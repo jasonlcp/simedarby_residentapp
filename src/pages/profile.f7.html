@@ -1,0 +1,57 @@
+<template>
+  <div class="page">
+    <div class="navbar">
+      <div class="navbar-inner sliding">
+        <div class="left">
+          <a href="#" class="back link">
+            <i class="icon icon-back"></i>
+            <span class="if-not-md">Back</span>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="page-content">
+      <div class="block block-strong">
+        {{name}}
+      </div>
+      <div class="list links-list">
+        <ul>
+          <li><a href="#" id="logout">Logout</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</template>
+<script>
+  export default {
+    data: function () {
+      var app = this.$app;
+      var auth = app.form.getFormData('auth');
+      if(auth){
+        return {
+          name: auth.user.first_name + " " + auth.user.last_name,
+        }
+      }
+    },
+    on: {
+      pageInit: function () {
+        //Logout btn
+        var app = this.$app;
+        var $$ = this.$$;
+        var router = this.$router;
+        var auth = app.form.getFormData('auth');
+        if (!auth){
+          router.navigate('/login/');
+        }
+
+        $$("#logout").on("click", function () {
+          app.panel.close("right");
+          app.form.removeFormData("auth");
+          router.navigate('/login/');
+        });
+      }
+    }
+
+
+  }
+</script>

@@ -1,0 +1,268 @@
+<template>
+  <div class="page" data-name="home">
+    <!-- Top Navbar -->
+    <div class="navbar no-hairline no-shadow">
+      <div class="navbar-inner navbar-inner-large">
+        <!--<div class="title sliding">Elmina Resident</div>-->
+        <div class="right">
+          <a href="/profile/" class="link icon-only panel-open" data-panel="right">
+            <i class="icon f7-icons ">person_round_fill</i>
+          </a>
+        </div>
+        <div class="title-large">
+          <div class="title-large-inner">
+            <div class="block">
+              <small>Welcome</small>
+              <h2 class="display-name">{{name}}</h2>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="toolbar tabbar tabbar-labels toolbar-top no-shadow no-hairline elevation-3">
+      <div class="toolbar-inner">
+        <a href="#" class="tab-link">
+          <i class="icon f7-icons">calendar_today</i>
+          <span class="tabbar-label">Schedule</span>
+        </a>
+        <a href="#" class="tab-link tab-link">
+          <i class="icon f7-icons">persons_round</i>
+          <span class="tabbar-label">Visitor List</span>
+        </a>
+        <a href="#" class="tab-link">
+          <i class="icon f7-icons">money_dollar_round</i>
+          <span class="tabbar-label">Pay Bills</span>
+        </a>
+        <a href="#" class="tab-link">
+          <i class="icon f7-icons">photos</i>
+          <span class="tabbar-label">Notification</span>
+        </a>
+      </div>
+    </div>
+    <!-- Scrollable page content-->
+    <div class="page-content">
+      <!--Service-->
+      <div class="block-title">
+        <h3>Services</h3>
+      </div>
+      <div class="block margin-btm-16">
+        <div class="row">
+          <div class="col-25">
+            <a href="#" class="service-link">
+              <i class="icon f7-icons">persons_round</i>
+              <p>Family</p>
+            </a>
+          </div>
+          <div class="col-25">
+            <a href="#" class="service-link">
+              <i class="icon f7-icons">graph_round</i>
+              <p>Visits</p>
+            </a>
+          </div>
+          <div class="col-25">
+            <a href="#" class="service-link">
+              <i class="icon f7-icons">document_text</i>
+              <p>Bills</p>
+            </a>
+          </div>
+          <div class="col-25">
+            <a href="#" class="service-link">
+              <i class="icon f7-icons">document_check</i>
+              <p>Payment</p>
+            </a>
+          </div>
+        </div>
+      </div>
+      <!--Properties-->
+      <div class="block-title margin-top-16">
+        <h3>Properties</h3>
+      </div>
+
+      <div class="block margin-btm-16">
+        <div class="swiper-container swiper-init" data-space-between="20" data-slides-per-view="auto">
+          <!-- Slides wrapper -->
+          <div class="swiper-wrapper ">
+            <!-- Slides -->
+            {{#each properties}}
+            <div class="swiper-slide">
+              <div class="card card-header-pic">
+                <div style="background-image:url({{street.area.thumbnail}})" class="card-header align-items-flex-end">
+                  {{name}}</div>
+                <div class="card-content card-content-padding">{{street.area.name}},{{street.name}}</div>
+                <div class="card-footer">View Your Property <i class="icon f7-icons em-1">chevron_right</i></div>
+              </div>
+            </div>
+            {{else}}
+            <div class="swiper-slide">
+              <div class="card">
+                <div class="card-content card-content-padding">No Property Found!</div>
+              </div>
+            </div>
+            {{/each}}
+          </div>
+        </div>
+      </div>
+
+      <!--Properties-->
+      <div class="block-title margin-top-16">
+        <h3>Announcements</h3>
+      </div>
+      <div class="block">
+        <div class="swiper-container swiper-init" data-space-between="20" data-slides-per-view="auto">
+          <!-- Slides wrapper -->
+          <div class="swiper-wrapper ">
+            <!-- Slides -->
+            {{#each announcements}}
+            <div class="swiper-slide">
+              <div class="card card-header-pic">
+                <div style="background-image:url({{thumbnail}})" class="card-header align-items-flex-end">{{title}}
+                </div>
+                <div class="card-footer">Find Out More <i class="icon f7-icons em-1">chevron_right</i></div>
+              </div>
+            </div>
+            {{else}}
+            <div class="swiper-slide">
+              <div class="card">
+                <div class="card-content card-content-padding">No announcements at the moment.</div>
+              </div>
+            </div>
+            {{/each}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+<style>
+  .swiper-slide {
+    width: 80%;
+  }
+  .em-1{
+    font-size:1em;
+  }
+  .card-header-pic .card-header {
+    height: 40vw;
+    background-size: cover;
+    background-position: center;
+    color: #fff;
+  }
+
+  .card-content-padding {
+    max-height: 21px;
+    overflow: hidden;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .col-25 {
+    text-align: center;
+  }
+
+  .margin-btm-16 {
+    margin-bottom: 16px;
+  }
+
+  .margin-top-16 {
+    margin-top: 16px;
+  }
+
+  .service-link p {
+    margin: 0px;
+  }
+
+  .display-name {
+    margin: 0px;
+  }
+
+  .toolbar .toolbar-inner .tab-link .icon {
+    color: var(--f7-theme-color-tint);
+  }
+
+  .navbar~.toolbar {
+    z-index: 501;
+    top: calc(var(--f7-navbar-height) + 112px);
+    width: calc(100% - 16px);
+    margin-left: 8px;
+    transform: translate3d(0px, calc(-0.8 * var(--f7-navbar-large-collapse-progress) * var(--f7-navbar-large-title-height)), 0);
+    will-change: transform, width, margin, top;
+    transition-property: transform, width, margin, top;
+    border-radius: 9px;
+    border: 1px solid #fff;
+  }
+
+  .service-link p {
+    color: var(--f7-tabbar-link-inactive-color);
+  }
+
+  .toolbar-top.tabbar-labels~* {
+    --f7-page-toolbar-top-offset: 0px;
+  }
+</style>
+<script>
+  import request from '../js/request.js';
+  export default {
+    data: function () {
+      var app = this.$app;
+      var auth = app.form.getFormData('auth');
+      var properties;
+      var announcements;
+      if (auth) {
+        request.get('residents', {
+            'Authorization': 'JWT ' + auth.token
+          }, {
+            "id": auth.user.id
+          },
+          function (data) {
+            properties = data.results[0].lot;
+          },
+          function (xhr, status) {
+            app.dialog.alert('Opps!');
+          });
+        request.get('announcements', {
+            'Authorization': 'JWT ' + auth.token
+          }, {
+            "page": 1
+          },
+          function (data) {
+            announcements = data.results;
+          },
+          function (xhr, status) {
+            app.dialog.alert('Opps!');
+          });
+        return {
+          name: auth.user.first_name + " " + auth.user.last_name,
+          properties: properties,
+          announcements: announcements,
+        }
+      }
+    },
+    on: {
+      pageInit: function () {
+        var app = this.$app;
+        var $$ = this.$$;
+        var router = this.$router;
+        var auth = app.form.getFormData('auth');
+        if (!auth) {
+          router.navigate('/login/');
+        }
+        $$('.navbar').on('navbar:collapse', function () {
+          $$('.toolbar').css({
+            'margin-left': '0px',
+            'width': '100%',
+            'border-radius': '0px',
+          });
+        });
+        $$('.navbar').on('navbar:expand', function () {
+          $$('.toolbar').css({
+            'margin-left': '8px',
+            'width': 'calc(100% - 16px)',
+            'border-radius': '9px',
+          });
+        });
+      }
+    }
+
+
+  }
+</script>

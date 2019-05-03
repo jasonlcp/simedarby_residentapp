@@ -1,0 +1,42 @@
+{
+  "prepare_queue": {
+    "installed": [],
+    "uninstalled": []
+  },
+  "config_munge": {
+    "files": {}
+  },
+  "installed_plugins": {
+    "cordova-plugin-device": {
+      "PACKAGE_NAME": "io.framework7.simedarbyelminaresident"
+    },
+    "cordova-plugin-file": {
+      "PACKAGE_NAME": "io.framework7.simedarbyelminaresident"
+    },
+    "cordova-plugin-inappbrowser": {
+      "PACKAGE_NAME": "io.framework7.simedarbyelminaresident"
+    },
+    "cordova-plugin-keyboard": {
+      "PACKAGE_NAME": "io.framework7.simedarbyelminaresident"
+    },
+    "cordova-plugin-media": {
+      "PACKAGE_NAME": "io.framework7.simedarbyelminaresident"
+    },
+    "cordova-plugin-safariviewcontroller": {
+      "PACKAGE_NAME": "io.framework7.simedarbyelminaresident"
+    },
+    "cordova-plugin-splashscreen": {
+      "PACKAGE_NAME": "io.framework7.simedarbyelminaresident"
+    },
+    "cordova-plugin-statusbar": {
+      "PACKAGE_NAME": "io.framework7.simedarbyelminaresident"
+    },
+    "cordova-plugin-whitelist": {
+      "PACKAGE_NAME": "io.framework7.simedarbyelminaresident"
+    },
+    "cordova-plugin-wkwebview-engine": {
+      "PACKAGE_NAME": "io.framework7.simedarbyelminaresident"
+    }
+  },
+  "dependent_plugins": {}
+}

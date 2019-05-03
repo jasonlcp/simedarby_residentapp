@@ -1,0 +1,66 @@
+<!-- Login Screen -->
+<template>
+    <div class="page" data-name="login">
+        <div class="page no-navbar no-toolbar no-swipeback">
+            <div class="page-content login-screen-content">
+                <div class="login-screen-title">My App</div>
+                <form id="login-screen">
+                    <div class="list">
+                        <ul>
+                            <li class="item-content item-input">
+                                <div class="item-inner">
+                                    <div class="item-title item-label">Email</div>
+                                    <div class="item-input">
+                                        <input type="email" name="email" placeholder="Your email" required validate
+                                            data-vaildate-on-blur="true">
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="item-content item-input">
+                                <div class="item-inner">
+                                    <div class="item-title item-label">Password</div>
+                                    <div class="item-input">
+                                        <input type="password" name="password" placeholder="Your password" required
+                                            validate data-vaildate-on-blur="true">
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="list">
+                        <ul>
+                            <li><a href="#" class="item-link list-button login-button">Sign In</a></li>
+                        </ul>
+                        <div class="block-footer">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</template>
+<script>
+    import request from '../js/request.js';
+    export default {
+        on: {
+            pageInit: function () {
+                var app = this.$app;
+                var $$ = this.$$;
+                var router = this.$router;
+                $$('#login-screen .login-button').on('click', function () {
+                    var formData = app.form.convertToData('#login-screen');
+                    request.post('login', null,formData,
+                        function (data) {
+                            app.form.storeFormData('auth',data);
+                            router.navigate('/');
+                            router.clearPreviousHistory();
+                        },
+                        function (xhr, status) {
+                            app.dialog.alert('Wrong email or password.');
+                        });
+                });
+            }
+        }
+    }
+</script>

@@ -1,0 +1,58 @@
+/* iOS Cordova Tweak */
+.device-cordova.device-ios {
+  height: 100vh;
+}
+
+/* Custom color theme properties */
+:root {
+  --f7-theme-color: #f04e23;
+  --f7-theme-color-rgb: 240, 78, 35;
+  --f7-theme-color-shade: #db3a0f;
+  --f7-theme-color-tint: #f36d49;
+  --f7-navbar-large-title-height:140px;
+  --f7-card-footer-text-color:#000;
+}
+
+/* Invert navigation bars to fill style */
+:root,
+:root.theme-dark,
+:root .theme-dark {
+  --f7-navbar-bg-image: linear-gradient(to right, #f8912c, #f78226, #f57223, #f36122, #f04e23);
+  --f7-bars-text-color: #fff;
+  --f7-bars-link-color: #fff;
+  --f7-navbar-subtitle-text-color: rgba(255,255,255,0.85);
+  --f7-bars-border-color: transparent;
+  --f7-tabbar-link-active-color: #fff;
+  --f7-tabbar-link-inactive-color: rgba(255,255,255,0.54);
+  --f7-searchbar-bg-color: var(--f7-bars-bg-color);
+  --f7-searchbar-input-bg-color: #fff;
+  --f7-searchbar-input-text-color: #000;
+  --f7-sheet-border-color: transparent;
+  --f7-tabbar-link-active-border-color: transparent;
+  --f7-block-title-text-color:#000;
+  --f7-tabbar-link-inactive-color:#000;
+}
+.appbar,
+.navbar,
+.toolbar,
+.subnavbar,
+.calendar-header,
+.calendar-footer {
+  --f7-touch-ripple-color: var(--f7-touch-ripple-white);
+  --f7-link-highlight-color: var(--f7-link-highlight-white);
+  --f7-button-text-color: #fff;
+  --f7-button-pressed-bg-color: rgba(255,255,255,0.1);
+}
+
+/* Your app custom styles here */
+.navbar .title-large{
+  border-radius:0px 0px 10% 10%;
+  text-transform: capitalize;
+  
+  .block{
+    color:var(--f7-navbar-text-color);
+  }
+}
+.statusbar {
+  background: linear-gradient(to right, #f8912c, #f78226, #f57223, #f36122, #f04e23);
+}
