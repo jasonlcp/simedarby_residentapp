@@ -19,13 +19,13 @@
         </div>
       </div>
     </div>
-    <div class="toolbar tabbar tabbar-labels toolbar-top no-shadow no-hairline elevation-3">
+    <div class="main-toolbar toolbar tabbar tabbar-labels toolbar-top no-shadow no-hairline elevation-3">
       <div class="toolbar-inner">
-        <a href="#" class="tab-link">
+        <a href="/schedule/" class="tab-link">
           <i class="icon f7-icons">calendar_today</i>
           <span class="tabbar-label">Schedule</span>
         </a>
-        <a href="#" class="tab-link tab-link">
+        <a href="/visitor-list/" class="tab-link tab-link">
           <i class="icon f7-icons">persons_round</i>
           <span class="tabbar-label">Visitor List</span>
         </a>
@@ -40,7 +40,11 @@
       </div>
     </div>
     <!-- Scrollable page content-->
-    <div class="page-content">
+    <div class="page-content ptr-content">
+      <div class="ptr-preloader">
+        <div class="preloader"></div>
+        <div class="ptr-arrow"></div>
+      </div>
       <!--Service-->
       <div class="block-title">
         <h3>Services</h3>
@@ -79,8 +83,9 @@
       </div>
 
       <div class="block margin-btm-16">
-        <div class="swiper-container swiper-init" data-space-between="20" data-slides-per-view="auto">
+        <div class="swiper-container property-swiper">
           <!-- Slides wrapper -->
+          <div class="swiper-pagination"></div>
           <div class="swiper-wrapper ">
             <!-- Slides -->
             {{#each properties}}
@@ -88,14 +93,14 @@
               <div class="card card-header-pic">
                 <div style="background-image:url({{street.area.thumbnail}})" class="card-header align-items-flex-end">
                   {{name}}</div>
-                <div class="card-content card-content-padding">{{street.area.name}},{{street.name}}</div>
-                <div class="card-footer">View Your Property <i class="icon f7-icons em-1">chevron_right</i></div>
+                <div class="card-footer"><span>{{street.area.name}},{{street.name}} <i
+                      class="icon f7-icons em-1"></span>chevron_right</i></div>
               </div>
             </div>
             {{else}}
             <div class="swiper-slide">
               <div class="card">
-                <div class="card-content card-content-padding">No Property Found!</div>
+                <div class="card-content card-content-padding"><span>No Property Found!</span></div>
               </div>
             </div>
             {{/each}}
@@ -133,23 +138,46 @@
     </div>
   </div>
 </template>
-<style>
+<style scoped>
+  .navbar .title-large {
+    border-radius: 0px 0px 10% 10%;
+    text-transform: capitalize;
+    --f7-navbar-large-title-height: 140px;
+
+  }
+
+  .ptr-preloader {
+    --f7-ptr-top: -30px;
+  }
+
+  .ptr-refreshing .ptr-preloader {
+    transform: translate3d(0, 106px, 0);
+  }
+
+  .page-content {
+    --f7-page-navbar-offset: calc(var(--f7-navbar-height) + 140px);
+  }
+
+  .navbar .title-large .block {
+    color: var(--f7-navbar-text-color);
+  }
+
   .swiper-slide {
     width: 80%;
   }
-  .em-1{
-    font-size:1em;
+
+  .em-1 {
+    font-size: 1em;
   }
+
   .card-header-pic .card-header {
-    height: 40vw;
+    height: 30vw;
     background-size: cover;
     background-position: center;
     color: #fff;
   }
 
-  .card-content-padding {
-    max-height: 21px;
-    overflow: hidden;
+  .card-footer span {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -175,15 +203,16 @@
     margin: 0px;
   }
 
-  .toolbar .toolbar-inner .tab-link .icon {
+  .main-toolbar.toolbar .toolbar-inner .tab-link .icon {
     color: var(--f7-theme-color-tint);
   }
 
-  .navbar~.toolbar {
+  .navbar~.main-toolbar.toolbar {
     z-index: 501;
     top: calc(var(--f7-navbar-height) + 112px);
     width: calc(100% - 16px);
     margin-left: 8px;
+    --f7-navbar-large-title-height: 140px;
     transform: translate3d(0px, calc(-0.8 * var(--f7-navbar-large-collapse-progress) * var(--f7-navbar-large-title-height)), 0);
     will-change: transform, width, margin, top;
     transition-property: transform, width, margin, top;
@@ -195,74 +224,69 @@
     color: var(--f7-tabbar-link-inactive-color);
   }
 
-  .toolbar-top.tabbar-labels~* {
+  .main-toolbar.toolbar-top.tabbar-labels~* {
     --f7-page-toolbar-top-offset: 0px;
   }
 </style>
 <script>
-  import request from '../js/request.js';
   export default {
     data: function () {
-      var app = this.$app;
-      var auth = app.form.getFormData('auth');
-      var properties;
-      var announcements;
+      var auth = this.$app.data.user;
+      var name = null;
       if (auth) {
-        request.get('residents', {
-            'Authorization': 'JWT ' + auth.token
-          }, {
-            "id": auth.user.id
-          },
-          function (data) {
-            properties = data.results[0].lot;
-          },
-          function (xhr, status) {
-            app.dialog.alert('Opps!');
-          });
-        request.get('announcements', {
-            'Authorization': 'JWT ' + auth.token
-          }, {
-            "page": 1
-          },
-          function (data) {
-            announcements = data.results;
-          },
-          function (xhr, status) {
-            app.dialog.alert('Opps!');
-          });
-        return {
-          name: auth.user.first_name + " " + auth.user.last_name,
-          properties: properties,
-          announcements: announcements,
-        }
+        name = auth.user.first_name + " " + auth.user.last_name;
+      }
+      return {
+        name: name,
+        announcements: null,
+        properties: null,
       }
     },
     on: {
-      pageInit: function () {
+      pageBeforeIn: function () {
         var app = this.$app;
+        var property_swiper;
+        this.$app.methods.getAnnouncements();
+        this.$app.methods.getProperties(function () {
+          property_swiper = app.swiper.create('.property-swiper', {
+            init:false,
+            slidesPerView: "auto",
+            width: "80%",
+            spaceBetween: "20",
+            observeSlideChildren: true,
+            observer: true,
+            pagination: {
+              el: '.swiper-pagination',
+              type: 'bullets',
+            },
+          });
+          console.log(property_swiper);
+          property_swiper.init();
+        });
+      },
+      pageInit: function () {
+        var auth = this.$app.data.user;
         var $$ = this.$$;
         var router = this.$router;
-        var auth = app.form.getFormData('auth');
         if (!auth) {
           router.navigate('/login/');
         }
         $$('.navbar').on('navbar:collapse', function () {
-          $$('.toolbar').css({
+          $$('.main-toolbar.toolbar').css({
             'margin-left': '0px',
             'width': '100%',
             'border-radius': '0px',
           });
         });
         $$('.navbar').on('navbar:expand', function () {
-          $$('.toolbar').css({
+          $$('.main-toolbar.toolbar').css({
             'margin-left': '8px',
             'width': 'calc(100% - 16px)',
             'border-radius': '9px',
           });
         });
+        
       }
     }
-
-
   }
 </script>

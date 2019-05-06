@@ -1,0 +1,128 @@
+<template>
+    <div class="page">
+        <div class="navbar">
+            <div class="navbar-inner sliding">
+                <div class="left">
+                    <a href="#" class="back link">
+                        <i class="icon icon-back"></i>
+                        <span class="if-not-md">Back</span>
+                    </a>
+                </div>
+                <div class="right">
+                    <!-- Link to enable searchbar -->
+                    <a class="link icon-only searchbar-enable" data-searchbar=".search">
+                        <i class="icon material-icons md-only">search</i>
+                    </a>
+                </div>
+                <div class="title-large">
+                    <div class="title-large-text">Visitors</div>
+                </div>
+                <!-- Searchbar is a direct child of "navbar-inner" -->
+                <form class="searchbar searchbar-expandable search searchbar-init">
+                    <div class="searchbar-inner">
+                        <div class="searchbar-input-wrap">
+                            <input type="search" placeholder="Search" />
+                            <i class="searchbar-icon"></i>
+                            <span class="input-clear-button"></span>
+                        </div>
+                        <span class="searchbar-disable-button">Cancel</span>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- FAB Right Bottom (Orange) -->
+        <div class="fab fab-right-bottom">
+            <a href="#" class="">
+                <i class="icon f7-icons">add</i>
+                <i class="icon f7-icons">close</i>
+            </a>
+        </div>
+        <div class="page-content infinite-scroll-content">
+            <div class="list searchbar-hide-on-search">
+                <ul>
+                    {{#each users}}
+                    <li>
+                        <a class="item-content item-link"
+                            @click="addSchedule('{{first_name}} {{last_name }}','number','vba123')">
+                            <div class="item-media"><i class="icon f7-icons">person</i></div>
+                            <div class="item-inner">
+                                <div class="item-title">{{ first_name }} {{last_name }}</div>
+                            </div>
+                        </a>
+                    </li>
+                    {{else}}
+
+                    {{/each}}
+                </ul>
+            </div>
+            <div class="preloader infinite-scroll-preloader"></div>
+        </div>
+    </div>
+</template>
+<style>
+</style>
+<script>
+    export default {
+        data: function () {
+            return {
+                users: null,
+                next: null,
+            }
+        },
+        methods: {
+            addSchedule: function (name, phone, plate) {
+                var router = this.$router;
+                router.navigate({
+                    name: 'schedule',
+                    params: {
+                        name: name,
+                        phone: phone,
+                        plate: plate,
+                    }
+                });
+            },
+            prefill: function () {
+                var $$ = this.$$
+                var list_h = $$('.list').height();
+                var app = this.$app;
+                var self = this;
+                var document_h = $$(window).height();
+                if (list_h < document_h) {
+                    app.methods.getVisitors(function () {
+                        self.prefill();
+                    });
+                }
+
+            }
+        },
+        on: {
+            pageInit: function () {
+                var self = this;
+                var $$ = this.$$;
+                // Loading flag
+                var app = this.$app;
+                var allowInfinite = true;
+                this.$app.methods.getVisitors(function () {
+                    self.prefill();
+                });
+                $$('.infinite-scroll-content').on('infinite', function () {
+                    // Exit, if loading in progress
+                    if (!allowInfinite) return;
+
+                    // Set loading flag
+                    allowInfinite = false;
+                    app.methods.getVisitors(function () {
+                        if (self.next) {
+                            allowInfinite = true;
+                        } else {
+                            app.infiniteScroll.destroy('.infinite-scroll-content');
+                            $$('.infinite-scroll-preloader').remove();
+                        }
+
+                    });
+                });
+            }
+        }
+
+    }
+</script>

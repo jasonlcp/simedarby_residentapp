@@ -9,10 +9,13 @@
   --f7-theme-color-rgb: 240, 78, 35;
   --f7-theme-color-shade: #db3a0f;
   --f7-theme-color-tint: #f36d49;
-  --f7-navbar-large-title-height:140px;
   --f7-card-footer-text-color:#000;
+  --f7-calendar-header-bg-color:#f36d49;
+  --f7-calendar-week-header-bg-color:var(--f7-calendar-header-bg-color);
+  --f7-calendar-footer-bg-color:var(--f7-calendar-week-header-bg-color);
+  --f7-searchbar-link-color:var(--f7-theme-color);
+  
 }
-
 /* Invert navigation bars to fill style */
 :root,
 :root.theme-dark,
@@ -31,6 +34,7 @@
   --f7-tabbar-link-active-border-color: transparent;
   --f7-block-title-text-color:#000;
   --f7-tabbar-link-inactive-color:#000;
+  
 }
 .appbar,
 .navbar,
@@ -45,14 +49,16 @@
 }
 
 /* Your app custom styles here */
-.navbar .title-large{
-  border-radius:0px 0px 10% 10%;
-  text-transform: capitalize;
-  
-  .block{
-    color:var(--f7-navbar-text-color);
-  }
-}
 .statusbar {
   background: linear-gradient(to right, #f8912c, #f78226, #f57223, #f36122, #f04e23);
+}
+.smart-select-sheet{
+  .toolbar{
+    background:linear-gradient(to right, #f8912c, #f78226, #f57223, #f36122, #f04e23);
+  }
+}
+.calendar{
+  .toolbar{
+    background-color:var(--f7-calendar-footer-bg-color);
+  }
 }

@@ -17,11 +17,10 @@ function post(url,header,data, success, error) {
         }
     })
 }
-function get(url,header,data, success, error) {
+function get(url,header,data, success, error,complete) {
     Framework7.request({
         url: config.BASE_URL + url + '/',
         method: "GET",
-        async:false,
         headers :header,
         contentType: 'application/x-www-form-urlencoded',
         data: data,
@@ -32,7 +31,33 @@ function get(url,header,data, success, error) {
         },
         error: function(xhr,status){
             error(xhr,status);
-        }
+        },
+        complete: function(xhr,status){
+            if(complete){
+                complete(xhr,status);
+            }
+        },
     })
 }
-export default {post,get};
+function getNext(url,header,success,error,complete){
+    Framework7.request({
+        url: url,
+        method: "GET",
+        headers :header,
+        contentType: 'application/x-www-form-urlencoded',
+        crossDomain: true,
+        dataType: 'json',
+        success: function(data){
+            success(data);
+        },
+        error: function(xhr,status){
+            error(xhr,status);
+        },
+        complete: function(xhr,status){
+            if(complete){
+                complete(xhr,status);
+            }
+        },
+    })
+}
+export default {post,get,getNext};
