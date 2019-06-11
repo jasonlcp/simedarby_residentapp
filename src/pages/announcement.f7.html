@@ -1,0 +1,44 @@
+<template>
+    <div class="page">
+        <div class="navbar">
+            <div class="navbar-inner sliding">
+                <div class="left">
+                    <a href="#" class="back link">
+                        <i class="icon icon-back"></i>
+                        <span class="if-not-md">Back</span>
+                    </a>
+                </div>
+                 {{#announcements}}
+                <div class="center">
+                    {{title}}
+                </div>
+                {{/announcements}}
+            </div>
+        </div>
+        <div class="page-content">
+            {{#announcements}}
+            <img src="{{thumbnail}}" width="100%"/>
+            
+            <div class="block">
+                {{body}}
+            </div>
+            {{/announcements}}
+        </div>
+    </div>
+</template>
+<style>
+</style>
+<script>
+    export default {
+        data: function () {
+            return {
+                announcements: null,
+            }
+        },
+        on: {
+            pageInit: function () {
+               this.$app.methods.getAnnouncement();
+            }
+        }
+    }
+</script>

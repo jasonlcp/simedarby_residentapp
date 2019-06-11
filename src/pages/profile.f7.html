@@ -11,23 +11,45 @@
       </div>
     </div>
     <div class="page-content">
-      <div class="block block-strong">
-        {{name}}
+      <div class="block block-strong inset shadow text-align-center no-margin">
+        <div id="user-infos">
+          <div class="profile-user-pic">
+            <i class="icon f7-icons">person_round</i>
+          </div>
+          <h3 class="profile-user-name">{{name}}</h3>
+          <button class="button button-fill color-green">Change Password</button>
+        </div>
       </div>
       <div class="list links-list">
         <ul>
+          <li><a href="#" id="">FAQ</a></li>
+          <li><a href="#" id="">Support</a></li>
           <li><a href="#" id="logout">Logout</a></li>
         </ul>
       </div>
     </div>
   </div>
 </template>
+<style>
+  .profile-user-pic i {
+    font-size: 70px;
+    color: var(--f7-theme-color-tint);
+  }
+  .shadow {
+    box-shadow: 0 .125rem .25rem rgba(0, 0, 0, .075);
+  }
+  #user-infos .button {
+    width: 40%;
+    margin: 0 auto;
+    font-size: 12px;
+}
+</style>
 <script>
   export default {
     data: function () {
       var app = this.$app;
       var auth = app.form.getFormData('auth');
-      if(auth){
+      if (auth) {
         return {
           name: auth.user.first_name + " " + auth.user.last_name,
         }
@@ -40,14 +62,16 @@
         var $$ = this.$$;
         var router = this.$router;
         var auth = app.form.getFormData('auth');
-        if (!auth){
+        if (!auth) {
           router.navigate('/login/');
+          router.clearPreviousHistory();
         }
 
         $$("#logout").on("click", function () {
           app.panel.close("right");
           app.form.removeFormData("auth");
           router.navigate('/login/');
+          router.clearPreviousHistory();
         });
       }
     }

@@ -1,0 +1,46 @@
+<!-- Login Screen -->
+<template>
+    <div class="page" data-name="login">
+        <div class="page no-navbar no-toolbar no-swipeback">
+            <div class="page-content login-screen-content">
+                <div class="login-screen-title"><img src="static/elmina-logo.svg" width="20%" /></div>
+                <div class="block text-center">
+                <p>If you have forgotten your password you can reset it here.</p>
+                </div>
+                <form id="forgot-screen">
+                    <div class="list">
+                        <ul>
+                            <li class="item-content item-input">
+                                <div class="item-inner">
+                                    <div class="item-title item-label">Email</div>
+                                    <div class="item-input-wrap">
+                                        <input type="email" name="email" placeholder="Your email" required validate
+                                            data-vaildate-on-blur="true">
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="row">
+                        <div class="col-25"></div>
+                        <div class="col-50">
+                            <a href="#" class="button button-raised button-fill login-button">Reset</a></li>
+                        </div>
+                        <div class="col-25"></div>
+                    </div>
+                    <div class="block-footer">
+                        <p><a href="#" class="back item-link list-button">Login</a></p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</template>
+<script>
+    import request from '../js/request.js';
+    export default {
+        on: {
+            pageInit: function () {}
+        }
+    }
+</script>

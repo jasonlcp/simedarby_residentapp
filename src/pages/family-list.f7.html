@@ -1,0 +1,102 @@
+<template>
+    <div class="page">
+        <div class="navbar">
+            <div class="navbar-inner sliding">
+                <div class="left">
+                    <a href="#" class="back link">
+                        <i class="icon icon-back"></i>
+                        <span class="if-not-md">Back</span>
+                    </a>
+                </div>
+                <div class="title">Family</div>
+                <div class="right">
+                    <!-- Link to enable searchbar -->
+                    <a class="link icon-only searchbar-enable" data-searchbar=".search">
+                        <i class="icon material-icons md-only">search</i>
+                    </a>
+                </div>
+                <div class="title-large">
+                    <div class="title-large-text">Family</div>
+                </div>
+                <!-- Searchbar is a direct child of "navbar-inner" -->
+                <form class="searchbar searchbar-expandable search searchbar-init">
+                    <div class="searchbar-inner">
+                        <div class="searchbar-input-wrap">
+                            <input type="search" placeholder="Search" />
+                            <i class="searchbar-icon"></i>
+                            <span class="input-clear-button"></span>
+                        </div>
+                        <span class="searchbar-disable-button">Cancel</span>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- FAB Right Bottom (Orange) -->
+        <div class="fab fab-right-bottom">
+            <a href="/add-family/" class="">
+                <i class="icon f7-icons">add</i>
+                <i class="icon f7-icons">close</i>
+            </a>
+        </div>
+        <div class="page-content">
+            <div class="list">
+                <div class="list-group">
+                    <ul>
+                        <li class="list-group-title">Reesia, Lot 55, Jalan Frekuensi U16/140</li>
+                        <li>
+                            <div class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title">Aaron </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title">Barclay</div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title">Bartolo</div>
+                                    <div class="item-after"><span class="badge color-yellow">Awaiting Approval</span></div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="list-group">
+                    <ul>
+                        <li class="list-group-title">Lot 32 Elmina Green 1, Jalan Frekuensi U16/141</li>
+                        <li>
+                            <div class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title">Bailey</div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title">Adam</div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title">Calvin</div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+<script>
+    export default {}
+</script>

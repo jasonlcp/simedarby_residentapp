@@ -3,14 +3,17 @@
     <div class="page" data-name="login">
         <div class="page no-navbar no-toolbar no-swipeback">
             <div class="page-content login-screen-content">
-                <div class="login-screen-title">My App</div>
+                <div class="login-screen-title"><img src="static/elmina-logo.svg" width="20%" /></div>
+                <div class="block text-center">
+                    <p>This Is How Life Should Be.</p>
+                </div>
                 <form id="login-screen">
                     <div class="list">
                         <ul>
                             <li class="item-content item-input">
                                 <div class="item-inner">
                                     <div class="item-title item-label">Email</div>
-                                    <div class="item-input">
+                                    <div class="item-input-wrap">
                                         <input type="email" name="email" placeholder="Your email" required validate
                                             data-vaildate-on-blur="true">
                                     </div>
@@ -19,7 +22,7 @@
                             <li class="item-content item-input">
                                 <div class="item-inner">
                                     <div class="item-title item-label">Password</div>
-                                    <div class="item-input">
+                                    <div class="item-input-wrap">
                                         <input type="password" name="password" placeholder="Your password" required
                                             validate data-vaildate-on-blur="true">
                                     </div>
@@ -27,13 +30,23 @@
                             </li>
                         </ul>
                     </div>
-                    <div class="list">
-                        <ul>
-                            <li><a href="#" class="item-link list-button login-button">Sign In</a></li>
-                        </ul>
-                        <div class="block-footer">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    <div class="row">
+                        <div class="col-25"></div>
+                        <div class="col-50">
+                            <a href="#" class="button button-raised button-fill login-button">Sign In</a></li>
                         </div>
+                        <div class="col-25"></div>
+                    </div>
+                    <div class="row" style="margin-top:20px;">
+                        <div class="col-25"></div>
+                        <div class="col-50">
+                            <a href="http://139.162.22.47:8000/user/register/"
+                                class="button button-raised button-fill external">Register</a></li>
+                        </div>
+                        <div class="col-25"></div>
+                    </div>
+                    <div class="block-footer">
+                        <p><a href="/forgot/" class="item-link list-button">Forgot Password</a></p>
                     </div>
                 </form>
             </div>
@@ -50,9 +63,9 @@
                 var router = this.$router;
                 $$('#login-screen .login-button').on('click', function () {
                     var formData = app.form.convertToData('#login-screen');
-                    request.post('login', null,formData,
+                    request.post('login', null, formData,
                         function (data) {
-                            app.form.storeFormData('auth',data);
+                            app.form.storeFormData('auth', data);
                             router.navigate('/');
                             router.clearPreviousHistory();
                         },

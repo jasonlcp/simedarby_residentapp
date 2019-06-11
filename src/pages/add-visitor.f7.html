@@ -1,0 +1,92 @@
+<template>
+    <div class="page">
+        <div class="navbar">
+            <div class="navbar-inner sliding">
+                <div class="left">
+                    <a href="#" class="back link">
+                        <i class="icon icon-back"></i>
+                        <span class="if-not-md">Back</span>
+                    </a>
+                </div>
+                <div class="center">
+                    Visitors
+                </div>
+            </div>
+        </div>
+
+        <div class="toolbar toolbar-bottom auto-height">
+            <div class="block">
+                <a href="#" id="schedule_submit" class="button button-raised button-round button-fill ">Submit</a>
+            </div>
+        </div>
+        <div class="page-content">
+            <div class="block-title">
+                <h3>Add Visitors</h3>
+            </div>
+            <div class="list no-hairlines-md">
+                <form id="scheduleForm">
+                    <ul>
+                        <li class="item-content item-input">
+                            <div class="item-inner">
+                                <div class="item-title item-label">Name</div>
+                                <div class="item-input-wrap">
+                                    <input type="text" placeholder="Visitor's name" name="name"
+                                        value="{{this.$route.params.name}}">
+                                    <span class="input-clear-button"></span>
+                                </div>
+                            </div>
+                            <div class="item-media">
+                                <i class="icon f7-icons">list</i>
+                            </div>
+                        </li>
+                        <li class="item-content item-input">
+                            <div class="item-inner">
+                                <div class="item-title item-label">Vehicle Plate Number</div>
+                                <div class="item-input-wrap">
+                                    <input type="text" placeholder="Plate Number" name="car_plate"
+                                        value="{{this.$route.params.plate}}">
+                                    <span class="input-clear-button"></span>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="item-content item-input">
+                            <div class="item-inner">
+                                <div class="item-title item-label">Mobile Number</div>
+                                <div class="item-input-wrap">
+                                    <input type="text" placeholder="Mobile No." name="phone"
+                                        value="{{this.$route.params.phone}}">
+                                    <span class="input-clear-button"></span>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </form>
+            </div>
+        </div>
+    </div>
+</template>
+<style>
+    .auto-height {
+        --f7-toolbar-height: 100px;
+
+    }
+
+    .auto-height~* {
+        --f7-page-toolbar-bottom-offset: 100px;
+    }
+
+    .item-content .item-link {
+        height: var(--f7-input-height);
+    }
+
+    .item-content .item-link .item-after {
+        padding-left: 0px;
+        margin-left: 0px;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+</style>
+<script>
+    import request from '../js/request.js';
+    export default {}
+</script>

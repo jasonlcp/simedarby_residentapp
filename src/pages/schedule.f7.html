@@ -9,19 +9,19 @@
                     </a>
                 </div>
                 <div class="center">
-                    Schedule
+                    Visitor Entry
                 </div>
             </div>
         </div>
 
         <div class="toolbar toolbar-bottom auto-height">
             <div class="block">
-                <a href="#" id="schedule_submit" class="button button-raised button-round button-fill ">Submit</a>
+                <a href="/qr/" id="schedule_submit" class="button button-raised button-round button-fill ">Submit</a>
             </div>
         </div>
         <div class="page-content">
             <div class="block-title">
-                <h3>Schedule Entry</h3>
+                <h3>Visitor Entry</h3>
             </div>
             <div class="list no-hairlines-md">
                 <form id="scheduleForm">
@@ -51,6 +51,9 @@
                                         value="{{this.$route.params.name}}">
                                     <span class="input-clear-button"></span>
                                 </div>
+                            </div>
+                            <div class="item-media">
+                                <i class="icon f7-icons">person_round</i>
                             </div>
                         </li>
                         <li class="item-content item-input">
@@ -82,11 +85,16 @@
                                         <div class="item-after"></div>
                                         <select name="entry">
                                             <option value="single" selected>Single Entry</option>
-                                            <option value="multiple">Multiple Entry</option>
+                                            <option value="multiple">Multiple Entries</option>
                                             <option value="scheduled">Scheduled Entry</option>
                                         </select>
                                     </a>
                                 </div>
+                            </div>
+                            <div class="item-media">
+                                <a class="popup-open" data-popup=".popup-info">
+                                    <i class="icon f7-icons">info_round</i>
+                                </a>
                             </div>
                         </li>
                         <li class="item-content item-input">
@@ -100,6 +108,21 @@
                         </li>
                     </ul>
                 </form>
+            </div>
+            <div class="popup popup-info popup-swipe-to-close">
+                <div class="block">
+                    <h1>Entry Type</h1>
+                    <!-- Close Popup -->
+                    <h3>Single Entry</h3>
+                    <p>Single entry is for one time use only.</p>
+                    <h3>Multiple Entries</h3>
+                    <p>Multiple entries allows visitors to enter & exit the compound multiple times within the day.</p>
+                    <p>New visitor entry is required after <b>12:00AM</b></p>
+                    <h3>Scheduled Entry</h3>
+                    <p>Scheduled entry allows visitor to enter within a start and end period.</p>
+                    <p>It is required to specify the <b>days</b> that the visitor is allow to enter.</p>
+                    <a class="button button-raised button-fill popup-close" href="#">Close popup</a>
+                </div>
             </div>
         </div>
     </div>
@@ -171,7 +194,6 @@
                                 '</a>' +
                                 '</div>' +
                                 '</div>' +
-
                                 '</li>'
                             );
                             expCalendarModal = app.calendar.create({

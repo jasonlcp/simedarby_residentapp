@@ -1,0 +1,76 @@
+<template>
+    <div class="page">
+        <div class="navbar">
+            <div class="navbar-inner sliding">
+                <div class="left">
+                    <a href="#" class="back link">
+                        <i class="icon icon-back"></i>
+                        <span class="if-not-md">Back</span>
+                    </a>
+                </div>
+                <div class="center">
+                    Announcements
+                </div>
+            </div>
+        </div>
+        <div class="page-content">
+            <div class="block">
+                <div class="list no-hairlines">
+                    <div class="list-group">
+                        <ul>
+                            <!-- Slides -->
+                            {{#each announcements}}
+                            <li>
+                                <a href="/announcement/">
+                                    <div class="card card-header-pic">
+                                        <div style="background-image:url({{thumbnail}})"
+                                            class="card-header align-items-flex-end">
+                                            {{title}}
+                                        </div>
+                                        <div class="card-footer">Find Out More <i
+                                                class="icon f7-icons em-1">chevron_right</i></div>
+                                    </div>
+                                </a>
+                            </li>
+                            {{else}}
+                            <li class="item-content ">
+                                <div class="card">
+                                    <div class="card-content card-content-padding">No announcements at the moment.</div>
+                                </div>
+                            </li>
+                            {{/each}}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+<style scoped>
+    .card-header-pic .card-header {
+        height: 30vw;
+        background-size: cover;
+        background-position: center;
+        color: #fff;
+    }
+
+    .card-footer span {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+</style>
+<script>
+    export default {
+        data: function () {
+            return {
+                announcements: null,
+            }
+        },
+        on: {
+            pageInit: function () {
+                this.$app.methods.getAnnouncements();
+            }
+        }
+    }
+</script>

@@ -6,6 +6,7 @@ import 'framework7/css/framework7.bundle.css';
 // Import Icons and App Custom Styles
 import '../css/icons.css';
 import '../css/app.less';
+import '../css/all.css'
 // Import Cordova APIs
 import cordovaApp from './cordova-app.js';
 // Import Routes
@@ -18,11 +19,6 @@ var app = new Framework7({
   id: 'io.framework7.simedarbyelminaresident', // App bundle ID
   name: 'Elmina Resident', // App name
   theme: 'md', // Automatic theme detection
-  data: function () {
-    return {
-      user: this.form.getFormData('auth'),
-    }
-  },
   // App routes
   routes: routes,
   // Input settings
@@ -48,11 +44,12 @@ var app = new Framework7({
         // Init cordova APIs (see cordova-app.js)
         cordovaApp.init(f7);
       }
-      if (f7.data.user) {
+      if (f7.methods.getUser()) {
         mainView.router.navigate('/');
         mainView.router.clearPreviousHistory();
       } else {
         mainView.router.navigate('/login/');
+        mainView.router.clearPreviousHistory();
       }
     },
   },

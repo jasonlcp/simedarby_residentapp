@@ -102,11 +102,11 @@
 		</data>
 		<key>Assets.car</key>
 		<data>
-		vfLHeN+4FdDt9bij+enQY3Hbwuo=
+		N4+vM3dKPigpH1vPO9Sm6eKaVGE=
 		</data>
 		<key>CDVLaunchScreen.storyboardc/01J-lp-oVM-view-Ze5-6b-2t3.nib</key>
 		<data>
-		uUIfUHJcFPZO5W5PajOoopkB72Q=
+		R440f6Mzl2mxvfkOt0+DWShG0rU=
 		</data>
 		<key>CDVLaunchScreen.storyboardc/Info.plist</key>
 		<data>
@@ -114,7 +114,7 @@
 		</data>
 		<key>CDVLaunchScreen.storyboardc/UIViewController-01J-lp-oVM.nib</key>
 		<data>
-		9P7R2XcYeQPR73XyiSQp4rgSPJk=
+		ZaFTr/1WDiJPN+v2cxGidtuaptA=
 		</data>
 		<key>Info.plist</key>
 		<data>
@@ -122,7 +122,7 @@
 		</data>
 		<key>MainViewController.nib</key>
 		<data>
-		v1EwtRgusJ7Qd8vPMHfaITKcUL8=
+		XY/Z+S6eHXu0L9ON1ZkQ4jO1Uw4=
 		</data>
 		<key>PkgInfo</key>
 		<data>
@@ -192,13 +192,73 @@
 		<data>
 		CZY1kujJU8x+FOP7ClsF1QQuhDU=
 		</data>
+		<key>www/fonts/fa-brands-400.eot</key>
+		<data>
+		p6m16JrngmEY1sBeXQ7It8kcgp8=
+		</data>
+		<key>www/fonts/fa-brands-400.ttf</key>
+		<data>
+		sm2lamXCEkfZqRxr2Q5Xx4SO54M=
+		</data>
+		<key>www/fonts/fa-brands-400.woff</key>
+		<data>
+		Rb+qpqBU27G9qN4ZxilGZtxGzLM=
+		</data>
+		<key>www/fonts/fa-brands-400.woff2</key>
+		<data>
+		GzOxJGYQWFxEDkZLBN9kzwzqHco=
+		</data>
+		<key>www/fonts/fa-regular-400.eot</key>
+		<data>
+		v+hYdDvqX9LHr84QnNsCtIs5ko4=
+		</data>
+		<key>www/fonts/fa-regular-400.ttf</key>
+		<data>
+		dTUku+1s3Qf23WQ/kN8CVnS9UxE=
+		</data>
+		<key>www/fonts/fa-regular-400.woff</key>
+		<data>
+		xU57Y2KAJMkgKkNv8p49qfVMIwc=
+		</data>
+		<key>www/fonts/fa-regular-400.woff2</key>
+		<data>
+		IlFoAu+ayHgphRnBj/qxF2nubNc=
+		</data>
+		<key>www/fonts/fa-solid-900.eot</key>
+		<data>
+		4lbf+FX3kuNl81s6N4d7+ej9yY4=
+		</data>
+		<key>www/fonts/fa-solid-900.ttf</key>
+		<data>
+		TjaVgesi+KNsQ/R0TKf9Wp12k0E=
+		</data>
+		<key>www/fonts/fa-solid-900.woff</key>
+		<data>
+		WAEU8S5gksHTP7t5sD6g5c0rlSQ=
+		</data>
+		<key>www/fonts/fa-solid-900.woff2</key>
+		<data>
+		+lxdNMfDdao+EB8LgQS2zbys1qY=
+		</data>
+		<key>www/images/fa-brands-400.svg</key>
+		<data>
+		h9Z+qI0gRVbtCMgvNVd3rVZdhC0=
+		</data>
+		<key>www/images/fa-regular-400.svg</key>
+		<data>
+		UlsRyQKN53STjcrff2ViYexFQAg=
+		</data>
+		<key>www/images/fa-solid-900.svg</key>
+		<data>
+		L+5yMTRPKWg6IyzGAfmLCFFMPII=
+		</data>
 		<key>www/index.html</key>
 		<data>
 		X1Frmxhh/TTsqpbl3AY6qeGVtwo=
 		</data>
 		<key>www/js/app.js</key>
 		<data>
-		NB5PItA1E9K854Mwps/w3SdT1oA=
+		xcQjkLqVeAPe3o581l6PFmwPqpI=
 		</data>
 		<key>www/plugins/cordova-plugin-device/www/device.js</key>
 		<data>
@@ -327,6 +387,10 @@
 		<key>www/plugins/cordova-plugin-wkwebview-engine/src/www/ios/ios-wkwebview.js</key>
 		<data>
 		uSpOoBJtw3huMClDN2UUZQOjz/Y=
+		</data>
+		<key>www/static/elmina-logo.svg</key>
+		<data>
+		zvE5Uui6XQYblYYnC1mxi5NKXF4=
 		</data>
 	</dict>
 	<key>files2</key>
@@ -599,22 +663,22 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			vfLHeN+4FdDt9bij+enQY3Hbwuo=
+			N4+vM3dKPigpH1vPO9Sm6eKaVGE=
 			</data>
 			<key>hash2</key>
 			<data>
-			hpr9h/HhTbGQYzN3ojWO2TrEm4XDn0AYszb7uLUQWHk=
+			Ec16XBV7evH+BFqPnG6R8VxABFDI6/yAn8NiXXxdhys=
 			</data>
 		</dict>
 		<key>CDVLaunchScreen.storyboardc/01J-lp-oVM-view-Ze5-6b-2t3.nib</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			uUIfUHJcFPZO5W5PajOoopkB72Q=
+			R440f6Mzl2mxvfkOt0+DWShG0rU=
 			</data>
 			<key>hash2</key>
 			<data>
-			PWmb6OmqDnvtrczTu2yD75bk/C2SiwcpU4cNT98KxCE=
+			i/39nYaXycnXdQvqWUi1FvV/oNyPswU0QlJp/CWW1rY=
 			</data>
 		</dict>
 		<key>CDVLaunchScreen.storyboardc/Info.plist</key>
@@ -632,22 +696,22 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			9P7R2XcYeQPR73XyiSQp4rgSPJk=
+			ZaFTr/1WDiJPN+v2cxGidtuaptA=
 			</data>
 			<key>hash2</key>
 			<data>
-			HLxq5wC2Npvr1r+jEoRhiHJJNU8sHHvsKF8KafNmn/I=
+			KnOVH0fyIqidb1BgzYE4fdwsrEsE8b/JaFgGAgomujg=
 			</data>
 		</dict>
 		<key>MainViewController.nib</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			v1EwtRgusJ7Qd8vPMHfaITKcUL8=
+			XY/Z+S6eHXu0L9ON1ZkQ4jO1Uw4=
 			</data>
 			<key>hash2</key>
 			<data>
-			yLhXSX86sGvu/26NTW3CIUSkQ8TReVrxG5m7HpQKPHs=
+			GwmQXF/E/keyDXzl/ZDjx2idGzw11aODZAk4S4S5l1I=
 			</data>
 		</dict>
 		<key>config.xml</key>
@@ -826,6 +890,171 @@
 			qH1myRsufcVTCu92wDvWo9JepYJhEL9IA7VhuBHMhyY=
 			</data>
 		</dict>
+		<key>www/fonts/fa-brands-400.eot</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			p6m16JrngmEY1sBeXQ7It8kcgp8=
+			</data>
+			<key>hash2</key>
+			<data>
+			beUn+y/EhpSamUn+Qg9OBQ6dNxPPIeG7B7bG7JreJ4E=
+			</data>
+		</dict>
+		<key>www/fonts/fa-brands-400.ttf</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			sm2lamXCEkfZqRxr2Q5Xx4SO54M=
+			</data>
+			<key>hash2</key>
+			<data>
+			Xt9GxZHUcBonIo+P7Y3Rx12J+jQpkxmkKTHpmRcBQd0=
+			</data>
+		</dict>
+		<key>www/fonts/fa-brands-400.woff</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			Rb+qpqBU27G9qN4ZxilGZtxGzLM=
+			</data>
+			<key>hash2</key>
+			<data>
+			VpS/lk+KpkwG9Z5f479hfvnMGVmfPJAbZ/BiYURuG7Y=
+			</data>
+		</dict>
+		<key>www/fonts/fa-brands-400.woff2</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			GzOxJGYQWFxEDkZLBN9kzwzqHco=
+			</data>
+			<key>hash2</key>
+			<data>
+			V8lv1ClGF/sL84QtH3fsI2X/DQ0AtoF1CLYZLfDowWk=
+			</data>
+		</dict>
+		<key>www/fonts/fa-regular-400.eot</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			v+hYdDvqX9LHr84QnNsCtIs5ko4=
+			</data>
+			<key>hash2</key>
+			<data>
+			k5yg5m6eHClmr6p8z6XqLYKUBDzTJCTthKO/si07AHE=
+			</data>
+		</dict>
+		<key>www/fonts/fa-regular-400.ttf</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			dTUku+1s3Qf23WQ/kN8CVnS9UxE=
+			</data>
+			<key>hash2</key>
+			<data>
+			2jXQ7Y5SChG9CyPTBM256GbvvL/tB/+dk3jXrfnXTw8=
+			</data>
+		</dict>
+		<key>www/fonts/fa-regular-400.woff</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			xU57Y2KAJMkgKkNv8p49qfVMIwc=
+			</data>
+			<key>hash2</key>
+			<data>
+			clE0MBPcVROB3jK0CYwLOEo/LkglA7LBYcyunA/dVT0=
+			</data>
+		</dict>
+		<key>www/fonts/fa-regular-400.woff2</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			IlFoAu+ayHgphRnBj/qxF2nubNc=
+			</data>
+			<key>hash2</key>
+			<data>
+			nai+Ll3vY8d/U+1mAwYJjeviHWIseXVhgKSmJrohxq8=
+			</data>
+		</dict>
+		<key>www/fonts/fa-solid-900.eot</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			4lbf+FX3kuNl81s6N4d7+ej9yY4=
+			</data>
+			<key>hash2</key>
+			<data>
+			4FXZyE3LarhoTyfnrGtICCtia3xTY5UC/QW/Rc1Dr+M=
+			</data>
+		</dict>
+		<key>www/fonts/fa-solid-900.ttf</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			TjaVgesi+KNsQ/R0TKf9Wp12k0E=
+			</data>
+			<key>hash2</key>
+			<data>
+			+0BJO47vFkZGSarGG5ZdU9lVMEGOieroO/NCCEL4t8I=
+			</data>
+		</dict>
+		<key>www/fonts/fa-solid-900.woff</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			WAEU8S5gksHTP7t5sD6g5c0rlSQ=
+			</data>
+			<key>hash2</key>
+			<data>
+			HbQsfGREm8IX3JawKyCgcoA4sUbU+N1h2rsn7UgPkxI=
+			</data>
+		</dict>
+		<key>www/fonts/fa-solid-900.woff2</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			+lxdNMfDdao+EB8LgQS2zbys1qY=
+			</data>
+			<key>hash2</key>
+			<data>
+			D+akNXUFyw08qLoGca1X32t0EMoCy4Bl7tWOLAOB5kA=
+			</data>
+		</dict>
+		<key>www/images/fa-brands-400.svg</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			h9Z+qI0gRVbtCMgvNVd3rVZdhC0=
+			</data>
+			<key>hash2</key>
+			<data>
+			P3Oj0gvwowOOa7L2Cih1+wKIf1rq47fuNf8ad2K9AFc=
+			</data>
+		</dict>
+		<key>www/images/fa-regular-400.svg</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			UlsRyQKN53STjcrff2ViYexFQAg=
+			</data>
+			<key>hash2</key>
+			<data>
+			6s5lxk+lctuw+ChaAZDNQHUsi2xgX12OkCmOcwchfNA=
+			</data>
+		</dict>
+		<key>www/images/fa-solid-900.svg</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			L+5yMTRPKWg6IyzGAfmLCFFMPII=
+			</data>
+			<key>hash2</key>
+			<data>
+			PlZEZzOPsduFlv5QL90dTamDv11+GFrIz14PzmeemsA=
+			</data>
+		</dict>
 		<key>www/index.html</key>
 		<dict>
 			<key>hash</key>
@@ -841,11 +1070,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			NB5PItA1E9K854Mwps/w3SdT1oA=
+			xcQjkLqVeAPe3o581l6PFmwPqpI=
 			</data>
 			<key>hash2</key>
 			<data>
-			Q2TlzHHAgToCK0a+M1mQKTwBibUg+od2arbo6BdvUUE=
+			8+6awUnG8DGCEtbW95GOd9LOIE6L0fhqGLs7oFK7btY=
 			</data>
 		</dict>
 		<key>www/plugins/cordova-plugin-device/www/device.js</key>
@@ -1198,6 +1427,17 @@
 			<key>hash2</key>
 			<data>
 			snCU5zVffeqnWk/2NWikUz5/ywm8VWiiKUujPDpj0Yw=
+			</data>
+		</dict>
+		<key>www/static/elmina-logo.svg</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			zvE5Uui6XQYblYYnC1mxi5NKXF4=
+			</data>
+			<key>hash2</key>
+			<data>
+			1UNBUoEkPGADDDstHM5OXJ4jY2d1mDG7EHq+FemJV7I=
 			</data>
 		</dict>
 	</dict>

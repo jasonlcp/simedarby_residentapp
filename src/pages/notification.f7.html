@@ -1,0 +1,120 @@
+<template>
+    <div class="page">
+        <div class="navbar">
+            <div class="navbar-inner sliding">
+                <div class="left">
+                    <a href="#" class="back link">
+                        <i class="icon icon-back"></i>
+                        <span class="if-not-md">Back</span>
+                    </a>
+                </div>
+                <div class="center">
+                    Notification
+                </div>
+                <div class="right">
+                    <a href="#" class="link open-confirm-delete">
+                        <i class="icon f7-icons">trash</i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="page-content">
+            <div class="block">
+                <div class="card">
+                    <div class="card-content">
+                        <div class="list media-list">
+                            <ul>
+                                {{#each "123"}}
+                                <li class="swipeout">
+                                    <div class="swipeout-content">
+                                        <a href="#" class="item-link item-content chevron-center">
+                                            <div class="item-media"><i class="icon f7-icons">email<span
+                                                        class="badge color-red"></span></i></div>
+                                            <div class="item-inner">
+                                                <div class="item-title-row">
+                                                    <div class="item-title">Pending Payment</div>
+                                                    <div class="item-after">17:35</div>
+                                                </div>
+                                                <div class="item-text">
+                                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
+                                                    sagittis
+                                                    tellus ut turpis condimentum, ut dignissim lacus tincidunt. Cras
+                                                    dolor
+                                                    metus, ultrices condimentum sodales sit amet, pharetra sodales eros.
+                                                    Phasellus vel felis tellus. Mauris rutrum ligula nec dapibus
+                                                    feugiat. In
+                                                    vel dui laoreet, commodo augue id, pulvinar lacus.
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="swipeout-actions-right">
+                                        <a href="#" data-confirm="Are you sure you want to delete this item?"
+                                            class="swipeout-delete swipeout-overswipe">Delete</a>
+                                    </div>
+                                </li>
+                                {{/each}}
+                                <li>
+                                    <a href="#" class="item-link item-content chevron-center">
+                                        <div class="item-media"><i class="icon f7-icons">email</i></div>
+                                        <div class="item-inner">
+                                            <div class="item-title-row">
+                                                <div class="item-title">Payment Approved</div>
+                                                <div class="item-after">20:24</div>
+                                            </div>
+                                            <div class="item-text">
+                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sagittis
+                                                tellus ut turpis condimentum, ut dignissim lacus tincidunt. Cras dolor
+                                                metus, ultrices condimentum sodales sit amet, pharetra sodales eros.
+                                                Phasellus vel felis tellus. Mauris rutrum ligula nec dapibus feugiat. In
+                                                vel dui laoreet, commodo augue id, pulvinar lacus.
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="item-link item-content chevron-center">
+                                        <div class="item-media"><i class="icon f7-icons">email</i></div>
+                                        <div class="item-inner">
+                                            <div class="item-title-row">
+                                                <div class="item-title">Announcement</div>
+                                                <div class="item-after">20:24</div>
+                                            </div>
+                                            <div class="item-text">
+                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sagittis
+                                                tellus ut turpis condimentum, ut dignissim lacus tincidunt. Cras dolor
+                                                metus, ultrices condimentum sodales sit amet, pharetra sodales eros.
+                                                Phasellus vel felis tellus. Mauris rutrum ligula nec dapibus feugiat. In
+                                                vel dui laoreet, commodo augue id, pulvinar lacus.
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+<style scoped>
+    .item-media {
+        padding-top: 32.5px;
+    }
+</style>
+<script>
+    export default {
+        on: {
+            pageInit: function () {
+                var app = this.$app;
+                this.$$(".open-confirm-delete").on('click', function () {
+                    app.dialog.confirm('Are you sure you want to delete all notification?', function () {
+                        app.dialog.alert('Great!');
+                    });
+                });
+            }
+        }
+
+    }
+</script>

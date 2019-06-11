@@ -23,18 +23,18 @@
       <div class="toolbar-inner">
         <a href="/schedule/" class="tab-link">
           <i class="icon f7-icons">calendar_today</i>
-          <span class="tabbar-label">Schedule</span>
+          <span class="tabbar-label">Visitor Entry</span>
         </a>
         <a href="/visitor-list/" class="tab-link tab-link">
           <i class="icon f7-icons">persons_round</i>
-          <span class="tabbar-label">Visitor List</span>
+          <span class="tabbar-label">My Visitors</span>
         </a>
-        <a href="#" class="tab-link">
+        <a href="/pay-bills/" class="tab-link">
           <i class="icon f7-icons">money_dollar_round</i>
           <span class="tabbar-label">Pay Bills</span>
         </a>
-        <a href="#" class="tab-link">
-          <i class="icon f7-icons">photos</i>
+        <a href="/notification/" class="tab-link">
+          <i class="icon f7-icons">photos<span class="badge color-red">3</span></i>
           <span class="tabbar-label">Notification</span>
         </a>
       </div>
@@ -52,19 +52,19 @@
       <div class="block margin-btm-16">
         <div class="row">
           <div class="col-25">
-            <a href="#" class="service-link">
+            <a href="/family-list/" class="service-link">
               <i class="icon f7-icons">persons_round</i>
               <p>Family</p>
             </a>
           </div>
           <div class="col-25">
-            <a href="#" class="service-link">
+            <a href="/visits/" class="service-link">
               <i class="icon f7-icons">graph_round</i>
               <p>Visits</p>
             </a>
           </div>
           <div class="col-25">
-            <a href="#" class="service-link">
+            <a href="/bills/" class="service-link">
               <i class="icon f7-icons">document_text</i>
               <p>Bills</p>
             </a>
@@ -83,19 +83,20 @@
       </div>
 
       <div class="block margin-btm-16">
-        <div class="swiper-container property-swiper">
+        <div class="swiper-container swiper-init" data-space-between="20" data-slides-per-view="auto">
           <!-- Slides wrapper -->
-          <div class="swiper-pagination"></div>
           <div class="swiper-wrapper ">
             <!-- Slides -->
             {{#each properties}}
             <div class="swiper-slide">
-              <div class="card card-header-pic">
-                <div style="background-image:url({{street.area.thumbnail}})" class="card-header align-items-flex-end">
-                  {{name}}</div>
-                <div class="card-footer"><span>{{street.area.name}},{{street.name}} <i
-                      class="icon f7-icons em-1"></span>chevron_right</i></div>
-              </div>
+              <a href="/property/">
+                <div class="card card-header-pic">
+                  <div style="background-image:url({{street.area.thumbnail}})" class="card-header align-items-flex-end">
+                    {{name}}</div>
+                  <div class="card-footer"><span>{{street.area.name}},{{street.name}} <i
+                        class="icon f7-icons em-1"></span>chevron_right</i></div>
+                </div>
+              </a>
             </div>
             {{else}}
             <div class="swiper-slide">
@@ -110,7 +111,10 @@
 
       <!--Properties-->
       <div class="block-title margin-top-16">
-        <h3>Announcements</h3>
+        <h3 style="float:left">Announcements</h3>
+        <div style="float:right;margin-top:1em; margin-bottom:1em;">
+          <a class="link" href="/announcement-list/"> More</a>
+        </div>
       </div>
       <div class="block">
         <div class="swiper-container swiper-init" data-space-between="20" data-slides-per-view="auto">
@@ -119,11 +123,13 @@
             <!-- Slides -->
             {{#each announcements}}
             <div class="swiper-slide">
-              <div class="card card-header-pic">
-                <div style="background-image:url({{thumbnail}})" class="card-header align-items-flex-end">{{title}}
+              <a href="/announcement/">
+                <div class="card card-header-pic">
+                  <div style="background-image:url({{thumbnail}})" class="card-header align-items-flex-end">{{title}}
+                  </div>
+                  <div class="card-footer">Find Out More <i class="icon f7-icons em-1">chevron_right</i></div>
                 </div>
-                <div class="card-footer">Find Out More <i class="icon f7-icons em-1">chevron_right</i></div>
-              </div>
+              </a>
             </div>
             {{else}}
             <div class="swiper-slide">
@@ -231,10 +237,10 @@
 <script>
   export default {
     data: function () {
-      var auth = this.$app.data.user;
+      var auth = this.$app.methods.getUser();
       var name = null;
       if (auth) {
-        name = auth.user.first_name + " " + auth.user.last_name;
+        name = auth.user.first_name + " " + auth.user.last_name
       }
       return {
         name: name,
@@ -243,33 +249,19 @@
       }
     },
     on: {
-      pageBeforeIn: function () {
-        var app = this.$app;
-        var property_swiper;
-        this.$app.methods.getAnnouncements();
-        this.$app.methods.getProperties(function () {
-          property_swiper = app.swiper.create('.property-swiper', {
-            init:false,
-            slidesPerView: "auto",
-            width: "80%",
-            spaceBetween: "20",
-            observeSlideChildren: true,
-            observer: true,
-            pagination: {
-              el: '.swiper-pagination',
-              type: 'bullets',
-            },
-          });
-          console.log(property_swiper);
-          property_swiper.init();
-        });
-      },
       pageInit: function () {
-        var auth = this.$app.data.user;
         var $$ = this.$$;
+        var app = this.$app;
+        var auth = this.$app.methods.getUser();
+        var property_swiper;
         var router = this.$router;
+        var self = this;
         if (!auth) {
           router.navigate('/login/');
+          router.clearPreviousHistory();
+        } else {
+          this.$app.methods.getAnnouncements();
+          this.$app.methods.getProperties();
         }
         $$('.navbar').on('navbar:collapse', function () {
           $$('.main-toolbar.toolbar').css({
@@ -285,7 +277,7 @@
             'border-radius': '9px',
           });
         });
-        
+
       }
     }
   }

@@ -1,0 +1,122 @@
+<template>
+    <div class="page">
+        <div class="navbar">
+            <div class="navbar-inner sliding">
+                <div class="left">
+                    <a href="#" class="back link">
+                        <i class="icon icon-back"></i>
+                        <span class="if-not-md">Back</span>
+                    </a>
+                </div>
+                <div class="center">
+                    Pay Bills
+                </div>
+            </div>
+        </div>
+
+        <div class="toolbar toolbar-bottom auto-height">
+            <div class="block">
+                <a href="#" id="schedule_submit" class="button button-raised button-round button-fill ">Submit</a>
+            </div>
+        </div>
+        <div class="page-content">
+            <div class="list no-hairlines-md">
+                <form id="paybillform">
+                    <ul class="list media-list">
+                        <li class="item-content item-input">
+                            <div class="item-inner">
+                                <h3 style="margin:0px;">Total Amount: RM <span id="total">1010.00</span></h3>
+                            </div>
+                        </li>
+                        <li class="item-content item-input">
+                            <div class="item-inner">
+                                <div class="item-title">Bills</div>
+                                <div class="item-input-wrap input-dropdown-wrap">
+                                    <a href="#" class="item-link smart-select">
+                                        <div class="item-after">Select bills</div>
+                                        <select name="bill" multiple>
+                                            {{#each bill}}
+                                            <option value="{{id}}" data-option-after="image">{{name}} - RM{{amount}}
+                                            </option>
+                                            {{/each}}
+                                        </select>
+                                    </a>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="item-content">
+                            <div class="item-inner">
+                                <div class="item-title-row">
+                                    <div class="item-title">Upload Receipt</div>
+                                    <div class="item-after">
+                                        <a href="#" class="button button-small button-raised button-round button-fill ">Upload</a>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <img height="300px"
+                                        src="https://proxy.duckduckgo.com/iu/?u=https%3A%2F%2Fi.pinimg.com%2Foriginals%2Feb%2Fe1%2F68%2Febe16834a8793ea27807268abc0f0644.jpg&f=1" />
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </form>
+            </div>
+        </div>
+    </div>
+</template>
+<style>
+    .auto-height {
+        --f7-toolbar-height: 100px;
+
+    }
+
+    .auto-height~* {
+        --f7-page-toolbar-bottom-offset: 100px;
+    }
+
+    .item-content .item-link {
+        height: var(--f7-input-height);
+    }
+
+    .item-content .item-link .item-after {
+        padding-left: 0px;
+        margin-left: 0px;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+</style>
+<script>
+    export default {
+        data: function () {
+            return {
+                bill: [{
+                    id: 1,
+                    amount: "1000",
+                    name: "Inv-123",
+                }, {
+                    id: 2,
+                    amount: "100",
+                    name: "Inv-13",
+                }, ]
+            }
+        },
+        on: {
+            pageInit: function () {
+                var $$ = this.$$;
+                var self = this;
+                $$('.smart-select').on('smartselect:close', function () {
+                    var d = $$('[name="bill"]').val();
+                    d.forEach(function (item, index) {
+                        var item = item;
+                        console.log(self.bill.filter(function (data) {
+                            return data.id === item
+                        }));
+                    })
+
+                    $$('#total').html();
+                });
+            }
+        }
+
+    }
+</script>
