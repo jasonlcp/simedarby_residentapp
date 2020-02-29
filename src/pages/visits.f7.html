@@ -3,7 +3,7 @@
         <div class="navbar">
             <div class="navbar-inner sliding">
                 <div class="left">
-                    <a href="#" class="back link">
+                    <a href="#"  class="back link">
                         <i class="icon icon-back"></i>
                         <span class="if-not-md">Back</span>
                     </a>
@@ -15,64 +15,137 @@
         </div>
         <div class="toolbar tabbar toolbar-top no-shadow">
             <div class="toolbar-inner">
-                <a class="link button-fill button tab-btn">Upcoming</a>
-                <a class="link button-fill button tab-btn">History</a>
+                <a class="tab-link tab-link-active tab-btn" href="#tab-1"><span
+                        class="tabbar-label"><small style="font-size: 3vw;">Single</small></span></small></a>
+                <a class="tab-link tab-btn" href="#tab-2"><span class="tabbar-label"><small style="font-size: 3vw;">Multiple</small></span></a>
+                <a class="tab-link tab-btn" href="#tab-3"><span class="tabbar-label"><small style="font-size: 3vw;">Scheduled</small></span></a>
+                <a class="tab-link tab-btn" href="#tab-4"><span class="tabbar-label"><small style="font-size: 3vw;">Upcoming</small></span></a>
             </div>
         </div>
-        <div class="page-content">
-            <div class="block">
-                <div class="card">
-                    <div class="card-content">
-                        <div class="list media-list">
-                            <ul>
-                                <li>
-                                    <a href="#" class="item-content">
-                                        <div class="item-media"><i class="icon fas fa-car"></i></div>
-                                        <div class="item-inner">
-                                            <div class="item-title-row">
-                                                <div class="item-title">Adam</div>
-                                                <div class="item-after">17:35</div>
+        <div class="tabs-animated-wrap">
+            <div class="tabs">
+                <div id="tab-1" class="page-content tab tab-active">
+                    <div class="block">
+                        <div class="card">
+                            <div class="card-content">
+                                <div class="list media-list">
+                                    <ul>
+                                        {{#single}}
+                                        <li>
+                                            <a href="/qr/{{id}}/2" class="item-content">
+                                                <div class="item-media"><i class="icon fas fa-car"></i></div>
+                                                <div class="item-inner">
+                                                    <div class="item-title-row">
+                                                        <div class="item-title">{{visitor_name}}</div>
+                                                        <div class="item-after">{{start_date}}</div>
+                                                    </div>
+                                                    <div class="item-text">
+                                                        {{visitor_car_plate}}
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        {{/single}}
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="tab-2" class="page-content tab">
+                    <div class="block">
+                        <div class="card">
+                            <div class="card-content">
+                                <div class="list media-list">
+                                    <ul>
+                                        {{#multiple}}
+                                        <li>
+                                            <a href="/qr/{{id}}/2" class="item-content">
+                                                <div class="item-media"><i class="icon fas fa-car"></i></div>
+                                                <div class="item-inner">
+                                                    <div class="item-title-row">
+                                                        <div class="item-title">{{visitor_name}}</div>
+                                                        <div class="item-after">{{start_date}}</div>
+                                                    </div>
+                                                    <div class="item-text">
+                                                        {{visitor_car_plate}}
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        {{/multiple}}
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="tab-3" class="page-content tab">
+                    <div class="block">
+                        <div class="card">
+                            <div class="card-content">
+                                <div class="list media-list">
+                                    <ul>
+                                        {{#schedule}}
+                                        <li>
+                                            <a href="/qr/{{id}}/2" class="item-content">
+                                                <div class="item-media"><i class="icon fas fa-car"></i></div>
+                                                <div class="item-inner">
+                                                    <div class="item-title-row">
+                                                        <div class="item-title">{{visitor_name}}</div>
+                                                        <div class="item-after">{{start_date}}</div>
+                                                    </div>
+                                                    <div class="item-text">
+                                                        {{visitor_car_plate}}
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        {{/schedule}}
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="tab-4" class="page-content tab">
+                    <div class="block">
+                        <div class="card">
+                            <div class="card-content">
+                                <div class="list media-list" id="upcoming-list">
+                                    <ul>
+                                        {{#upcoming}}
+                                        <li class="swipeout" data-id={{id}}>
+                                            <div class="swipeout-content">
+                                                <a href="/qr/{{id}}/2" class="item-content">
+                                                    <div class="item-media"><i class="icon fas fa-car"></i></div>
+                                                    <div class="item-inner">
+                                                        <div class="item-title-row">
+                                                            <div class="item-title">{{visitor_name}}</div>
+                                                            <div class="item-after">{{start_date}}</div>
+                                                        </div>
+                                                        <div class="item-text">
+                                                            {{visitor_car_plate}}
+                                                        </div>
+                                                    </div>
+                                                </a>
                                             </div>
-                                            <div class="item-text">
-                                                VAT 2552
+                                            <div class="swipeout-actions-right">
+                                                <a href="/edit-schedule/{{id}}" class="color-orange alert-mark">Edit</a>
+                                                <a href="#" data-confirm="Are you sure you want to delete this item?"
+                                                    class="swipeout-delete swipeout-overswipe">Delete</a>
                                             </div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="item-content">
-                                        <div class="item-media"><i class="icon fas fa-car"></i></div>
-                                        <div class="item-inner">
-                                            <div class="item-title-row">
-                                                <div class="item-title">David</div>
-                                                <div class="item-after">Tues</div>
-                                            </div>
-                                            <div class="item-text">
-                                                VAT 3121
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="item-content">
-                                        <div class="item-media"><i class="icon fas fa-car"></i></div>
-                                        <div class="item-inner">
-                                            <div class="item-title-row">
-                                                <div class="item-title">John Doe</div>
-                                                <div class="item-after">Mon</div>
-                                            </div>
-                                            <div class="item-text">
-                                                DDK 9345
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                            </ul>
+                                        </li>
+                                        {{/upcoming}}
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
     </div>
 </template>
 <style scoped>
@@ -99,14 +172,44 @@
         text-align: center;
 
     }
-    .toolbar-inner{
-        padding:10px;
-    }
-    .tab-btn{
-        margin:15px;
+
+    .toolbar-inner {
+        padding: 10px;
     }
 
+    .tab-btn {
+        margin: 0px 5px;
+        background-color: #737373 !important;
+        color: #fff;
+        border-radius: 5px;
+    }
+
+    .tabbar .tab-link-active {
+        background-color: #f04e23 !important;
+    }
 </style>
 <script>
-    export default {}
+    export default {
+        data: function () {
+            return {
+                single: null,
+                multiple: null,
+                schedule: null,
+            }
+        },
+        on: {
+            pageInit: function () {
+                var $$ = this.$$;
+                var app = this.$app;
+                this.$app.methods.getEntriesSingle();
+                this.$app.methods.getEntriesMultiple();
+                this.$app.methods.getEntriesSchedule();
+                this.$app.methods.getEntriesUpcoming();
+                this.$$("#upcoming-list").on('swipeout:delete', '.swipeout', function () {
+                    app.methods.deleteEntry($$(this).data("id"));
+                    console.log($$(this).data("id"));
+                });
+            }
+        }
+    }
 </script>

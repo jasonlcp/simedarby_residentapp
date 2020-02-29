@@ -170,9 +170,7 @@ module.exports = {
       // Production only plugins
       new UglifyJsPlugin({
         uglifyOptions: {
-          compress: {
-            warnings: false,
-          },
+   
         },
         sourceMap: true,
         parallel: true,

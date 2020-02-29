@@ -1,0 +1,168 @@
+<template>
+    <div class="page">
+        <div class="navbar">
+            <div class="navbar-inner sliding">
+                <div class="left">
+                    <a href="#" class="back link">
+                        <i class="icon icon-back"></i>
+                        <span class="if-not-md">Back</span>
+                    </a>
+                </div>
+                <div class="center">
+                    Bills
+                </div>
+            </div>
+        </div>
+        <div class="page-content">
+            <div class="list no-hairlines-md">
+                <ul class="list media-list">
+                    <li class="item-content item-input">
+                        <div class="item-inner">
+                            <div class="item-title item-label">House</div>
+                            <div class="item-input-wrap input-dropdown-wrap">
+                                <a class="item-link smart-select smart-select" data-open-in="sheet">
+                                    <div class="item-after"></div>
+                                    <select name="house">
+                                        {{#each properties}}
+                                        <option value="{{id}}" {{#if is_default}}selected{{/if}}>{{name}}, {{street.area.name}}</option>
+                                        {{else}}
+                                        <option value="">Select a property</option>
+                                        {{/each}}
+                                    </select>
+                                </a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                <div class="block">
+                    <div class="card">
+                        <div class="card-header">
+                            Bill Pending
+                        </div>
+                        <div class="card-content">
+                            <div class="list media-list">
+                                <ul>
+                                    {{#each bill}}
+                                    <li>
+                                        <a href="/bill-details/{{id}}" class="item-content">
+                                            <div class="item-media"><i class="icon fas fa-file-invoice-dollar"></i>
+                                            </div>
+                                            <div class="item-inner">
+                                                <div class="item-title-row">
+                                                    <div class="item-title">Inv-{{id}}</div>
+                                                    <div class="item-after">
+                                                    <span class="badge color-orange">{{billStatus status}}</span>
+                                                    {{bill_date}}
+                                                    </div>
+                                                </div>
+                                                <div class="item-subtitle">
+                                                    {{bill_type.name}}
+                                                    
+                                                </div>
+                                                <div class="item-text">
+                                                    RM{{amount}}
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    {{else}}
+                                    <li>
+                                        <a href="#" class="item-content">
+                                            No Pending Bills.
+                                        </a>
+                                    </li>
+                                    {{/each}}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+<style scoped>
+    .auto-height {
+        --f7-toolbar-height: 100px;
+
+    }
+
+    .auto-height~* {
+        --f7-page-toolbar-bottom-offset: 100px;
+    }
+
+    .item-content .item-link {
+        height: var(--f7-input-height);
+    }
+
+    .item-content .item-link .item-after {
+        padding-left: 0px;
+        margin-left: 0px;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    .badge {
+        margin-right: 10px;
+    }
+
+    .item-media {
+        padding-top: 26px;
+    }
+
+    .fas {
+        font-style: normal;
+        font-size: 45px;
+        line-height: 1;
+        letter-spacing: normal;
+        text-transform: none;
+        display: inline-block;
+        white-space: nowrap;
+        word-wrap: normal;
+        direction: ltr;
+        -webkit-font-smoothing: antialiased;
+        text-rendering: optimizeLegibility;
+        -moz-osx-font-smoothing: grayscale;
+        -moz-font-feature-settings: "liga=1";
+        -moz-font-feature-settings: "liga";
+        font-feature-settings: "liga";
+        text-align: center;
+
+    }
+</style>
+<script>
+    export default {
+        data: function () {
+            return {
+                bill: null
+            }
+        },
+        on: {
+            pageBeforeIn: function () {
+                var app = this.$app;
+                var self = this;
+                var $$ = this.$$;
+                this.$app.methods.getProperties(function () {
+                    var a = app.smartSelect.create({
+                        el: '.smart-select',
+                        openIn:'sheet',
+                        
+                    });
+                    console.log(a);
+                    app.methods.getBills($$(a.selectEl).val());
+                });
+            },
+            pageInit: function () {
+                var $$ = this.$$;
+                var self = this;
+                var app = this.$app;
+                $$('.smart-select').on('smartselect:close', function () {
+                    var d = $$('[name="house"]').val();
+                    console.log(d)
+                    app.methods.getBills(d);
+                });
+            }
+        }
+
+    }
+</script>

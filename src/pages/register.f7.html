@@ -1,0 +1,377 @@
+<template>
+    <div class="page">
+        <div class="navbar">
+            <div class="navbar-inner sliding">
+                <div class="left">
+                    <a  class="back link">
+                        <i class="icon icon-back"></i>
+                        <span class="if-not-md">Back</span>
+                    </a>
+                </div>
+                <div class="center">
+                    Register
+                </div>
+            </div>
+        </div>
+
+        <div class="toolbar toolbar-bottom auto-height">
+            <div class="block">
+                <a href="#" id="reg_btn" class="button button-raised button-round button-fill ">Submit</a>
+            </div>
+        </div>
+        <div class="page-content">
+            <div class="list no-hairlines-md">
+                  <div class="login-screen-title"><img src="static/logo1.png" width="40%" /></div>
+                <form id="regform">
+                    <ul class="list media-list">
+                        <li class="item-content item-input item-input-with-error-message">
+                            <div class="item-inner">
+                                <div class="item-title item-label">Email Address</div>
+                                <div class="item-input-wrap">
+                                    <input type="email" placeholder="Email Address" name="email" value="">
+                                    <span class="input-clear-button"></span>
+                                    <div class="item-input-error-message" for="email"></div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="item-content item-input item-input-with-error-message">
+                            <div class="item-inner">
+                                <div class="item-title item-label">First Name</div>
+                                <div class="item-input-wrap">
+                                    <input type="text" placeholder="First Name" name="first_name" value="">
+                                    <span class="input-clear-button"></span>
+                                    <div class="item-input-error-message" for="first_name"></div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="item-content item-input item-input-with-error-message">
+                            <div class="item-inner">
+                                <div class="item-title item-label">Last Name</div>
+                                <div class="item-input-wrap">
+                                    <input type="text" placeholder="Last Name" name="last_name" value="">
+                                    <span class="input-clear-button"></span>
+                                    <div class="item-input-error-message" for="last_name"></div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="item-content item-input item-input-with-error-message">
+                            <div class="item-inner">
+                                <div class="item-title item-label">Mobile Number</div>
+                                <div class="item-input-wrap">
+                                    <input type="tel" placeholder="Mobile No." name="phone_number"
+                                        value="">
+                                    <span class="input-clear-button"></span>
+                                    <div class="item-input-error-message" for="phone_number"></div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="item-content item-input item-input-with-error-message">
+                            <div class="item-inner">
+                                <div class="item-title item-label">Community</div>
+                                <div class="item-input-wrap input-dropdown-wrap">
+                                <select placeholder="Please choose one" name="community" id="community">
+                                    <option value="" selected disabled hidden>Select your community</option>
+                                    {{#community}}
+                                    <option value="{{id}}">{{name}}</option>
+                                    {{/community}}
+                                </select>
+                                <div class="item-input-error-message" for="community"></div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="item-content item-input item-input-with-error-message">
+                            <div class="item-inner">
+                                <div class="item-title item-label">Area</div>
+                                <div class="item-input-wrap input-dropdown-wrap">
+                                <select placeholder="Please choose one" name="area" id="area">
+                                   <option value="" selected disabled hidden>Select your area</option>
+                                    {{#area}}
+                                    <option value="{{id}}">{{name}}</option>
+                                    {{/area}}
+                                </select>
+                                <div class="item-input-error-message" for="area"></div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="item-content item-input item-input-with-error-message">
+                            <div class="item-inner">
+                                <div class="item-title item-label">Street</div>
+                                <div class="item-input-wrap input-dropdown-wrap">
+                                <select placeholder="Please choose one" name="street" id="street">
+                                    <option value="" selected disabled hidden>Select your street</option>
+                                    {{#street}}
+                                    <option value="{{id}}">{{name}}</option>
+                                    {{/street}}
+                                </select>
+                                <div class="item-input-error-message" for="street"></div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="item-content item-input item-input-with-error-message">
+                            <div class="item-inner">
+                                <div class="item-title item-label">House No.</div>
+                                <div class="item-input-wrap input-dropdown-wrap">
+                                <select placeholder="Please choose one" name="lot" id="lot">
+                                    <option value="" selected disabled hidden>Select your House No.</option>
+                                    {{#lot}}
+                                    <option value="{{id}}">{{name}}</option>
+                                    {{/lot}}
+                                </select>
+                                <div class="item-input-error-message" for="lot"></div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="item-content">
+                            <div class="item-inner">
+                                <div class="item-title-row">
+                                    <div class="item-title">Certificate of Ownership</div>
+                                    <div class="item-after">
+                                        <a href="#"
+                                            class="button button-small button-raised button-round button-fill popover-open"
+                                            data-popover=".popover-links">Upload</a>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <br>
+                                    <div class="row">
+                                        <div class="col-20">
+                                            <img id="display-image" width="100%"  />
+                                        </div>
+                                        <div class="col-80">
+                                             <span id="file-name"></span>
+                                             <br>
+                                             <span id="file-size"></span>
+                                        </div>
+                                    </div>
+                                   
+                                </div>
+                            </div>
+                        </li>
+                         <li class="item-content item-input item-input-with-error-message">
+                            <label class="item-checkbox item-content">
+                                <input type="checkbox" name="confirm" value="True"/>
+                                <i class="icon icon-checkbox"></i>
+                                <div class="item-inner">
+                                    I confirm that the information given in this form is true, complete and accurate.
+                                    <div class="item-input-error-message" for="confirm"></div>
+                                </div>
+                            </label>
+                            
+                        </li>
+                        <li class="item-content item-input item-input-with-error-message">
+                            <label class="item-checkbox item-content">
+                                <input type="checkbox" name="tou" value="True"/>
+                                <i class="icon icon-checkbox"></i>
+                                <div class="item-inner">
+                                    I have read and agree to the <a class="link external" target="_blank" href="http://simedarbycommunity.com/static/ivms/file/PDPA.pdf">Privacy Policy</a> </label>
+                                    <div class="item-input-error-message" for="tou"></div>
+                                </div>
+                            </label>
+                        </li>
+                    </ul>
+                </form>
+            </div>
+            <div class="popover popover-links">
+                <div class="popover-inner">
+                    <div class="list">
+                        <ul>
+                            <li>
+                                <a class="item-link item-content popover-close camera-click" href="#">
+                                    <div class="item-media"><i class="icon f7-icons">camera</i></div>
+                                    <div class="item-inner">
+                                        <div class="item-title">Taka a picture</div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="item-link item-content popover-close photo-click" href="#">
+                                    <div class="item-media"><i class="icon f7-icons">photos</i></div>
+                                    <div class="item-inner">
+                                        <div class="item-title">Select From Gallery</div>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+<style>
+    .auto-height {
+        --f7-toolbar-height: 100px;
+
+    }
+
+    .list textarea.resizable {
+        height: auto;
+    }
+
+    .auto-height~* {
+        --f7-page-toolbar-bottom-offset: 100px;
+    }
+
+    .item-content .item-link {
+        height: var(--f7-input-height);
+    }
+
+    .item-content .item-link .item-after {
+        padding-left: 0px;
+        margin-left: 0px;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+    .item-input-error-message{
+        display:block;
+    }
+    .md label.item-checkbox {
+        position: relative;
+        overflow: visible;
+        z-index: 0;
+    }
+</style>
+<script>
+    export default {
+        data: function () {
+            return {
+                community: null,
+                area:null,
+                street:null,
+                lot:null,
+            }
+        },
+        on: {
+            pageBeforeIn: function () {
+                var app = this.$app;
+                this.$app.methods.getCommunity();
+            },
+            pageInit: function () {
+                var $$ = this.$$;
+                var app = this.$app;
+                var self = this;
+                var f = document.getElementById('regform');
+                var bdata;
+                $$('#community').on('change',function(){
+                    var val = $$(this).val();
+                    console.log(val);
+                    if(val == ' '){
+                        //self.area = null;
+                        //self.f7.$update();
+                        self.$setState({area: null,street:null,lot:null});
+                    }else{
+                        app.methods.getArea(val);
+                    }
+
+                });
+
+
+                $$('#area').on('change',function(){
+                    var val = $$(this).val();
+                    console.log(val);
+                    if(val == ' '){
+                        //self.area = null;
+                        //self.f7.$update();
+                        self.$setState({street: null,lot:null});
+                    }else{
+                        app.methods.getStreet(val);
+                    }
+                });
+
+
+                $$('#street').on('change',function(){
+                    var val = $$(this).val();
+                    console.log(val);
+                    if(val == ' '){
+                        //self.area = null;
+                        //self.f7.$update();
+                        //self.$setState({street: null,lot:null});
+                    }else{
+                        app.methods.getLot(val);
+                    }
+                });
+
+                $$('.photo-click').on('click', function () {
+                    navigator.camera.getPicture(onSuccess, onFail, {
+                        quality: 50,
+                        destinationType: Camera.DestinationType.DATA_URL,
+                        mediaType: Camera.MediaType.PICTURE,
+                        sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
+                    });
+                });
+                $$('#reg_btn').on('submit', function (e) {
+                    e.preventDefault();
+                    return false;
+                });
+                $$('.camera-click').on('click', function () {
+                    navigator.camera.getPicture(onSuccess, onFail, {
+                        quality: 50,
+                        destinationType: Camera.DestinationType.DATA_URL,
+                        mediaType: Camera.MediaType.PICTURE,
+                        sourceType: Camera.PictureSourceType.CAMERA,
+                    });
+                });
+                $$('.page').on('click', '#reg_btn', function () {
+                    var Fdata = new FormData(f);
+                    if(bdata){
+                        Fdata.append("slip", bdata, "upload.jpg");
+                        app.methods.postRegister(Fdata);
+                    }else {
+                                app.dialog.alert("Please attached the prove of payment! ", "Error!");
+                            }
+                    
+                    
+
+                });
+
+                function onSuccess(imageURI) {
+                    window.resolveLocalFileSystemURL(imageURI, function (fileEntry) {
+                        fileEntry.file(function (fileObj) {
+                            console.log(fileObj);
+                            $$('#file-name').html('File Name: '+fileObj.name);
+                            $$('#file-size').html('File Size: '+fileObj.size);
+                        });
+                    },function(fail){
+                        console.log(fail);
+                    });
+                    $$('#display-image').attr('src', "data:image/jpeg;base64," + imageURI);
+                    bdata = b64toBlob(imageURI, 'image/jpeg', 512);
+                }
+
+                function onFail() {
+                    //app.dialog.alert("Please Ensure you have enabled permission settings.", "Opps!");
+                }
+
+                function b64toBlob(b64Data, contentType, sliceSize) {
+
+                    contentType = contentType || '';
+                    sliceSize = sliceSize || 512;
+
+                    var byteCharacters = atob(b64Data);
+                    var byteArrays = [];
+
+
+                    for (var offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+                        var slice = byteCharacters.slice(offset, offset + sliceSize);
+
+                        var byteNumbers = new Array(slice.length);
+                        for (var i = 0; i < slice.length; i++) {
+
+                            byteNumbers[i] = slice.charCodeAt(i);
+                        }
+
+                        var byteArray = new Uint8Array(byteNumbers);
+
+                        byteArrays.push(byteArray);
+                    }
+
+                    var blob = new Blob(byteArrays, {
+                        type: contentType
+                    });
+                    return blob;
+                }
+            }
+        }
+
+    }
+</script>

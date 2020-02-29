@@ -3,7 +3,7 @@
         <div class="navbar">
             <div class="navbar-inner sliding">
                 <div class="left">
-                    <a href="#" class="back link">
+                    <a href="{{link}}" data-force="{{frc}}" data-ignore-cache="{{frc}}" data-reload-current="true" class="back link">
                         <i class="icon icon-back"></i>
                         <span class="if-not-md">Back</span>
                     </a>
@@ -11,7 +11,7 @@
                 <div class="title">Visitors</div>
                 <div class="right">
                     <!-- Link to enable searchbar -->
-                    <a class="link icon-only searchbar-enable" data-searchbar=".search">
+                    <a class="link icon-only searchbar-enable" data-searchbar=".searchVisitor">
                         <i class="icon material-icons md-only">search</i>
                     </a>
                 </div>
@@ -19,7 +19,7 @@
                     <div class="title-large-text">Visitors</div>
                 </div>
                 <!-- Searchbar is a direct child of "navbar-inner" -->
-                <form class="searchbar searchbar-expandable search searchbar-init">
+                <form class="searchbar searchbar-expandable searchVisitor searchbar-init">
                     <div class="searchbar-inner">
                         <div class="searchbar-input-wrap">
                             <input type="search" placeholder="Search" />
@@ -39,22 +39,22 @@
             </a>
         </div>
         <div class="page-content infinite-scroll-content">
-            <div class="list searchbar-hide-on-search">
-                <ul>
+            <div class="list visitorList">
+                <ul id="visitorslist">
                     {{#each users}}
-                    <li class="swipeout">
+                    <li class="swipeout" data-id={{id}}>
                         <div class="swipeout-content">
                             <a class="item-content item-link"
-                                @click="addSchedule('{{first_name}} {{last_name }}','number','vba123')">
+                                @click="addSchedule('{{name}}','{{phone_number}}','{{car_plate}}','{{../link}}')">
                                 <div class="item-media"><i class="icon f7-icons">person</i></div>
                                 <div class="item-inner">
-                                    <div class="item-title">{{ first_name }} {{last_name }}</div>
+                                    <div class="item-title capitalize">{{ name }}</div>
                                 </div>
                             </a>
                         </div>
                         <div class="swipeout-actions-right">
-                            <a href="#" class="color-orange alert-mark">Edit</a>
-                            <a href="#" data-confirm="Are you sure you want to delete this item?"
+                            <a href="/edit-visitor/{{id}}" class="color-orange alert-mark">Edit</a>
+                            <a href="#" data-confirm="Confirm Deletion?"
                                 class="swipeout-delete swipeout-overswipe">Delete</a>
                         </div>
                     </li>
@@ -63,7 +63,10 @@
                     {{/each}}
                 </ul>
             </div>
-            <div class="preloader infinite-scroll-preloader"></div>
+            <div class="block searchbar-not-found">
+                <div class="block-title"><h3>No results found.</h3></div>
+            </div>
+            <!--<div class="preloader infinite-scroll-preloader"></div>-->
         </div>
     </div>
 </template>
@@ -72,21 +75,44 @@
 <script>
     export default {
         data: function () {
+            var id= this.$route.params.id;
+            var link;
+            var frc
+            if(id == 1){
+                link = '#';
+                frc = "false";
+            }else{
+                link = '/';
+                frc = "true";
+            }
             return {
                 users: null,
                 next: null,
+                link:link,
+                frc:frc,
             }
         },
         methods: {
-            addSchedule: function (name, phone, plate) {
+            addSchedule: function (name, phone, plate,link) {
                 var router = this.$router;
+                var l;
+                console.log(link)
+                if (link == '#'){
+                    l = 2;
+                }else{
+                    l = 1;
+                }
                 router.navigate({
                     name: 'schedule',
                     params: {
                         name: name,
                         phone: phone,
                         plate: plate,
+                        link:l,
                     }
+                },{
+                    clearPreviousHistory:'true',
+                    reloadAll:'true',
                 });
             },
             prefill: function () {
@@ -96,9 +122,14 @@
                 var self = this;
                 var document_h = $$(window).height();
                 if (list_h < document_h) {
-                    app.methods.getVisitors(function () {
-                        self.prefill();
-                    });
+                    if (self.next) {
+                        app.methods.getVisitors(function () {
+                            self.prefill();
+                        });
+                    } else {
+                        app.infiniteScroll.destroy('.infinite-scroll-content');
+                        $$('.infinite-scroll-preloader').remove();
+                    }
                 }
 
             }
@@ -119,15 +150,33 @@
 
                     // Set loading flag
                     allowInfinite = false;
-                    app.methods.getVisitors(function () {
-                        if (self.next) {
-                            allowInfinite = true;
-                        } else {
-                            app.infiniteScroll.destroy('.infinite-scroll-content');
-                            $$('.infinite-scroll-preloader').remove();
-                        }
+                    if (self.next) {
+                        app.methods.getVisitors(function () {
+                            if (self.next) {
+                                allowInfinite = true;
+                            } else {
+                                app.infiniteScroll.destroy('.infinite-scroll-content');
+                                $$('.infinite-scroll-preloader').remove();
+                            }
 
-                    });
+                        });
+                    } else {
+                        app.infiniteScroll.destroy('.infinite-scroll-content');
+                        $$('.infinite-scroll-preloader').remove();
+                    }
+                });
+                this.$$("#visitorslist").on('swipeout:delete', '.swipeout', function () {
+                    app.methods.deleteVisitor($$(this).data("id"));
+                });
+                var searchbar = app.searchbar.create({
+                    el: '.searchVisitor',
+                    searchContainer: '.visitorList',
+                    searchIn: '.item-title',
+                    on: {
+                        search(sb, query, previousQuery) {
+                            console.log(query, previousQuery);
+                        }
+                    }
                 });
             }
         }

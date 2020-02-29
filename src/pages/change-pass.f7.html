@@ -1,0 +1,94 @@
+<!-- Login Screen -->
+<template>
+    <div class="page">
+    <div class="navbar">
+      <div class="navbar-inner sliding">
+        <div class="left">
+          <a href="#"  class="back link">
+            <i class="icon icon-back"></i>
+            <span class="if-not-md">Back</span>
+          </a>
+        </div>
+        <div class="center">
+        Change Password
+        </div>
+      </div>
+    </div>
+        <div class="page-content login-screen-content">
+            <div class="login-screen-title"><img src="static/simedarby-logo.svg" width="20%" /></div>
+            <div class="block text-center">
+                <p>You can change your password here.</p>
+            </div>
+            <form id="reset-screen">
+                <div class="list">
+                    <ul>
+                        <li class="item-content item-input item-input-with-error-message">
+                            <div class="item-inner">
+                                <div class="item-title item-label">Password</div>
+                                <div class="item-input-wrap">
+                                    <input type="password" name="password"
+                                        data-vaildate-on-blur="true">
+                                    <div class="item-input-error-message" for="password"></div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="item-content item-input item-input-with-error-message">
+                            <div class="item-inner">
+                                <div class="item-title item-label ">New Password</div>
+                                <div class="item-input-wrap">
+                                    <input type="password" name="new_password"
+                                        data-vaildate-on-blur="true">
+                                   
+                                </div>
+                                 <div class="item-input-error-message odd-one" for="new_password"></div>
+                            </div>
+                        </li>
+                        <li class="item-content item-input item-input-with-error-message">
+                            <div class="item-inner">
+                                <div class="item-title item-label">Re-enter New Password</div>
+                                <div class="item-input-wrap">
+                                    <input type="password" name="confirm_password"
+                                        data-vaildate-on-blur="true">
+                                        <div class="item-input-error-message" for="confirm_password"></div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="row">
+                    <div class="col-25"></div>
+                    <div class="col-50">
+                        <a href="#" class="button button-raised button-fill reseted-button">Reset</a></li>
+                    </div>
+                    <div class="col-25"></div>
+                </div>
+            </form>
+        </div>
+    </div>
+</template>
+<style scoped>
+    .odd-one{
+        white-space: normal;
+        position:relative;
+        top:0px;
+    }
+    .item-input-error-message{
+        display:block;
+    }
+</style>
+<script>
+    import request from '../js/request.js';
+    export default {
+        on: {
+            pageInit: function () {
+                var app = this.$app;
+                var $$ = this.$$;
+                var router = this.$router;
+                $$('.reseted-button').on('click',function(){
+                    var data = app.form.convertToData('#reset-screen');
+                    app.methods.resetPassword(data);
+                })
+            }
+        }
+    }
+</script>

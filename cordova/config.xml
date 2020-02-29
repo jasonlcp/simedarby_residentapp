@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="io.framework7.simedarbyelminaresident" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>Elmina Resident</name>
+<widget id="com.framework7.simedarbycommunity" version="1.0.7" xmlns="http://www.w3.org/ns/widgets" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>Sime Darby Community</name>
     <description>
         A sample Apache Cordova application that responds to the deviceready event.
     </description>
@@ -25,7 +25,8 @@
     <allow-navigation href="*" />
     <platform name="android">
         <preference name="StatusBarOverlaysWebView" value="false" />
-        <preference name="android-minSdkVersion" value="21" />
+        <preference name="android-minSdkVersion" value="19" />
+        <preference name="android-targetSdkVersion" value="28" />
         <preference name="SplashMaintainAspectRatio" value="true" />
         <splash density="land-hdpi" src="res/screen/android/drawable-hdpi/screen.png" />
         <splash density="land-mdpi" src="res/screen/android/drawable-mdpi/screen.png" />
@@ -43,6 +44,10 @@
         <icon density="xhdpi" src="res/icon/android/mipmap-xhdpi/ic_launcher.png" />
         <icon density="xxhdpi" src="res/icon/android/mipmap-xxhdpi/ic_launcher.png" />
         <icon density="xxxhdpi" src="res/icon/android/mipmap-xxxhdpi/ic_launcher.png" />
+        <edit-config file="app/src/main/AndroidManifest.xml" mode="merge" target="/manifest/application">
+            <application android:usesCleartextTraffic="true" />
+        </edit-config>
+        <resource-file src="google-services.json" target="app/google-services.json" />
     </platform>
     <platform name="ios">
         <config-file parent="CFBundleAllowMixedLocalizations" platform="ios" target="*-Info.plist">
@@ -70,7 +75,9 @@
         <icon height="100" src="res/icon/ios/icon-50x50@2x.png" width="100" />
         <icon height="167" src="res/icon/ios/icon-83.5x83.5@2x.png" width="167" />
         <icon height="1024" src="res/icon/ios/icon-512x512@2x.png" width="1024" />
+        <resource-file src="GoogleService-Info.plist" />
     </platform>
+    <preference name="orientation" value="portrait" />
     <preference name="UIWebViewBounce" value="false" />
     <preference name="DisallowOverscroll" value="true" />
     <preference name="BackupWebStorage" value="local" />
@@ -81,16 +88,48 @@
     <preference name="Allow3DTouchLinkPreview" value="false" />
     <preference name="CordovaWebViewEngine" value="CDVWKWebViewEngine" />
     <preference name="AllowInlineMediaPlayback" value="true" />
+    <edit-config file="*-Info.plist" mode="merge" target="NSContactsUsageDescription">
+        <string>This app requires contacts access</string>
+    </edit-config>
+    <edit-config file="*-Info.plist" mode="merge" target="NSCameraUsageDescription">
+        <string>need camera access to take pictures</string>
+    </edit-config>
+    <edit-config file="*-Info.plist" mode="merge" target="NSPhotoLibraryUsageDescription">
+        <string>need photo library access to get pictures from there</string>
+    </edit-config>
+    <edit-config file="*-Info.plist" mode="merge" target="NSLocationWhenInUseUsageDescription">
+        <string>need location access to find things nearby</string>
+    </edit-config>
+    <edit-config file="*-Info.plist" mode="merge" target="NSPhotoLibraryAddUsageDescription">
+        <string>need photo library access to save pictures there</string>
+    </edit-config>
     <plugin name="cordova-plugin-statusbar" spec="~2.4.2" />
     <plugin name="cordova-plugin-keyboard" spec="~1.2.0" />
     <plugin name="cordova-plugin-splashscreen" spec="~5.0.2" />
     <plugin name="cordova-plugin-wkwebview-engine" spec="~1.1.4" />
     <plugin name="cordova-plugin-device" spec="~2.0.2" />
     <plugin name="cordova-plugin-inappbrowser" spec="~3.0.0" />
-    <plugin name="cordova-plugin-file" spec="~6.0.1" />
     <plugin name="cordova-plugin-media" spec="~5.0.2">
         <variable name="KEEP_AVAUDIOSESSION_ALWAYS_ACTIVE" value="NO" />
     </plugin>
     <plugin name="cordova-plugin-safariviewcontroller" spec="~1.6.0" />
     <plugin name="cordova-plugin-whitelist" spec="1" />
+    <plugin name="cordova-plugin-vibration" spec="~3.1.1" />
+    <plugin name="cordova-plugin-contacts-phonenumbers" spec="~0.0.12" />
+    <plugin name="cordova-plugin-x-socialsharing" spec="~5.6.0">
+        <variable name="ANDROID_SUPPORT_V4_VERSION" value="24.1.1+" />
+    </plugin>
+    <plugin name="com.darktalker.cordova.screenshot" spec="~0.1.6" />
+    <plugin name="cordova-plugin-camera" spec="^4.1.0">
+        <variable name="ANDROID_SUPPORT_V4_VERSION" value="27.+" />
+    </plugin>
+    <plugin name="cordova-plugin-file" spec="^6.0.1" />
+    <plugin name="cordova-plugin-decimal-keyboard" spec="https://github.com/aiba/cordova-plugin-decimal-keyboard.git" />
+    <plugin name="phonegap-plugin-push" spec="^2.3.0">
+        <variable name="ANDROID_SUPPORT_V13_VERSION" value="27.+" />
+        <variable name="FCM_VERSION" value="17.0.+" />
+    </plugin>
+    <engine name="browser" spec="^5.0.4" />
+    <engine name="ios" spec="^4.5.5" />
+    <engine name="android" spec="^7.1.0" />
 </widget>

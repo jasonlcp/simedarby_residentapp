@@ -21,30 +21,31 @@
     </div>
     <div class="main-toolbar toolbar tabbar tabbar-labels toolbar-top no-shadow no-hairline elevation-3">
       <div class="toolbar-inner">
-        <a href="/schedule/" class="tab-link">
+        <a  {{#if is_lock_down}}class="tab-link locked" @click="this.$app.methods.locked()" {{else}}class="tab-link " href="/schedule/2"{{/if}}>
           <i class="icon f7-icons">calendar_today</i>
-          <span class="tabbar-label">Visitor Entry</span>
+          <span class="tabbar-label">Schedule Visit</span>
         </a>
-        <a href="/visitor-list/" class="tab-link tab-link">
-          <i class="icon f7-icons">persons_round</i>
+        <a href="/visitor-list/2" class="tab-link tab-link">
+          <i class="icon f7-icons">person_round</i>
           <span class="tabbar-label">My Visitors</span>
         </a>
-        <a href="/pay-bills/" class="tab-link">
+        <a href="/bill/" class="tab-link">
           <i class="icon f7-icons">money_dollar_round</i>
-          <span class="tabbar-label">Pay Bills</span>
+          <span class="tabbar-label">Bill Payment</span>
         </a>
         <a href="/notification/" class="tab-link">
-          <i class="icon f7-icons">photos<span class="badge color-red">3</span></i>
+          <i class="icon f7-icons">photos{{#notificationCount}}<span
+              class="badge color-red">{{this}}</span>{{/notificationCount}}</i>
           <span class="tabbar-label">Notification</span>
         </a>
       </div>
     </div>
     <!-- Scrollable page content-->
     <div class="page-content ptr-content">
-      <div class="ptr-preloader">
+      <!--<div class="ptr-preloader">
         <div class="preloader"></div>
         <div class="ptr-arrow"></div>
-      </div>
+      </div>-->
       <!--Service-->
       <div class="block-title">
         <h3>Services</h3>
@@ -64,44 +65,56 @@
             </a>
           </div>
           <div class="col-25">
-            <a href="/bills/" class="service-link">
+            <!--<a href="/bill/" class="service-link">
               <i class="icon f7-icons">document_text</i>
               <p>Bills</p>
-            </a>
+            </a>-->
           </div>
           <div class="col-25">
-            <a href="#" class="service-link">
-              <i class="icon f7-icons">document_check</i>
-              <p>Payment</p>
-            </a>
           </div>
         </div>
       </div>
       <!--Properties-->
       <div class="block-title margin-top-16">
-        <h3>Properties</h3>
+        <h3 style="float:left;">Property</h3>
+        <div style="float:right;margin-top:1em; margin-bottom:1em;">
+          <a class="link" href="/property-list/"> More</a>
+        </div>
       </div>
 
       <div class="block margin-btm-16">
-        <div class="swiper-container swiper-init" data-space-between="20" data-slides-per-view="auto">
+        <div class="swiper-container property-slider" data-space-between="20" data-slides-per-view="auto">
           <!-- Slides wrapper -->
-          <div class="swiper-wrapper ">
+          <div class="swiper-wrapper property-wrapper">
             <!-- Slides -->
             {{#each properties}}
             <div class="swiper-slide">
-              <a href="/property/">
+              <a  {{#if is_lock}} @click="this.$app.methods.locked()" class="locked" {{else}} href="/property/{{@index}}" {{/if}}>
                 <div class="card card-header-pic">
-                  <div style="background-image:url({{street.area.thumbnail}})" class="card-header align-items-flex-end">
+                  <div style="background-image:url({{street.area.thumbnail}}); text-overflow: ellipsis; white-space: nowrap;" class="card-header align-items-flex-end">
                     {{name}}</div>
-                  <div class="card-footer"><span>{{street.area.name}},{{street.name}} <i
-                        class="icon f7-icons em-1"></span>chevron_right</i></div>
+                  <div class="card-footer capitalize"><span>{{street.area.name}},{{street.name}}</span>
+                    <i class="icon f7-icons em-1">chevron_right</i></div>
                 </div>
               </a>
             </div>
             {{else}}
             <div class="swiper-slide">
               <div class="card">
-                <div class="card-content card-content-padding"><span>No Property Found!</span></div>
+                <div class="card card-header-pic " style="margin:0;">
+                  <div class="card-header align-items-flex-end skeleton-block skeleton-effect-blink"></div>
+                  <div class="card-footer capitalize skeleton-text skeleton-effect-blink">
+                    <span>------------------------------- </span><i class="icon f7-icons em-1">chevron_right</i></div>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="card">
+                <div class="card card-header-pic " style="margin:0;">
+                  <div class="card-header align-items-flex-end skeleton-block skeleton-effect-blink"></div>
+                  <div class="card-footer capitalize skeleton-text skeleton-effect-blink">
+                    <span>------------------------------- <i class="icon f7-icons em-1"></span>chevron_right</i></div>
+                </div>
               </div>
             </div>
             {{/each}}
@@ -117,24 +130,43 @@
         </div>
       </div>
       <div class="block">
-        <div class="swiper-container swiper-init" data-space-between="20" data-slides-per-view="auto">
+        <div class="swiper-container announcement-slider" data-space-between="20" data-slides-per-view="auto">
           <!-- Slides wrapper -->
-          <div class="swiper-wrapper ">
+          <div class="swiper-wrapper announcement-wrapper ">
             <!-- Slides -->
             {{#each announcements}}
             <div class="swiper-slide">
-              <a href="/announcement/">
+              <a href="/announcement/{{id}}">
                 <div class="card card-header-pic">
-                  <div style="background-image:url({{thumbnail}})" class="card-header align-items-flex-end">{{title}}
+                  <div style="background-image:url({{thumbnail}});" class="card-header align-items-flex-end" >
+                  {{#if is_new}}
+                  <span class="badge color-red" style="top: 10px;position: absolute; right: 10px;">New</span>
+                  {{/if}}
+                  <span class="long-and-truncated">
+                  {{title}}
+                  </span>
                   </div>
-                  <div class="card-footer">Find Out More <i class="icon f7-icons em-1">chevron_right</i></div>
+                  <div class="card-footer">View More <i class="icon f7-icons em-1">chevron_right</i></div>
                 </div>
               </a>
             </div>
             {{else}}
             <div class="swiper-slide">
               <div class="card">
-                <div class="card-content card-content-padding">No announcements at the moment.</div>
+                <div class="card card-header-pic " style="margin:0;">
+                  <div class="card-header align-items-flex-end skeleton-block skeleton-effect-blink"></div>
+                  <div class="card-footer capitalize skeleton-text skeleton-effect-blink">
+                    <span>------------------------------- <i class="icon f7-icons em-1"></span>chevron_right</i></div>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="card">
+                <div class="card card-header-pic " style="margin:0;">
+                  <div class="card-header align-items-flex-end skeleton-block skeleton-effect-blink"></div>
+                  <div class="card-footer capitalize skeleton-text skeleton-effect-blink">
+                    <span>------------------------------- <i class="icon f7-icons em-1"></span>chevron_right</i></div>
+                </div>
               </div>
             </div>
             {{/each}}
@@ -149,6 +181,15 @@
     border-radius: 0px 0px 10% 10%;
     text-transform: capitalize;
     --f7-navbar-large-title-height: 140px;
+
+  }
+
+  .locked .icon,
+  .locked .card-header-pic {
+
+    -webkit-filter: grayscale(100%);
+    /* Safari 6.0 - 9.0 */
+    filter: grayscale(100%);
 
   }
 
@@ -207,6 +248,11 @@
 
   .display-name {
     margin: 0px;
+        white-space: normal;
+    line-height: 1;
+    overflow: hidden;
+    font-size: 6.6vw;
+    text-overflow: ellipsis;
   }
 
   .main-toolbar.toolbar .toolbar-inner .tab-link .icon {
@@ -224,6 +270,13 @@
     transition-property: transform, width, margin, top;
     border-radius: 9px;
     border: 1px solid #fff;
+  }
+  .long-and-truncated {
+    flex: 1;
+    
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .service-link p {
@@ -246,9 +299,19 @@
         name: name,
         announcements: null,
         properties: null,
+        notificationCount: null,
       }
     },
     on: {
+      pageAfterIn:function(){
+        var app = this.$app;
+        app.form.removeFormData('selectedLot');
+        app.form.removeFormData('entryVal');
+        app.form.removeFormData('notify');
+        app.form.removeFormData('startDate');
+        app.form.removeFormData('endDate');
+        app.form.removeFormData('days');
+      },
       pageInit: function () {
         var $$ = this.$$;
         var app = this.$app;
@@ -260,8 +323,56 @@
           router.navigate('/login/');
           router.clearPreviousHistory();
         } else {
-          this.$app.methods.getAnnouncements();
-          this.$app.methods.getProperties();
+          this.$app.methods.getAnnouncements(5, function () {
+            var swiper = app.swiper.create('.announcement-slider', {
+              spaceBetween: 20,
+              slidesPerView: "auto",
+            });
+          
+            if (self.announcements == null) {
+              
+          
+              $$(".announcement-wrapper").html('<div class="swiper-slide">' +
+                '<div class="card">' +
+                '<div class="card-content card-content-padding">No announcements at the moment.</div>' +
+                '</div>' +
+                '</div>');
+            }else{
+              if(self.announcements.length ==0){
+                 $$(".announcement-wrapper").html('<div class="swiper-slide">' +
+                '<div class="card">' +
+                '<div class="card-content card-content-padding">No announcements at the moment.</div>' +
+                '</div>' +
+                '</div>');
+              }
+            }
+
+          });
+          this.$app.methods.getProperties(function () {
+            var swiper2 = app.swiper.create('.property-slider', {
+              spaceBetween: 20,
+              slidesPerView: "auto",
+            });
+            $$('.locked').attr('href', '');
+            if (self.properties ==  null) {
+          
+              $$(".property-wrapper").html('<div class="swiper-slide">' +
+                '<div class="card">' +
+                '<div class="card-content card-content-padding">No properties at the moment.</div>' +
+                '</div>' +
+                '</div>');
+            }else{
+              if(self.properties.length ==0){
+                       $$(".property-wrapper").html('<div class="swiper-slide">' +
+                '<div class="card">' +
+                '<div class="card-content card-content-padding">No properties at the moment.</div>' +
+                '</div>' +
+                '</div>');
+              }
+            }
+          });
+          this.$app.methods.getNotificationCount();
+
         }
         $$('.navbar').on('navbar:collapse', function () {
           $$('.main-toolbar.toolbar').css({
@@ -278,6 +389,36 @@
           });
         });
 
+      },
+      pageReinit: function () {
+        var $$ = this.$$;
+        var app = this.$app;
+        var auth = this.$app.methods.getUser();
+        var property_swiper;
+        var router = this.$router;
+        var self = this;
+        this.$app.methods.getAnnouncements(5, function () {
+          var swiper = app.swiper.create('.announcement-slider', {
+            spaceBetween: 20,
+            slidesPerView: "auto",
+          });
+          if (self.announcements == null) {
+            $$(".announcement-wrapper").html('<div class="swiper-slide">' +
+              '<div class="card">' +
+              '<div class="card-content card-content-padding">No announcements at the moment.</div>' +
+              '</div>' +
+              '</div>');
+          }
+
+        });
+        this.$app.methods.getProperties(function () {
+          var swiper2 = app.swiper.create('.property-slider', {
+            spaceBetween: 20,
+            slidesPerView: "auto",
+          });
+          $$('.locked').attr('href', '');
+        });
+        this.$app.methods.getNotificationCount();
       }
     }
   }

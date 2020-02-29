@@ -1,0 +1,306 @@
+<template>
+    <div class="page">
+        <div class="navbar">
+            <div class="navbar-inner sliding">
+                <div class="left">
+                    <a href="/" class="back link">
+                        <i class="icon icon-back"></i>
+                        <span class="if-not-md">Back</span>
+                    </a>
+                </div>
+                <div class="center">
+                    Visitor Entry
+                </div>
+            </div>
+        </div>
+
+        <div class="toolbar toolbar-bottom auto-height">
+            <div class="block">
+                <a id="schedule_submit" class="button button-raised button-round button-fill ">Submit</a>
+            </div>
+        </div>
+        <div class="page-content">
+            <div class="block-title">
+                <h3>Visitor Entry</h3>
+            </div>
+            <div class="list no-hairlines-md">
+                <form id="scheduleForm">
+                    <ul class="mainform">
+                        <li class="item-content item-input item-input-with-error-message">
+                            <div class="item-inner">
+                                <div class="item-title item-label">House</div>
+                                <div class="item-input-wrap input-dropdown-wrap">
+                                    <a class="item-link smart-select" data-open-in="sheet">
+                                        <div class="item-after"></div>
+                                        <select name="lot">
+                                            {{#each properties}}
+                                            {{#unless is_lock}}
+                                            <option value="{{id}}" {{#js_if 'this.entry !=null'}}{{#js_if 'this.entry.lot == id'}}selected{{/js_if}}{{/js_if}}>{{name}},
+                                                {{street.area.name}}</option>
+                                            {{/unless}}
+                                            {{else}}
+                                            <option value="">Select a property</option>
+                                            {{/each}}
+                                        </select>
+                                    </a>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="item-content item-input item-input-with-error-message">
+                            <div class="item-inner">
+                                <div class="item-title item-label">Name</div>
+                                <div class="item-input-wrap">
+                                    <input type="text" placeholder="Visitor's name" name="visitor_name"
+                                        value="{{js 'this.$route.params.phone ? decodeURIComponent(this.$route.params.name) : this.entry ? this.entry.visitor_name :"" '}}">
+                                    <span class="input-clear-button"></span>
+                                    <div class="item-input-error-message" for="visitor_name"></div>
+                                </div>
+                            </div>
+                            <div class="item-media">
+                                <a href="/visitor-list/" data-clear-previous-history="true"><i
+                                        class="icon f7-icons">person_round</i></a>
+                            </div>
+                        </li>
+                        <li class="item-content item-input item-input-with-error-message">
+                            <div class="item-inner">
+                                <div class="item-title item-label">Vehicle Plate Number</div>
+                                <div class="item-input-wrap">
+                                    <input type="text" placeholder="Plate Number" name="visitor_car_plate"
+                                        value="{{js 'this.$route.params.phone ? decodeURIComponent(this.$route.params.plate) : this.entry ? this.entry.visitor_car_plate :"" '}}">
+                                    <span class="input-clear-button"></span>
+                                    <div class="item-input-error-message" for="visitor_car_plate"></div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="item-content item-input item-input-with-error-message">
+                            <div class="item-inner">
+                                <div class="item-title item-label">Mobile Number</div>
+                                <div class="item-input-wrap">
+                                    <input type="text" placeholder="Mobile No." name="visitor_phone_number"
+                                        value="{{js 'this.$route.params.phone ? decodeURIComponent(this.$route.params.phone) : this.entry ? this.entry.visitor_phone_number :"" '}}">
+                                    <span class="input-clear-button"></span>
+                                    <div class="item-input-error-message" for="visitor_phone_number"></div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="item-content item-input item-input-with-error-message">
+                            <div class="item-inner">
+                                <div class="item-title item-label">Entry Type</div>
+                                <div class="item-input-wrap input-dropdown-wrap">
+                                    <a id="entryid" class="item-link smart-select smart-select-init"
+                                        data-open-in="sheet">
+                                        <div class="item-after"></div>
+                                        <select name="entry_type">
+                                            <option value="E" selected>Single Entry</option>
+                                            <option value="M">Multiple Entries</option>
+                                            <option value="S">Scheduled Entry</option>
+                                        </select>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="item-media">
+                                <a class="popup-open" data-popup=".popup-info">
+                                    <i class="icon f7-icons">info_round</i>
+                                </a>
+                            </div>
+                        </li>
+                        <li class="item-content item-input item-input-with-error-message">
+                            <div class="item-inner">
+                                <div class="item-title item-label">Entry Date</div>
+                                <div class="item-input-wrap">
+                                    <input name="start_date" type="text" placeholder="Select date" readonly="readonly"
+                                        id="entry_date" />
+                                    <div class="item-input-error-message" for="start_date"></div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                    <ul>
+                        <li>
+                            <div class="item-content item-input-with-error-message">
+                                <div class="item-inner">
+                                    <div class="item-title">Approval Upon Arrival</div>
+                                    <div class="item-after">
+                                        <label class="toggle toggle-init">
+                                            <input type="checkbox" value="true" class="ck" name="notify"><i
+                                                class="toggle-icon"></i>
+                                        </label>
+                                    </div>
+                                    <input name="is_notify" value="false" type="hidden" />
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </form>
+            </div>
+            <div class="popup popup-info popup-swipe-to-close">
+                <div class="block">
+                    <h1>Entry Type</h1>
+                    <br>
+                    <!-- Close Popup -->
+                    <h3>Single Entry</h3>
+                    <p>Single entry is for one time use only.</p>
+                    <h3>Multiple Entries</h3>
+                    <p>Multiple entries allows visitors to enter & exit the compound multiple times within the day.</p>
+                    <p>New visitor entry is required after <b>12:00AM</b></p>
+                    <h3>Scheduled Entry</h3>
+                    <p>Scheduled entry allows visitor to enter within a start and end period.</p>
+                    <p>It is required to specify the <b>days</b> that the visitor is allow to enter.</p>
+                    <a class="button button-raised button-fill popup-close" href="#">Close popup</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+<style>
+    .auto-height {
+        --f7-toolbar-height: 100px;
+
+    }
+
+    .md .item-media .icon {
+        color: inherit;
+    }
+
+    .auto-height~* {
+        --f7-page-toolbar-bottom-offset: 100px;
+    }
+
+    .item-content .item-link {
+        height: var(--f7-input-height);
+    }
+
+    .item-content .item-link .item-after {
+        padding-left: 0px;
+        margin-left: 0px;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    .item-input-error-message {
+        display: block;
+    }
+</style>
+<script>
+    import request from '../js/request.js';
+    export default {
+        data: function () {
+            return {
+                entry: null,
+            }
+        },
+        on: {
+            pageBeforeIn: function () {
+                var app = this.$app;
+                this.$app.methods.getProperties(function () {
+                    app.smartSelect.create({
+                        el: '.smart-select',
+                        openIn: 'sheet',
+                    });
+                });
+            },
+            pageInit: function () {
+                var app = this.$app;
+                var $$ = this.$$;
+                var schedule = false;
+                var expCalendarModal;
+                var entryCalendarModal;
+                var today = new Date();
+                this.$app.methods.getEntry(this.$route.params.id);
+                $$("#schedule_submit").on("click", function () {
+                    var data = app.form.convertToData('#scheduleForm');
+
+                    app.methods.postEntry(data);
+                });
+
+                var yesterday = new Date().setDate(today.getDate() - 1);
+                var ayear = new Date(new Date().setFullYear(new Date().getFullYear() + 1));
+                $$('.ck').on('change', function () {
+                    if ($$('input[name="notify"]').prop('checked')) {
+
+                        $$('input[name="is_notify"]').val("true");
+                    } else {
+
+                        $$('input[name="is_notify"]').val("false");
+                    }
+                });
+
+                $$("#entryid").on("smartselect:close", function () {
+
+                    var val = $$(this).children('select').val();
+                    console.log(val);
+                    if (val == 'S') {
+                        if (schedule == false) {
+                            $$('#scheduleForm ul.mainform').append(
+                                '<li class="item-content item-input added">' +
+                                '<div class="item-inner">' +
+                                '<div class="item-title item-label">Valid Until</div>' +
+                                '<div class="item-input-wrap">' +
+                                '<input name="end_date" type="text" placeholder="Select date" readonly="readonly" id="exp_date" required/>' +
+                                '</div>' +
+                                '</div>' +
+                                '</li>' +
+                                '<li class="item-content item-input added">' +
+                                '<div class="item-inner">' +
+                                '<div class="item-title item-label">Day</div>' +
+                                '<div class="item-input-wrap input-dropdown-wrap">' +
+                                '<a href="#" class="item-link smart-select">' +
+                                '<div class="item-after"></div>' +
+                                '<select name="days" multiple required>' +
+                                '<option value="monday" selected data-display-as="Mon">Monday</option>' +
+                                '<option value="tuesday" data-display-as="Tue">Tuesday</option>' +
+                                '<option value="wednesday" data-display-as="Wed">Wednesday</option>' +
+                                '<option value="thursday" data-display-as="Thu">Thursday</option>' +
+                                '<option value="friday" data-display-as="Fri">Friday</option>' +
+                                '<option value="saturday" data-display-as="Sat">Saturday</option>' +
+                                '<option value="sunday" data-display-as="Sun">Sunday</option>' +
+                                '</select>' +
+                                '</a>' +
+                                '</div>' +
+                                '</div>' +
+                                '</li>'
+                            );
+                            expCalendarModal = app.calendar.create({
+                                inputEl: '#exp_date',
+                                openIn: 'customModal',
+                                header: true,
+                                footer: true,
+                                dateFormat: 'yyyy-mm-dd',
+                                minDate: entryCalendarModal.getValue(),
+                            });
+                        }
+                        schedule = true;
+                    } else {
+                        if (schedule == true) {
+                            expCalendarModal.off('destroy');
+                            expCalendarModal.destroy();
+                            schedule = false;
+                            $$('.added').remove();
+
+                        }
+                    }
+                });
+                entryCalendarModal = app.calendar.create({
+                    inputEl: '#entry_date',
+                    openIn: 'customModal',
+                    header: true,
+                    footer: true,
+                    dateFormat: 'yyyy-mm-dd',
+                    minDate: yesterday,
+                    maxDate: ayear,
+                });
+                entryCalendarModal.on('close', function () {
+                    if (this.getValue() && expCalendarModal && !expCalendarModal.destroyed) {
+                        if (expCalendarModal.params.minDate > entryCalendarModal.value || expCalendarModal
+                            .value > entryCalendarModal.value) {
+                            expCalendarModal.setValue(entryCalendarModal.getValue());
+                        }
+                        expCalendarModal.params.minDate = entryCalendarModal.value;
+
+                    }
+                });
+                
+            }
+        }
+    }
+</script>

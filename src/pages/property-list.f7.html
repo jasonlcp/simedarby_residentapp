@@ -1,0 +1,92 @@
+<template>
+    <div class="page">
+        <div class="navbar">
+            <div class="navbar-inner sliding">
+                <div class="left">
+                    <a href="#" class="back link">
+                        <i class="icon icon-back"></i>
+                        <span class="if-not-md">Back</span>
+                    </a>
+                </div>
+                <div class="center">
+                    Properties
+                </div>
+            </div>
+        </div>
+        <div class="page-content">
+            <div class="block">
+                <div class="list no-hairlines">
+                    <div class="list-group">
+                        <ul>
+                            <!-- Slides -->
+                            {{#each properties}}
+                            <li>
+                                <a {{#if is_lock}} @click="this.$app.methods.locked()" class="locked" {{else}} href="/property/{{@index}}" {{/if}}>
+                                    <div class="card card-header-pic">
+                                        <div style="background-image:url({{street.area.thumbnail}})"
+                                            class="card-header align-items-flex-end">
+                                            {{name}}
+                                        </div>
+                                        <div class="card-footer">{{street.area.name}},{{street.name}} <i
+                                                class="icon f7-icons em-1" style="font-size:18px;">chevron_right</i></div>
+                                    </div>
+                                </a>
+                            </li>
+                            {{else}}
+                            <li class="">
+                                <div class="card card-header-pic">
+                                    <div class="card-header align-items-flex-end skeleton-block skeleton-effect-blink">
+                                    </div>
+                                    <div class="card-footer capitalize skeleton-text skeleton-effect-blink">
+                                        <span>------------------------------- </span><i
+                                            class="icon f7-icons em-1">chevron_right</i></div>
+                                </div>
+                            </li>
+                            {{/each}}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+<style scoped>
+    .card-header-pic .card-header {
+        height: 30vw;
+        background-size: cover;
+        background-position: center;
+        color: #fff;
+    }
+
+    .locked .card-header-pic {
+
+        -webkit-filter: grayscale(100%);
+        /* Safari 6.0 - 9.0 */
+        filter: grayscale(100%);
+
+    }
+
+    .card-footer span {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+</style>
+<script>
+    export default {
+        data: function () {
+            return {
+                announcements: null,
+            }
+        },
+        on: {
+            pageInit: function () {
+                var $$ = this.$$;
+                var app = this.$app;
+                this.$app.methods.getProperties(function () {
+                    $$('.locked').attr('href', '');
+                });
+            }
+        }
+    }
+</script>

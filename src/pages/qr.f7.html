@@ -1,26 +1,28 @@
 <template>
     <div class="page">
-        <div class="navbar">
+        <div class="navbar screencap">
             <div class="navbar-inner sliding">
                 <div class="left">
-                    <a href="#" class="back link">
+                    <a href="{{link}}" data-force="true" class="back link">
                         <i class="icon icon-back"></i>
                         <span class="if-not-md">Back</span>
                     </a>
                 </div>
+                <div class="center">
+                    <div class="title">Entry</div>
+                </div>
             </div>
         </div>
-        <div class="toolbar toolbar-bottom auto-height">
+        <div class="toolbar toolbar-bottom auto-height screencap">
             <div class="block">
-                <a href="#" id="schedule_submit" class="button button-raised button-round button-fill ">Share</a>
+                <a href="#" id="schedule_submit" class="ac-5 button button-raised button-round button-fill ">Share</a>
             </div>
         </div>
         <div class="page-content">
-            <div class="card data-table data-table-collapsible data-table-init">
+            <div class="card data-table data-table-collapsible">
                 <div class="card-header">
-                    <div class="data-table-title text-center">
-                        <img width="70%"
-                            src="https://proxy.duckduckgo.com/iu/?u=https%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fcommons%2Fthumb%2Fd%2Fd0%2FQR_code_for_mobile_English_Wikipedia.svg%2F1200px-QR_code_for_mobile_English_Wikipedia.svg.png&f=1">
+                    <div class="data-table-title text-center qr">
+
 
                     </div>
                 </div>
@@ -29,30 +31,97 @@
                         <thead>
                             <tr>
                                 <th class="label-cell">Area</th>
-                                <th class="label-cell">House Unit</th>
-                                <th class="label-cell">Visitor Name</th>
+                                <th class="label-cell">House No.</th>
+                                <th class="label-cell">Visitor's Name</th>
+                                <th classs="label-cell">Visitor's Registration No.</th>
                                 <th class="label-cell">Visit Date</th>
                                 <th class="label-cell">Entry Type</th>
                             </tr>
                         </thead>
                         <tbody>
+                            {{#entry}}
                             <tr>
-                                <td class="label-cell">Reesia</td>
-                                <td class="label-cell">Lot 52, Jalan Frekuensi U16/140</td>
-                                <td class="label-cell">Adam Wong</td>
-                                <td class="label-cell">27 / July / 2019</td>
-                                <td class="label-cell">Multiple Entry</td>
+                                <td class="label-cell">{{area_name}}</td>
+                                <td class="label-cell">{{lot_name}}, {{street_name}}</td>
+                                <td class="label-cell">{{visitor_name}}</td>
+                                <td classs="label-cell">{{visitor_car_plate}}</td>
+                                <td class="label-cell">{{start_date}}</td>
+                                <td class="label-cell">{{entryType entry_type}}</td>
                             </tr>
+                            {{/entry}}
                         </tbody>
                     </table>
                 </div>
             </div>
+            <br>
+            <br>
         </div>
     </div>
 </template>
-<style>
+<style scoped>
+    .qr {
+        width: 100%;
+    }
 
+    .qr img {
+        width: 90% !important;
+        height: auto !important;
+    }
 </style>
 <script>
+    import qrcode from "qrcode-generator/qrcode.js"
+    export default {
+        data: function () {
+            var id= this.$route.params.link;
+            var link;
+            if(id == 1){
+                link = '/';
+            }else{
+                link = '/visits/';
+            }
+            return {
+                entry: null,
+                link:link,
+            }
+        },
+        on: {
+            pageInit: function () {
+                var self = this;
+                var $$ = this.$$;
+                var app = this.$app;
+                this.$app.methods.getEntry(this.$route.params.id, function () {
+                    var qr = qrcode(13, "M");
+                    console.log(self);
+                    console.log(self.entry.qr_uuid);
+                    qr.addData(self.entry.qr_uuid);
+                    qr.make();
+                    $$(".qr").html(qr.createImgTag());
+                    var dt = app.dataTable.create({
+                        el: '.data-table'
+                    });
+                    $$('.ac-5').on('click', function () {
+                        var imageLink;
+                        $$('.screencap').css("display","none");
+                        console.log('Calling from CapturePhoto');
+                        navigator.screenshot.save(function (error, res) {
+                            if (error) {
+                                console.error(error);
+                            } else {
+                                console.log('ok', res
+                                .filePath); //should be path/to/myScreenshot.jpg
+                                //For android
+                                imageLink = res.filePath;
+                                window.plugins.socialsharing.share(null, null, 'file://' +
+                                    imageLink, null);
 
+                                //For iOS
+                                //window.plugins.socialsharing.share(null,   null,imageLink, null)
+                            }
+                        }, 'jpg', 50, 'myScreenShot');
+                        $$('.screencap').css("display","block");
+                    });
+                });
+            }
+        }
+    }
 </script>

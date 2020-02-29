@@ -8,18 +8,19 @@
                         <span class="if-not-md">Back</span>
                     </a>
                 </div>
-                 {{#announcements}}
-                <div class="center">
-                    {{title}}
+                <div class="center" style="text-overflow: ellipsis; white-space: nowrap; overflow:hidden;">
+                    Announcement
                 </div>
-                {{/announcements}}
+
             </div>
         </div>
         <div class="page-content">
             {{#announcements}}
             <img src="{{thumbnail}}" width="100%"/>
-            
             <div class="block">
+            <h2>{{title}}</h2>
+            </div>
+            <div class="block" style="width:100%!important; word-wrap: break-word;">
                 {{body}}
             </div>
             {{/announcements}}
@@ -27,6 +28,10 @@
     </div>
 </template>
 <style>
+.img-responsive{
+    width:100%!important;
+    height:auto!important;
+}
 </style>
 <script>
     export default {
@@ -37,7 +42,7 @@
         },
         on: {
             pageInit: function () {
-               this.$app.methods.getAnnouncement();
+               this.$app.methods.getAnnouncement(this.$route.params.id);
             }
         }
     }

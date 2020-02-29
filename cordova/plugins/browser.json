@@ -1,0 +1,67 @@
+{
+  "prepare_queue": {
+    "installed": [],
+    "uninstalled": []
+  },
+  "config_munge": {
+    "files": {}
+  },
+  "installed_plugins": {
+    "com.darktalker.cordova.screenshot": {
+      "PACKAGE_NAME": "io.framework7.simedarbyelminaresident"
+    },
+    "cordova-plugin-camera": {
+      "PACKAGE_NAME": "io.framework7.simedarbyelminaresident"
+    },
+    "cordova-plugin-contacts-phonenumbers": {
+      "PACKAGE_NAME": "io.framework7.simedarbyelminaresident"
+    },
+    "cordova-plugin-device": {
+      "PACKAGE_NAME": "io.framework7.simedarbyelminaresident"
+    },
+    "cordova-plugin-file": {
+      "PACKAGE_NAME": "io.framework7.simedarbyelminaresident"
+    },
+    "cordova-plugin-inappbrowser": {
+      "PACKAGE_NAME": "io.framework7.simedarbyelminaresident"
+    },
+    "cordova-plugin-keyboard": {
+      "PACKAGE_NAME": "io.framework7.simedarbyelminaresident"
+    },
+    "cordova-plugin-media": {
+      "PACKAGE_NAME": "io.framework7.simedarbyelminaresident"
+    },
+    "cordova-plugin-safariviewcontroller": {
+      "PACKAGE_NAME": "io.framework7.simedarbyelminaresident"
+    },
+    "cordova-plugin-splashscreen": {
+      "PACKAGE_NAME": "io.framework7.simedarbyelminaresident"
+    },
+    "cordova-plugin-statusbar": {
+      "PACKAGE_NAME": "io.framework7.simedarbyelminaresident"
+    },
+    "cordova-plugin-vibration": {
+      "PACKAGE_NAME": "io.framework7.simedarbyelminaresident"
+    },
+    "cordova-plugin-whitelist": {
+      "PACKAGE_NAME": "io.framework7.simedarbyelminaresident"
+    },
+    "cordova-plugin-wkwebview-engine": {
+      "PACKAGE_NAME": "io.framework7.simedarbyelminaresident"
+    },
+    "cordova-plugin-x-socialsharing": {
+      "PACKAGE_NAME": "io.framework7.simedarbyelminaresident"
+    },
+    "cordova-plugin-decimal-keyboard": {
+      "PACKAGE_NAME": "io.framework7.simedarbyelminaresident"
+    },
+    "phonegap-plugin-push": {
+      "PACKAGE_NAME": "com.framework7.simedarbycommunity"
+    }
+  },
+  "dependent_plugins": {
+    "es6-promise-plugin": {
+      "PACKAGE_NAME": "io.framework7.simedarbyelminaresident"
+    }
+  }
+}

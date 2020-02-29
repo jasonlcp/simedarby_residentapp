@@ -1,0 +1,47 @@
+{
+  "_from": "git+https://github.com/aiba/cordova-plugin-decimal-keyboard.git",
+  "_id": "cordova-plugin-decimal-keyboard@1.1.0",
+  "_inBundle": false,
+  "_integrity": "",
+  "_location": "/cordova-plugin-decimal-keyboard",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "git",
+    "raw": "https://github.com/aiba/cordova-plugin-decimal-keyboard.git",
+    "rawSpec": "https://github.com/aiba/cordova-plugin-decimal-keyboard.git",
+    "saveSpec": "git+https://github.com/aiba/cordova-plugin-decimal-keyboard.git",
+    "fetchSpec": "https://github.com/aiba/cordova-plugin-decimal-keyboard.git",
+    "gitCommittish": null
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "git+https://github.com/aiba/cordova-plugin-decimal-keyboard.git#6c28bcfda17fada5165b78632e89584ac0830516",
+  "_spec": "https://github.com/aiba/cordova-plugin-decimal-keyboard.git",
+  "_where": "/Users/danielltoidy/Desktop/projects/resident_app/cordova",
+  "author": "",
+  "bugs": {
+    "url": "https://github.com/aiba/cordova-plugin-decimal-keyboard/issues"
+  },
+  "bundleDependencies": false,
+  "deprecated": false,
+  "description": "Plugin to display decimal keyboard on Cordova and Phonegap applications",
+  "homepage": "https://github.com/aiba/cordova-plugin-decimal-keyboard",
+  "keywords": [
+    "cordova",
+    "decimal",
+    "keypad"
+  ],
+  "license": "Apache-2.0",
+  "main": "index.js",
+  "name": "cordova-plugin-decimal-keyboard",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aiba/cordova-plugin-decimal-keyboard.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "version": "1.1.0"
+}

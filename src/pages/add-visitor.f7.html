@@ -3,7 +3,7 @@
         <div class="navbar">
             <div class="navbar-inner sliding">
                 <div class="left">
-                    <a href="#" class="back link">
+                    <a href="#"  class="back link">
                         <i class="icon icon-back"></i>
                         <span class="if-not-md">Back</span>
                     </a>
@@ -13,10 +13,9 @@
                 </div>
             </div>
         </div>
-
         <div class="toolbar toolbar-bottom auto-height">
             <div class="block">
-                <a href="#" id="schedule_submit" class="button button-raised button-round button-fill ">Submit</a>
+                <a href="#" id="visit_submit" class="button button-raised button-round button-fill ">Submit</a>
             </div>
         </div>
         <div class="page-content">
@@ -24,38 +23,41 @@
                 <h3>Add Visitors</h3>
             </div>
             <div class="list no-hairlines-md">
-                <form id="scheduleForm">
+                <form id="visitorForm">
                     <ul>
-                        <li class="item-content item-input">
+                        <li class="item-content item-input item-input-with-error-message">
                             <div class="item-inner">
                                 <div class="item-title item-label">Name</div>
                                 <div class="item-input-wrap">
                                     <input type="text" placeholder="Visitor's name" name="name"
                                         value="{{this.$route.params.name}}">
                                     <span class="input-clear-button"></span>
+                                    <div class="item-input-error-message" for="name"></div>
                                 </div>
                             </div>
                             <div class="item-media">
-                                <i class="icon f7-icons">list</i>
+                                <a href="/contacts/"><i class="icon f7-icons">list</i></a>
                             </div>
                         </li>
-                        <li class="item-content item-input">
+                        <li class="item-content item-input item-input-with-error-message">
                             <div class="item-inner">
                                 <div class="item-title item-label">Vehicle Plate Number</div>
                                 <div class="item-input-wrap">
                                     <input type="text" placeholder="Plate Number" name="car_plate"
                                         value="{{this.$route.params.plate}}">
                                     <span class="input-clear-button"></span>
+                                    <div class="item-input-error-message" for="car_plate"></div>
                                 </div>
                             </div>
                         </li>
-                        <li class="item-content item-input">
+                        <li class="item-content item-input item-input-with-error-message">
                             <div class="item-inner">
                                 <div class="item-title item-label">Mobile Number</div>
                                 <div class="item-input-wrap">
-                                    <input type="text" placeholder="Mobile No." name="phone"
+                                    <input type="tel" placeholder="Mobile No." name="phone_number"
                                         value="{{this.$route.params.phone}}">
                                     <span class="input-clear-button"></span>
+                                    <div class="item-input-error-message" for="phone_number"></div>
                                 </div>
                             </div>
                         </li>
@@ -75,6 +77,10 @@
         --f7-page-toolbar-bottom-offset: 100px;
     }
 
+    .md .item-media .icon {
+        color: inherit;
+    }
+
     .item-content .item-link {
         height: var(--f7-input-height);
     }
@@ -85,8 +91,24 @@
         top: 50%;
         transform: translateY(-50%);
     }
+
+    .item-input-error-message {
+        display: block;
+    }
 </style>
 <script>
     import request from '../js/request.js';
-    export default {}
+    export default {
+        on: {
+            pageInit: function () {
+                var $$ = this.$$;
+                var app = this.$app;
+                var router = this.$router;
+                $$('#visit_submit').on('click', function () {
+                    var data = app.form.convertToData('#visitorForm');
+                    app.methods.postVisitors(data);
+                })
+            }
+        }
+    }
 </script>

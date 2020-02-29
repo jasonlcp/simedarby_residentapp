@@ -3,7 +3,7 @@
         <div class="navbar">
             <div class="navbar-inner sliding">
                 <div class="left">
-                    <a href="#" class="back link">
+                    <a href="{{link}}" data-force="true" data-ignore-cache="true"  class="back link">
                         <i class="icon icon-back"></i>
                         <span class="if-not-md">Back</span>
                     </a>
@@ -16,7 +16,7 @@
 
         <div class="toolbar toolbar-bottom auto-height">
             <div class="block">
-                <a href="/qr/" id="schedule_submit" class="button button-raised button-round button-fill ">Submit</a>
+                <a id="schedule_submit" class="button button-raised button-round button-fill ">Submit</a>
             </div>
         </div>
         <div class="page-content">
@@ -25,16 +25,19 @@
             </div>
             <div class="list no-hairlines-md">
                 <form id="scheduleForm">
-                    <ul>
-                        <li class="item-content item-input">
+                    <ul class="mainform">
+                        <li class="item-content item-input item-input-with-error-message">
                             <div class="item-inner">
-                                <div class="item-title item-label">House</div>
+                                <div class="item-title item-label">House No.</div>
                                 <div class="item-input-wrap input-dropdown-wrap">
-                                    <a class="item-link smart-select smart-select-init" data-open-in="sheet">
+                                    <a class="item-link lotSelector smart-select" data-open-in="sheet">
                                         <div class="item-after"></div>
-                                        <select name="house">
+                                        <select id='lt' name="lot">
                                             {{#each properties}}
-                                            <option value="{{id}}">{{name}}, {{street.area.name}}</option>
+                                            {{#unless is_lock}}
+                                            <option value="{{id}}" {{#if is_default}}selected{{/if}}>{{name}},
+                                                {{street.area.name}}</option>
+                                            {{/unless}}
                                             {{else}}
                                             <option value="">Select a property</option>
                                             {{/each}}
@@ -43,50 +46,53 @@
                                 </div>
                             </div>
                         </li>
-                        <li class="item-content item-input">
+                        <li class="item-content item-input item-input-with-error-message">
                             <div class="item-inner">
                                 <div class="item-title item-label">Name</div>
                                 <div class="item-input-wrap">
-                                    <input type="text" placeholder="Visitor's name" name="name"
-                                        value="{{this.$route.params.name}}">
+                                    <input type="text" placeholder="Visitor's name" name="visitor_name"
+                                        value="{{js 'this.$route.params.phone ? decodeURIComponent(this.$route.params.name) :"" '}}">
                                     <span class="input-clear-button"></span>
+                                    <div class="item-input-error-message" for="visitor_name"></div>
                                 </div>
                             </div>
                             <div class="item-media">
-                                <i class="icon f7-icons">person_round</i>
+                                <a href="/visitor-list/1" ><i class="icon f7-icons">person_round</i></a>
                             </div>
                         </li>
-                        <li class="item-content item-input">
+                        <li class="item-content item-input item-input-with-error-message">
                             <div class="item-inner">
-                                <div class="item-title item-label">Vehicle Plate Number</div>
+                                <div class="item-title item-label">Vehicle Registration No.</div>
                                 <div class="item-input-wrap">
-                                    <input type="text" placeholder="Plate Number" name="car_plate"
-                                        value="{{this.$route.params.plate}}">
+                                    <input type="text" placeholder="Plate Number" name="visitor_car_plate"
+                                        value="{{js 'this.$route.params.phone ? decodeURIComponent(this.$route.params.plate) : "" '}}">
                                     <span class="input-clear-button"></span>
+                                    <div class="item-input-error-message" for="visitor_car_plate"></div>
                                 </div>
                             </div>
                         </li>
-                        <li class="item-content item-input">
+                        <li class="item-content item-input item-input-with-error-message">
                             <div class="item-inner">
-                                <div class="item-title item-label">Mobile Number</div>
+                                <div class="item-title item-label">Mobile No.</div>
                                 <div class="item-input-wrap">
-                                    <input type="text" placeholder="Mobile No." name="phone"
-                                        value="{{this.$route.params.phone}}">
+                                    <input type="tel" placeholder="Mobile No." name="visitor_phone_number"
+                                        value="{{js 'this.$route.params.phone ? decodeURIComponent(this.$route.params.phone) : "" '}}">
                                     <span class="input-clear-button"></span>
+                                    <div class="item-input-error-message" for="visitor_phone_number"></div>
                                 </div>
                             </div>
                         </li>
-                        <li class="item-content item-input">
+                        <li class="item-content item-input item-input-with-error-message">
                             <div class="item-inner">
                                 <div class="item-title item-label">Entry Type</div>
                                 <div class="item-input-wrap input-dropdown-wrap">
                                     <a id="entryid" class="item-link smart-select smart-select-init"
                                         data-open-in="sheet">
                                         <div class="item-after"></div>
-                                        <select name="entry">
-                                            <option value="single" selected>Single Entry</option>
-                                            <option value="multiple">Multiple Entries</option>
-                                            <option value="scheduled">Scheduled Entry</option>
+                                        <select name="entry_type">
+                                            <option value="E" selected>Single Entry</option>
+                                            <option value="M">Multiple Entries</option>
+                                            <option value="S">Scheduled Entry</option>
                                         </select>
                                     </a>
                                 </div>
@@ -97,12 +103,29 @@
                                 </a>
                             </div>
                         </li>
-                        <li class="item-content item-input">
+                        <li class="item-content item-input item-input-with-error-message">
                             <div class="item-inner">
                                 <div class="item-title item-label">Entry Date</div>
                                 <div class="item-input-wrap">
-                                    <input name="entry_date" type="text" placeholder="Select date" readonly="readonly"
+                                    <input name="start_date" type="text" placeholder="Select date" readonly="readonly"
                                         id="entry_date" />
+                                    <div class="item-input-error-message" for="start_date"></div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                    <ul>
+                        <li>
+                            <div class="item-content item-input-with-error-message">
+                                <div class="item-inner">
+                                    <div class="item-title">Alert me upon arrival</div>
+                                    <div class="item-after">
+                                        <label class="toggle toggle-init">
+                                            <input type="checkbox" value="true" class="ck" name="notify"><i
+                                                class="toggle-icon"></i>
+                                        </label>
+                                    </div>
+                                    <input name="is_notify" value="false" type="hidden" />
                                 </div>
                             </div>
                         </li>
@@ -112,15 +135,15 @@
             <div class="popup popup-info popup-swipe-to-close">
                 <div class="block">
                     <h1>Entry Type</h1>
+                    <br>
                     <!-- Close Popup -->
                     <h3>Single Entry</h3>
-                    <p>Single entry is for one time use only.</p>
+                    <p>Single entry is vaild for a single visit only.</p>
                     <h3>Multiple Entries</h3>
-                    <p>Multiple entries allows visitors to enter & exit the compound multiple times within the day.</p>
-                    <p>New visitor entry is required after <b>12:00AM</b></p>
+                    <p>Multiple entries allows unlimited entry & exit within the same day.</p>
+                    <p>Re-registration is required after 12:00AM</p>
                     <h3>Scheduled Entry</h3>
-                    <p>Scheduled entry allows visitor to enter within a start and end period.</p>
-                    <p>It is required to specify the <b>days</b> that the visitor is allow to enter.</p>
+                    <p>Scheduled Entry allows repetative visits to be scheduled up front.</p>
                     <a class="button button-raised button-fill popup-close" href="#">Close popup</a>
                 </div>
             </div>
@@ -131,6 +154,10 @@
     .auto-height {
         --f7-toolbar-height: 100px;
 
+    }
+
+    .md .item-media .icon {
+        color: inherit;
     }
 
     .auto-height~* {
@@ -147,13 +174,63 @@
         top: 50%;
         transform: translateY(-50%);
     }
+
+    .item-input-error-message {
+        display: block;
+    }
 </style>
 <script>
     import request from '../js/request.js';
     export default {
+        data: function () {
+            var id= this.$route.params.link;
+            var link;
+            if(id == 1){
+                link = '/visitor-list/2';
+            }else{
+                link = '/';
+            }
+            return {
+                link:link,
+            }
+        },
         on: {
-            pageBeforeIn: function () {
-                this.$app.methods.getProperties();
+            pageBeforeIn: function () {},
+            pageAfterIn: function(){
+                var app = this.$app;
+                var $$ = this.$$;
+                var entryVal = app.form.getFormData('entryVal');
+                var notify = app.form.getFormData('notify');
+
+                if(entryVal){
+                var sms = app.smartSelect.get('#entryid');
+                
+                    sms.setValue(entryVal);
+                }
+                $$('#entryid').trigger('smartselect:close');
+                if(notify == 'true'){
+                    $$('input[name="notify"]').prop('checked', true);
+                }
+                console.log(entryVal);
+                console.log(notify);
+                console.log("here!");
+                
+            },
+            pageReinit: function () {
+                var app = this.$app;
+                this.$app.methods.getProperties(function () {
+                    app.smartSelect.create({
+                        el: '.smart-select',
+                        openIn: 'sheet',
+                    });
+                    var selectedLot = app.form.getFormData('selectedLot');
+                    if(selectedLot){
+                        var sm = app.smartSelect.get('.lotSelector.smart-select');
+                        console.log(sm);
+                        sm.setValue(selectedLot);
+                    }
+                });
+
             },
             pageInit: function () {
                 var app = this.$app;
@@ -162,17 +239,62 @@
                 var expCalendarModal;
                 var entryCalendarModal;
                 var today = new Date();
+                $$("#schedule_submit").on("click", function () {
+                    var data = app.form.convertToData('#scheduleForm');
+                    app.methods.postEntry(data);
+                    app.form.removeFormData('selectedLot');
+                    app.form.removeFormData('entryVal');
+                    app.form.removeFormData('notify');
+                    app.form.removeFormData('startDate');
+                    app.form.removeFormData('endDate');
+                    app.form.removeFormData('days');
+                });
+                this.$app.methods.getProperties(function () {
+                    app.smartSelect.create({
+                        el: '.smart-select',
+                        openIn: 'sheet',
+                    });
+                    var selectedLot = app.form.getFormData('selectedLot');
+                    if(selectedLot){
+
+                    var sm = app.smartSelect.get($$('.lotSelector.smart-select'));
+                        console.log(sm);
+                        sm.setValue(selectedLot);
+                        
+                    
+                    }
+                });
                 var yesterday = new Date().setDate(today.getDate() - 1);
+                var ayear = new Date(new Date().setFullYear(new Date().getFullYear() + 1));
+                $$('.ck').on('change', function () {
+                    if ($$('input[name="notify"]').prop('checked')) {
+                        app.form.storeFormData('notify', 'true');
+                        $$('input[name="is_notify"]').val("true");
+                    } else {
+                        app.form.storeFormData('notify', 'false');
+                        $$('input[name="is_notify"]').val("false");
+                    }
+                });
+                $$('#lt').on('change',function(){
+                    console.log($$(this).val());
+                    app.form.storeFormData('selectedLot', $$(this).val());
+                });
+
+
+
                 $$("#entryid").on("smartselect:close", function () {
+
                     var val = $$(this).children('select').val();
-                    if (val == 'scheduled') {
+                    app.form.storeFormData('entryVal', $$(this).children('select').val());
+                    console.log(val);
+                    if (val == 'S') {
                         if (schedule == false) {
-                            $$('#scheduleForm ul').append(
+                            $$('#scheduleForm ul.mainform').append(
                                 '<li class="item-content item-input added">' +
                                 '<div class="item-inner">' +
                                 '<div class="item-title item-label">Valid Until</div>' +
                                 '<div class="item-input-wrap">' +
-                                '<input name="exp_date" type="text" placeholder="Select date" readonly="readonly" id="exp_date" />' +
+                                '<input name="end_date" type="text" placeholder="Select date" readonly="readonly" id="exp_date" required/>' +
                                 '</div>' +
                                 '</div>' +
                                 '</li>' +
@@ -180,9 +302,9 @@
                                 '<div class="item-inner">' +
                                 '<div class="item-title item-label">Day</div>' +
                                 '<div class="item-input-wrap input-dropdown-wrap">' +
-                                '<a href="#" class="item-link smart-select">' +
+                                '<a href="#" class="item-link selectdays smart-select">' +
                                 '<div class="item-after"></div>' +
-                                '<select name="days" multiple>' +
+                                '<select name="days" multiple required>' +
                                 '<option value="monday" selected data-display-as="Mon">Monday</option>' +
                                 '<option value="tuesday" data-display-as="Tue">Tuesday</option>' +
                                 '<option value="wednesday" data-display-as="Wed">Wednesday</option>' +
@@ -201,34 +323,65 @@
                                 openIn: 'customModal',
                                 header: true,
                                 footer: true,
-                                dateFormat: 'MM dd yyyy',
+                                dateFormat: 'yyyy-mm-dd',
                                 minDate: entryCalendarModal.getValue(),
                             });
+                            expCalendarModal.on('close', function () {
+                                app.form.storeFormData('endDate',this.getValue());
+                            });
+                            var ed = app.form.getFormData('endDate');
+                            if(ed){
+                                expCalendarModal.setValue(sd);
+                            }
+                            var day = app.form.getFormData('days');
+                            var d = app.smartSelect.create({
+                                el: '.selectdays',
+                                openIn: 'page',
+                            });
+                            $$(".selectdays").on("smartselect:close", function () {
+                                app.form.storeFormData('days',$$(this).children('select').val());
+                            });
+                            if(day){
+                                
+                                d.setValue(day);
+                            }
                         }
                         schedule = true;
                     } else {
                         if (schedule == true) {
                             expCalendarModal.off('destroy');
-                            expCalendarModal.destroy()
+                            expCalendarModal.destroy();
                             schedule = false;
                             $$('.added').remove();
 
                         }
                     }
                 });
+
                 entryCalendarModal = app.calendar.create({
                     inputEl: '#entry_date',
                     openIn: 'customModal',
                     header: true,
                     footer: true,
-                    dateFormat: 'MM dd yyyy',
-                    minDate: today,
+                    dateFormat: 'yyyy-mm-dd',
+                    minDate: yesterday,
+                    maxDate: ayear,
                 });
+                var sd = app.form.getFormData('startDate');
+                if(sd){
+                    entryCalendarModal.setValue(sd);
+                }
+
                 entryCalendarModal.on('close', function () {
+                    console.log(this.getValue());
+                    app.form.storeFormData('startDate', this.getValue());
+                    var v = this.getValue();
                     if (this.getValue() && expCalendarModal && !expCalendarModal.destroyed) {
-                        if (expCalendarModal.params.minDate > entryCalendarModal.value || expCalendarModal
-                            .value > entryCalendarModal.value) {
-                            expCalendarModal.setValue(entryCalendarModal.getValue());
+                        console.log(expCalendarModal.value)
+                        if ( new Date(expCalendarModal.value) < new Date(v)) {
+                            expCalendarModal.setValue(v);
+                            app.form.storeFormData('endDate',expCalendarModal.value);
+                            console.log("here");
                         }
                         expCalendarModal.params.minDate = entryCalendarModal.value;
 

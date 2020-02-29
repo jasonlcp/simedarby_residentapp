@@ -3,62 +3,74 @@
     <div class="navbar">
       <div class="navbar-inner sliding">
         <div class="left">
-          <a href="#" class="back link">
+          <a href="/notification/" data-force="true" class="back link">
             <i class="icon icon-back"></i>
             <span class="if-not-md">Back</span>
           </a>
         </div>
+        <div class="center">Visitor</div>
       </div>
     </div>
+    {{#visitor}}
+    {{#js_if "this.status == 'PEN'"}}
     <div class="toolbar toolbar-bottom auto-height">
       <div class="block">
         <div class="row">
           <div class="col-50">
-            <a href="#" id="schedule_submit" class="button button-raised button-round button-fill color-red ">Reject</a>
+            <a href="#" data-val="RIR"
+              class="button schedule_submit button-raised button-round button-fill color-red ">Reject</a>
           </div>
           <div class="col-50">
-            <a href="#" id="schedule_submit"
-              class="button button-raised button-round button-fill color-green ">Approve</a>
+            <a href="#" data-val="AIR"
+              class="button schedule_submit button-raised button-round button-fill color-green ">Approve</a>
           </div>
         </div>
       </div>
     </div>
+    {{/js_if}}
+    {{/visitor}}
     <div class="page-content">
-      <div class="card data-table data-table-collapsible data-table-init">
-        <div class="card-header">
-          <div class="data-table-title text-center">
-            <h5>Your visitor has arrived!</h5>
-                  <img width="100%"
-                            src="https://proxy.duckduckgo.com/iu/?u=http%3A%2F%2Fwww.gazetadopovo.com.br%2Fviver-bem%2Fwp-content%2Fuploads%2F2015%2F12%2Fviagem-de-carro.jpg&f=1"/>
+      <div class="text-center">
+        <h5>Your visitor has arrived!</h5>
+        <div class="swiper-container">
+          <div class="swiper-wrapper">
+            {{#visitor}}
+            <div class="swiper-slide"><img src="{{driver_image}}" class="lazy"></div>
+            <div class="swiper-slide"><img src="{{entry_car_plate_image}}" class="lazy"></div>
+            <div class="swiper-slide"><img src="{{identity_image}}" class="lazy"></div>
+            {{/visitor}}
           </div>
         </div>
+      </div>
+      <div class="card data-table dt data-table-collapsible">
+
         <div class="card-content">
+          {{#visitor}}
           <table>
             <thead>
               <tr>
                 <th class="label-cell">Area</th>
-                <th class="label-cell">House Unit</th>
-                <th class="label-cell">Visitor Name</th>
-                <th class="label-cell">Visit Date</th>
+                <th class="label-cell">House No</th>
+                <th class="numeric-cell">Date</th>
                 <th class="label-cell">Entry Type</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td class="label-cell">Reesia</td>
-                <td class="label-cell">Lot 52, Jalan Frekuensi U16/140</td>
-                <td class="label-cell">Adam Wong</td>
-                <td class="label-cell">27 / July / 2019</td>
-                <td class="label-cell">Multiple Entry</td>
+                <td class="label-cell">{{lot.street.area.name}}</td>
+                <td class="label-cell">{{lot.name}}, {{lot.street.name}}</td>
+                <td class="numeric-cell">{{created_at}}</td>
+                <td class="label-cell">{{entryType entry_type}}</td>
               </tr>
             </tbody>
           </table>
+          {{/visitor}}
         </div>
       </div>
     </div>
   </div>
 </template>
-<style>
+<style scoped>
   .row .col-33 div {
 
     height: 70px;
@@ -66,7 +78,46 @@
     background-position: center;
     width: 100%;
   }
+
+  .swiper-slide img {
+    width: 100%;
+  }
+
+  .page-content {
+    padding-bottom: 100px;
+  }
 </style>
 <script>
+  export default {
+    data: function () {
+      return {
+        visitor: null,
+      }
+    },
+    on: {
+      pageInit: function () {
+        this.$app.dialog.preloader();
+        var app = this.$app;
+        var $$ = this.$$;
+        var router = this.$router;
+        var d;
+        this.$app.methods.getTrack(this.$route.params.id, function (data) {
+          app.dialog.close();
+          d = JSON.parse(data.response);
+          var dt = app.dataTable.create({
+            el: '.dt'
+          });
+          var swiper = app.swiper.create('.swiper-container');
+        });
+        $$('.page').on('click', '.schedule_submit', function () {
+          console.log(d);
+          var val = $$(this).data('val');
+          app.methods.updateStatus(d.tracker_id, val, function (data) {
+            router.back();
+          })
+        });
 
+      }
+    }
+  }
 </script>

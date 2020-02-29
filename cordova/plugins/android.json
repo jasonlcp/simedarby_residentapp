@@ -7,36 +7,71 @@
     "files": {}
   },
   "installed_plugins": {
+    "com.darktalker.cordova.screenshot": {
+      "PACKAGE_NAME": "com.framework7.simedarbycommunity"
+    },
+    "cordova-plugin-camera": {
+      "ANDROID_SUPPORT_V4_VERSION": "27.+",
+      "PACKAGE_NAME": "com.framework7.simedarbycommunity"
+    },
+    "cordova-plugin-contacts-phonenumbers": {
+      "PACKAGE_NAME": "com.framework7.simedarbycommunity"
+    },
+    "cordova-plugin-decimal-keyboard": {
+      "PACKAGE_NAME": "com.framework7.simedarbycommunity"
+    },
     "cordova-plugin-device": {
-      "PACKAGE_NAME": "io.framework7.simedarbyelminaresident"
+      "PACKAGE_NAME": "com.framework7.simedarbycommunity"
     },
     "cordova-plugin-file": {
-      "PACKAGE_NAME": "io.framework7.simedarbyelminaresident"
+      "PACKAGE_NAME": "com.framework7.simedarbycommunity"
     },
     "cordova-plugin-inappbrowser": {
-      "PACKAGE_NAME": "io.framework7.simedarbyelminaresident"
+      "PACKAGE_NAME": "com.framework7.simedarbycommunity"
     },
     "cordova-plugin-keyboard": {
-      "PACKAGE_NAME": "io.framework7.simedarbyelminaresident"
+      "PACKAGE_NAME": "com.framework7.simedarbycommunity"
     },
     "cordova-plugin-media": {
-      "PACKAGE_NAME": "io.framework7.simedarbyelminaresident"
+      "PACKAGE_NAME": "com.framework7.simedarbycommunity"
     },
     "cordova-plugin-safariviewcontroller": {
-      "PACKAGE_NAME": "io.framework7.simedarbyelminaresident"
+      "PACKAGE_NAME": "com.framework7.simedarbycommunity"
     },
     "cordova-plugin-splashscreen": {
-      "PACKAGE_NAME": "io.framework7.simedarbyelminaresident"
+      "PACKAGE_NAME": "com.framework7.simedarbycommunity"
     },
     "cordova-plugin-statusbar": {
-      "PACKAGE_NAME": "io.framework7.simedarbyelminaresident"
+      "PACKAGE_NAME": "com.framework7.simedarbycommunity"
+    },
+    "cordova-plugin-vibration": {
+      "PACKAGE_NAME": "com.framework7.simedarbycommunity"
     },
     "cordova-plugin-whitelist": {
-      "PACKAGE_NAME": "io.framework7.simedarbyelminaresident"
+      "PACKAGE_NAME": "com.framework7.simedarbycommunity"
     },
     "cordova-plugin-wkwebview-engine": {
-      "PACKAGE_NAME": "io.framework7.simedarbyelminaresident"
+      "PACKAGE_NAME": "com.framework7.simedarbycommunity"
+    },
+    "cordova-plugin-x-socialsharing": {
+      "ANDROID_SUPPORT_V4_VERSION": "24.1.1+",
+      "PACKAGE_NAME": "com.framework7.simedarbycommunity"
+    },
+    "phonegap-plugin-push": {
+      "ANDROID_SUPPORT_V13_VERSION": "27.+",
+      "FCM_VERSION": "17.0.+",
+      "PACKAGE_NAME": "com.framework7.simedarbycommunity"
     }
   },
-  "dependent_plugins": {}
+  "dependent_plugins": {
+    "es6-promise-plugin": {
+      "PACKAGE_NAME": "com.framework7.simedarbycommunity"
+    },
+    "cordova-support-google-services": {
+      "PACKAGE_NAME": "com.framework7.simedarbycommunity"
+    },
+    "phonegap-plugin-multidex": {
+      "PACKAGE_NAME": "com.framework7.simedarbycommunity"
+    }
+  }
 }

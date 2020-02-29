@@ -1,5 +1,5 @@
 <template>
-    <div class="page">
+    <div class="page sortable-disable">
         <div class="navbar">
             <div class="navbar-inner sliding">
                 <div class="left">
@@ -8,95 +8,206 @@
                         <span class="if-not-md">Back</span>
                     </a>
                 </div>
-                <div class="title">Family</div>
+                <div class="title">Family
+                </div>
                 <div class="right">
                     <!-- Link to enable searchbar -->
-                    <a class="link icon-only searchbar-enable" data-searchbar=".search">
-                        <i class="icon material-icons md-only">search</i>
+                    <a class="link icon-only smart-select smart-select-init property-filter" data-open-in="sheet">
+                        <select name="property">
+                            <option value="all" selected>All</option>
+                            {{#each properties}}
+                            <option value="{{@index}}">{{street.area.name}},{{name}},{{street.name}}</option>
+                            {{/each}}
+                        </select>
+                        <div class="item-content">
+                            <i class="icon material-icons md-only">filter_list</i>
+                        </div>
                     </a>
                 </div>
                 <div class="title-large">
                     <div class="title-large-text">Family</div>
                 </div>
                 <!-- Searchbar is a direct child of "navbar-inner" -->
-                <form class="searchbar searchbar-expandable search searchbar-init">
-                    <div class="searchbar-inner">
-                        <div class="searchbar-input-wrap">
-                            <input type="search" placeholder="Search" />
-                            <i class="searchbar-icon"></i>
-                            <span class="input-clear-button"></span>
-                        </div>
-                        <span class="searchbar-disable-button">Cancel</span>
-                    </div>
-                </form>
             </div>
         </div>
         <!-- FAB Right Bottom (Orange) -->
-        <div class="fab fab-right-bottom">
-            <a href="/add-family/" class="">
+        <!--<div class="fab fab-right-bottom">
+            <a href="#" class="">
                 <i class="icon f7-icons">add</i>
                 <i class="icon f7-icons">close</i>
             </a>
-        </div>
+        
+            <div class="fab-buttons fab-buttons-top">
+                <a href="/add-family/" class="fab-label-button">
+                    <span><i class="icon f7-icons">person</i></span>
+                    <span class="fab-label">Add Family Member</span>
+                </a>
+                <a href="#" class="fab-label-button sortable-toggle fab-close" data-sortable=".sortable">
+                    <span><i class="icon f7-icons">sort_down</i></span>
+                    <span class="fab-label">Sort Family Member</span>
+                </a>
+            </div>
+        </div>-->
         <div class="page-content">
-            <div class="list">
-                <div class="list-group">
-                    <ul>
-                        <li class="list-group-title">Reesia, Lot 55, Jalan Frekuensi U16/140</li>
-                        <li>
-                            <div class="item-content">
-                                <div class="item-inner">
-                                    <div class="item-title">Aaron </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="item-content">
-                                <div class="item-inner">
-                                    <div class="item-title">Barclay</div>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="item-content">
-                                <div class="item-inner">
-                                    <div class="item-title">Bartolo</div>
-                                    <div class="item-after"><span class="badge color-yellow">Awaiting Approval</span></div>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
+            {{#each properties}}
+            <div class="filter-list" data-index="{{@index}}">
+                <div class="block-title">
+                    <span class="text-wrapper">{{street.area.name}},{{name}},{{street.name}}</span>
+                    {{#if is_owner}}
+                    {{#if is_lock}}
+                    <span style="float:right; color:red; margin-top:-7px">
+                        <i class="icon f7-icons">lock</i>
+                    </span>
+                    {{else}}
+                    <span style="float:right; margin-top:-5px;">
+                        <a {{#js_if "(parseInt(this.residentlotthroughmodel_set.length) + parseInt(this.requestfamily.length)) < 6"}}
+                            href="/add-family/{{id}}" {{else}} data-stop="true" {{/js_if}} class="link checkFamily"
+                            style="margin-right:10px;"><i class="icon f7-icons">add</i></a>
+                        <a class="link sortable-toggle" data-sortable=".st-{{@index}}"><i
+                                class="icon f7-icons">sort_down</i></a>
+                    </span>
+                    {{/if}}
+                    {{/if}}
                 </div>
-                <div class="list-group">
-                    <ul>
-                        <li class="list-group-title">Lot 32 Elmina Green 1, Jalan Frekuensi U16/141</li>
-                        <li>
-                            <div class="item-content">
-                                <div class="item-inner">
-                                    <div class="item-title">Bailey</div>
+                <div class="list sortable st-{{@index}}">
+                    <div class="list-group">
+                        <ul id="family-list">
+                            {{#residentlotthroughmodel_set}}
+                            <li {{#if ../is_owner}}{{#js_if "this.@index == 0" }} class="no-sorting"
+                                {{else}}class="swipeout" {{/js_if}} {{/if}} data-lot={{../id}}
+                                data-resident={{resident_id}}>
+                                <div {{#if ../is_owner}}{{#js_if "this.@index == 0" }} {{else}}class="swipeout-content"
+                                    {{/js_if}} {{/if}}>
+                                    <div class="item-content">
+                                        <div class="item-inner">
+                                            <div class="item-title">{{resident.user.first_name}}
+                                                {{resident.user.last_name}}
+                                            </div>
+                                            {{#js_if "this.@index == 0"}}
+                                            <div class="item-after">
+                                                <div class="chip color-green">
+                                                    <div class="chip-label">Owner</div>
+                                                </div>
+                                            </div>
+                                            {{/js_if}}
+                                        </div>
+                                    </div>
+                                    {{#if ../is_owner}}
+                                    {{#js_if "this.@index != 0"}}
+                                    <div class="sortable-handler"></div>
+                                    <div class="swipeout-actions-right">
+                                        <a href="#" data-confirm="Are you sure you want to delete this item?"
+                                            class="swipeout-delete">Delete</a>
+                                    </div>
+                                    {{/js_if}}
+                                    {{/if}}
                                 </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="item-content">
-                                <div class="item-inner">
-                                    <div class="item-title">Adam</div>
+                            </li>
+                            {{/residentlotthroughmodel_set}}
+                            {{#js_if "this.residentlotthroughmodel_set.length <= 6"}}
+                            {{#requestfamily}}
+                            <li class="no-sorting">
+                                <div class="item-content">
+                                    <div class="item-inner">
+                                        <div class="item-title">{{first_name}} {{last_name}}
+                                        </div>
+                                        <div class="item-after">
+                                            <div class="chip color-orange">
+                                                <div class="chip-label">Awaiting Approval</div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="item-content">
-                                <div class="item-inner">
-                                    <div class="item-title">Calvin</div>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
+                            </li>
+                            {{/requestfamily}}
+                            {{/js_if}}
+                        </ul>
+                    </div>
                 </div>
             </div>
+            {{/each}}
         </div>
     </div>
 </template>
+<style scoped>
+    .list {
+        margin: 0px;
+    }
+
+    .block-title {
+        overflow: visible;
+    }
+
+    .fab-label {
+        font-family: Roboto
+    }
+
+    .text-wrapper {
+        width: 75%;
+        display: inline-block;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+        font-size: 3.3vw;
+        font-weight: bold;
+    }
+</style>
 <script>
-    export default {}
+    export default {
+        data: function () {
+            return {
+                properties: null,
+            }
+        },
+        on: {
+            pageInit: function () {
+                var $$ = this.$$;
+                var app = this.$app;
+                var property_swiper;
+                var router = this.$router;
+                var self = this;
+                this.$app.methods.getProperties(function () {});
+                $$('.page-content').on('click', '.checkFamily', function (e) {
+                    if ($$(this).data('stop') == 'true') {
+                        app.dialog.alert("You have reached the max number of family members.",
+                            "Max Capacity.");
+                    }
+                });
+                app.on('sortableSort', function (listEl, indexes) {
+                    var toel = $$(listEl).parent('ul').children('.sortel')[indexes.from - 1];
+                    console.log($$(listEl).parent('ul').children('.sortel'));
+                    console.log(indexes.from - 1);
+                    console.log(toel);
+                    var data = {
+                        'froms': parseInt($$(listEl).data('order')),
+                        'to': parseInt($$(toel).data('order')),
+                        'lot': parseInt($$(listEl).data('lot')),
+                        'resident': parseInt($$(listEl).data('resident')),
+                        'resident_to': parseInt($$(toel).data('resident')),
+                    }
+                    console.log(data);
+                    app.methods.postOrderFamily(data)
+                })
+                $$(".page-content").on('swipeout:delete', '.swipeout', function () {
+                    app.methods.deletefamily($$(this).data("resident"), $$(this).data("lot"));
+
+                });
+                $$('.property-filter').on('smartselect:close', function () {
+                    var val = $$(this).children('[name="property"]').val();
+                    $$('.filter-list').each(function () {
+                        if (val == 'all') {
+                            $$(this).show();
+                        } else {
+                            if (val == $$(this).data("index")) {
+                                $$(this).show();
+                            } else {
+                                $$(this).hide();
+                            }
+                        }
+                    })
+                });
+            }
+
+        }
+    }
 </script>

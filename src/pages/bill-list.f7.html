@@ -1,0 +1,276 @@
+<template>
+    <div class="page">
+        <div class="navbar">
+            <div class="navbar-inner sliding">
+                <div class="left">
+                    <a href="#"  class="back link">
+                        <i class="icon icon-back"></i>
+                        <span class="if-not-md">Back</span>
+                    </a>
+                </div>
+                <div class="center">
+                    Bill History
+                </div>
+                <div class="right">
+                    <!-- Link to enable searchbar -->
+                    <a class="link icon-only" id="open-picker-date" href="#">
+                        <i class="icon material-icons md-only">filter_list</i>
+                    </a>
+                    <input type="hidden" readonly="readonly" id="demo-picker-date" />
+                </div>
+            </div>
+        </div>
+        <div class="toolbar tabbar toolbar-top no-shadow">
+            <div class="toolbar-inner">
+                <a class="tab-link tab-link-active tab-btn" href="#tab-1"><span
+                        class="tabbar-label"><small>Pending</small></span></small></a>
+                <a class="tab-link tab-btn" href="#tab-2"><span class="tabbar-label"><small>Partially</small></span></a>
+                <a class="tab-link tab-btn" href="#tab-3"><span class="tabbar-label"><small>Paid</small></span></a>
+            </div>
+        </div>
+        <div class="tabs-animated-wrap">
+            <div class="tabs">
+                <div id="tab-1" class="page-content tab tab-active">
+                    <div class="block">
+                        <div class="card">
+                            <div class="card-content">
+                                <div class="list media-list">
+                                    <ul>
+                                        {{#pending}}
+                                        <li data-date={{bill_date}} class="filter-items">
+                                            <a href="/bill-details/{{id}}" class="item-content">
+                                                <div class="item-media"><i class="icon fas fa-file-invoice-dollar"></i>
+                                                </div>
+                                                <div class="item-inner">
+                                                    <div class="item-title-row">
+                                                        <div class="item-title">Inv-{{id}}</div>
+                                                        <div class="item-after">
+                                                            <span
+                                                                class="badge color-orange">{{billStatus status}}</span>
+                                                            {{bill_date}}
+                                                        </div>
+                                                    </div>
+                                                    <div class="item-subtitle">
+                                                        {{bill_type.name}}
+
+                                                    </div>
+                                                    <div class="item-text">
+                                                        RM{{amount}}
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        {{else}}
+                                        <li class="item-content">
+                                            No Pending Bills
+                                        </li>
+                                        {{/pending}}
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="tab-2" class="page-content tab">
+                    <div class="block">
+                        <div class="card">
+                            <div class="card-content">
+                                <div class="list media-list">
+                                    <ul>
+                                        {{#partially}}
+                                        <li data-date={{bill_date}} class="filter-items">
+                                            <a href="/bill-details/{{id}}" class="item-content">
+                                                <div class="item-media"><i class="icon fas fa-file-invoice-dollar"></i>
+                                                </div>
+                                                <div class="item-inner">
+                                                    <div class="item-title-row">
+                                                        <div class="item-title">Inv-{{id}}</div>
+                                                        <div class="item-after">
+                                                            <span
+                                                                class="badge color-orange">{{billStatus status}}</span>
+                                                            {{bill_date}}
+                                                        </div>
+                                                    </div>
+                                                    <div class="item-subtitle">
+                                                        {{bill_type.name}}
+
+                                                    </div>
+                                                    <div class="item-text">
+                                                        RM{{amount}}
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        {{else}}
+                                        <li class="item-content">
+                                            No Partially Paid Bills
+                                        </li>
+                                        {{/partially}}
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="tab-3" class="page-content tab">
+                    <div class="block">
+                        <div class="card">
+                            <div class="card-content">
+                                <div class="list media-list">
+                                    <ul>
+                                        {{#paid}}
+                                        <li data-date={{bill_date}} class="filter-items">
+                                            <a href="/bill-details/{{id}}" class="item-content">
+                                                <div class="item-media"><i class="icon fas fa-file-invoice-dollar"></i>
+                                                </div>
+                                                <div class="item-inner">
+                                                    <div class="item-title-row">
+                                                        <div class="item-title">Inv-{{id}}</div>
+                                                        <div class="item-after">
+                                                            <span
+                                                                class="badge color-green">{{billStatus status}}</span>
+                                                            {{bill_date}}
+                                                        </div>
+                                                    </div>
+                                                    <div class="item-subtitle">
+                                                        {{bill_type.name}}
+
+                                                    </div>
+                                                    <div class="item-text">
+                                                        RM{{amount}}
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        {{else}}
+                                        <li class="item-content">
+                                            No Paid Bills
+                                        </li>
+                                        {{/paid}}
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</template>
+<style scoped>
+    .item-media {
+        padding-top: 26px;
+    }
+
+    .fas {
+        font-style: normal;
+        font-size: 28px;
+        line-height: 1;
+        letter-spacing: normal;
+        text-transform: none;
+        display: inline-block;
+        white-space: nowrap;
+        word-wrap: normal;
+        direction: ltr;
+        -webkit-font-smoothing: antialiased;
+        text-rendering: optimizeLegibility;
+        -moz-osx-font-smoothing: grayscale;
+        -moz-font-feature-settings: "liga=1";
+        -moz-font-feature-settings: "liga";
+        font-feature-settings: "liga";
+        text-align: center;
+
+    }
+    .sheet-modal .toolbar{
+        background: linear-gradient(to right, #f8912c, #f78226, #f57223, #f36122, #f04e23)!important;
+    }
+
+    .toolbar-inner {
+        padding: 10px;
+    }
+
+    .tab-btn {
+        margin: 0px 5px;
+        background-color: #737373 !important;
+        color: #fff;
+        border-radius: 5px;
+    }
+
+    .tabbar .tab-link-active {
+        background-color: #f04e23 !important;
+    }
+</style>
+<script>
+    export default {
+        data: function () {
+            return {
+                partially: null,
+                paid: null,
+                pending: null,
+                id: this.$route.params.id,
+                property_index: this.$route.params.property_index,
+            }
+        },
+        on: {
+            pageInit: function () {
+                var app = this.$app;
+                var $$ = this.$$;
+                this.$app.methods.getBillPending(this.$route.params.id);
+                this.$app.methods.getBillPartially(this.$route.params.id);
+                this.$app.methods.getBillPaid(this.$route.params.id);
+                var today = new Date();
+                var pickerInline = app.picker.create({
+                    inputEl: '#demo-picker-date',
+                    rotateEffect: true,
+                    value: [
+                        today.getFullYear(),
+                        today.getMonth()+1,
+                    ],
+                    formatValue: function (values, displayValues) {
+                        return displayValues[0] + ' ' + values[1];
+                    },
+                    cols: [
+                       
+
+                        // Years
+                        {
+                            values: (function () {
+                                var arr = [];
+                                for (var i = 2019; i <= 2050; i++) {
+                                    arr.push(i);
+                                }
+                                return arr;
+                            })(),
+                        },
+                         // Months
+                        {
+                            values: ('1 2 3 4 5 6 7 8 9 10 11 12').split(' '),
+                            displayValues: (
+                                'January February March April May June July August September October November December'
+                            ).split(' '),
+                            
+                        }
+                    ],
+                    on: {
+                        close(picker, values, displayValues){
+                            var pk = picker.value[0] + '-'+picker.value[1];
+                            $$('.filter-items').each(function(){
+                                var i = $$(this).data('date').slice(0, -3);
+                                if(i == pk){
+                                    $$(this).show();
+                                }else{
+                                    $$(this).hide();
+                                }
+                            })
+
+                        }
+                    }
+                });
+                $$('#open-picker-date').on('click', function () {
+                    pickerInline.open();
+                });
+            }
+        }
+    }
+</script>

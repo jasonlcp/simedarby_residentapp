@@ -11,59 +11,362 @@
                 <div class="title">Property</div>
             </div>
         </div>
-        <!-- FAB Right Bottom (Orange) -->
-        <div class="fab fab-right-bottom">
-            <a href="/add-family/" class="">
-                <i class="icon f7-icons">add</i>
-                <i class="icon f7-icons">close</i>
-            </a>
-        </div>
         <div class="page-content">
-           {{#property}}
-            <div style="background:url({{street.area.thumbnail}}); background-size:cover; background-position:center; height:200px;" width="100%"></div>
-            <div class="list" style="margin-top:0px;">
-                <div class="list-group">
-                    <ul>
-                        <li class="list-group-title">Reesia, Lot 55, Jalan Frekuensi U16/140</li>
-                        <li>
-                            <div class="item-content">
-                                <div class="item-inner">
-                                    <div class="item-title">Aaron </div>
-                                </div>
+            {{#property}}
+            <div style="background:url({{street.area.thumbnail}}); background-size:cover; background-position:center; height:200px;"
+                width="100%"></div>
+            <div class="block-title">
+                {{street.area.name}},{{name}},{{street.name}}
+            </div>
+            <div class="block">
+                <div class="card">
+                    <div class="card-header">
+                        Family Members
+                        {{#if is_owner}}
+                        <div>
+                            
+                            <a {{#js_if "(parseInt(this.residentlotthroughmodel_set.length) + parseInt(this.requestfamily.length)) < 6"}} href="/add-family/{{id}}"
+                                {{else}} data-stop="true" {{/js_if}} class="link checkFamily"
+                                style="margin-right:10px;"><i class="icon f7-icons">add</i></a>
+                            <a class="link sortable-toggle" data-sortable=".sortable"><i
+                                    class="icon f7-icons">sort_down</i></a>
+                        </div>
+                        {{/if}}
+                    </div>
+                    <div class="card-content">
+                        <div class="list sortable" style="margin-top:0px;">
+                            <div class="list-group">
+                                <ul class="family-list">
+                                    {{#residentlotthroughmodel_set}}
+                                    <li  {{#if ../is_owner}}{{#js_if "this.@index == 0" }} class="no-sorting" {{else}}class="swipeout" {{/js_if}} {{/if}} data-lot={{../id}} data-resident={{resident_id}}>
+                                        <div {{#if ../is_owner}}{{#js_if "this.@index == 0" }} {{else}}class="swipeout-content" {{/js_if}} {{/if}} >
+                                            <div class="item-content">
+                                                <div class="item-inner">
+                                                    <div class="item-title">{{resident.user.first_name}}
+                                                        {{resident.user.last_name}}
+                                                    </div>
+                                                    {{#js_if "this.@index == 0"}}
+                                                    <div class="item-after">
+                                                        <div class="chip color-green">
+                                                            <div class="chip-label">Owner</div>
+                                                        </div>
+                                                    </div>
+                                                    {{/js_if}} 
+                                                </div>
+                                            </div>
+                                             {{#if ../is_owner}}
+                                            {{#js_if "this.@index != 0"}}
+                                            <div class="sortable-handler"></div>
+                                            <div class="swipeout-actions-right">
+                                                <a href="#" data-confirm="Are you sure you want to delete this item?" class="swipeout-delete">Delete</a>
+                                            </div>
+                                             {{/js_if}}
+                                             {{/if}}
+                                        </div>
+                                    </li>
+                                    {{/residentlotthroughmodel_set}}
+                                    {{#js_if "this.residentlotthroughmodel_set.length <= 6"}}
+                                    {{#requestfamily}}
+                                    <li class="no-sorting">
+                                        <div class="item-content">
+                                            <div class="item-inner">
+                                                <div class="item-title">{{first_name}} {{last_name}}
+                                                </div>
+                                                <div class="item-after">
+                                                    <div class="chip color-orange">
+                                                        <div class="chip-label">Awaiting Approval</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    {{/requestfamily}}
+                                    {{/js_if}}
+                                </ul>
                             </div>
-                        </li>
-                        <li>
-                            <div class="item-content">
-                                <div class="item-inner">
-                                    <div class="item-title">Barclay</div>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="item-content">
-                                <div class="item-inner">
-                                    <div class="item-title">Bartolo</div>
-                                    <div class="item-after"><span class="badge color-yellow">Awaiting Approval</span></div>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
+                        </div>
+                        {{/property}}
+                    </div>
                 </div>
             </div>
-            {{/property}}
+            <div class="block">
+                <div class="card">
+                    <div class="card-header">
+                        Latest Bills
+                        {{#property}}
+                        <a class="link" href="/bill-list/{{id}}/{{../property_index}}">More</a>
+                        {{/property}}
+                    </div>
+                    <div class="card-content">
+                        <div class="list media-list">
+                            <ul>
+                                {{#each bill}}
+                                <li>
+                                    <a href="/bill-details/{{id}}" class="item-content">
+                                        <div class="item-media"><i class="icon fas fa-file-invoice-dollar"></i>
+                                        </div>
+                                        <div class="item-inner">
+                                            <div class="item-title-row">
+                                                <div class="item-title">Inv-{{id}}</div>
+                                                <div class="item-after">
+                                                    <span class="badge color-orange">{{billStatus status}}</span>
+                                                    {{bill_date}}
+                                                </div>
+                                            </div>
+                                            <div class="item-subtitle">
+                                                {{bill_type.name}}
+
+                                            </div>
+                                            <div class="item-text">
+                                                RM{{amount}}
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                {{else}}
+                                <li>
+                                    <a href="#" class="item-content">
+                                        No Pending Bills.
+                                    </a>
+                                </li>
+                                {{/each}}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="block-title clearfix" style="overflow:visible;">
+                <div class="left">
+                    Property Settings
+                </div>
+                <div class="right">
+                    <a class="popup-open" data-popup=".popup-info">
+                        <i class="icon f7-icons">info_round</i>
+                    </a>
+                </div>
+            </div>
+            <div class="list simple-list inset no-hairlines" style="box-shadow: var(--f7-card-box-shadow);">
+                <ul>
+                    <li>
+                        <span>Allow Notification</span>
+                        {{#property}}
+                        <label class="toggle" id="disableNotification" data-id="{{id}}">
+                            <input type="checkbox" {{#if is_notify}}checked{{/if}}>
+                            <span class="toggle-icon"></span>
+                        </label>
+                        {{/property}}
+                    </li>
+
+                    <li>
+                        <span>Set as default Property</span>
+                        {{#property}}
+                        <label class="toggle" id="defaultProperty" data-id="{{id}}">
+                            <input type="checkbox" {{#if is_default}}checked{{/if}}>
+                            <span class="toggle-icon"></span>
+                        </label>
+                        {{/property}}
+                    </li>
+                </ul>
+                <div class="popup popup-info popup-swipe-to-close">
+                    <div class="block">
+                        <h1>Property Settings</h1>
+                        <br>
+                        <!-- Close Popup -->
+                        <h3>
+                            <label class="toggle">
+                                <input type="checkbox" checked disabled>
+                                <span class="toggle-icon"></span>
+                            </label>
+                            Allow Notification
+                        </h3>
+                        <p>
+                        Enable this to receive approval notifications from visits scheduled by your family members.
+                        </p>
+                        <h3>
+                            <label class="toggle">
+                                <input type="checkbox" checked disabled>
+                                <span class="toggle-icon"></span>
+                            </label>
+                            Set as Default Property
+                        </h3>
+                        <p>You can set your current property as the default property.</p>
+                        <p>
+                            Default property can be updated at any point of time.
+                        </p>
+                        <a class="button button-raised button-fill popup-close" href="#">Close popup</a>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
 </template>
+<style scoped>
+    .badge {
+        margin-right: 10px;
+    }
+
+    .item-media {
+        padding-top: 26px;
+    }
+
+    .right {
+        float: right;
+    }
+
+    .left {
+        float: left;
+    }
+
+    .clearfix::after {
+        content: "";
+        clear: both;
+        display: table;
+    }
+
+    .fas {
+        font-style: normal;
+        font-size: 28px;
+        line-height: 1;
+        letter-spacing: normal;
+        text-transform: none;
+        display: inline-block;
+        white-space: nowrap;
+        word-wrap: normal;
+        direction: ltr;
+        -webkit-font-smoothing: antialiased;
+        text-rendering: optimizeLegibility;
+        -moz-osx-font-smoothing: grayscale;
+        -moz-font-feature-settings: "liga=1";
+        -moz-font-feature-settings: "liga";
+        font-feature-settings: "liga";
+        text-align: center;
+
+    }
+</style>
 <script>
     export default {
         data: function () {
             return {
                 property: null,
+                bill: null,
+                property_index: this.$route.params.id,
             }
         },
         on: {
-            pageInit: function () {
-               this.$app.methods.getProperty();
+            pageReinit: function () {
+                var app = this.$app;
+                var f7 = this.$f7;
+                var $$ = this.$$;
+                var self = this;
+                var route = this.$route;
+                this.$app.methods.getProperty(this.$route.params.id, function () {
+                    var toggle = app.toggle.create({
+                        el: '#defaultProperty',
+                        on: {
+                            change: function () {
+                                if (this.checked) {
+                                    var data = {
+                                        'default_lot': $$(this.el).data("id")
+                                    }
+                                    app.methods.postDefaultLot(data)
+                                } else {
+                                    var data = {
+                                        'default_lot': 0
+                                    }
+                                    app.methods.postDefaultLot(data);
+                                }
+                            }
+                        }
+                    });
+                    var toggle2 = app.toggle.create({
+                        el: '#disableNotification',
+                        on: {
+                            change: function () {
+                                if (this.checked) {
+                                    var data = {
+                                        'lot': $$(this.el).data("id"),
+                                        'disable_notification': 'true'
+                                    }
+                                    app.methods.postDisNotification(data)
+                                } else {
+                                    var data = {
+                                        'lot': $$(this.el).data("id"),
+                                        'disable_notification': 'false'
+                                    }
+                                    app.methods.postDisNotification(data);
+                                }
+                            }
+                        }
+                    });
+                    app.methods.getBillLimits(self.property.id);
+                });
+            },
+            pageInit: function (e, page) {
+                var app = this.$app;
+                var f7 = this.$f7;
+                var $$ = this.$$;
+                var self = this;
+                var route = this.$route;
+                $$('.page-content').on('click', '.checkFamily', function (e) {
+                    if ($$(this).data('stop') == 'true') {
+                        app.dialog.alert("You have reached the max number of family members.",
+                            "Max Capacity.");
+                    }
+                });
+                app.on('sortableSort', function (listEl, indexes) {
+                    var data = {
+                        'froms': indexes.from,
+                        'to': indexes.to,
+                        'lot': parseInt($$(listEl).data('lot')),
+                    }
+                    app.methods.postOrderFamily(data)
+                })
+                 $$(".page-content").on('swipeout:delete','.swipeout',function(){
+                        app.methods.deletefamily($$(this).data("resident"),$$(this).data("lot"));
+                        
+                    });
+                this.$app.methods.getProperty(this.$route.params.id, function () {
+                    var toggle = app.toggle.create({
+                        el: '#defaultProperty',
+                        on: {
+                            change: function () {
+                                if (this.checked) {
+                                    var data = {
+                                        'default_lot': $$(this.el).data("id")
+                                    }
+                                    app.methods.postDefaultLot(data)
+                                } else {
+                                    var data = {
+                                        'default_lot': 0
+                                    }
+                                    app.methods.postDefaultLot(data);
+                                }
+                            }
+                        }
+                    });
+
+                    var toggle2 = app.toggle.create({
+                        el: '#disableNotification',
+                        on: {
+                            change: function () {
+                                if (this.checked) {
+                                    var data = {
+                                        'lot': $$(this.el).data("id"),
+                                        'disable_notification': 'true'
+                                    }
+                                    app.methods.postDisNotification(data)
+                                } else {
+                                    var data = {
+                                        'lot': $$(this.el).data("id"),
+                                        'disable_notification': 'false'
+                                    }
+                                    app.methods.postDisNotification(data);
+                                }
+                            }
+                        }
+                    });
+                    app.methods.getBillLimits(self.property.id);
+                });
+
             }
         }
     }

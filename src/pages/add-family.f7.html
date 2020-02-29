@@ -9,60 +9,65 @@
                     </a>
                 </div>
                 <div class="center">
-                    Famliy
+                    Family
                 </div>
             </div>
         </div>
 
         <div class="toolbar toolbar-bottom auto-height">
             <div class="block">
-                <a href="#" id="schedule_submit" class="button button-raised button-round button-fill ">Submit</a>
+                <a href="#" id="family_submit" class="button button-raised button-round button-fill ">Submit</a>
             </div>
         </div>
         <div class="page-content">
             <div class="block-title">
-                <h3>Add Famlily Request</h3>
+                <h3>Add Family Members</h3>
             </div>
             <div class="list no-hairlines-md">
-                <form id="scheduleForm">
+                <form id="familyForm">
                     <ul>
-                        <li class="item-content item-input">
+                        <li class="item-content item-input item-input-with-error-message">
                             <div class="item-inner">
                                 <div class="item-title item-label">Email Address</div>
                                 <div class="item-input-wrap">
                                     <input type="email" placeholder="Email Address" name="email" value="">
                                     <span class="input-clear-button"></span>
+                                    <div class="item-input-error-message" for="email"></div>
                                 </div>
                             </div>
                         </li>
-                        <li class="item-content item-input">
+                        <li class="item-content item-input item-input-with-error-message">
                             <div class="item-inner">
                                 <div class="item-title item-label">First Name</div>
                                 <div class="item-input-wrap">
                                     <input type="text" placeholder="First Name" name="first_name" value="">
                                     <span class="input-clear-button"></span>
+                                    <div class="item-input-error-message" for="first_name"></div>
                                 </div>
                             </div>
                         </li>
-                        <li class="item-content item-input">
+                        <li class="item-content item-input item-input-with-error-message">
                             <div class="item-inner">
                                 <div class="item-title item-label">Last Name</div>
                                 <div class="item-input-wrap">
                                     <input type="text" placeholder="Last Name" name="last_name" value="">
                                     <span class="input-clear-button"></span>
+                                    <div class="item-input-error-message" for="last_name"></div>
                                 </div>
                             </div>
                         </li>
-                        <li class="item-content item-input">
+                        <li class="item-content item-input item-input-with-error-message">
                             <div class="item-inner">
                                 <div class="item-title item-label">Mobile Number</div>
                                 <div class="item-input-wrap">
-                                    <input type="text" placeholder="Mobile No." name="phone"
+                                    <input type="tel" placeholder="Mobile No." name="phone_number"
                                         value="">
                                     <span class="input-clear-button"></span>
+                                    <div class="item-input-error-message" for="phone_number"></div>
                                 </div>
                             </div>
                         </li>
+                        <input type="hidden" name="lot" value={{lot}} readonly>
                     </ul>
                 </form>
             </div>
@@ -89,8 +94,29 @@
         top: 50%;
         transform: translateY(-50%);
     }
+    .item-input-error-message{
+        display:block;
+    }
 </style>
 <script>
     import request from '../js/request.js';
-    export default {}
+    export default {
+        data: function () {
+            return {
+                lot: this.$route.params.id,
+            }
+        },
+        on:{
+            pageInit:function(){
+                var $$ = this.$$;
+                var app = this.$app;
+                var router = this.$router;
+                $$('#family_submit').on('click',function(){
+                    var data = app.form.convertToData('#familyForm');
+                    app.methods.postFamilyRequest(data);
+                })
+            }
+        }
+
+    }
 </script>

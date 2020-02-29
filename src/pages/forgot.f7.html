@@ -1,11 +1,11 @@
 <!-- Login Screen -->
 <template>
-    <div class="page" data-name="login">
+    <div class="page" data-name="">
         <div class="page no-navbar no-toolbar no-swipeback">
             <div class="page-content login-screen-content">
-                <div class="login-screen-title"><img src="static/elmina-logo.svg" width="20%" /></div>
+                <div class="login-screen-title"><img src="static/logo1.png" width="20%" /></div>
                 <div class="block text-center">
-                <p>If you have forgotten your password you can reset it here.</p>
+                <p>Reset your password here.</p>
                 </div>
                 <form id="forgot-screen">
                     <div class="list">
@@ -24,7 +24,7 @@
                     <div class="row">
                         <div class="col-25"></div>
                         <div class="col-50">
-                            <a href="#" class="button button-raised button-fill login-button">Reset</a></li>
+                            <a href="#" class="button button-raised button-fill reset-button">Reset</a></li>
                         </div>
                         <div class="col-25"></div>
                     </div>
@@ -40,7 +40,16 @@
     import request from '../js/request.js';
     export default {
         on: {
-            pageInit: function () {}
+            pageInit: function () {
+                var app = this.$app;
+                var $$ = this.$$;
+                var router = this.$router;
+                $$('.reset-button').on('click',function(){
+                    var data = app.form.convertToData('#forgot-screen');
+                    app.methods.forgotPassword(data);
+                })
+
+            }
         }
     }
 </script>

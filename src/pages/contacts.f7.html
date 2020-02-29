@@ -1,0 +1,147 @@
+<template>
+    <div class="page">
+        <div class="navbar">
+            <div class="navbar-inner sliding">
+                <div class="left">
+                    <a href="#" class="back link">
+                        <i class="icon icon-back"></i>
+                        <span class="if-not-md">Back</span>
+                    </a>
+                </div>
+                <div class="title">Contacts</div>
+                <div class="right">
+                    <!-- Link to enable searchbar -->
+                    <a class="link icon-only searchbar-enable" data-searchbar=".searchContacts">
+                        <i class="icon material-icons md-only">search</i>
+                    </a>
+                </div>
+                <div class="title-large">
+                    <div class="title-large-text">Contacts</div>
+                </div>
+                <!-- Searchbar is a direct child of "navbar-inner" -->
+                <form class="searchbar searchbar-expandable searchContacts">
+                    <div class="searchbar-inner">
+                        <div class="searchbar-input-wrap">
+                            <input type="search" placeholder="Search" />
+                            <i class="searchbar-icon"></i>
+                            <span class="input-clear-button"></span>
+                        </div>
+                        <span class="searchbar-disable-button">Cancel</span>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="list-index"></div>
+        <div class="page-content infinite-scroll-content">
+            <div class="searchbar-backdrop"></div>
+            <div class="list contactsList searchbar-found">
+                {{#each contacts}}
+                <div class="list-group">
+                    <ul>
+                        <li class="list-group-title capitalize">{{@key}}</li>
+                        {{#each this}}
+                        <li class="swipeout">
+                            <div class="swipeout-content">
+                                <a class="item-content item-link"
+                                    @click="addVisitor('{{escape displayName}}',{{@index}},'{{../@key}}')">
+                                    <div class="item-media">{{#if thumbnail}}<img src="thumbnail"
+                                            width="100%">{{else}}<i class="icon f7-icons">person</i>{{/if}}</div>
+                                    <div class="item-inner">
+                                        <div class="item-title capitalize">{{#if displayName }}{{ displayName }}{{else}}
+                                            {{phoneNumbers[0].number}}{{/if}}</div>
+                                    </div>
+                                </a>
+                            </div>
+                        </li>
+                        {{/each}}
+                    </ul>
+                </div>
+                {{else}}
+                {{/each}}
+            </div>
+            <div class="block searchbar-not-found">
+                <div class="block-inner">Nothing found</div>
+            </div>
+        </div>
+    </div>
+</template>
+<style>
+</style>
+<script>
+    export default {
+        data: function () {
+            return {
+                contacts: null,
+            }
+        },
+        methods: {
+            addVisitor: function (name, id,key) {
+                var router = this.$router;
+                console.log(this.contacts[key][id]);
+                var phone = this.contacts[key][id].phoneNumbers[0].number;
+                var p = phone.replace(/(\+6)|[-\s\(\)]+/gm,'');
+                router.back('/add-visitor/'+name+'/'+p,{force: true});
+            },
+        },
+        on: {
+            pageInit: function () {
+                var self = this;
+                var $$ = this.$$;
+                var app = this.$app;
+                var searchbar;
+                var listIndex;
+                navigator.contactsPhoneNumbers.list(function (c) {
+                    var data = {};
+                    data['#'] = [];
+                    var cs = c.sort(function (a, b) {
+                        a = a.displayName.toLowerCase();
+                        b = b.displayName.toLowerCase();
+
+                        return a < b ? -1 : a > b ? 1 : 0;
+                    });
+                    for (var i = 0; i < cs.length; i++) {
+                        if (cs[i].displayName.length > 0) {
+                            var k = cs[i].displayName.toString();
+                            var n = k.charAt(0).toLowerCase();
+                            if (/([A-Za-z])/.test(n)) {
+                                if (data[n] == null)
+                                    data[n] = [];
+                                data[n].push(cs[i]);
+                            } else {
+                                data["#"].push(cs[i])
+                            }
+                        } else {
+                            data["#"].push(cs[i])
+                        }
+
+                    }
+                    self.$setState({
+                        contacts: data
+                    });
+                    listIndex = app.listIndex.create({
+                        // ".list-index" element
+                        el: '.list-index',
+                        // List el where to look indexes and scroll for
+                        listEl: '.contactsList',
+                        // Generate indexes automatically based on ".list-group-title" and ".item-divider"
+                        indexes: 'auto',
+                        // Scroll list on indexes click and touchmove
+                        scrollList: true,
+                        // Enable bubble label when swiping over indexes
+                        label: true,
+                    });
+
+                    searchbar = app.searchbar.create({
+                        el: '.searchContacts',
+                        searchContainer: '.contactsList',
+                        searchIn: '.item-title',
+
+                    });
+                }, function (error) {
+                    app.dialog.alert(error);
+                });
+            }
+        }
+
+    }
+</script>

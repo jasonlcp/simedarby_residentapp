@@ -1,0 +1,188 @@
+<template>
+    <div class="page">
+        <div class="navbar">
+            <div class="navbar-inner sliding">
+                <div class="left">
+                    <a href="#"  class="back link">
+                        <i class="icon icon-back"></i>
+                        <span class="if-not-md">Back</span>
+                    </a>
+                </div>
+                <div class="center">
+                    Bill Details
+                </div>
+            </div>
+        </div>
+        {{#bill}}
+        {{#js_if "this.status != 'S'"}}
+        <div class="toolbar toolbar-bottom auto-height">
+            <div class="block">
+                <a href="/pay-bills/{{id}}" id="pay-bill" class="button button-raised button-round button-fill ">Pay Bill</a>
+            </div>
+        </div>
+        {{/js_if}}
+        {{/bill}}
+        <div class="page-content">
+            <div class="list no-hairlines-md">
+                {{#bill}}
+                <ul class="list media-list">
+                    <li class="item-content">
+                        <div class="item-inner">
+                            <div class="item-title-row">
+                                <div class="item-title">Bill Total</div>
+                                <div class="item-after">
+                                    {{amount}}
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="item-content">
+                        <div class="item-inner total-after">
+                            <div class="item-title-row">
+                                <div class="item-title">Amount Paid</div>
+                                <div class="item-after">
+                                    {{paid_amount}}
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="item-content">
+                        <div class="item-inner">
+                            <div class="item-title-row">
+                                <div class="item-title">Amount Due</div>
+                                <div class="item-after">
+                                    {{remainder}}
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                <div class="block">
+                    <div class="card">
+                        <div class="card-header">
+                            Payment
+                        </div>
+                        <div class="card-content">
+                            <div class="list media-list">
+                                <ul>
+                                    {{#each payment_set}}
+                                    <li>
+                                        <a href="#" class="item-content">
+                                            <div class="item-media"><i class="icon fas fa-file-invoice-dollar"></i>
+                                            </div>
+                                            <div class="item-inner">
+                                                <div class="item-title-row">
+                                                    <div class="item-title">Inv-{{../id}}-{{js "this.@index + 1"}}</div>
+                                                    <div class="item-after">
+                                                        <span class="badge color-orange">{{paymentStatus status}}</span>
+                                                        {{payment_date}}
+                                                    </div>
+                                                </div>
+                                                <div class="item-text">
+                                                    RM{{amount}}
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    {{else}}
+                                    <li>
+                                        <a href="#" class="item-content">
+                                            No Pending Bills.
+                                        </a>
+                                    </li>
+                                    {{/each}}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {{/bill}}
+            </div>
+        </div>
+    </div>
+</template>
+<style scoped>
+    .auto-height {
+        --f7-toolbar-height: 100px;
+
+    }
+
+    .total-after::after {
+        content: '';
+        position: absolute;
+        background-color: black;
+        display: block;
+        z-index: 15;
+        top: auto;
+        right: auto;
+        bottom: 0;
+        left: 0;
+        height: 2px;
+        width: 100%;
+        transform-origin: 50% 100%;
+        transform: scaleY(calc(1 / 1));
+        transform: scaleY(calc(1 / var(--f7-device-pixel-ratio)));
+    }
+
+    .auto-height~* {
+        --f7-page-toolbar-bottom-offset: 100px;
+    }
+
+    .item-content .item-link {
+        height: var(--f7-input-height);
+    }
+
+    .item-content .item-link .item-after {
+        padding-left: 0px;
+        margin-left: 0px;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    .badge {
+        margin-right: 10px;
+    }
+
+    .item-media {
+        padding-top: 26px;
+    }
+
+    .fas {
+        font-style: normal;
+        font-size: 45px;
+        line-height: 1;
+        letter-spacing: normal;
+        text-transform: none;
+        display: inline-block;
+        white-space: nowrap;
+        word-wrap: normal;
+        direction: ltr;
+        -webkit-font-smoothing: antialiased;
+        text-rendering: optimizeLegibility;
+        -moz-osx-font-smoothing: grayscale;
+        -moz-font-feature-settings: "liga=1";
+        -moz-font-feature-settings: "liga";
+        font-feature-settings: "liga";
+        text-align: center;
+
+    }
+</style>
+<script>
+    export default {
+        data: function () {
+            return {
+                bill: null
+            }
+        },
+        on: {
+            pageBeforeIn: function () {
+              
+            },
+            pageInit: function () {
+                var app = this.$app;
+                app.methods.getBill(this.$route.params.id);
+            }
+        }
+
+    }
+</script>

@@ -103,3 +103,20 @@ framework7 generate-assets --ui
 
 Love Framework7? Support project by donating or pledging on patreon:
 https://patreon.com/vladimirkharlampidi
+
+
+## Upload to google playstore
+
+```
+1) $ keytool -genkey -v -keystore simedarbycommunity.keystore -alias simedarbycommunity -keyalg RSA -keysize 2048 -validity 10000
+
+2) Keystore password: simedarbycommunity
+
+3) Name =Yong Heng Meng, Organization Unit =IT, Organization =Simedarby Property Bhd, Location =Petaling Jaya, State =Selangor, Country=MY
+
+4) $ jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore simedarbycommunity.keystore app-release-unsigned.apk simedarbycommunity
+
+5) find ~/Library/Android/sdk/build-tools -name "zipalign"
+
+6)zipalign -v 4 app-release-unsigned.apk simedarbycommunity.apk
+```

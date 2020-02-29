@@ -23,27 +23,22 @@
                 <div class="card">
                     <div class="card-content">
                         <div class="list media-list">
-                            <ul>
-                                {{#each "123"}}
-                                <li class="swipeout">
+                            <ul id="notification-list">
+                                {{#notification}}
+                                <li class="swipeout" data-id="{{id}}">
                                     <div class="swipeout-content">
-                                        <a href="#" class="item-link item-content chevron-center">
-                                            <div class="item-media"><i class="icon f7-icons">email<span
-                                                        class="badge color-red"></span></i></div>
+                                        <a href="{{getUrl type}}{{#js_if "this.type != 'F'"}}{{object_id}}{{/js_if}}" class="item-link item-content chevron-center" data-id="{{id}}" data-read={{is_read}}>
+                                            <div class="item-media"><i class="icon f7-icons">email
+                                                    {{#if is_read }} {{else}} <span class="badge color-red"></span>{{/if}}</i></div>
                                             <div class="item-inner">
                                                 <div class="item-title-row">
-                                                    <div class="item-title">Pending Payment</div>
-                                                    <div class="item-after">17:35</div>
+                                                    <div class="item-title">Notification</div>
+                                                    <div class="item-after">{{created_at}}</div>
                                                 </div>
                                                 <div class="item-text">
-                                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
-                                                    sagittis
-                                                    tellus ut turpis condimentum, ut dignissim lacus tincidunt. Cras
-                                                    dolor
-                                                    metus, ultrices condimentum sodales sit amet, pharetra sodales eros.
-                                                    Phasellus vel felis tellus. Mauris rutrum ligula nec dapibus
-                                                    feugiat. In
-                                                    vel dui laoreet, commodo augue id, pulvinar lacus.
+                                                    {{descriptions}}
+                                                    <br>
+                                                    <br>
                                                 </div>
                                             </div>
                                         </a>
@@ -53,43 +48,7 @@
                                             class="swipeout-delete swipeout-overswipe">Delete</a>
                                     </div>
                                 </li>
-                                {{/each}}
-                                <li>
-                                    <a href="#" class="item-link item-content chevron-center">
-                                        <div class="item-media"><i class="icon f7-icons">email</i></div>
-                                        <div class="item-inner">
-                                            <div class="item-title-row">
-                                                <div class="item-title">Payment Approved</div>
-                                                <div class="item-after">20:24</div>
-                                            </div>
-                                            <div class="item-text">
-                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sagittis
-                                                tellus ut turpis condimentum, ut dignissim lacus tincidunt. Cras dolor
-                                                metus, ultrices condimentum sodales sit amet, pharetra sodales eros.
-                                                Phasellus vel felis tellus. Mauris rutrum ligula nec dapibus feugiat. In
-                                                vel dui laoreet, commodo augue id, pulvinar lacus.
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="item-link item-content chevron-center">
-                                        <div class="item-media"><i class="icon f7-icons">email</i></div>
-                                        <div class="item-inner">
-                                            <div class="item-title-row">
-                                                <div class="item-title">Announcement</div>
-                                                <div class="item-after">20:24</div>
-                                            </div>
-                                            <div class="item-text">
-                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sagittis
-                                                tellus ut turpis condimentum, ut dignissim lacus tincidunt. Cras dolor
-                                                metus, ultrices condimentum sodales sit amet, pharetra sodales eros.
-                                                Phasellus vel felis tellus. Mauris rutrum ligula nec dapibus feugiat. In
-                                                vel dui laoreet, commodo augue id, pulvinar lacus.
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
+                                {{/notification}}
                             </ul>
                         </div>
                     </div>
@@ -105,14 +64,36 @@
 </style>
 <script>
     export default {
+        data: function () {
+            return {
+                notification: null,
+            }
+        },
         on: {
+        
             pageInit: function () {
+                this.$app.methods.getNotification();
                 var app = this.$app;
+                var $$ = this.$$;
                 this.$$(".open-confirm-delete").on('click', function () {
-                    app.dialog.confirm('Are you sure you want to delete all notification?', function () {
-                        app.dialog.alert('Great!');
-                    });
+                    app.dialog.confirm('Are you sure you want to delete all notification?',
+                        function () {
+                            app.methods.deleteAllNotification();
+                            $$('#notification-list').html('');
+                        });
                 });
+                this.$$('.media-list').on('click','a',function(){
+                    var read = $$(this).data('read');
+                    var id = $$(this).data('id');
+                    if(read == "false"){
+                        app.methods.updateNotification(id);
+                    }
+
+                });
+                this.$$("#notification-list").on('swipeout:delete','.swipeout',function(){
+                    app.methods.deleteNotification($$(this).data("id"));
+                });
+                //
             }
         }
 
