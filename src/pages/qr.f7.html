@@ -3,7 +3,7 @@
         <div class="navbar screencap">
             <div class="navbar-inner sliding">
                 <div class="left">
-                    <a href="{{link}}" data-force="true" class="back link">
+                    <a href="{{link}}" data-force="true" class="back link only-click-this">
                         <i class="icon icon-back"></i>
                         <span class="if-not-md">Back</span>
                     </a>
@@ -15,7 +15,14 @@
         </div>
         <div class="toolbar toolbar-bottom auto-height screencap">
             <div class="block">
-                <a href="#" id="schedule_submit" class="ac-5 button button-raised button-round button-fill ">Share</a>
+                <div class="row">
+                    <div class="col">
+                        <a href="#" id="cancel_btn" class="cnc-btn color-gray button button-raised button-round button-fill ">Cancel</a>
+                    </div>
+                    <div class="col">
+                        <a href="#" id="schedule_submit" class="ac-5 button button-raised button-round button-fill ">Share</a>
+                    </div>
+                 </div>
             </div>
         </div>
         <div class="page-content">
@@ -36,6 +43,7 @@
                                 <th classs="label-cell">Visitor's Registration No.</th>
                                 <th class="label-cell">Visit Date</th>
                                 <th class="label-cell">Entry Type</th>
+                                <th class="label-cell">Status</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -47,6 +55,9 @@
                                 <td classs="label-cell">{{visitor_car_plate}}</td>
                                 <td class="label-cell">{{start_date}}</td>
                                 <td class="label-cell">{{entryType entry_type}}</td>
+                                <td class="label-cell stats" data-val="{{status}}">
+                                    {{status}}
+                                </td>
                             </tr>
                             {{/entry}}
                         </tbody>
@@ -89,6 +100,8 @@
                 var self = this;
                 var $$ = this.$$;
                 var app = this.$app;
+                var id = this.$route.params.id;
+                var router = this.$router;
                 this.$app.methods.getEntry(this.$route.params.id, function () {
                     var qr = qrcode(13, "M");
                     console.log(self);
@@ -120,6 +133,21 @@
                         }, 'jpg', 50, 'myScreenShot');
                         $$('.screencap').css("display","block");
                     });
+                });
+                $$('.cnc-btn').on('click',function(){
+                    var k = $$('.stats').data("val");
+                    console.log(k);
+                    if( k == 'Cancelled' || k == 'Expired' ){
+                        app.dialog.alert("This entry is already cancelled or expired! ","Error!");
+                    }else{
+                        app.dialog.confirm('You won\'t be able to undo this.','Are you sure?',function(){
+                            app.methods.updateStatus(id,0 ,function () {
+                                app.dialog.alert("Successfully cancel this entry.","Success",function(){
+                                    $$(".only-click-this").click();
+                                });
+                            });
+                        });
+                    }
                 });
             }
         }

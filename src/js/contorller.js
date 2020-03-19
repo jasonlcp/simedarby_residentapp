@@ -730,6 +730,30 @@ var methods = {
                 }
             });
     },
+    updateStatus: function (id, val, complete) {
+        var user = this.methods.getUser();
+        this.dialog.preloader();
+        var app = this;
+        request.put('entry_schedule/' + id, {
+                'Authorization': 'JWT ' + user.token
+            }, {
+                "is_active": val
+            },
+            function (data) {
+                //setTimeout(function(){ app.dialog.close(); }, 300);
+            },
+            function (xhr, status) {
+                setTimeout(function(){ app.dialog.close(); }, 300);
+                if (xhr.status != 404) {
+                    app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
+                }
+            },
+            function (xhr, status) {
+                setTimeout(function(){ app.dialog.close(); }, 300);
+                complete(xhr, status);
+            }
+        );
+    },
     getEntry: function (id, complete) {
         var user = this.methods.getUser();
         var f7c = this.view.current.router.currentPageEl.f7Component;
@@ -740,6 +764,7 @@ var methods = {
             }, null,
             function (data) {
                 setTimeout(function(){ app.dialog.close(); }, 300);
+                console.log(data);
                 f7c.$setState({
                     entry: data,
                 });
