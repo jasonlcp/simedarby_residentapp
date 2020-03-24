@@ -100,10 +100,14 @@
         var app = this.$app;
         var $$ = this.$$;
         var router = this.$router;
+        var r = this.$route;
         var d;
         this.$app.methods.getTrack(this.$route.params.id, function (data) {
           app.dialog.close();
+   
           d = JSON.parse(data.response);
+          console.log(r.params.id);
+                 console.log(d);
           var dt = app.dataTable.create({
             el: '.dt'
           });

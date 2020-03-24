@@ -62,9 +62,10 @@
                     <span style="float:right; margin-top:-5px;">
                         <a {{#js_if "(parseInt(this.residentlotthroughmodel_set.length) + parseInt(this.requestfamily.length)) < 6"}}
                             href="/add-family/{{id}}" {{else}} data-stop="true" {{/js_if}} class="link checkFamily"
-                            style="margin-right:10px;"><i class="icon f7-icons">add</i></a>
-                        <a class="link sortable-toggle" data-sortable=".st-{{@index}}"><i
-                                class="icon f7-icons">sort_down</i></a>
+                            style=""><i class="icon f7-icons">add</i></a>
+                            <!--margin-right:10px;-->
+                        <!--<a class="link sortable-toggle" data-sortable=".st-{{@index}}"><i
+                                class="icon f7-icons">sort_down</i></a>-->
                     </span>
                     {{/if}}
                     {{/if}}

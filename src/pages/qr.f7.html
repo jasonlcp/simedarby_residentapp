@@ -126,7 +126,7 @@
                                 imageLink = res.filePath;
                                 window.plugins.socialsharing.share(null, null, 'file://' +
                                     imageLink, null);
-
+                                $$('.screencap').css("display","block");
                                 //For iOS
                                 //window.plugins.socialsharing.share(null,   null,imageLink, null)
                             }
@@ -141,7 +141,7 @@
                         app.dialog.alert("This entry is already cancelled or expired! ","Error!");
                     }else{
                         app.dialog.confirm('You won\'t be able to undo this.','Are you sure?',function(){
-                            app.methods.updateStatus(id,0 ,function () {
+                            app.methods.updateStatusV(id,0 ,function () {
                                 app.dialog.alert("Successfully cancel this entry.","Success",function(){
                                     $$(".only-click-this").click();
                                 });

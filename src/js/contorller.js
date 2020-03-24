@@ -730,7 +730,7 @@ var methods = {
                 }
             });
     },
-    updateStatus: function (id, val, complete) {
+    updateStatusV: function (id, val, complete) {
         var user = this.methods.getUser();
         this.dialog.preloader();
         var app = this;
@@ -1140,9 +1140,7 @@ var methods = {
         } else {
             request.get('visitors', {
                     'Authorization': 'JWT ' + user.token
-                }, {
-                    "page": 1
-                },
+                },null,
                 function (data) {
                     setTimeout(function(){ app.dialog.close(); }, 300);
                     if (data.results) {
