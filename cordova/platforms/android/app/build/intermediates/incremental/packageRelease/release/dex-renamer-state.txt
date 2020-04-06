@@ -1,4 +1,4 @@
-#Tue Mar 24 16:56:53 MYT 2020
+#Mon Apr 06 18:09:44 MYT 2020
 base.0=/Users/danielltoidy/Desktop/projects/resident_app/cordova/platforms/android/app/build/intermediates/transforms/dex/release/0
 path.0=classes.dex
 renamed.0=classes.dex
