@@ -1,4 +1,4 @@
-var uri = 'https://simedarbycommunity.com';
+var uri = 'https://simedarbypropertycommunity.com/';
 var sockets = 'https://vmsnodejsweb.azurewebsites.net'
 //var uri = 'http://139.162.60.53';
 //var sockets = 'http://139.162.60.53:3000'
