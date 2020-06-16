@@ -113,6 +113,9 @@
                                 </div>
                             </div>
                         </li>
+                        <div id="extend_date_selection">
+
+                        </div>
                     </ul>
                     <ul>
                         <li>
@@ -289,7 +292,9 @@
                     console.log(val);
                     if (val == 'S') {
                         if (schedule == false) {
-                            $$('#scheduleForm ul.mainform').append(
+                                                    
+                            // $$('#scheduleForm ul.mainform').html(
+                                document.getElementById("extend_date_selection").innerHTML=
                                 '<li class="item-content item-input added">' +
                                 '<div class="item-inner">' +
                                 '<div class="item-title item-label">Valid Until</div>' +
@@ -304,7 +309,7 @@
                                 '<div class="item-input-wrap input-dropdown-wrap">' +
                                 '<a href="#" class="item-link selectdays smart-select">' +
                                 '<div class="item-after"></div>' +
-                                '<select name="days" multiple required>' +
+                                '<select name="days" id="selected_day" multiple required>' +
                                 '<option value="monday" selected data-display-as="Mon">Monday</option>' +
                                 '<option value="tuesday" data-display-as="Tue">Tuesday</option>' +
                                 '<option value="wednesday" data-display-as="Wed">Wednesday</option>' +
@@ -316,8 +321,8 @@
                                 '</a>' +
                                 '</div>' +
                                 '</div>' +
-                                '</li>'
-                            );
+                                '</li>';
+                            // );
                             expCalendarModal = app.calendar.create({
                                 inputEl: '#exp_date',
                                 openIn: 'customModal',
@@ -345,15 +350,28 @@
                                 
                                 d.setValue(day);
                             }
+                            schedule = true;
+                        }else{
+                            document.getElementById("extend_date_selection").style.display = "block";
+                           
                         }
-                        schedule = true;
+                        
                     } else {
                         if (schedule == true) {
-                            expCalendarModal.off('destroy');
-                            expCalendarModal.destroy();
-                            schedule = false;
-                            $$('.added').remove();
+                            // expCalendarModal.off('destroy');
+                            // expCalendarModal.destroy();
+                            // schedule = false;
+                            // $$('.added').remove();
+                            console.log(schedule);
+                            document.getElementById("extend_date_selection").style.display = "none";
+                            app.form.removeFormData('days');
+                            $$("#exp_date").val("")
+                            $$(".selectdays").children('select').val("monday");
+                            $$(".selectdays").find(".item-after").text("Mon");
 
+
+                            expCalendarModal.setValue("");
+                            app.form.removeFormData('endDate');
                         }
                     }
                 });
