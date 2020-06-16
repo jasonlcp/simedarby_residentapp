@@ -1,2 +1,0 @@
-# Referenced at /Users/danielltoidy/Desktop/projects/resident_app/cordova/platforms/android/app/build/intermediates/manifests/full/debug/AndroidManifest.xml:59
--keep class android.support.multidex.MultiDexApplication { <init>(); }

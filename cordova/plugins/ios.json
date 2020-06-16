@@ -8,64 +8,70 @@
   },
   "installed_plugins": {
     "com.darktalker.cordova.screenshot": {
-      "PACKAGE_NAME": "com.framework7.simedarbycommunity"
+      "PACKAGE_NAME": "$(PRODUCT_BUNDLE_IDENTIFIER)"
     },
     "cordova-plugin-camera": {
-      "PACKAGE_NAME": "com.framework7.simedarbycommunity"
+      "PACKAGE_NAME": "$(PRODUCT_BUNDLE_IDENTIFIER)"
     },
     "cordova-plugin-contacts-phonenumbers": {
       "CONTACTS_USAGE_DESCRIPTION": "This app needs contacts access",
-      "PACKAGE_NAME": "com.framework7.simedarbycommunity"
+      "PACKAGE_NAME": "$(PRODUCT_BUNDLE_IDENTIFIER)"
     },
     "cordova-plugin-decimal-keyboard": {
-      "PACKAGE_NAME": "com.framework7.simedarbycommunity"
+      "PACKAGE_NAME": "$(PRODUCT_BUNDLE_IDENTIFIER)"
     },
     "cordova-plugin-device": {
-      "PACKAGE_NAME": "com.framework7.simedarbycommunity"
+      "PACKAGE_NAME": "$(PRODUCT_BUNDLE_IDENTIFIER)"
     },
     "cordova-plugin-file": {
-      "PACKAGE_NAME": "com.framework7.simedarbycommunity"
+      "PACKAGE_NAME": "$(PRODUCT_BUNDLE_IDENTIFIER)"
     },
     "cordova-plugin-inappbrowser": {
-      "PACKAGE_NAME": "com.framework7.simedarbycommunity"
+      "PACKAGE_NAME": "$(PRODUCT_BUNDLE_IDENTIFIER)"
     },
     "cordova-plugin-keyboard": {
-      "PACKAGE_NAME": "com.framework7.simedarbycommunity"
+      "PACKAGE_NAME": "$(PRODUCT_BUNDLE_IDENTIFIER)"
     },
     "cordova-plugin-media": {
       "KEEP_AVAUDIOSESSION_ALWAYS_ACTIVE": "NO",
-      "PACKAGE_NAME": "com.framework7.simedarbycommunity"
+      "PACKAGE_NAME": "$(PRODUCT_BUNDLE_IDENTIFIER)"
     },
     "cordova-plugin-safariviewcontroller": {
-      "PACKAGE_NAME": "com.framework7.simedarbycommunity"
+      "PACKAGE_NAME": "$(PRODUCT_BUNDLE_IDENTIFIER)"
     },
     "cordova-plugin-splashscreen": {
-      "PACKAGE_NAME": "com.framework7.simedarbycommunity"
+      "PACKAGE_NAME": "$(PRODUCT_BUNDLE_IDENTIFIER)"
     },
     "cordova-plugin-statusbar": {
-      "PACKAGE_NAME": "com.framework7.simedarbycommunity"
+      "PACKAGE_NAME": "$(PRODUCT_BUNDLE_IDENTIFIER)"
     },
     "cordova-plugin-vibration": {
-      "PACKAGE_NAME": "com.framework7.simedarbycommunity"
+      "PACKAGE_NAME": "$(PRODUCT_BUNDLE_IDENTIFIER)"
     },
     "cordova-plugin-whitelist": {
-      "PACKAGE_NAME": "com.framework7.simedarbycommunity"
+      "PACKAGE_NAME": "$(PRODUCT_BUNDLE_IDENTIFIER)"
     },
     "cordova-plugin-wkwebview-engine": {
-      "PACKAGE_NAME": "com.framework7.simedarbycommunity"
+      "PACKAGE_NAME": "$(PRODUCT_BUNDLE_IDENTIFIER)"
     },
     "cordova-plugin-x-socialsharing": {
       "PHOTO_LIBRARY_ADD_USAGE_DESCRIPTION": "This app requires photo library access to function properly.",
       "PHOTO_LIBRARY_USAGE_DESCRIPTION": "This app requires photo library access to function properly.",
-      "PACKAGE_NAME": "com.framework7.simedarbycommunity"
+      "PACKAGE_NAME": "$(PRODUCT_BUNDLE_IDENTIFIER)"
     },
     "phonegap-plugin-push": {
-      "PACKAGE_NAME": "com.framework7.simedarbycommunity"
+      "PACKAGE_NAME": "$(PRODUCT_BUNDLE_IDENTIFIER)"
     }
   },
   "dependent_plugins": {
     "es6-promise-plugin": {
-      "PACKAGE_NAME": "com.framework7.simedarbycommunity"
+      "PACKAGE_NAME": "$(PRODUCT_BUNDLE_IDENTIFIER)"
+    },
+    "cordova-support-google-services": {
+      "PACKAGE_NAME": "$(PRODUCT_BUNDLE_IDENTIFIER)"
+    },
+    "phonegap-plugin-multidex": {
+      "PACKAGE_NAME": "$(PRODUCT_BUNDLE_IDENTIFIER)"
     }
   }
 }

@@ -105,10 +105,11 @@ var methods = {
             function (data) {
                 setTimeout(function(){ app.dialog.close(); }, 300);
                 app.dialog.alert("successfully registered your account.", "Success!",function(){
-                    f7c.$router.back("/login/", {
-                        force: true
-                    });
+                 
 
+                });
+                f7c.$router.back("/login/", {
+                    force: true
                 });
             },
             function (xhr, status) {
@@ -832,7 +833,7 @@ var methods = {
                 for (var res in response) {
                     f7c.$$("div[for=" + res + "]").html(response[res]);
                 }
-
+                
             } else {
                 app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
             }
