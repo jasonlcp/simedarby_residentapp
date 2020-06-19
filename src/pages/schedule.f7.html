@@ -244,6 +244,8 @@
                 var today = new Date();
                 $$("#schedule_submit").on("click", function () {
                     var data = app.form.convertToData('#scheduleForm');
+                    data['days'] = JSON.stringify(data['days'] )
+                    console.log('schedule: ' + JSON.stringify(data));
                     app.methods.postEntry(data);
                     app.form.removeFormData('selectedLot');
                     app.form.removeFormData('entryVal');
@@ -310,13 +312,13 @@
                                 '<a href="#" class="item-link selectdays smart-select">' +
                                 '<div class="item-after"></div>' +
                                 '<select name="days" id="selected_day" multiple required>' +
-                                '<option value="monday" selected data-display-as="Mon">Monday</option>' +
-                                '<option value="tuesday" data-display-as="Tue">Tuesday</option>' +
-                                '<option value="wednesday" data-display-as="Wed">Wednesday</option>' +
-                                '<option value="thursday" data-display-as="Thu">Thursday</option>' +
-                                '<option value="friday" data-display-as="Fri">Friday</option>' +
-                                '<option value="saturday" data-display-as="Sat">Saturday</option>' +
-                                '<option value="sunday" data-display-as="Sun">Sunday</option>' +
+                                '<option value="0" selected data-display-as="Mon">Monday</option>' +
+                                '<option value="1" data-display-as="Tue">Tuesday</option>' +
+                                '<option value="2" data-display-as="Wed">Wednesday</option>' +
+                                '<option value="3" data-display-as="Thu">Thursday</option>' +
+                                '<option value="4" data-display-as="Fri">Friday</option>' +
+                                '<option value="5" data-display-as="Sat">Saturday</option>' +
+                                '<option value="6" data-display-as="Sun">Sunday</option>' +
                                 '</select>' +
                                 '</a>' +
                                 '</div>' +
