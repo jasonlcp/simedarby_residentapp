@@ -78,6 +78,7 @@
                 $$('#login-screen').on('submit', function (e) {
                     e.preventDefault();
                     var formData = app.form.convertToData('#login-screen');
+                    console.log(formData)
                     request.post('login', null, formData,
                         function (data) {
                             app.form.storeFormData('auth', data);

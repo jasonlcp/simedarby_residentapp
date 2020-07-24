@@ -101,6 +101,7 @@ var methods = {
         var f7c = this.view.current.router.currentPageEl.f7Component;
         var app = this;
         this.dialog.preloader();
+        
         request.post('resident_request', null, data,
             function (data) {
                 setTimeout(function(){ app.dialog.close(); }, 300);

@@ -46,6 +46,7 @@ var app = new Framework7({
   on: {
     init: function () {
       var f7 = this;
+
       mainView = f7.views.create('.view-main');
       this.form.removeFormData('selectedLot');
       this.form.removeFormData('entryVal');
@@ -71,9 +72,10 @@ var app = new Framework7({
           });
 
           push.on('registration', function (data) {
-            // data.registrationId
-              var old_id =f7.form.getFormData(reg_id); 
-              var old_device_id = f7.form.getFormData(device_id);
+              // data.registrationId
+              console.log('register: ' + JSON.stringify(data));
+              var old_id =f7.form.getFormData('reg_id'); 
+              var old_device_id = f7.form.getFormData('device_id');
               if( old_id != data.registrationId){
                 f7.form.storeFormData('reg_id', data.registrationId);
               }
@@ -86,12 +88,12 @@ var app = new Framework7({
           });
 
           push.on('notification', function (data) {
-            console.log(data);
+            console.log('notification: ' + data);
             //alert("Title:" + data.title + " Message:" + data.message);
           });
 
           push.on('error', function (e) {
-            console.log(e.message)
+            console.log('error: ' +e.message)
           });
         });
         document.addEventListener("resume", onResume, false);
@@ -132,6 +134,7 @@ var app = new Framework7({
       }
 
       sck.on('visitor_arrive', function (data) {
+        app.methods.getNotificationCount();
         navigator.vibrate(500);
         var notificationCallbackOnClose = app.notification.create({
           icon: '<i class="icon f7-icons">person_round</i>',
@@ -143,7 +146,8 @@ var app = new Framework7({
           on: {
             close: function () {
               mainView.router.navigate('/arrival/' + data.track_id);
-              //app.dialog.alert('Notification closed');
+              console.log(data);
+                app.methods.updateNotification('id'+data.track_id);
             },
           },
         });
