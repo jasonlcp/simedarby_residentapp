@@ -40,7 +40,7 @@
                 </div>
            
 
-                <div class="card-content">
+                <div class="card-content" >
                     <center>
                     <table>
                         <thead>
@@ -73,7 +73,7 @@
 
                   </center>
                 </div>
-                <div class="card-footer" style="text-align: center;">
+                <div class="card-footer adv" style="text-align: center;display:none;">
                    
                         <text class="adv" style="color:black;padding:5px 0;display:none;width:100%"><b style="font-weight:600;font-size:0.6rem"> Powered By</b><br>LCP Buildsoft Technology (M) Sdn Bhd</text>
                     
@@ -131,36 +131,61 @@
                         var imageLink;
                        
                         $$('.screencap').css("display","none");
-                                $$('.adv').css("display","block");
+                        $$('.adv').css("display","block");
+                        $$('.page-content').addClass( "padding-top-none" );
+                        $$('.card-content').addClass( "full_height" );
+                                
+     
 
-                                $$('.page-content').addClass( "padding-top-none" );
+
+                        
 
                         console.log('Calling from CapturePhoto');
-                        navigator.screenshot.save(function (error, res) {
-                            if (error) {
-                                console.error(error);
-                            } else {
+                        $$('.page-content').scrollTop(0)
+                        setTimeout(function(){ 
 
-                             
+                            navigator.screenshot.save(function (error, res) {
+                                if (error) {
+                                    console.error(error);
+
+                                    $$('.screencap').css("display","block");
+                                    $$('.adv').css("display","none");
+                                    $$('.page-content').removeClass( "padding-top-none" );
+                                    $$('.card-content').removeClass( "full_height" );
+                           
+                                } else {
+
                                 
 
-                                console.log('ok', res
-                                .filePath); //should be path/to/myScreenshot.jpg
-                                //For android
-                                imageLink = res.filePath;
-                                window.plugins.socialsharing.share(null, null, 'file://' +
-                                    imageLink, null);
-                              
-                                //For iOS
-                                //window.plugins.socialsharing.share(null,   null,imageLink, null)
-                            }
-                        }, 'jpg', 50, 'myScreenShot');
+                                    console.log('ok', res
+                                    .filePath); //should be path/to/myScreenshot.jpg
+                                    //For android
+                                    imageLink = res.filePath;
+                                            
+                                
+                                        window.plugins.socialsharing.share(null, null, 'file://' +
+                                        imageLink, function(result){
+                                            $$('.screencap').css("display","block");
+                                            $$('.adv').css("display","none");
+                                            $$('.page-content').removeClass( "padding-top-none" );
+                                            $$('.card-content').removeClass( "full_height" );
+                                        }, function(result){
+                                            $$('.screencap').css("display","block");
+                                            $$('.adv').css("display","none");
+                                            $$('.page-content').removeClass( "padding-top-none" );
+                                            $$('.card-content').removeClass( "full_height" );
+                                        });
+
+                                
+                                    //For iOS
+                                    //window.plugins.socialsharing.share(null,   null,imageLink, null)
+                                }
+                            }, 'jpg', 50, 'myScreenShot');
+                            
+                        }, 500);
+                      
                         
-                        setTimeout(function(){ 
-                            $$('.screencap').css("display","block");
-                                $$('.adv').css("display","none");
-                                $$('.page-content').removeClass( "padding-top-none" );
-                         }, 1000);
+                    
                      
                     });
                 });
