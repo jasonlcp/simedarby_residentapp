@@ -9,8 +9,12 @@
         "parents": {
           "NSContactsUsageDescription": [
             {
+              "xml": "<string>This app needs contacts access</string>",
+              "count": 1
+            },
+            {
               "xml": "<string>This app requires contacts access</string>",
-              "count": 2,
+              "count": 1,
               "mode": "merge",
               "id": "config.xml"
             }
@@ -25,8 +29,12 @@
           ],
           "NSPhotoLibraryUsageDescription": [
             {
+              "xml": "<string>This app requires photo library access to function properly.</string>",
+              "count": 1
+            },
+            {
               "xml": "<string>need photo library access to get pictures from there</string>",
-              "count": 2,
+              "count": 1,
               "mode": "merge",
               "id": "config.xml"
             }
@@ -41,8 +49,12 @@
           ],
           "NSPhotoLibraryAddUsageDescription": [
             {
+              "xml": "<string>This app requires photo library access to function properly.</string>",
+              "count": 1
+            },
+            {
               "xml": "<string>need photo library access to save pictures there</string>",
-              "count": 2,
+              "count": 1,
               "mode": "merge",
               "id": "config.xml"
             }
@@ -50,7 +62,7 @@
           "CFBundleAllowMixedLocalizations": [
             {
               "xml": "<true />",
-              "count": 3
+              "count": 2
             }
           ],
           "UIBackgroundModes": [

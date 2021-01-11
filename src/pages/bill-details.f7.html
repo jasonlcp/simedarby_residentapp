@@ -13,13 +13,18 @@
                 </div>
             </div>
         </div>
+
+
+       
         {{#bill}}
         {{#js_if "this.status != 'S'"}}
-        <div class="toolbar toolbar-bottom auto-height">
-            <div class="block">
-                <a href="/pay-bills/{{id}}" id="pay-bill" class="button button-raised button-round button-fill ">Pay Bill</a>
+            <div id="toolbar" class="toolbar toolbar-bottom auto-height" >
+                    <div class="block">
+                        {% comment %} /pay-bills/{{id}} {% endcomment %}
+                        <a href="#!" id="pay-bill"  class="button button-raised button-round button-fill pay-bill external disabled_btn"  >Checking Payment History...</a>
+                    </div>
             </div>
-        </div>
+          
         {{/js_if}}
         {{/bill}}
         <div class="page-content">
@@ -166,8 +171,17 @@
         text-align: center;
 
     }
+
+    .disabled_btn{
+        background-color:grey !important;
+    }
+
 </style>
 <script>
+import request from '../js/request.js';
+import configsetting from '../js/config.js';
+import Framework7 from 'framework7/framework7.esm.bundle.js';
+
     export default {
         data: function () {
             return {
@@ -175,14 +189,127 @@
             }
         },
         on: {
-            pageBeforeIn: function () {
-              
-            },
+      
             pageInit: function () {
+                var $$ = this.$$;
                 var app = this.$app;
+                var router = this.$router;
+               
                 app.methods.getBill(this.$route.params.id);
-            }
+                var _this=this;
+                console.log(this.bill)
+
+               window.myInterval = setInterval(function(){ 
+                    var bill_data=_this.bill;
+                    
+                    if(bill_data){
+                        console.log(bill_data)
+                        window.clearInterval(window.myInterval);
+                        var user = app.methods.getUser();
+
+                        if(bill_data.status!= 'S'){
+                        
+                        request.get('billplz_invoice/' + bill_data.id, {
+                                        'Authorization': 'JWT ' + user.token
+                                    }, null,
+                                    function (data) {
+                                        console.log(data);
+                                 
+                                        setTimeout(function(){ 
+                                          
+
+                                            $$("#pay-bill").attr("href",data.url)
+                                            $$("#pay-bill").attr("target","_blank");
+                                            $$("#pay-bill").text("PAY BILL");
+                                            $$("#pay-bill").removeClass( "disabled_btn" )
+                                        }, 1500);
+                                    },
+                                    function (xhr, status) {
+                                        if (xhr.status != 404) {
+                                            app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
+                                        }else{
+                                            if(xhr.responseText){
+                                                if(JSON.parse(xhr.responseText).detail=="Not found."){
+                                                 
+
+                                                    var bill_amt=parseInt(bill_data.remainder*100);
+                                                    var email=user.user.email;
+                                                    var name =user.user.first_name +" "+user.user.last_name;
+                                                    var callback_url=configsetting.BASE_URL+"billplz_invoice/update_Billplzz_Invoice/";
+
+
+                                                    var today = new Date();
+                                                    var dd = String(today.getDate()).padStart(2, '0');
+                                                    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+                                                    var yyyy = today.getFullYear();
+
+                                                    today = yyyy + '-' + mm + '-' + dd;
+                                                    console.log(today)
+
+                                                    var form = new FormData();
+                                                    form.append("bill_id", bill_data.id);
+                                                    form.append("amount", bill_amt); //amount : RM 1 = 100
+                                                    form.append("email",email);
+                                                    form.append("name", name);
+                                                    form.append("callback_url", callback_url); //callback url to upate billplz invoice data after payment done
+                                                    form.append("description", 
+                                                                "DATE: "+today+
+                                                                "\nInvoice: INV-"+bill_data.id+
+                                                                "\nBill Type: "+bill_data.bill_type.name+
+                                                                "\nBill: "+bill_data.name+
+                                                                "\nbill_date: "+bill_data.bill_date+
+                                                                "\nAmount: "+bill_data.remainder);
+                                          
+
+                                                    request.post('billplz_invoice/generate_Billplzz_Invoice', {
+                                                            'Authorization': 'JWT ' + user.token
+                                                        }, form,
+                                                        function (response) {
+
+                                                            console.log(response)
+
+                                                            
+                                                            setTimeout(function(){ 
+                                                            
+
+                                                                $$("#pay-bill").attr("href",response.url)
+                                                                $$("#pay-bill").attr("target","_blank");
+                                                                $$("#pay-bill").text("PAY BILL");
+                                                                $$("#pay-bill").removeClass( "disabled_btn" )
+                                                            }, 1500);
+                                                        },
+                                                        function (xhr, status) {
+                                                            if (xhr.status != 404) {
+                                                                app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
+                                                            }
+                                                        },
+                                                        function (xhr, status) {
+                                                            //complete(xhr, status);
+                                                        });
+
+                                                   
+
+                                              
+                                               }
+                                            }
+                                        }
+                                    },
+                                    function (xhr, status) {});
+
+
+                      
+                        }else{
+                            $$("#toolbar").css("display","none");
+                              $$("#pay-bill").text("PAYMENT COMPLETE");
+                        }
+                    
+
+                    }
+                 }, 1000);
+            },
+          
         }
+         
 
     }
 </script>

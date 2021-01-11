@@ -1,0 +1,71 @@
+<template>
+    <div class="page">
+        <div class="navbar">
+            <div class="navbar-inner sliding">
+                <div class="left">
+                    <a href="#" class="back link">
+                        <i class="icon icon-back"></i>
+                        <span class="if-not-md">Back</span>
+                    </a>
+                </div>
+                <div class="center">
+                    Pay Bill Online
+                </div>
+            </div>
+        </div>
+
+   
+        <div class="page-content">
+        <iframe class="external" src="https://www.billplz.com/bills/gvqiqmrm" frameborder="0" id="MyIframe" style="height:100%;width:100%"></iframe>
+       
+        </div>
+    </div>
+</template>
+<style>
+    .auto-height {
+        --f7-toolbar-height: 100px;
+
+    }
+
+    .list textarea.resizable {
+        height: auto;
+    }
+
+    .auto-height~* {
+        --f7-page-toolbar-bottom-offset: 100px;
+    }
+
+    .item-content .item-link {
+        height: var(--f7-input-height);
+    }
+
+    .item-content .item-link .item-after {
+        padding-left: 0px;
+        margin-left: 0px;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+</style>
+<script>
+    export default {
+        data: function () {
+            return {
+                bill: null
+            }
+        },
+        on: {
+            pageBeforeIn: function () {
+                var app = this.$app;
+                app.methods.getBill(this.$route.params.id);
+            },
+            pageInit: function () {
+                var $$ = this.$$;
+                var app = this.$app;
+                console.log(app.view.current.router.currentPageEl.f7Component.bill)
+                
+            },
+          
+        }
+
+    }
+</script>
