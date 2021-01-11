@@ -2,7 +2,7 @@
 
 platform :ios, '10.0'
 
-target 'C:\Users\yeewong\Desktop\Sime Darby Document\simedarby_ResidentApp\resident_app\cordova\platforms\ios\Sime Darby Community' do
-	project 'C:\Users\yeewong\Desktop\Sime Darby Document\simedarby_ResidentApp\resident_app\cordova\platforms\ios\Sime Darby Community.xcodeproj'
+target 'C:\Users\yeewong\Desktop\resident app latest\resident_app\cordova\platforms\ios\Sime Darby Community' do
+	project 'C:\Users\yeewong\Desktop\resident app latest\resident_app\cordova\platforms\ios\Sime Darby Community.xcodeproj'
 	pod 'FirebaseMessaging', '~> 2.0.0'
 end

@@ -117,6 +117,7 @@ var app = new Framework7({
       }
 
       if (f7.methods.getUser()) {
+        console.log(f7.methods.getUser().token)
         mainView.router.navigate('/');
         mainView.router.clearPreviousHistory();
         f7.methods.getUserLot(function (data) {
