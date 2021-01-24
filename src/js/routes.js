@@ -10,7 +10,6 @@ import FamilyListPage from '../pages/family-list.f7.html';
 import NotificationPage from '../pages/notification.f7.html';
 import VisitsPage from '../pages/visits.f7.html';
 import PayBillsPage from '../pages/pay-bills.f7.html';
-import PayBillOnlinePage from '../pages/pay-bill-online.f7.html';
 import QrPage from '../pages/qr.f7.html';
 import AnnouncementPage from '../pages/announcement.f7.html';
 import ArrivalPage from '../pages/arrival.f7.html';
@@ -120,10 +119,7 @@ var routes = [{
     path:'/pay-bills/:id',
     component: PayBillsPage,
   },
-  {
-    path:'/pay-bill-online/:id',
-    component: PayBillOnlinePage,
-  },
+  
   {
     path:'/notification/',
     component:NotificationPage,

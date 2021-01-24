@@ -20,8 +20,8 @@
         {{#js_if "this.status != 'S'"}}
             <div id="toolbar" class="toolbar toolbar-bottom auto-height" >
                     <div class="block">
-                        {% comment %} /pay-bills/{{id}} {% endcomment %}
-                        <a href="#!" id="pay-bill"  class="button button-raised button-round button-fill pay-bill external disabled_btn"  >Checking Payment History...</a>
+                     <!-- /pay-bills/{{id}}--> 
+                        <a href="#!" id="pay-bill"  class="button button-raised button-round button-fill pay-bill external  disabled_btn"  >Checking Payment History...</a>
                     </div>
             </div>
           
@@ -208,98 +208,268 @@ import Framework7 from 'framework7/framework7.esm.bundle.js';
                         var user = app.methods.getUser();
 
                         if(bill_data.status!= 'S'){
-                        
-                        request.get('billplz_invoice/' + bill_data.id, {
-                                        'Authorization': 'JWT ' + user.token
-                                    }, null,
-                                    function (data) {
-                                        console.log(data);
-                                 
-                                        setTimeout(function(){ 
-                                          
 
-                                            $$("#pay-bill").attr("href",data.url)
-                                            $$("#pay-bill").attr("target","_blank");
+                           var manual=bill_data.area.manual_payment;
+                           var online=bill_data.area.online_payment;
+                            
+
+                            if(manual && online){
+
+                                    $$("#pay-bill").attr("href",'#!')
+                                    $$("#pay-bill").removeClass( "external" )
+                                    $$("#pay-bill").text("PAY BILL");
+                                    $$("#pay-bill").removeClass( "disabled_btn" )
+
+                                    $$("#pay-bill").on('click',function(){
+
+                                            app.dialog.create({
+                                                title: 'Make Payment',
+                                                text: 'Please select your payment method',
+                                                buttons: [
+                                                {
+                                                    text: 'Online payment',
+                                                    onClick: function(){
+                                                        console.log('make online payment')
+                                                        app.dialog.preloader();
+
+
+                                                        request.get('billplz_invoice/' + bill_data.id, {
+                                                                'Authorization': 'JWT ' + user.token
+                                                            }, null,
+                                                            function (data) {
+                                                                console.log(data);
+                                                        
+                                                                setTimeout(function(){ 
+                                                                     app.dialog.close();
+
+                                                                    var dynamic_link= '<a href="'+data.url+'" id="pay_online"  class="external" target="_blank"  ></a>';
+
+                                                                    $$(".page-content").append(dynamic_link);
+                                                                    $$("#pay_online").click();
+
+                                                                    $$("#pay_online").remove();
+
+                                                                 
+                                                                }, 1500);
+                                                            },
+                                                            function (xhr, status) {
+                                                                if (xhr.status != 404) {
+                                                                    app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
+                                                                }else{
+                                                                    if(xhr.responseText){
+                                                                        if(JSON.parse(xhr.responseText).detail=="Not found."){
+                                                                        
+
+                                                                            var bill_amt=parseInt(bill_data.remainder*100);
+                                                                            var email=user.user.email;
+                                                                            var name =user.user.first_name +" "+user.user.last_name;
+                                                                            var callback_url=configsetting.uri+"billings_api/billplz_invoice_update/";
+
+
+                                                                            var today = new Date();
+                                                                            var dd = String(today.getDate()).padStart(2, '0');
+                                                                            var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+                                                                            var yyyy = today.getFullYear();
+
+                                                                            today = yyyy + '-' + mm + '-' + dd;
+                                                                            console.log(today)
+
+                                                                            var form = new FormData();
+                                                                            form.append("bill_id", bill_data.id);
+                                                                            form.append("amount", bill_amt); //amount : RM 1 = 100
+                                                                            form.append("email",email);
+                                                                            form.append("name", name);
+                                                                            form.append("callback_url", callback_url); //callback url to upate billplz invoice data after payment done
+                                                                            form.append("description", 
+                                                                                        "DATE: "+today+
+                                                                                        "\nInvoice: INV-"+bill_data.id+
+                                                                                        "\nBill Type: "+bill_data.bill_type.name+
+                                                                                        "\nBill: "+bill_data.name+
+                                                                                        "\nbill_date: "+bill_data.bill_date+
+                                                                                        "\nAmount: "+bill_data.remainder);
+                                                                
+
+                                                                            request.post('billplz_invoice/generate_Billplzz_Invoice', {
+                                                                                    'Authorization': 'JWT ' + user.token
+                                                                                }, form,
+                                                                                function (response) {
+
+                                                                                    console.log(response)
+
+                                                                                    
+                                                                                  setTimeout(function(){ 
+                                                                                            app.dialog.close();
+
+                                                                                        var dynamic_link= '<a href="'+data.url+'" id="pay_online"  class="external" target="_blank"  ></a>';
+
+                                                                                        $$(".page-content").append(dynamic_link);
+                                                                                        $$("#pay_online").click();
+
+                                                                                        $$("#pay_online").remove();
+
+                                                                                        
+                                                                                    }, 1500);
+                                                                                },
+                                                                                function (xhr, status) {
+                                                                                    if (xhr.status != 404) {
+                                                                                        app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
+                                                                                    }
+                                                                                },
+                                                                                function (xhr, status) {
+                                                                                    //complete(xhr, status);
+                                                                                });
+
+                                                                        
+
+                                                                    
+                                                                    }
+                                                                    }
+                                                                }
+                                                            },
+                                                            function (xhr, status) {});
+
+
+                                                    }
+                                                },
+                                                {
+                                                    text: 'Uplaod Receipt',
+                                                    onClick: function(){
+                                                       
+                                                    var dynamic_link= '<a href="/pay-bills/'+bill_data.id+'" id="pay_manual"    ></a>';
+
+                                                    $$(".page-content").append(dynamic_link);
+                                                    $$("#pay_manual").click();
+
+                                                    $$("#pay_manual").remove();
+
+                                                    }
+                                                },
+                                              
+                                                ],
+                                                verticalButtons: true,
+                                            }).open();
+                                    })
+
+                            
+
+
+                            }else{
+                                if(online){
+                                    request.get('billplz_invoice/' + bill_data.id, {
+                                            'Authorization': 'JWT ' + user.token
+                                        }, null,
+                                        function (data) {
+                                            console.log(data);
+                                    
+                                            setTimeout(function(){ 
+                                            
+
+                                                $$("#pay-bill").attr("href",data.url)
+                                                $$("#pay-bill").attr("target","_blank");
+                                                $$("#pay-bill").text("PAY BILL");
+                                                $$("#pay-bill").removeClass( "disabled_btn" )
+                                            }, 1500);
+                                        },
+                                        function (xhr, status) {
+                                            if (xhr.status != 404) {
+                                                app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
+                                            }else{
+                                                if(xhr.responseText){
+                                                    if(JSON.parse(xhr.responseText).detail=="Not found."){
+                                                    
+
+                                                        var bill_amt=parseInt(bill_data.remainder*100);
+                                                        var email=user.user.email;
+                                                        var name =user.user.first_name +" "+user.user.last_name;
+                                                        var callback_url=configsetting.uri+"billings_api/billplz_invoice_update/";
+
+
+                                                        var today = new Date();
+                                                        var dd = String(today.getDate()).padStart(2, '0');
+                                                        var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+                                                        var yyyy = today.getFullYear();
+
+                                                        today = yyyy + '-' + mm + '-' + dd;
+                                                        console.log(today)
+
+                                                        var form = new FormData();
+                                                        form.append("bill_id", bill_data.id);
+                                                        form.append("amount", bill_amt); //amount : RM 1 = 100
+                                                        form.append("email",email);
+                                                        form.append("name", name);
+                                                        form.append("callback_url", callback_url); //callback url to upate billplz invoice data after payment done
+                                                        form.append("description", 
+                                                                    "DATE: "+today+
+                                                                    "\nInvoice: INV-"+bill_data.id+
+                                                                    "\nBill Type: "+bill_data.bill_type.name+
+                                                                    "\nBill: "+bill_data.name+
+                                                                    "\nbill_date: "+bill_data.bill_date+
+                                                                    "\nAmount: "+bill_data.remainder);
+                                            
+
+                                                        request.post('billplz_invoice/generate_Billplzz_Invoice', {
+                                                                'Authorization': 'JWT ' + user.token
+                                                            }, form,
+                                                            function (response) {
+
+                                                                console.log(response)
+
+                                                                
+                                                                setTimeout(function(){ 
+                                                                
+                                                                    $$("#pay-bill").attr("href",response.url)
+                                                                    $$("#pay-bill").attr("target","_blank");
+                                                                    $$("#pay-bill").text("PAY BILL");
+                                                                    $$("#pay-bill").removeClass( "disabled_btn" )
+                                                                
+                                                                    
+                                                                }, 1500);
+                                                            },
+                                                            function (xhr, status) {
+                                                                if (xhr.status != 404) {
+                                                                    app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
+                                                                }
+                                                            },
+                                                            function (xhr, status) {
+                                                                //complete(xhr, status);
+                                                            });
+
+                                                    
+
+                                                
+                                                }
+                                                }
+                                            }
+                                        },
+                                        function (xhr, status) {});
+
+
+
+                                }else if(manual){
+                                        setTimeout(function(){ 
+                                            $$("#pay-bill").attr("href",'/pay-bills/'+bill_data.id)
+
+                                            $$("#pay-bill").removeClass( "external" )
                                             $$("#pay-bill").text("PAY BILL");
                                             $$("#pay-bill").removeClass( "disabled_btn" )
                                         }, 1500);
-                                    },
-                                    function (xhr, status) {
-                                        if (xhr.status != 404) {
-                                            app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
-                                        }else{
-                                            if(xhr.responseText){
-                                                if(JSON.parse(xhr.responseText).detail=="Not found."){
-                                                 
+                                }else{
+                                    console.log("payment lock")
+                                    $$("#pay-bill").attr("href",'#!')
+                                    $$("#pay-bill").removeClass( "external" )
 
-                                                    var bill_amt=parseInt(bill_data.remainder*100);
-                                                    var email=user.user.email;
-                                                    var name =user.user.first_name +" "+user.user.last_name;
-                                                    var callback_url=configsetting.BASE_URL+"billplz_invoice/update_Billplzz_Invoice/";
+                                    $$("#pay-bill").text("PAYMENT LOCK!");
+                                }
 
+                         
 
-                                                    var today = new Date();
-                                                    var dd = String(today.getDate()).padStart(2, '0');
-                                                    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-                                                    var yyyy = today.getFullYear();
+                            }
 
-                                                    today = yyyy + '-' + mm + '-' + dd;
-                                                    console.log(today)
-
-                                                    var form = new FormData();
-                                                    form.append("bill_id", bill_data.id);
-                                                    form.append("amount", bill_amt); //amount : RM 1 = 100
-                                                    form.append("email",email);
-                                                    form.append("name", name);
-                                                    form.append("callback_url", callback_url); //callback url to upate billplz invoice data after payment done
-                                                    form.append("description", 
-                                                                "DATE: "+today+
-                                                                "\nInvoice: INV-"+bill_data.id+
-                                                                "\nBill Type: "+bill_data.bill_type.name+
-                                                                "\nBill: "+bill_data.name+
-                                                                "\nbill_date: "+bill_data.bill_date+
-                                                                "\nAmount: "+bill_data.remainder);
-                                          
-
-                                                    request.post('billplz_invoice/generate_Billplzz_Invoice', {
-                                                            'Authorization': 'JWT ' + user.token
-                                                        }, form,
-                                                        function (response) {
-
-                                                            console.log(response)
-
-                                                            
-                                                            setTimeout(function(){ 
-                                                            
-
-                                                                $$("#pay-bill").attr("href",response.url)
-                                                                $$("#pay-bill").attr("target","_blank");
-                                                                $$("#pay-bill").text("PAY BILL");
-                                                                $$("#pay-bill").removeClass( "disabled_btn" )
-                                                            }, 1500);
-                                                        },
-                                                        function (xhr, status) {
-                                                            if (xhr.status != 404) {
-                                                                app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
-                                                            }
-                                                        },
-                                                        function (xhr, status) {
-                                                            //complete(xhr, status);
-                                                        });
-
-                                                   
-
-                                              
-                                               }
-                                            }
-                                        }
-                                    },
-                                    function (xhr, status) {});
-
-
+                            
                       
                         }else{
-                            $$("#toolbar").css("display","none");
+                            console.log("payment complete")
+                           $$("#pay-bill").attr("href",'#!')
                               $$("#pay-bill").text("PAYMENT COMPLETE");
                         }
                     
