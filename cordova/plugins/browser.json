@@ -57,6 +57,12 @@
     },
     "phonegap-plugin-push": {
       "PACKAGE_NAME": "com.framework7.simedarbycommunity"
+    },
+    "cordova-custom-config": {
+      "PACKAGE_NAME": "com.framework7.simedarbycommunity"
+    },
+    "cordova-plugin-android-permissions": {
+      "PACKAGE_NAME": "com.framework7.simedarbycommunity"
     }
   },
   "dependent_plugins": {

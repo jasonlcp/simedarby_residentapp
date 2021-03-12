@@ -375,6 +375,14 @@ module.exports = [
         "clobbers": [
             "PushNotification"
         ]
+    },
+    {
+        "file": "plugins/cordova-plugin-android-permissions/www/permissions-dummy.js",
+        "id": "cordova-plugin-android-permissions.Permissions",
+        "pluginId": "cordova-plugin-android-permissions",
+        "clobbers": [
+            "cordova.plugins.permissions"
+        ]
     }
 ];
 module.exports.metadata = 
@@ -397,7 +405,9 @@ module.exports.metadata =
     "es6-promise-plugin": "4.2.2",
     "cordova-plugin-x-socialsharing": "5.6.0",
     "cordova-plugin-decimal-keyboard": "1.1.0",
-    "phonegap-plugin-push": "2.3.0"
+    "phonegap-plugin-push": "2.3.0",
+    "cordova-custom-config": "5.1.0",
+    "cordova-plugin-android-permissions": "1.1.2"
 }
 // BOTTOM OF METADATA
 });
