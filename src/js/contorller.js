@@ -941,6 +941,7 @@ var methods = {
                 "finish": 1,
             },
             function (data) {
+                console.log(data)
                 f7c.$setState({
                     bill: data,
                 });
@@ -1104,6 +1105,8 @@ var methods = {
             },
             function (xhr, status) {});
     },
+    
+    
     getVisitors: function (complete) {
         var user = this.methods.getUser();
         var f7c = this.view.current.router.currentPageEl.f7Component;

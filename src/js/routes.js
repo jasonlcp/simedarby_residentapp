@@ -119,6 +119,7 @@ var routes = [{
     path:'/pay-bills/:id',
     component: PayBillsPage,
   },
+  
   {
     path:'/notification/',
     component:NotificationPage,

@@ -31,7 +31,13 @@
     {{/visitor}}
     <div class="page-content">
       <div class="text-center">
-        <h5>Your visitor has arrived!</h5>
+      {{#visitor}}
+        {{#js_if "this.status == 'AOS'"}}
+          <h5>Your visitor has left!</h5>
+          {{else}}
+            <h5>Your visitor has arrived!</h5>
+        {{/js_if}}
+      {{/visitor}}
         <div class="swiper-container">
           <div class="swiper-wrapper">
             {{#visitor}}

@@ -56,6 +56,9 @@
                                                     </div>
                                                 </div>
                                                 <div class="item-subtitle">
+                                                    {{name}}
+                                                </div>
+                                                <div class="item-subtitle">
                                                     {{bill_type.name}}
                                                     
                                                 </div>
@@ -156,6 +159,8 @@
                 var $$ = this.$$;
                 var self = this;
                 var app = this.$app;
+ 
+
                 $$('.smart-select').on('smartselect:close', function () {
                     var d = $$('[name="house"]').val();
                     console.log(d)

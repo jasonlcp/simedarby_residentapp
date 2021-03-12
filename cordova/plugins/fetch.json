@@ -2,7 +2,7 @@
   "cordova-plugin-statusbar": {
     "source": {
       "type": "registry",
-      "id": "cordova-plugin-statusbar@2.4.2"
+      "id": "cordova-plugin-statusbar@^2.4.3"
     },
     "is_top_level": true,
     "variables": {}
@@ -26,7 +26,7 @@
   "cordova-plugin-wkwebview-engine": {
     "source": {
       "type": "registry",
-      "id": "cordova-plugin-wkwebview-engine"
+      "id": "cordova-plugin-wkwebview-engine@^1.2.1"
     },
     "is_top_level": true,
     "variables": {}
@@ -34,7 +34,7 @@
   "cordova-plugin-device": {
     "source": {
       "type": "registry",
-      "id": "cordova-plugin-device"
+      "id": "cordova-plugin-device@^2.0.3"
     },
     "is_top_level": true,
     "variables": {}
@@ -164,6 +164,22 @@
       "id": "phonegap-plugin-multidex@~1.0.0"
     },
     "is_top_level": false,
+    "variables": {}
+  },
+  "cordova-custom-config": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-custom-config"
+    },
+    "is_top_level": true,
+    "variables": {}
+  },
+  "cordova-plugin-android-permissions": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-android-permissions"
+    },
+    "is_top_level": true,
     "variables": {}
   }
 }
