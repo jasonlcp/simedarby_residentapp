@@ -75,7 +75,8 @@
       "cordova-plugin-android-permissions": {}
     },
     "platforms": [
-      "browser"
+      "browser",
+      "android"
     ]
   },
   "devDependencies": {
