@@ -30,6 +30,7 @@ import RegisterPage from '../pages/register.f7.html';
 import FaqPage from '../pages/faq.f7.html';
 var routes = [{
     path: '/',
+    
     component: HomePage,
   },
   {

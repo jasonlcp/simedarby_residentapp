@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "77973643141",
+    "firebase_url": "https://simedarbycommunity.firebaseio.com",
+    "project_id": "simedarbycommunity",
+    "storage_bucket": "simedarbycommunity.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:77973643141:android:137cacb941504a7f362eec",
+        "android_client_info": {
+          "package_name": "com.framework7.simedarbycommunity"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "77973643141-klt6sr6lh5f15plv8gpiomrffd2rr126.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAEESCm1V_w5_7Me9JZcSz2itTxtwTRp38"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "77973643141-klt6sr6lh5f15plv8gpiomrffd2rr126.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "77973643141-ueqe87hs5evmubomdckibeb1ga1et4ts.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.framework7.simedarbycommunity"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
