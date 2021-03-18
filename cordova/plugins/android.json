@@ -10,6 +10,12 @@
     "com.darktalker.cordova.screenshot": {
       "PACKAGE_NAME": "com.framework7.simedarbycommunity"
     },
+    "cordova-custom-config": {
+      "PACKAGE_NAME": "com.framework7.simedarbycommunity"
+    },
+    "cordova-plugin-android-permissions": {
+      "PACKAGE_NAME": "com.framework7.simedarbycommunity"
+    },
     "cordova-plugin-camera": {
       "ANDROID_SUPPORT_V4_VERSION": "27.+",
       "PACKAGE_NAME": "com.framework7.simedarbycommunity"

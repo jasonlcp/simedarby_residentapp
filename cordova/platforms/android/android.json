@@ -76,6 +76,10 @@
               "count": 1
             },
             {
+              "xml": "<feature name=\"Permissions\"><param name=\"android-package\" value=\"com.android.plugins.Permissions\" /></feature>",
+              "count": 1
+            },
+            {
               "xml": "<feature name=\"Camera\"><param name=\"android-package\" value=\"org.apache.cordova.camera.CameraLauncher\" /></feature>",
               "count": 1
             },
@@ -228,6 +232,12 @@
     "com.darktalker.cordova.screenshot": {
       "PACKAGE_NAME": "com.framework7.simedarbycommunity"
     },
+    "cordova-custom-config": {
+      "PACKAGE_NAME": "com.framework7.simedarbycommunity"
+    },
+    "cordova-plugin-android-permissions": {
+      "PACKAGE_NAME": "com.framework7.simedarbycommunity"
+    },
     "cordova-plugin-camera": {
       "ANDROID_SUPPORT_V4_VERSION": "27.+",
       "PACKAGE_NAME": "com.framework7.simedarbycommunity"
@@ -298,6 +308,14 @@
       "pluginId": "com.darktalker.cordova.screenshot",
       "merges": [
         "navigator.screenshot"
+      ]
+    },
+    {
+      "id": "cordova-plugin-android-permissions.Permissions",
+      "file": "plugins/cordova-plugin-android-permissions/www/permissions.js",
+      "pluginId": "cordova-plugin-android-permissions",
+      "clobbers": [
+        "cordova.plugins.permissions"
       ]
     },
     {
@@ -611,6 +629,8 @@
   ],
   "plugin_metadata": {
     "com.darktalker.cordova.screenshot": "0.1.6",
+    "cordova-custom-config": "5.1.0",
+    "cordova-plugin-android-permissions": "1.1.2",
     "cordova-plugin-camera": "4.1.0",
     "cordova-plugin-contacts-phonenumbers": "0.0.12",
     "cordova-plugin-decimal-keyboard": "1.1.0",

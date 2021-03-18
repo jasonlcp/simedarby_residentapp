@@ -1,1 +1,13 @@
-{"background_color":"#FFF","display":"standalone","name":"Sime Darby Community","short_name":"Sime Darby Community","version":"com.framework7.simedarbycommunity","description":"A sample Apache Cordova application that responds to the deviceready event.","author":"Apache Cordova Team","icons":[],"orientation":"portrait","start_url":"index.html","theme_color":"#f04e23","gcm_sender_id":"996231231186"}
+{
+  "background_color": "#FFF",
+  "display": "standalone",
+  "name": "Sime Darby Community",
+  "short_name": "Sime Darby Community",
+  "version": "com.framework7.simedarbycommunity",
+  "description": "A sample Apache Cordova application that responds to the deviceready event.",
+  "author": "Apache Cordova Team",
+  "icons": [],
+  "orientation": "portrait",
+  "start_url": "index.html",
+  "theme_color": "#f04e23"
+}

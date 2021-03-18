@@ -941,6 +941,7 @@ var methods = {
                 "finish": 1,
             },
             function (data) {
+                console.log(data)
                 f7c.$setState({
                     bill: data,
                 });

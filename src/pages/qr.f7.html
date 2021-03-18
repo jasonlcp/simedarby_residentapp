@@ -14,8 +14,12 @@
             </div>
         </div>
         <div class="toolbar toolbar-bottom auto-height screencap">
-            <div class="block">
-                <div class="row">
+          
+            <div class="block ">
+               
+                <div class="row ">
+                   
+
                     <div class="col">
                         <a href="#" id="cancel_btn" class="cnc-btn color-gray button button-raised button-round button-fill ">Cancel</a>
                     </div>
@@ -32,37 +36,48 @@
 
 
                     </div>
+
                 </div>
-                <div class="card-content">
+           
+
+                <div class="card-content" >
+                    <center>
                     <table>
                         <thead>
                             <tr>
-                                <th class="label-cell">Area</th>
-                                <th class="label-cell">House No.</th>
-                                <th class="label-cell">Visitor's Name</th>
-                                <th classs="label-cell">Visitor's Registration No.</th>
-                                <th class="label-cell">Visit Date</th>
-                                <th class="label-cell">Entry Type</th>
-                                <th class="label-cell">Status</th>
+                                <th class="label-cell" style="min-height:40px">Area</th>
+                                <th class="label-cell"  style="min-height:40px">House No.</th>
+                                <th class="label-cell" style="min-height:40px">Visitor's Name</th>
+                                <th classs="label-cell" style="min-height:40px">Visitor's Registration No.</th>
+                                <th class="label-cell" style="min-height:40px">Visit Date</th>
+                                <th class="label-cell" style="min-height:40px">Entry Type</th>
+                                <th class="label-cell" style= "min-height:40px">Status</th>
                             </tr>
                         </thead>
                         <tbody>
                             {{#entry}}
-                            <tr>
-                                <td class="label-cell">{{area_name}}</td>
-                                <td class="label-cell">{{lot_name}}, {{street_name}}</td>
-                                <td class="label-cell">{{visitor_name}}</td>
-                                <td classs="label-cell">{{visitor_car_plate}}</td>
-                                <td class="label-cell">{{start_date}}</td>
-                                <td class="label-cell">{{entryType entry_type}}</td>
-                                <td class="label-cell stats" data-val="{{status}}">
-                                    {{status}}
+                            <tr >
+                                <td class="label-cell" style="min-height:40px;padding:0 12.5%;"><span style="width:100%;text-align: right;">{{area_name}}</span></td>
+                                <td class="label-cell" style="min-height:40px;padding:0 12.5%;"><span style="width:100%;text-align: right;">{{lot_name}}, {{street_name}}</span></td>
+                                <td class="label-cell" style="min-height:40px;padding:0 12.5%;"><span style="width:100%;text-align: right;">{{visitor_name}}</span></td>
+                                <td class="label-cell" style="min-height:40px;padding:0 12.5%;"><span style="width:100%;text-align: right;">{{visitor_car_plate}}</span></td>
+                                <td class="label-cell" style="min-height:40px;padding:0 12.5%;"><span style="width:100%;text-align: right;">{{start_date}}</span></td>
+                                <td class="label-cell" style="min-height:40px;padding:0 12.5%;"><span style="width:100%;text-align: right;">{{entryType entry_type}}</span></td>
+                                <td class="label-cell stats" style="min-height:40px;padding:0 12.5%;" data-val="{{status}}">
+                                    <span style="width:100%;text-align: right;"> {{status}}
                                 </td>
                             </tr>
                             {{/entry}}
                         </tbody>
                     </table>
+
+                  </center>
                 </div>
+                <div class="card-footer adv" style="text-align: center;display:none;">
+                   
+                        <text class="adv" style="color:black;padding:5px 0;display:none;width:100%"><b style="font-weight:600;font-size:0.6rem"> Powered By</b><br>LCP Buildsoft Technology (M) Sdn Bhd</text>
+                    
+                    </div>
             </div>
             <br>
             <br>
@@ -114,24 +129,64 @@
                     });
                     $$('.ac-5').on('click', function () {
                         var imageLink;
+                       
                         $$('.screencap').css("display","none");
+                        $$('.adv').css("display","block");
+                        $$('.page-content').addClass( "padding-top-none" );
+                        $$('.card-content').addClass( "full_height" );
+                                
+     
+
+
+                        
+
                         console.log('Calling from CapturePhoto');
-                        navigator.screenshot.save(function (error, res) {
-                            if (error) {
-                                console.error(error);
-                            } else {
-                                console.log('ok', res
-                                .filePath); //should be path/to/myScreenshot.jpg
-                                //For android
-                                imageLink = res.filePath;
-                                window.plugins.socialsharing.share(null, null, 'file://' +
-                                    imageLink, null);
-                                $$('.screencap').css("display","block");
-                                //For iOS
-                                //window.plugins.socialsharing.share(null,   null,imageLink, null)
-                            }
-                        }, 'jpg', 50, 'myScreenShot');
-                        $$('.screencap').css("display","block");
+                        $$('.page-content').scrollTop(0)
+                        setTimeout(function(){ 
+
+                            navigator.screenshot.save(function (error, res) {
+                                if (error) {
+                                    console.error(error);
+
+                                    $$('.screencap').css("display","block");
+                                    $$('.adv').css("display","none");
+                                    $$('.page-content').removeClass( "padding-top-none" );
+                                    $$('.card-content').removeClass( "full_height" );
+                           
+                                } else {
+
+                                
+
+                                    console.log('ok', res
+                                    .filePath); //should be path/to/myScreenshot.jpg
+                                    //For android
+                                    imageLink = res.filePath;
+                                            
+                                
+                                        window.plugins.socialsharing.share(null, null, 'file://' +
+                                        imageLink, function(result){
+                                            $$('.screencap').css("display","block");
+                                            $$('.adv').css("display","none");
+                                            $$('.page-content').removeClass( "padding-top-none" );
+                                            $$('.card-content').removeClass( "full_height" );
+                                        }, function(result){
+                                            $$('.screencap').css("display","block");
+                                            $$('.adv').css("display","none");
+                                            $$('.page-content').removeClass( "padding-top-none" );
+                                            $$('.card-content').removeClass( "full_height" );
+                                        });
+
+                                
+                                    //For iOS
+                                    //window.plugins.socialsharing.share(null,   null,imageLink, null)
+                                }
+                            }, 'jpg', 50, 'myScreenShot');
+                            
+                        }, 500);
+                      
+                        
+                    
+                     
                     });
                 });
                 $$('.cnc-btn').on('click',function(){

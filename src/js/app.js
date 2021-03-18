@@ -1,5 +1,5 @@
 import Framework7 from 'framework7/framework7.esm.bundle.js';
-
+import sound_audio from './sound_audio.js'
 // Import F7 Styles
 import 'framework7/css/framework7.bundle.css';
 import Template7 from 'template7';
@@ -46,6 +46,8 @@ var app = new Framework7({
   on: {
     init: function () {
       var f7 = this;
+
+     
 
       mainView = f7.views.create('.view-main');
       this.form.removeFormData('selectedLot');
@@ -96,22 +98,37 @@ var app = new Framework7({
             console.log('error: ' +e.message)
           });
         });
+
+       
+       
         document.addEventListener("resume", onResume, false);
         function onResume() {
+     
+
             setTimeout(function() {
-                    console.log(sck.connected)
-                    if(sck.connected == false){
-                      f7.methods.getUserLot(function (data) {
-                        var d = JSON.parse(data.response);
-                        console.log(d);
-                        sck.emit('user', {
-                          id: d.user.id,
-                          role: 'resident',
-                          lot: d.lot
-                        });
-                      });
-                    }
-                }, 0);
+            
+              if(  app.view.current.router.url.includes("/bill-details/")){
+                  mainView.router.navigate(app.view.current.router.url, {
+                    ignoreCache  : true,
+                    reloadCurrent : true
+                  });
+              }else{
+                console.log(sck.connected)
+                if(sck.connected == false){
+                  f7.methods.getUserLot(function (data) {
+                    var d = JSON.parse(data.response);
+                    console.log(d);
+                    sck.emit('user', {
+                      id: d.user.id,
+                      role: 'resident',
+                      lot: d.lot
+                    });
+                  });
+                }
+              }
+
+                   
+                }, 300);
         }
 
       }
@@ -134,9 +151,57 @@ var app = new Framework7({
         mainView.router.clearPreviousHistory();
       }
 
+
+      sck.on('visitor_out', function (data) {
+        app.methods.getNotificationCount();
+
+        navigator.vibrate(500);
+
+        var notification_sound =sound_audio.sound_out;
+
+        notification_sound.play();
+  
+        var notificationCallbackOnClose = app.notification.create({
+          icon: '<i class="icon f7-icons">person_round</i>',
+          title: "your visitor has left!",
+          titleRightText: 'now',
+          subtitle: data.title,
+          text: 'Click here to close',
+          closeOnClick: true,
+          on: {
+            close: function () {
+            
+              console.log(data);
+              mainView.router.navigate('/arrival/' + data.track_id);
+              app.methods.updateNotification('id'+data.track_id);
+            },
+          },
+        });
+        notificationCallbackOnClose.open();
+      })
+
       sck.on('visitor_arrive', function (data) {
         app.methods.getNotificationCount();
         navigator.vibrate(500);
+
+        var notification_sound =sound_audio.sound_in;
+
+        var loop_sound = null;
+        notification_sound.play();
+        var count =0 ;
+        loop_sound=  setInterval(function () {
+                        
+                      if(count==4){
+                        clearInterval(loop_sound);
+                      }else{
+                        notification_sound.pause();
+                        notification_sound.currentTime = 0;
+                        notification_sound.play();
+                        count ++;
+                      }
+                    
+                      }, 4500);
+        
         var notificationCallbackOnClose = app.notification.create({
           icon: '<i class="icon f7-icons">person_round</i>',
           title: "A visitor has arrived!",
@@ -146,6 +211,7 @@ var app = new Framework7({
           closeOnClick: true,
           on: {
             close: function () {
+              clearInterval(loop_sound);
               mainView.router.navigate('/arrival/' + data.track_id);
               console.log(data);
                 app.methods.updateNotification('id'+data.track_id);
@@ -154,6 +220,9 @@ var app = new Framework7({
         });
         notificationCallbackOnClose.open();
       })
+
+
+
     },
   },
 });
