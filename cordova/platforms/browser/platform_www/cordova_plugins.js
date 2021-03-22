@@ -9,36 +9,6 @@ module.exports = [
         ]
     },
     {
-        "file": "plugins/cordova-plugin-camera/www/CameraConstants.js",
-        "id": "cordova-plugin-camera.Camera",
-        "pluginId": "cordova-plugin-camera",
-        "clobbers": [
-            "Camera"
-        ]
-    },
-    {
-        "file": "plugins/cordova-plugin-camera/www/CameraPopoverOptions.js",
-        "id": "cordova-plugin-camera.CameraPopoverOptions",
-        "pluginId": "cordova-plugin-camera",
-        "clobbers": [
-            "CameraPopoverOptions"
-        ]
-    },
-    {
-        "file": "plugins/cordova-plugin-camera/www/Camera.js",
-        "id": "cordova-plugin-camera.camera",
-        "pluginId": "cordova-plugin-camera",
-        "clobbers": [
-            "navigator.camera"
-        ]
-    },
-    {
-        "file": "plugins/cordova-plugin-camera/src/browser/CameraProxy.js",
-        "id": "cordova-plugin-camera.CameraProxy",
-        "pluginId": "cordova-plugin-camera",
-        "runs": true
-    },
-    {
         "file": "plugins/cordova-plugin-contacts-phonenumbers/www/contactsPhoneNumbers.js",
         "id": "cordova-plugin-contacts-phonenumbers.contactsPhoneNumbers",
         "pluginId": "cordova-plugin-contacts-phonenumbers",
@@ -389,7 +359,6 @@ module.exports.metadata =
 // TOP OF METADATA
 {
     "com.darktalker.cordova.screenshot": "0.1.6",
-    "cordova-plugin-camera": "4.1.0",
     "cordova-plugin-contacts-phonenumbers": "0.0.12",
     "cordova-plugin-device": "2.0.2",
     "cordova-plugin-file": "6.0.1",

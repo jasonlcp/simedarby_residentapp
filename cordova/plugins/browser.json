@@ -10,9 +10,6 @@
     "com.darktalker.cordova.screenshot": {
       "PACKAGE_NAME": "io.framework7.simedarbyelminaresident"
     },
-    "cordova-plugin-camera": {
-      "PACKAGE_NAME": "io.framework7.simedarbyelminaresident"
-    },
     "cordova-plugin-contacts-phonenumbers": {
       "PACKAGE_NAME": "io.framework7.simedarbyelminaresident"
     },
