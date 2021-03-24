@@ -22,6 +22,9 @@
     <feature name="Screenshot">
         <param name="ios-package" value="Screenshot" />
     </feature>
+    <feature name="Camera">
+        <param name="ios-package" value="CDVCamera" />
+    </feature>
     <feature name="ContactsPhoneNumbers">
         <param name="ios-package" value="CDVContactsPhoneNumbers" />
     </feature>
@@ -87,8 +90,11 @@
     <edit-config file="*-Info.plist" mode="merge" target="NSContactsUsageDescription">
         <string>This app requires contacts access to create your visitor contact list</string>
     </edit-config>
+    <edit-config file="*-Info.plist" mode="merge" target="NSCameraUsageDescription">
+        <string>need camera access to take pictures for submit certificate</string>
+    </edit-config>
     <edit-config file="*-Info.plist" mode="merge" target="NSPhotoLibraryUsageDescription">
-        <string>Need photo library access to get pictures when submit payment</string>
+        <string>Need photo library access to get pictures when submit payment receipt</string>
     </edit-config>
     <edit-config file="*-Info.plist" mode="merge" target="NSPhotoLibraryAddUsageDescription">
         <string>Need photo library access to save pictures</string>
@@ -132,6 +138,7 @@
     <preference name="PageLength" value="0" />
     <preference name="PaginationBreakingMode" value="page" />
     <preference name="PaginationMode" value="unpaginated" />
+    <preference name="CameraUsesGeolocation" value="false" />
     <preference name="KeepAVAudioSessionAlwaysActive" value="NO" />
     <preference name="StatusBarStyle" value="lightcontent" />
     <preference name="orientation" value="portrait" />

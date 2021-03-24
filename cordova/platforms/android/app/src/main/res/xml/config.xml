@@ -41,6 +41,9 @@
     <feature name="PushNotification">
         <param name="android-package" value="com.adobe.phonegap.push.PushPlugin" />
     </feature>
+    <feature name="Camera">
+        <param name="android-package" value="org.apache.cordova.camera.CameraLauncher" />
+    </feature>
     <feature name="Keyboard">
         <param name="android-package" onload="true" value="org.apache.cordova.labs.keyboard.Keyboard" />
     </feature>
@@ -65,19 +68,13 @@
     <allow-intent href="geo:*" />
     <allow-navigation href="*" />
     <edit-config file="*-Info.plist" mode="merge" target="NSContactsUsageDescription">
-        <string>This app requires contacts access</string>
-    </edit-config>
-    <edit-config file="*-Info.plist" mode="merge" target="NSCameraUsageDescription">
-        <string>need camera access to take pictures</string>
+        <string>This app requires contacts access to create your visitor contact list</string>
     </edit-config>
     <edit-config file="*-Info.plist" mode="merge" target="NSPhotoLibraryUsageDescription">
-        <string>need photo library access to get pictures from there</string>
-    </edit-config>
-    <edit-config file="*-Info.plist" mode="merge" target="NSLocationWhenInUseUsageDescription">
-        <string>need location access to find things nearby</string>
+        <string>Need photo library access to get pictures when submit payment receipt</string>
     </edit-config>
     <edit-config file="*-Info.plist" mode="merge" target="NSPhotoLibraryAddUsageDescription">
-        <string>need photo library access to save pictures there</string>
+        <string>Need photo library access to save pictures</string>
     </edit-config>
     <allow-intent href="market:*" />
     <splash density="land-hdpi" src="res/screen/android/drawable-hdpi/screen.png" />

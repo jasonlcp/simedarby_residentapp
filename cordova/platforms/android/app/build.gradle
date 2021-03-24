@@ -301,6 +301,7 @@ dependencies {
     implementation "com.android.support:support-v13:27.+"
     implementation "me.leolin:ShortcutBadger:1.1.17@aar"
     implementation "com.google.firebase:firebase-messaging:17.0.+"
+    implementation "com.android.support:support-v4:27.+"
     // SUB-PROJECT DEPENDENCIES END
 }
 

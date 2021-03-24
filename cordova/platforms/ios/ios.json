@@ -19,13 +19,21 @@
               "id": "config.xml"
             }
           ],
+          "NSCameraUsageDescription": [
+            {
+              "xml": "<string>need camera access to take pictures for submit certificate</string>",
+              "count": 1,
+              "mode": "merge",
+              "id": "config.xml"
+            }
+          ],
           "NSPhotoLibraryUsageDescription": [
             {
               "xml": "<string>This app requires photo library access to function properly.</string>",
               "count": 1
             },
             {
-              "xml": "<string>Need photo library access to get pictures when submit payment</string>",
+              "xml": "<string>Need photo library access to get pictures when submit payment receipt</string>",
               "count": 1,
               "mode": "merge",
               "id": "config.xml"
@@ -62,6 +70,14 @@
           "/*": [
             {
               "xml": "<feature name=\"Screenshot\"><param name=\"ios-package\" value=\"Screenshot\" /></feature>",
+              "count": 1
+            },
+            {
+              "xml": "<feature name=\"Camera\"><param name=\"ios-package\" value=\"CDVCamera\" /></feature>",
+              "count": 1
+            },
+            {
+              "xml": "<preference name=\"CameraUsesGeolocation\" value=\"false\" />",
               "count": 1
             },
             {
@@ -171,6 +187,9 @@
     "cordova-plugin-android-permissions": {
       "PACKAGE_NAME": "$(PRODUCT_BUNDLE_IDENTIFIER)"
     },
+    "cordova-plugin-camera": {
+      "PACKAGE_NAME": "$(PRODUCT_BUNDLE_IDENTIFIER)"
+    },
     "cordova-plugin-contacts-phonenumbers": {
       "CONTACTS_USAGE_DESCRIPTION": "This app needs contacts access",
       "PACKAGE_NAME": "$(PRODUCT_BUNDLE_IDENTIFIER)"
@@ -246,6 +265,38 @@
       "pluginId": "cordova-plugin-android-permissions",
       "clobbers": [
         "cordova.plugins.permissions"
+      ]
+    },
+    {
+      "id": "cordova-plugin-camera.Camera",
+      "file": "plugins/cordova-plugin-camera/www/CameraConstants.js",
+      "pluginId": "cordova-plugin-camera",
+      "clobbers": [
+        "Camera"
+      ]
+    },
+    {
+      "id": "cordova-plugin-camera.CameraPopoverOptions",
+      "file": "plugins/cordova-plugin-camera/www/CameraPopoverOptions.js",
+      "pluginId": "cordova-plugin-camera",
+      "clobbers": [
+        "CameraPopoverOptions"
+      ]
+    },
+    {
+      "id": "cordova-plugin-camera.camera",
+      "file": "plugins/cordova-plugin-camera/www/Camera.js",
+      "pluginId": "cordova-plugin-camera",
+      "clobbers": [
+        "navigator.camera"
+      ]
+    },
+    {
+      "id": "cordova-plugin-camera.CameraPopoverHandle",
+      "file": "plugins/cordova-plugin-camera/www/ios/CameraPopoverHandle.js",
+      "pluginId": "cordova-plugin-camera",
+      "clobbers": [
+        "CameraPopoverHandle"
       ]
     },
     {
@@ -553,6 +604,7 @@
     "com.darktalker.cordova.screenshot": "0.1.6",
     "cordova-custom-config": "5.1.0",
     "cordova-plugin-android-permissions": "1.1.2",
+    "cordova-plugin-camera": "4.1.0",
     "cordova-plugin-contacts-phonenumbers": "0.0.12",
     "cordova-plugin-decimal-keyboard": "1.1.0",
     "cordova-plugin-device": "2.0.2",

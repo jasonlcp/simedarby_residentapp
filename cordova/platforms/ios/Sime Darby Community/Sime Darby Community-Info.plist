@@ -63,5 +63,7 @@
     <array>
       <string>remote-notification</string>
     </array>
+    <key>NSCameraUsageDescription</key>
+    <string>need camera access to take pictures for submit certificate</string>
   </dict>
 </plist>
