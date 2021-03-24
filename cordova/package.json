@@ -63,20 +63,21 @@
         "PHOTO_LIBRARY_USAGE_DESCRIPTION": "This app requires photo library access to function properly."
       },
       "com.darktalker.cordova.screenshot": {},
-      "cordova-plugin-camera": {
-        "ANDROID_SUPPORT_V4_VERSION": "27.+"
-      },
       "cordova-plugin-decimal-keyboard": {},
       "phonegap-plugin-push": {
         "ANDROID_SUPPORT_V13_VERSION": "27.+",
         "FCM_VERSION": "17.0.+"
       },
       "cordova-custom-config": {},
-      "cordova-plugin-android-permissions": {}
+      "cordova-plugin-android-permissions": {},
+      "cordova-plugin-camera": {
+        "ANDROID_SUPPORT_V4_VERSION": "27.+"
+      }
     },
     "platforms": [
       "browser",
-      "android"
+      "android",
+      "ios"
     ]
   },
   "devDependencies": {

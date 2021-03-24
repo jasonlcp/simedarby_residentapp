@@ -16,10 +16,6 @@
     "cordova-plugin-android-permissions": {
       "PACKAGE_NAME": "com.framework7.simedarbycommunity"
     },
-    "cordova-plugin-camera": {
-      "ANDROID_SUPPORT_V4_VERSION": "27.+",
-      "PACKAGE_NAME": "com.framework7.simedarbycommunity"
-    },
     "cordova-plugin-contacts-phonenumbers": {
       "PACKAGE_NAME": "com.framework7.simedarbycommunity"
     },
@@ -66,6 +62,10 @@
     "phonegap-plugin-push": {
       "ANDROID_SUPPORT_V13_VERSION": "27.+",
       "FCM_VERSION": "17.0.+",
+      "PACKAGE_NAME": "com.framework7.simedarbycommunity"
+    },
+    "cordova-plugin-camera": {
+      "ANDROID_SUPPORT_V4_VERSION": "27.+",
       "PACKAGE_NAME": "com.framework7.simedarbycommunity"
     }
   },

@@ -9,7 +9,7 @@
         "parents": {
           "NSContactsUsageDescription": [
             {
-              "xml": "<string>This app requires contacts access</string>",
+              "xml": "<string>This app requires contacts access to create your visitor contact list</string>",
               "count": 1,
               "mode": "merge",
               "id": "config.xml"
@@ -25,7 +25,7 @@
           ],
           "NSPhotoLibraryUsageDescription": [
             {
-              "xml": "<string>need photo library access to get pictures from there</string>",
+              "xml": "<string>Need photo library access to get pictures when submit payment receipt</string>",
               "count": 1,
               "mode": "merge",
               "id": "config.xml"
@@ -41,7 +41,7 @@
           ],
           "NSPhotoLibraryAddUsageDescription": [
             {
-              "xml": "<string>need photo library access to save pictures there</string>",
+              "xml": "<string>Need photo library access to save pictures</string>",
               "count": 1,
               "mode": "merge",
               "id": "config.xml"
@@ -77,10 +77,6 @@
             },
             {
               "xml": "<feature name=\"Permissions\"><param name=\"android-package\" value=\"com.android.plugins.Permissions\" /></feature>",
-              "count": 1
-            },
-            {
-              "xml": "<feature name=\"Camera\"><param name=\"android-package\" value=\"org.apache.cordova.camera.CameraLauncher\" /></feature>",
               "count": 1
             },
             {
@@ -125,6 +121,10 @@
             },
             {
               "xml": "<feature name=\"PushNotification\"><param name=\"android-package\" value=\"com.adobe.phonegap.push.PushPlugin\" /></feature>",
+              "count": 1
+            },
+            {
+              "xml": "<feature name=\"Camera\"><param name=\"android-package\" value=\"org.apache.cordova.camera.CameraLauncher\" /></feature>",
               "count": 1
             }
           ]
@@ -238,10 +238,6 @@
     "cordova-plugin-android-permissions": {
       "PACKAGE_NAME": "com.framework7.simedarbycommunity"
     },
-    "cordova-plugin-camera": {
-      "ANDROID_SUPPORT_V4_VERSION": "27.+",
-      "PACKAGE_NAME": "com.framework7.simedarbycommunity"
-    },
     "cordova-plugin-contacts-phonenumbers": {
       "PACKAGE_NAME": "com.framework7.simedarbycommunity"
     },
@@ -298,6 +294,10 @@
       "ANDROID_SUPPORT_V13_VERSION": "27.+",
       "FCM_VERSION": "17.0.+",
       "PACKAGE_NAME": "com.framework7.simedarbycommunity"
+    },
+    "cordova-plugin-camera": {
+      "ANDROID_SUPPORT_V4_VERSION": "27.+",
+      "PACKAGE_NAME": "com.framework7.simedarbycommunity"
     }
   },
   "dependent_plugins": {},
@@ -316,38 +316,6 @@
       "pluginId": "cordova-plugin-android-permissions",
       "clobbers": [
         "cordova.plugins.permissions"
-      ]
-    },
-    {
-      "id": "cordova-plugin-camera.Camera",
-      "file": "plugins/cordova-plugin-camera/www/CameraConstants.js",
-      "pluginId": "cordova-plugin-camera",
-      "clobbers": [
-        "Camera"
-      ]
-    },
-    {
-      "id": "cordova-plugin-camera.CameraPopoverOptions",
-      "file": "plugins/cordova-plugin-camera/www/CameraPopoverOptions.js",
-      "pluginId": "cordova-plugin-camera",
-      "clobbers": [
-        "CameraPopoverOptions"
-      ]
-    },
-    {
-      "id": "cordova-plugin-camera.camera",
-      "file": "plugins/cordova-plugin-camera/www/Camera.js",
-      "pluginId": "cordova-plugin-camera",
-      "clobbers": [
-        "navigator.camera"
-      ]
-    },
-    {
-      "id": "cordova-plugin-camera.CameraPopoverHandle",
-      "file": "plugins/cordova-plugin-camera/www/CameraPopoverHandle.js",
-      "pluginId": "cordova-plugin-camera",
-      "clobbers": [
-        "CameraPopoverHandle"
       ]
     },
     {
@@ -625,13 +593,44 @@
       "clobbers": [
         "PushNotification"
       ]
+    },
+    {
+      "id": "cordova-plugin-camera.Camera",
+      "file": "plugins/cordova-plugin-camera/www/CameraConstants.js",
+      "pluginId": "cordova-plugin-camera",
+      "clobbers": [
+        "Camera"
+      ]
+    },
+    {
+      "id": "cordova-plugin-camera.CameraPopoverOptions",
+      "file": "plugins/cordova-plugin-camera/www/CameraPopoverOptions.js",
+      "pluginId": "cordova-plugin-camera",
+      "clobbers": [
+        "CameraPopoverOptions"
+      ]
+    },
+    {
+      "id": "cordova-plugin-camera.camera",
+      "file": "plugins/cordova-plugin-camera/www/Camera.js",
+      "pluginId": "cordova-plugin-camera",
+      "clobbers": [
+        "navigator.camera"
+      ]
+    },
+    {
+      "id": "cordova-plugin-camera.CameraPopoverHandle",
+      "file": "plugins/cordova-plugin-camera/www/CameraPopoverHandle.js",
+      "pluginId": "cordova-plugin-camera",
+      "clobbers": [
+        "CameraPopoverHandle"
+      ]
     }
   ],
   "plugin_metadata": {
     "com.darktalker.cordova.screenshot": "0.1.6",
     "cordova-custom-config": "5.1.0",
     "cordova-plugin-android-permissions": "1.1.2",
-    "cordova-plugin-camera": "4.1.0",
     "cordova-plugin-contacts-phonenumbers": "0.0.12",
     "cordova-plugin-decimal-keyboard": "1.1.0",
     "cordova-plugin-device": "2.0.2",
@@ -649,6 +648,7 @@
     "cordova-plugin-x-socialsharing": "5.6.0",
     "cordova-support-google-services": "1.3.2",
     "phonegap-plugin-multidex": "1.0.0",
-    "phonegap-plugin-push": "2.3.0"
+    "phonegap-plugin-push": "2.3.0",
+    "cordova-plugin-camera": "4.1.0"
   }
 }
