@@ -9,10 +9,6 @@
         "parents": {
           "NSContactsUsageDescription": [
             {
-              "xml": "<string>This app needs contacts access</string>",
-              "count": 1
-            },
-            {
               "xml": "<string>This app requires contacts access to create your visitor contact list</string>",
               "count": 1,
               "mode": "merge",
@@ -29,10 +25,6 @@
           ],
           "NSPhotoLibraryUsageDescription": [
             {
-              "xml": "<string>This app requires photo library access to function properly.</string>",
-              "count": 1
-            },
-            {
               "xml": "<string>Need photo library access to get pictures when submit payment receipt</string>",
               "count": 1,
               "mode": "merge",
@@ -40,10 +32,6 @@
             }
           ],
           "NSPhotoLibraryAddUsageDescription": [
-            {
-              "xml": "<string>This app requires photo library access to function properly.</string>",
-              "count": 1
-            },
             {
               "xml": "<string>Need photo library access to save pictures</string>",
               "count": 1,
@@ -54,7 +42,7 @@
           "CFBundleAllowMixedLocalizations": [
             {
               "xml": "<true />",
-              "count": 2
+              "count": 6
             }
           ],
           "UIBackgroundModes": [

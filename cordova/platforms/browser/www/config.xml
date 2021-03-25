@@ -19,6 +19,9 @@
     <edit-config file="*-Info.plist" mode="merge" target="NSContactsUsageDescription">
         <string>This app requires contacts access to create your visitor contact list</string>
     </edit-config>
+    <edit-config file="*-Info.plist" mode="merge" target="NSCameraUsageDescription">
+        <string>need camera access to take pictures for submit certificate</string>
+    </edit-config>
     <edit-config file="*-Info.plist" mode="merge" target="NSPhotoLibraryUsageDescription">
         <string>Need photo library access to get pictures when submit payment receipt</string>
     </edit-config>
