@@ -261,6 +261,8 @@ Template7.registerHelper('getUrl', function (val) {
       return '/arrival/';
     case 'A':
       return '/announcement/';
+    case 'B':
+        return '/bill-details/';
     case 'F':
       return '/family-list/';
   }
