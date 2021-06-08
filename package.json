@@ -75,13 +75,16 @@
     "Samsung >= 5"
   ],
   "dependencies": {
+    "android-versions": "^1.7.0",
     "babel-preset-es2015": "^6.24.1",
+    "compare-func": "^2.0.0",
     "connectycube": "^3.7.8",
     "cordova-common": "^4.0.2",
     "cordova-custom-config": "^1.2.1",
     "dom7": "^2.1.3",
     "framework7": "^4.5.2",
     "framework7-icons": "^2.3.1",
+    "node-gyp": "^8.1.0",
     "properties-parser": "^0.3.1",
     "qrcode-generator": "^1.4.4",
     "shelljs": "^0.8.4",
