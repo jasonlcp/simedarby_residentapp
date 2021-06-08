@@ -191,6 +191,7 @@ var methods = {
             }, null,
             function (data) {
                 setTimeout(function(){ app.dialog.close(); }, 300);
+                console.log(data)
                 f7c.$setState({
                     notification: data,
                 });
