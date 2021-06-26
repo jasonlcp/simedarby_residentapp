@@ -32,6 +32,12 @@
                             </div>
                         </li>
                         {{/bill}}
+                        <li class="item-content item-input" style="visibility: hidden;">
+                            <div class="item-inner">
+                                <input id="user_id" type="hidden" name="user_id" value="{{user_id}}">
+                                <input id="user_name" type="hidden" name="user_name" value="{{name}}">
+                            </div>
+                        </li>
                         <li class="item-content item-input item-input-with-error-message">
                             <div class="item-inner">
                                 <div class="item-title item-label">Pay Amount</div>
@@ -123,20 +129,31 @@
 <script>
     export default {
         data: function () {
+            var auth = this.$app.methods.getUser();
+            var username = auth.user.first_name + " " + auth.user.last_name;
+            var userID = auth.user.id
             return {
-                bill: null
+                bill: null,
+                name: username,
+                user_id:userID
             }
         },
         on: {
             pageBeforeIn: function () {
+                
                 var app = this.$app;
                 app.methods.getBill(this.$route.params.id);
+                
+                // $$('#user_id').val(auth.user.id);
+                // $$('#user_name').val(auth.user.first_name + " " + auth.user.last_name);
             },
             pageInit: function () {
                 var $$ = this.$$;
                 var app = this.$app;
                 var f = document.getElementById('paybillform');
+                
                 var bdata;
+                
                 $$('.photo-click').on('click', function () {
                     navigator.camera.getPicture(onSuccess, onFail, {
                         quality: 50,
@@ -158,8 +175,9 @@
                     });
                 });
                 $$('.page').on('click', '#pay_submit', function () {
+                    
                     var Fdata = new FormData(f);
-
+                    console.log(Fdata)
                     if ($$('[name=amount]').val() == '') {
                         app.dialog.alert("Please input an amount", "Error!");
                     } else {
