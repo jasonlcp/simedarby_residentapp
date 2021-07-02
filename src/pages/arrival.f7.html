@@ -29,6 +29,24 @@
     </div>
     {{/js_if}}
     {{/visitor}}
+    {{#visitor}}
+    {{#js_if "this.status == 'OEN'"}}
+    <div class="toolbar toolbar-bottom auto-height">
+      <div class="block">
+        <div class="row">
+          <div class="col-50">
+            <a href="#" data-val="RIR"
+              class="button schedule_submit button-raised button-round button-fill color-red ">Reject</a>
+          </div>
+          <div class="col-50">
+            <a href="#" data-val="AIR"
+              class="button schedule_submit button-raised button-round button-fill color-green ">Approve</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    {{/js_if}}
+    {{/visitor}}
     <div class="page-content">
       <div class="text-center">
       {{#visitor}}

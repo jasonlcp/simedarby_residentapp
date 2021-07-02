@@ -101,6 +101,7 @@
                         </div>
                     </li>
                 </ul>
+                {{#each payment_set}}
                 <div class="block">
                     <div class="card">
                         <div class="card-header">
@@ -109,7 +110,7 @@
                         <div class="card-content">
                             <div class="list media-list">
                                 <ul>
-                                    {{#each payment_set}}
+                                    
                                     <li>
                                         <a href="#" class="item-content">
                                             <div class="item-media"><i class="icon fas fa-file-invoice-dollar"></i>
@@ -132,18 +133,20 @@
                                             </div>
                                         </a>
                                     </li>
-                                    {{else}}
-                                    <li>
+                                    
+                                    <!-- <li>
                                         <a href="#" class="item-content">
                                             No Pending Bills.
                                         </a>
-                                    </li>
-                                    {{/each}}
+                                    </li> -->
+                                   
                                 </ul>
                             </div>
                         </div>
                     </div>
                 </div>
+                {{else}}
+                {{/each}}
                 {{/bill}}
             </div>
         </div>
@@ -240,11 +243,11 @@ import Framework7 from 'framework7/framework7.esm.bundle.js';
                
                 app.methods.getBill(this.$route.params.id);
                 var _this=this;
-                console.log(this.bill)
+                console.log(_this.bill)
 
                window.myInterval = setInterval(function(){ 
                     var bill_data=_this.bill;
-                    
+                    console.log(bill_data)
                     if(bill_data){
                         console.log(bill_data)
                         window.clearInterval(window.myInterval);
@@ -306,6 +309,7 @@ import Framework7 from 'framework7/framework7.esm.bundle.js';
                                                                             var bill_amt=parseInt(bill_data.remainder*100);
                                                                             var email=user.user.email;
                                                                             var name =user.user.first_name +" "+user.user.last_name;
+                                                                            var lot=bill_data.lot.name+","+bill_data.lot.street.name+","+bill_data.lot.street.area.name;
                                                                             var callback_url=configsetting.uri+"billings_api/billplz_invoice_update/";
 
 
@@ -316,7 +320,7 @@ import Framework7 from 'framework7/framework7.esm.bundle.js';
 
                                                                             today = yyyy + '-' + mm + '-' + dd;
                                                                             console.log(today)
-
+                                                                            
                                                                             var form = new FormData();
                                                                             form.append("bill_id", bill_data.id);
                                                                             form.append("amount", bill_amt); //amount : RM 1 = 100
@@ -325,10 +329,11 @@ import Framework7 from 'framework7/framework7.esm.bundle.js';
                                                                             form.append("callback_url", callback_url); //callback url to upate billplz invoice data after payment done
                                                                             form.append("description", 
                                                                                         "DATE: "+today+
-                                                                                        "\nInvoice: INV-"+bill_data.id+
+                                                                                        "\nHouse Lot: "+lot+
+                                                                                        "\nInvoice: "+bill_data.index+
                                                                                         "\nBill Type: "+bill_data.bill_type.name+
                                                                                         "\nBill: "+bill_data.name+
-                                                                                        "\nbill_date: "+bill_data.bill_date+
+                                                                                        "\nDue Date: "+bill_data.bill_date+
                                                                                         "\nAmount: "+bill_data.remainder);
                                                                 
 
@@ -347,7 +352,7 @@ import Framework7 from 'framework7/framework7.esm.bundle.js';
 
                                                                                         $$(".page-content").append(dynamic_link);
                                                                                         $$("#pay_online").click();
-
+                                                                                        $$("#pay-bill").removeClass( "disabled_btn")
                                                                                         $$("#pay_online").remove();
 
                                                                                         
@@ -440,10 +445,10 @@ import Framework7 from 'framework7/framework7.esm.bundle.js';
                                                         form.append("callback_url", callback_url); //callback url to upate billplz invoice data after payment done
                                                         form.append("description", 
                                                                     "DATE: "+today+
-                                                                    "\nInvoice: INV-"+bill_data.id+
+                                                                    "\nInvoice: "+bill_data.index+
                                                                     "\nBill Type: "+bill_data.bill_type.name+
                                                                     "\nBill: "+bill_data.name+
-                                                                    "\nbill_date: "+bill_data.bill_date+
+                                                                    "\nDue Date: "+bill_data.bill_date+
                                                                     "\nAmount: "+bill_data.remainder);
                                             
 

@@ -35,7 +35,7 @@
                                         <select id='lt' name="lot">
                                             {{#each properties}}
                                             {{#unless is_lock}}
-                                            <option value="{{id}}" {{#if is_default}}selected{{/if}}>{{name}},
+                                            <option data-area="{{street.area.visitor_approval}}" value="{{id}}" {{#if is_default}}selected{{/if}}>{{name}},
                                                 {{street.area.name}}</option>
                                             {{/unless}}
                                             {{else}}
@@ -119,7 +119,7 @@
                     </ul>
                     <ul>
                         <li>
-                            <div class="item-content item-input-with-error-message">
+                            <div class="item-content item-input-with-error-message" id="alert_arrival">
                                 <div class="item-inner">
                                     <div class="item-title">Alert me upon arrival</div>
                                     <div class="item-after">
@@ -180,6 +180,10 @@
 
     .item-input-error-message {
         display: block;
+    }
+
+    .visible-alert{
+       visibility: hidden;
     }
 </style>
 <script>
@@ -282,6 +286,14 @@
                 });
                 $$('#lt').on('change',function(){
                     console.log($$(this).val());
+                    console.log($$(this).find(':checked').attr('data-area'));
+                    var area_ev = $$(this).find(':checked').attr('data-area');
+
+                    if(area_ev == "true"){
+                        $$("#alert_arrival").removeClass('visible-alert');
+                    }else{
+                        $$("#alert_arrival").addClass('visible-alert');
+                    }
                     app.form.storeFormData('selectedLot', $$(this).val());
                 });
 
