@@ -40,7 +40,7 @@
             <div id="toolbar" class="toolbar toolbar-bottom auto-height" >
                     <div class="block">
                      <!-- /pay-bills/{{id}}--> 
-                        <a href="#!" id="pay-bill"  class="button button-raised button-round button-fill pay-bill external  disabled_btn"  >Checking Payment History...</a>
+                        <a href="#!" id="pay-bill"  target="_blank" class="button button-raised button-round button-fill pay-bill external  disabled_btn"  >Checking Payment History...</a>
                     </div>
             </div>
           
@@ -53,7 +53,17 @@
                     <li class="item-content">
                         <div class="item-inner">
                             <div class="item-title-row">
-                                <div class="item-title">Title</div>
+                                <div class="item-title text-bold">Invoice No </div>
+                                <div class="item-after">
+                                    {{index}}
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="item-content">
+                        <div class="item-inner">
+                            <div class="item-title-row">
+                                <div class="item-title text-bold">Bill Name</div>
                                 <div class="item-after">
                                     {{name}}
                                 </div>
@@ -63,7 +73,37 @@
                     <li class="item-content">
                         <div class="item-inner">
                             <div class="item-title-row">
-                                <div class="item-title">Bill Total</div>
+                                <div class="item-title text-bold">Bill Type</div>
+                                <div class="item-after">
+                                    {{bill_type.name}}
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="item-content">
+                        <div class="item-inner">
+                            <div class="item-title-row">
+                                <div class="item-title text-bold">Due Date</div>
+                                <div class="item-after">
+                                    {{bill_date}}
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="item-content">
+                        <div class="item-inner">
+                            <div class="item-title-row">
+                                <div class="item-title text-bold">Bill Date</div>
+                                <div class="item-after">
+                                    {{created_at}}
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="item-content">
+                        <div class="item-inner">
+                            <div class="item-title-row">
+                                <div class="item-title text-bold">Bill Total</div>
                                 <div class="item-after">
                                     {{amount}}
                                 </div>
@@ -73,7 +113,7 @@
                     <li class="item-content">
                         <div class="item-inner total-after">
                             <div class="item-title-row">
-                                <div class="item-title">Amount Paid</div>
+                                <div class="item-title text-bold">Amount Paid</div>
                                 <div class="item-after">
                                     {{paid_amount}}
                                 </div>
@@ -83,7 +123,7 @@
                     <li class="item-content">
                         <div class="item-inner total-after">
                             <div class="item-title-row">
-                                <div class="item-title">Amount Due</div>
+                                <div class="item-title text-bold">Amount Due</div>
                                 <div class="item-after">
                                     {{remainder}}
                                 </div>
@@ -93,7 +133,7 @@
                      <li class="item-content">
                         <div class="item-inner ">
                             <div class="item-title-row">
-                                <div class="item-title">Remark:</div>
+                                <div class="item-title text-bold">Remark:</div>
                             </div>
                             <div style="    word-break: break-word;">
                                 {{remark}}
@@ -222,6 +262,10 @@
         background-color:grey !important;
     }
 
+    .text-bold{
+        font-weight: bold;
+    }
+
 </style>
 <script>
 import request from '../js/request.js';
@@ -240,12 +284,19 @@ import Framework7 from 'framework7/framework7.esm.bundle.js';
                 var $$ = this.$$;
                 var app = this.$app;
                 var router = this.$router;
-               
+                var userDetail;
+                var userlot;
+                app.methods.getUserLot(function (data) {
+                    userDetail = JSON.parse(data.response);
+                    userlot = userDetail.lot
+                            });
+                
                 app.methods.getBill(this.$route.params.id);
                 var _this=this;
                 console.log(_this.bill)
 
                window.myInterval = setInterval(function(){ 
+                   console.log(userlot)
                     var bill_data=_this.bill;
                     console.log(bill_data)
                     if(bill_data){
@@ -255,10 +306,10 @@ import Framework7 from 'framework7/framework7.esm.bundle.js';
 
                         if(bill_data.status!= 'S'){
 
-                           var manual=bill_data.area.manual_payment;
-                           var online=bill_data.area.online_payment;
-                            
-
+                           var manual=bill_data.lot.street.area.manual_payment;
+                           var online=bill_data.lot.street.area.online_payment;
+                           var lothouse = bill_data.lot.name+", "+bill_data.lot.street.name+", "+bill_data.lot.street.area.name;
+                           console.log(lothouse);
                             if(manual && online){
 
                                     $$("#pay-bill").attr("href",'#!')
@@ -288,8 +339,8 @@ import Framework7 from 'framework7/framework7.esm.bundle.js';
                                                                 setTimeout(function(){ 
                                                                      app.dialog.close();
 
-                                                                    var dynamic_link= '<a href="'+data.url+'" id="pay_online"  class="external" target="_system"  ></a>';
-
+                                                                    var dynamic_link= '<a href="'+data.url+'" id="pay_online" class="link external" target="_blank" ></a>';
+                                                                    // router.navigate('/');
                                                                     $$(".page-content").append(dynamic_link);
                                                                     $$("#pay_online").click();
 
@@ -309,7 +360,8 @@ import Framework7 from 'framework7/framework7.esm.bundle.js';
                                                                             var bill_amt=parseInt(bill_data.remainder*100);
                                                                             var email=user.user.email;
                                                                             var name =user.user.first_name +" "+user.user.last_name;
-                                                                            var lot=bill_data.lot.name+","+bill_data.lot.street.name+","+bill_data.lot.street.area.name;
+                                                                            var lot = bill_data.lot.name+", "+bill_data.lot.street.name+", "+bill_data.lot.street.area.name;
+                                                                            console.log(lot)
                                                                             var callback_url=configsetting.uri+"billings_api/billplz_invoice_update/";
 
 
@@ -330,9 +382,9 @@ import Framework7 from 'framework7/framework7.esm.bundle.js';
                                                                             form.append("description", 
                                                                                         "DATE: "+today+
                                                                                         "\nHouse Lot: "+lot+
-                                                                                        "\nInvoice: "+bill_data.index+
+                                                                                        "\nInvoice No: "+bill_data.index+
+                                                                                        "\nBill Name: "+bill_data.name+
                                                                                         "\nBill Type: "+bill_data.bill_type.name+
-                                                                                        "\nBill: "+bill_data.name+
                                                                                         "\nDue Date: "+bill_data.bill_date+
                                                                                         "\nAmount: "+bill_data.remainder);
                                                                 
@@ -348,11 +400,10 @@ import Framework7 from 'framework7/framework7.esm.bundle.js';
                                                                                   setTimeout(function(){ 
                                                                                             app.dialog.close();
 
-                                                                                        var dynamic_link= '<a href="'+response.url+'" id="pay_online"  class="external" target="_system"  ></a>';
-
+                                                                                        var dynamic_link= '<a href="'+response.url+'" id="pay_online"  class="link external" target="_blank" ></a>';
                                                                                         $$(".page-content").append(dynamic_link);
                                                                                         $$("#pay_online").click();
-                                                                                        $$("#pay-bill").removeClass( "disabled_btn")
+                                                                                        // $$("#pay-bill").removeClass( "disabled_btn")
                                                                                         $$("#pay_online").remove();
 
                                                                                         
@@ -403,31 +454,11 @@ import Framework7 from 'framework7/framework7.esm.bundle.js';
 
                             }else{
                                 if(online){
-                                    request.get('billplz_invoice/' + bill_data.id, {
-                                            'Authorization': 'JWT ' + user.token
-                                        }, null,
-                                        function (data) {
-                                            console.log(data);
-                                    
-                                            setTimeout(function(){ 
-                                                $$("#pay-bill").attr("href",data.url)
-                                                $$("#pay-bill").text("PAY BILL");
-                                                $$("#pay-bill").removeClass( "disabled_btn" )
-                                            }, 1500);
-                                        },
-                                        function (xhr, status) {
-                                            if (xhr.status != 404) {
-                                                app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
-                                            }else{
-                                                if(xhr.responseText){
-                                                    if(JSON.parse(xhr.responseText).detail=="Not found."){
-                                                    
-
-                                                        var bill_amt=parseInt(bill_data.remainder*100);
+                                    var bill_amt=parseInt(bill_data.remainder*100);
                                                         var email=user.user.email;
                                                         var name =user.user.first_name +" "+user.user.last_name;
                                                         var callback_url=configsetting.uri+"billings_api/billplz_invoice_update/";
-
+                                                        var lot = bill_data.lot.name+", "+bill_data.lot.street.name+", "+bill_data.lot.street.area.name;
 
                                                         var today = new Date();
                                                         var dd = String(today.getDate()).padStart(2, '0');
@@ -445,9 +476,10 @@ import Framework7 from 'framework7/framework7.esm.bundle.js';
                                                         form.append("callback_url", callback_url); //callback url to upate billplz invoice data after payment done
                                                         form.append("description", 
                                                                     "DATE: "+today+
-                                                                    "\nInvoice: "+bill_data.index+
+                                                                    "\nHouse Lot: "+lot+
+                                                                    "\nInvoice No: "+bill_data.index+
+                                                                    "\nBill Name: "+bill_data.name+
                                                                     "\nBill Type: "+bill_data.bill_type.name+
-                                                                    "\nBill: "+bill_data.name+
                                                                     "\nDue Date: "+bill_data.bill_date+
                                                                     "\nAmount: "+bill_data.remainder);
                                             
@@ -467,7 +499,7 @@ import Framework7 from 'framework7/framework7.esm.bundle.js';
                                                                     $$("#pay-bill").removeClass( "disabled_btn" )
                                                                 
                                                                     
-                                                                }, 1500);
+                                                                }, 600);
                                                             },
                                                             function (xhr, status) {
                                                                 if (xhr.status != 404) {
@@ -478,15 +510,14 @@ import Framework7 from 'framework7/framework7.esm.bundle.js';
                                                                 //complete(xhr, status);
                                                             });
 
-                                                    
-
+                                        $$("#pay-bill").on('click',function(){
+                                            setTimeout(function(){ 
+                                                router.navigate('/');
+                                                router.clearPreviousHistory();
+                                            
                                                 
-                                                }
-                                                }
-                                            }
-                                        },
-                                        function (xhr, status) {});
-
+                                            }, 1500);
+                                        });
 
 
                                 }else if(manual){
@@ -513,7 +544,7 @@ import Framework7 from 'framework7/framework7.esm.bundle.js';
                       
                         }else{
                             console.log("payment complete")
-                           $$("#pay-bill").attr("href",'#!')
+                            $$("#pay-bill").attr("href",'#!')
                               $$("#pay-bill").text("PAYMENT COMPLETE");
                         }
                     
@@ -523,6 +554,7 @@ import Framework7 from 'framework7/framework7.esm.bundle.js';
 
                     
                  }, 1000);
+                 
             },
           
         }

@@ -114,17 +114,23 @@
                                                 <div class="item-title">{{index}}</div>
                                                 
                                             </div>
-                                            <div class="item-subtitle" style="color:grey">
-                                                Due Date : {{bill_date}}9
-
-                                            </div>
                                             <div class="item-subtitle">
-                                                {{bill_type.name}}
-
-                                            </div>
-                                            <div class="item-text">
-                                                RM{{amount}}
-                                            </div>
+                                                <span style="font-weight: bold;"> Bill Name :</span>{{name}}
+                                               </div>
+                                               <div class="item-subtitle">
+                                                   <span style="font-weight: bold;">Bill Type :</span> {{bill_type.name}}
+                                               </div>
+                                               <div class="item-subtitle">
+                                                   <span style="font-weight: bold;">Due Date :</span> {{bill_date}}
+   
+                                               </div>
+                                               <div class="item-subtitle" style="color:grey">
+                                                   <span style="font-weight: bold;">Bill Date :</span> {{created_at}}
+  
+                                              </div>
+                                               <div class="item-text">
+                                                   <span style="font-weight: bold;">Total Amount :</span> RM{{amount}}
+                                               </div>
                                         </div>
                                     </a>
                                 </li>
@@ -152,16 +158,20 @@
             </div>
             <div class="list simple-list inset no-hairlines" style="box-shadow: var(--f7-card-box-shadow);">
                 <ul>
+                    {{#property}}
+                    {{#if street.area.visitor_approval}}
                     <li>
+                       
                         <span>Allow Notification</span>
-                        {{#property}}
+                        
                         <label class="toggle" id="disableNotification" data-id="{{id}}">
                             <input type="checkbox" {{#if is_notify}}checked{{/if}}>
                             <span class="toggle-icon"></span>
                         </label>
-                        {{/property}}
+                       
                     </li>
-
+                    {{/if}}
+                    {{/property}}
                     <li>
                         <span>Set as default Property</span>
                         {{#property}}
@@ -177,6 +187,8 @@
                         <h1>Property Settings</h1>
                         <br>
                         <!-- Close Popup -->
+                        {{#property}}
+                        {{#if street.area.visitor_approval}}
                         <h3>
                             <label class="toggle">
                                 <input type="checkbox" checked disabled>
@@ -187,6 +199,8 @@
                         <p>
                         Enable this to receive approval notifications from visits scheduled by your family members.
                         </p>
+                        {{/if}}
+                        {{/property}}
                         <h3>
                             <label class="toggle">
                                 <input type="checkbox" checked disabled>
