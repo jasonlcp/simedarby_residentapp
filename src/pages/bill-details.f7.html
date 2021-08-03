@@ -372,7 +372,7 @@ import Framework7 from 'framework7/framework7.esm.bundle.js';
                                                                             var bill_amt=parseInt(bill_data.remainder*100);
                                                                             var email=user.user.email;
                                                                             var name =user.user.first_name +" "+user.user.last_name;
-                                                                            var lot = bill_data.lot.name+", "+bill_data.lot.street.name+", "+bill_data.lot.street.area.name;
+                                                                            var lot = bill_data.lot.name+", "+bill_data.lot.street.name+", "+bill_data.lot.street.area.code;
                                                                             console.log(lot)
                                                                             var callback_url=configsetting.uri+"billings_api/billplz_invoice_update/";
 
@@ -470,7 +470,7 @@ import Framework7 from 'framework7/framework7.esm.bundle.js';
                                                         var email=user.user.email;
                                                         var name =user.user.first_name +" "+user.user.last_name;
                                                         var callback_url=configsetting.uri+"billings_api/billplz_invoice_update/";
-                                                        var lot = bill_data.lot.name+", "+bill_data.lot.street.name+", "+bill_data.lot.street.area.name;
+                                                        var lot = bill_data.lot.name+", "+bill_data.lot.street.name+", "+bill_data.lot.street.area.code;
 
                                                         var today = new Date();
                                                         var dd = String(today.getDate()).padStart(2, '0');
