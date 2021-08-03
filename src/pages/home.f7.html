@@ -355,7 +355,27 @@
             });
             $$('.locked').attr('href', '');
             if (self.properties ==  null) {
-          
+              var dialog1 = app.dialog.create({
+                        title: 'Server is busy',
+                        text: 'Server is busy at the moment. Please try again later or click on the <b>RETRY</b> button',
+                        buttons: [
+                          {
+                            text: 'RETRY',
+                            onClick: function () {
+                              router.refreshPage('/');
+                              router.clearPreviousHistory();
+                            }
+                          },
+                          // {
+                          //   text: 'Close',
+                          //   onClick: function () {
+                          //       app.dialog.close()
+                          //   }
+                          // }
+                        ]
+                      })
+
+                      dialog1.open();
               $$(".property-wrapper").html('<div class="swiper-slide">' +
                 '<div class="card">' +
                 '<div class="card-content card-content-padding">No properties at the moment.</div>' +

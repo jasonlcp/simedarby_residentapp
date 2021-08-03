@@ -169,7 +169,7 @@ var methods = {
             },
             function (xhr, status) {
                 if (xhr.status != 404) {
-                    app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
+                    // app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
                 }else{
                     f7c.$setState({
                         notificationCount: null,
@@ -320,6 +320,29 @@ var methods = {
                 }
             });
     },
+
+    submitFeedback: function (data, complete) {
+        var user = this.methods.getUser();
+        var f7c = this.view.current.router.currentPageEl.f7Component;
+        var app = this;
+        this.dialog.preloader();
+        request.post('feedback', null, data,
+            function (data) {
+                setTimeout(function(){ app.dialog.close(); }, 300);
+                app.dialog.alert("We will get back to your shortly.","Thank you!");
+            },
+            function (xhr, status) {
+                setTimeout(function(){ app.dialog.close(); }, 300);
+                app.dialog.alert("Please try again.", "Submition Failed! ");
+            },
+            function (xhr, status) {
+                if (xhr.status == 200) {
+                     f7c.$router.back("/", {
+                        force: true
+                    });
+                }
+            });
+    },
     resetPassword: function (data, complete) {
         var user = this.methods.getUser();
         var f7c = this.view.current.router.currentPageEl.f7Component;
@@ -430,7 +453,7 @@ var methods = {
             function (xhr, status) {
                 //setTimeout(function(){ app.dialog.close(); }, 300);
                 if (xhr.status != 404) {
-                    app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
+                    // app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
                 }
             },
             function (xhr, status) {
@@ -460,7 +483,7 @@ var methods = {
             function (xhr, status) {
                 setTimeout(function(){ app.dialog.close(); }, 300);
                 if (xhr.status != 404) {
-                    app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
+                    // app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
                 }
             });
     },
@@ -515,7 +538,7 @@ var methods = {
             function (xhr, status) {
                 setTimeout(function(){ app.dialog.close(); }, 300);
                 if (xhr.status != 404) {
-                    app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
+                    // app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
                 }
             },
             function (xhr, status) {
