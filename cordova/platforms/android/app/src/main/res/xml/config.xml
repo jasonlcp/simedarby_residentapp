@@ -99,6 +99,7 @@
     <edit-config file="app/src/main/AndroidManifest.xml" mode="merge" target="/manifest/application">
         <application android:usesCleartextTraffic="true" />
     </edit-config>
+    <resource-file src="assets/sound/audio.mp3" target="app/src/main/res/raw/audio.mp3" />
     <resource-file src="google-services.json" target="app/google-services.json" />
     <preference name="loglevel" value="DEBUG" />
     <preference name="orientation" value="portrait" />

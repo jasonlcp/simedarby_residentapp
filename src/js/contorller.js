@@ -23,7 +23,7 @@ var methods = {
             },
             function (xhr, status) {
                 if (xhr.status != 404) {
-                    app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
+                    // app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
                 }
 
             },
@@ -41,7 +41,7 @@ var methods = {
             },
             function (xhr, status) {
                 if (xhr.status != 404) {
-                    app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
+                    // app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
                 }else{
                     f7c.$setState({
                         area: null,
@@ -63,7 +63,7 @@ var methods = {
             },
             function (xhr, status) {
                 if (xhr.status != 404) {
-                    app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
+                    // app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
                 }else{
                     f7c.$setState({
                         street: null,
@@ -85,7 +85,7 @@ var methods = {
             },
             function (xhr, status) {
                 if (xhr.status != 404) {
-                    app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
+                    // app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
                 }else{
                     f7c.$setState({
                         lot: null,
@@ -129,7 +129,32 @@ var methods = {
                     //alert(response);
                     //alert(JSON.stringify(xhr));
                     //alert(status);
-                    app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection")
+                    // app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection")
+                    var dialog1 = app.dialog.create({
+                        title: 'Sorry to have you waiting.',
+                        text: '<div>We currently facing high traffic on billing-related action.<br><br>Please try again !<br>Thank you for your patience :) </div>',
+                        buttons: [
+                        // {
+                        //     text: 'RETRY NOW',
+                        //     onClick: function () {
+                        //         clearInterval(myTimer);
+                        //         router.refreshPage('/');
+                                
+                        //     }
+                        // },
+                        {
+                            text: 'Close',
+                            onClick: function () {
+                                clearInterval(myTimer);
+                                app.dialog.close()
+                            }
+                        }
+                        ]
+                    })
+    
+                    dialog1.open();
+                   
+             
                 }
             },
             function (xhr, status) {
@@ -149,7 +174,30 @@ var methods = {
             function () {},
             function (xhr, status) {
                 if (xhr.status != 404) {
-                    app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
+                    // app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
+                    var dialog1 = app.dialog.create({
+                        title: 'Sorry to have you waiting.',
+                        text: '<div>We currently facing high traffic on billing-related action.<br><br>Please try again !<br>Thank you for your patience :) </div>',
+                        buttons: [
+                        // {
+                        //     text: 'RETRY NOW',
+                        //     onClick: function () {
+                        //         clearInterval(myTimer);
+                        //         router.refreshPage('/');
+                                
+                        //     }
+                        // },
+                        {
+                            text: 'Close',
+                            onClick: function () {
+    
+                                app.dialog.close()
+                            }
+                        }
+                        ]
+                    })
+    
+                    dialog1.open();
                 }
             },
             function (xhr, status) {
@@ -168,6 +216,7 @@ var methods = {
                 });
             },
             function (xhr, status) {
+                console.log(xhr)
                 if (xhr.status != 404) {
                     // app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
                 }else{
@@ -199,7 +248,30 @@ var methods = {
             function (xhr, status) {
                 setTimeout(function(){ app.dialog.close(); }, 300);
                 if (xhr.status != 404) {
-                    app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
+                    // app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
+                    // var dialog1 = app.dialog.create({
+                    //     title: 'Server is busy at the moment...',
+                    //     text: '<div id="retry_btn"></div>',
+                    //     buttons: [
+                    //       {
+                    //         text: 'RETRY NOW',
+                    //         onClick: function () {
+                    //             // clearInterval(myTimer);
+                    //             f7c.$router.refreshPage('/');
+                                
+                    //         }
+                    //       },
+                    //       {
+                    //         text: 'Close',
+                    //         onClick: function () {
+                    //             clearInterval(myTimer);
+                    //             app.dialog.close()
+                    //         }
+                    //       }
+                    //     ]
+                    //   })
+
+                    //   dialog1.open();
                 }
             },
             function (xhr, status) {
@@ -217,7 +289,30 @@ var methods = {
             function () {},
             function (xhr, status) {
                 if (xhr.status != 404) {
-                    app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
+                    // app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
+                    var dialog1 = app.dialog.create({
+                        title: 'Sorry to have you waiting.',
+                        text: '<div>We currently facing high traffic on billing-related action.<br><br>Please try again !<br>Thank you for your patience :) </div>',
+                        buttons: [
+                        // {
+                        //     text: 'RETRY NOW',
+                        //     onClick: function () {
+                        //         clearInterval(myTimer);
+                        //         router.refreshPage('/');
+                                
+                        //     }
+                        // },
+                        {
+                            text: 'Close',
+                            onClick: function () {
+    
+                                app.dialog.close()
+                            }
+                        }
+                        ]
+                    })
+    
+                    dialog1.open();
                 }
             },
             function (xhr, status) {
@@ -233,7 +328,31 @@ var methods = {
             function () {},
             function (xhr, status) {
                 if (xhr.status != 404) {
-                    app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
+                    // app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
+
+                    var dialog1 = app.dialog.create({
+                        title: 'Sorry to have you waiting.',
+                        text: '<div>We currently facing high traffic on billing-related action.<br><br>Please try again !<br>Thank you for your patience :) </div>',
+                        buttons: [
+                        // {
+                        //     text: 'RETRY NOW',
+                        //     onClick: function () {
+                        //         clearInterval(myTimer);
+                        //         router.refreshPage('/');
+                                
+                        //     }
+                        // },
+                        {
+                            text: 'Close',
+                            onClick: function () {
+    
+                                app.dialog.close()
+                            }
+                        }
+                        ]
+                    })
+    
+                    dialog1.open();
                 }
             },
             function (xhr, status) {
@@ -249,7 +368,30 @@ var methods = {
             function () {},
             function (xhr, status) {
                 if (xhr.status != 404) {
-                    app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
+                    // app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
+                    var dialog1 = app.dialog.create({
+                        title: 'Sorry to have you waiting.',
+                        text: '<div>We currently facing high traffic on billing-related action.<br><br>Please try again !<br>Thank you for your patience :) </div>',
+                        buttons: [
+                        // {
+                        //     text: 'RETRY NOW',
+                        //     onClick: function () {
+                        //         clearInterval(myTimer);
+                        //         router.refreshPage('/');
+                                
+                        //     }
+                        // },
+                        {
+                            text: 'Close',
+                            onClick: function () {
+    
+                                app.dialog.close()
+                            }
+                        }
+                        ]
+                    })
+    
+                    dialog1.open();
                 }
             },
             function (xhr, status) {
@@ -273,7 +415,7 @@ var methods = {
             function (xhr, status) {
                 setTimeout(function(){ app.dialog.close(); }, 300);
                 if (xhr.status != 404) {
-                    app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
+                    // app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
                 }
             },
             function (xhr, status) {
@@ -291,7 +433,7 @@ var methods = {
             function (data) {},
             function (xhr, status) {
                 if (xhr.status != 404) {
-                    app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
+                    // app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
                 }
             },
             function (xhr, status) {
@@ -329,11 +471,33 @@ var methods = {
         request.post('feedback', null, data,
             function (data) {
                 setTimeout(function(){ app.dialog.close(); }, 300);
-                app.dialog.alert("We will get back to your shortly.","Thank you!");
+                app.dialog.alert(" Our support team will get back to you soon !\nOur office hour is Mon - Fri, 9am - 6pm (Excluding Public Holiday) !","Thanks for your Feedback !");
             },
             function (xhr, status) {
                 setTimeout(function(){ app.dialog.close(); }, 300);
-                app.dialog.alert("Please try again.", "Submition Failed! ");
+                var dialog1 = app.dialog.create({
+                    title: 'Sorry to have you waiting.',
+                    text: '<div>We currently facing high traffic on billing-related action.<br><br>Please try again !<br>Thank you for your patience :) </div>',
+                    buttons: [
+                    // {
+                    //     text: 'RETRY NOW',
+                    //     onClick: function () {
+                    //         clearInterval(myTimer);
+                    //         router.refreshPage('/');
+                            
+                    //     }
+                    // },
+                    {
+                        text: 'Close',
+                        onClick: function () {
+
+                            app.dialog.close()
+                        }
+                    }
+                    ]
+                })
+
+                dialog1.open();
             },
             function (xhr, status) {
                 if (xhr.status == 200) {
@@ -367,7 +531,30 @@ var methods = {
                     }
     
                 } else {
-                    app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection")
+                    // app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection")
+                    var dialog1 = app.dialog.create({
+                        title: 'Sorry to have you waiting.',
+                        text: '<div>We currently facing high traffic on billing-related action.<br><br>Please try again !<br>Thank you for your patience :) </div>',
+                        buttons: [
+                        // {
+                        //     text: 'RETRY NOW',
+                        //     onClick: function () {
+                        //         clearInterval(myTimer);
+                        //         router.refreshPage('/');
+                                
+                        //     }
+                        // },
+                        {
+                            text: 'Close',
+                            onClick: function () {
+    
+                                app.dialog.close()
+                            }
+                        }
+                        ]
+                    })
+    
+                    dialog1.open();
                 }
             },
             function (xhr, status) {
@@ -483,10 +670,34 @@ var methods = {
             function (xhr, status) {
                 setTimeout(function(){ app.dialog.close(); }, 300);
                 if (xhr.status != 404) {
+                    // var dialog1 = app.dialog.create({
+                    //     title: 'Server is busy at the moment...',
+                    //     text: '<div id="retry_btn"></div>',
+                    //     buttons: [
+                    //       {
+                    //         text: 'RETRY NOW',
+                    //         onClick: function () {
+                    //             // clearInterval(myTimer);
+                    //             f7c.$router.refreshPage('/');
+                                
+                    //         }
+                    //       },
+                    //       {
+                    //         text: 'Close',
+                    //         onClick: function () {
+                    //             clearInterval(myTimer);
+                    //             app.dialog.close()
+                    //         }
+                    //       }
+                    //     ]
+                    //   })
+
+                    //   dialog1.open()
                     // app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
                 }
             });
     },
+    
     getProperties: function (complete) {
         var user = this.methods.getUser();
         var f7c = this.view.current.router.currentPageEl.f7Component;
@@ -507,8 +718,52 @@ var methods = {
             },
             function (xhr, status) {
                 //setTimeout(function(){ app.dialog.close(); }, 300);
+                console.log(xhr)
                 if (xhr.status != 404) {
-                    app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
+                    var timeleft = 59;
+                    var count= 0;
+                       
+                    // var myTimer = setInterval(function(){
+                    //         app.dialog.close()
+                    //         count= timeleft - 1;
+                    //         timeleft -= 1;
+                    //         console.log(count)
+                            
+                    //         if(count == 0){
+                    //             clearInterval(myTimer);
+                    //             app.dialog.close()
+                    //             f7c.$router.refreshPage('/');
+                    //         }else{
+                    //         }
+                         
+                    // }, 1000);
+                    
+                        // var dialog1 = app.dialog.create({
+                        //         title: 'Server is busy at the moment...',
+                        //         text: '<div id="retry_btn"></div>',
+                        //         buttons: [
+                        //         //   {
+                        //         //     text: 'RETRY NOW',
+                        //         //     onClick: function () {
+                        //         //         // clearInterval(myTimer);
+                        //         //         f7c.$router.refreshPage('/');
+                                        
+                        //         //     }
+                        //         //   },
+                        //           {
+                        //             text: 'Close',
+                        //             onClick: function () {
+                                       
+                        //                 app.dialog.close()
+                        //             }
+                        //           }
+                        //         ]
+                        //       })
+        
+                        //       dialog1.open()
+                            // }
+                    // app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
+                
                 }
             },
             function (xhr, status) {
@@ -538,7 +793,29 @@ var methods = {
             function (xhr, status) {
                 setTimeout(function(){ app.dialog.close(); }, 300);
                 if (xhr.status != 404) {
-                    // app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
+                    // var dialog1 = app.dialog.create({
+                    //     title: 'Server is busy at the moment...',
+                    //     text: '<div id="retry_btn"></div>',
+                    //     buttons: [
+                    //       {
+                    //         text: 'RETRY NOW',
+                    //         onClick: function () {
+                    //             // clearInterval(myTimer);
+                    //             f7c.$router.refreshPage('/');
+                                
+                    //         }
+                    //       },
+                    //       {
+                    //         text: 'Close',
+                    //         onClick: function () {
+                    //             clearInterval(myTimer);
+                    //             app.dialog.close()
+                    //         }
+                    //       }
+                    //     ]
+                    //   })
+
+                    //   dialog1.open()
                 }
             },
             function (xhr, status) {
@@ -574,8 +851,30 @@ var methods = {
                 }
 
             } else {
-                app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
-                
+                // app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
+                var dialog1 = app.dialog.create({
+                    title: 'Sorry to have you waiting.',
+                    text: '<div>We currently facing high traffic on billing-related action.<br><br>Please try again !<br>Thank you for your patience :) </div>',
+                    buttons: [
+                    // {
+                    //     text: 'RETRY NOW',
+                    //     onClick: function () {
+                    //         clearInterval(myTimer);
+                    //         router.refreshPage('/');
+                            
+                    //     }
+                    // },
+                    {
+                        text: 'Close',
+                        onClick: function () {
+
+                            app.dialog.close()
+                        }
+                    }
+                    ]
+                })
+
+                dialog1.open();
             }
 
         }, function (xhr, status) {})
@@ -602,7 +901,30 @@ var methods = {
                 }
 
             } else {
-                app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
+                // app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
+                var dialog1 = app.dialog.create({
+                    title: 'Sorry to have you waiting.',
+                    text: '<div>We currently facing high traffic on billing-related action.<br><br>Please try again !<br>Thank you for your patience :) </div>',
+                    buttons: [
+                    // {
+                    //     text: 'RETRY NOW',
+                    //     onClick: function () {
+                    //         clearInterval(myTimer);
+                    //         router.refreshPage('/');
+                            
+                    //     }
+                    // },
+                    {
+                        text: 'Close',
+                        onClick: function () {
+
+                            app.dialog.close()
+                        }
+                    }
+                    ]
+                })
+
+                dialog1.open();
             }
 
         }, function (xhr, status) {})
@@ -633,7 +955,29 @@ var methods = {
             function (xhr, status) {
                 setTimeout(function(){ app.dialog.close(); }, 300);
                 if (xhr.status != 404) {
-                    app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
+                    // var dialog1 = app.dialog.create({
+                    //     title: 'Server is busy at the moment...',
+                    //     text: '<div id="retry_btn"></div>',
+                    //     buttons: [
+                    //       {
+                    //         text: 'RETRY NOW',
+                    //         onClick: function () {
+                    //             // clearInterval(myTimer);
+                    //             f7c.$router.refreshPage('/');
+                                
+                    //         }
+                    //       },
+                    //       {
+                    //         text: 'Close',
+                    //         onClick: function () {
+                    //             clearInterval(myTimer);
+                    //             app.dialog.close()
+                    //         }
+                    //       }
+                    //     ]
+                    //   })
+
+                    //   dialog1.open()
                 }
             },
             function (xhr, status) {
@@ -664,7 +1008,30 @@ var methods = {
             },
             function (xhr, status) {
                 if (xhr.status != 404) {
-                    app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
+                    // app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
+                    // var dialog1 = app.dialog.create({
+                    //     title: 'Server is busy at the moment...',
+                    //     text: '<div id="retry_btn"></div>',
+                    //     buttons: [
+                    //       {
+                    //         text: 'RETRY NOW',
+                    //         onClick: function () {
+                    //             // clearInterval(myTimer);
+                    //             f7c.$router.refreshPage('/');
+                                
+                    //         }
+                    //       },
+                    //       {
+                    //         text: 'Close',
+                    //         onClick: function () {
+                    //             clearInterval(myTimer);
+                    //             app.dialog.close()
+                    //         }
+                    //       }
+                    //     ]
+                    //   })
+
+                    //   dialog1.open()
                 }
             },
             function (xhr, status) {
@@ -695,7 +1062,29 @@ var methods = {
             },
             function (xhr, status) {
                 if (xhr.status != 404) {
-                    app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
+                    // var dialog1 = app.dialog.create({
+                    //     title: 'Server is busy at the moment...',
+                    //     text: '<div id="retry_btn"></div>',
+                    //     buttons: [
+                    //       {
+                    //         text: 'RETRY NOW',
+                    //         onClick: function () {
+                    //             // clearInterval(myTimer);
+                    //             f7c.$router.refreshPage('/');
+                                
+                    //         }
+                    //       },
+                    //       {
+                    //         text: 'Close',
+                    //         onClick: function () {
+                    //             clearInterval(myTimer);
+                    //             app.dialog.close()
+                    //         }
+                    //       }
+                    //     ]
+                    //   })
+
+                    //   dialog1.open()
                 }
             },
             function (xhr, status) {
@@ -715,7 +1104,29 @@ var methods = {
             },
             function (xhr, status) {
                 if (xhr.status != 404) {
-                    app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
+                    var dialog1 = app.dialog.create({
+                        title: 'Sorry to have you waiting.',
+                        text: '<div>We currently facing high traffic on billing-related action.<br><br>Please try again !<br>Thank you for your patience :) </div>',
+                        buttons: [
+                        // {
+                        //     text: 'RETRY NOW',
+                        //     onClick: function () {
+                        //         clearInterval(myTimer);
+                        //         router.refreshPage('/');
+                                
+                        //     }
+                        // },
+                        {
+                            text: 'Close',
+                            onClick: function () {
+    
+                                app.dialog.close()
+                            }
+                        }
+                        ]
+                    })
+    
+                    dialog1.open();
                 }
             },
             function (xhr, status) {
@@ -747,7 +1158,30 @@ var methods = {
             function (xhr, status) {
                 setTimeout(function(){ app.dialog.close(); }, 300);
                 if (xhr.status != 404) {
-                    app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
+                    // app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
+                    // var dialog1 = app.dialog.create({
+                    //     title: 'Server is busy at the moment...',
+                    //     text: '<div id="retry_btn"></div>',
+                    //     buttons: [
+                    //       {
+                    //         text: 'RETRY NOW',
+                    //         onClick: function () {
+                    //             // clearInterval(myTimer);
+                    //             f7c.$router.refreshPage('/');
+                                
+                    //         }
+                    //       },
+                    //       {
+                    //         text: 'Close',
+                    //         onClick: function () {
+                    //             clearInterval(myTimer);
+                    //             app.dialog.close()
+                    //         }
+                    //       }
+                    //     ]
+                    //   })
+
+                    //   dialog1.open()
                 }
             },
             function (xhr, status) {
@@ -771,7 +1205,30 @@ var methods = {
             function (xhr, status) {
                 setTimeout(function(){ app.dialog.close(); }, 300);
                 if (xhr.status != 404) {
-                    app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
+                    // app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
+                    var dialog1 = app.dialog.create({
+                        title: 'Sorry to have you waiting.',
+                        text: '<div>We currently facing high traffic on billing-related action.<br><br>Please try again !<br>Thank you for your patience :) </div>',
+                        buttons: [
+                        // {
+                        //     text: 'RETRY NOW',
+                        //     onClick: function () {
+                        //         clearInterval(myTimer);
+                        //         router.refreshPage('/');
+                                
+                        //     }
+                        // },
+                        {
+                            text: 'Close',
+                            onClick: function () {
+    
+                                app.dialog.close()
+                            }
+                        }
+                        ]
+                    })
+    
+                    dialog1.open();
                 }
             },
             function (xhr, status) {
@@ -799,7 +1256,30 @@ var methods = {
             function (xhr, status) {
                 setTimeout(function(){ app.dialog.close(); }, 300);
                 if (xhr.status != 404) {
-                    app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
+                    // app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
+                    // var dialog1 = app.dialog.create({
+                    //     title: 'Server is busy at the moment...',
+                    //     text: '<div id="retry_btn"></div>',
+                    //     buttons: [
+                    //       {
+                    //         text: 'RETRY NOW',
+                    //         onClick: function () {
+                    //             // clearInterval(myTimer);
+                    //             f7c.$router.refreshPage('/');
+                                
+                    //         }
+                    //       },
+                    //       {
+                    //         text: 'Close',
+                    //         onClick: function () {
+                    //             clearInterval(myTimer);
+                    //             app.dialog.close()
+                    //         }
+                    //       }
+                    //     ]
+                    //   })
+
+                    //   dialog1.open()
                 }
             },
             function (xhr, status) {
@@ -828,7 +1308,30 @@ var methods = {
                 }
 
             } else {
-                app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
+                // app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
+                var dialog1 = app.dialog.create({
+                    title: 'Sorry to have you waiting.',
+                    text: '<div>We currently facing high traffic on billing-related action.<br><br>Please try again !<br>Thank you for your patience :) </div>',
+                    buttons: [
+                    // {
+                    //     text: 'RETRY NOW',
+                    //     onClick: function () {
+                    //         clearInterval(myTimer);
+                    //         router.refreshPage('/');
+                            
+                    //     }
+                    // },
+                    {
+                        text: 'Close',
+                        onClick: function () {
+
+                            app.dialog.close()
+                        }
+                    }
+                    ]
+                })
+
+                dialog1.open();
             }
 
         }, function (xhr, status) {
@@ -860,7 +1363,30 @@ var methods = {
                 }
                 
             } else {
-                app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
+            //     app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
+            var dialog1 = app.dialog.create({
+                title: 'Sorry to have you waiting.',
+                text: '<div>We currently facing high traffic on billing-related action.<br><br>Please try again !<br>Thank you for your patience :) </div>',
+                buttons: [
+                // {
+                //     text: 'RETRY NOW',
+                //     onClick: function () {
+                //         clearInterval(myTimer);
+                //         router.refreshPage('/');
+                        
+                //     }
+                // },
+                {
+                    text: 'Close',
+                    onClick: function () {
+
+                        app.dialog.close()
+                    }
+                }
+                ]
+            })
+
+            dialog1.open();
             }
 
         }, function (xhr, status) {
@@ -919,7 +1445,30 @@ var methods = {
             function (xhr, status) {
                 setTimeout(function(){ app.dialog.close(); }, 300);
                 if (xhr.status != 404) {
-                    app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
+                    // app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
+                    var dialog1 = app.dialog.create({
+                        title: 'Sorry to have you waiting.',
+                        text: '<div>We currently facing high traffic on billing-related action.<br><br>Please try again !<br>Thank you for your patience :) </div>',
+                        buttons: [
+                        // {
+                        //     text: 'RETRY NOW',
+                        //     onClick: function () {
+                        //         clearInterval(myTimer);
+                        //         router.refreshPage('/');
+                                
+                        //     }
+                        // },
+                        {
+                            text: 'Close',
+                            onClick: function () {
+    
+                                app.dialog.close()
+                            }
+                        }
+                        ]
+                    })
+    
+                    dialog1.open();
                 }
             },
             function (xhr, status) {
@@ -944,7 +1493,30 @@ var methods = {
             function (xhr, status) {
                 setTimeout(function(){ app.dialog.close(); }, 300);
                 if (xhr.status != 404) {
-                    app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
+                    // app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
+                    // var dialog1 = app.dialog.create({
+                    //     title: 'Server is busy at the moment...',
+                    //     text: '<div id="retry_btn"></div>',
+                    //     buttons: [
+                    //       {
+                    //         text: 'RETRY NOW',
+                    //         onClick: function () {
+                    //             // clearInterval(myTimer);
+                    //             f7c.$router.refreshPage('/');
+                                
+                    //         }
+                    //       },
+                    //       {
+                    //         text: 'Close',
+                    //         onClick: function () {
+                    //             clearInterval(myTimer);
+                    //             app.dialog.close()
+                    //         }
+                    //       }
+                    //     ]
+                    //   })
+
+                    //   dialog1.open()
                 }
             },
             function (xhr, status) {
@@ -974,7 +1546,7 @@ var methods = {
             function (xhr, status) {
                 setTimeout(function(){ app.dialog.close(); }, 300);
                 if (xhr.status != 404) {
-                    app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
+                    // app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
                 }
             },
             function (xhr, status) {
@@ -1000,7 +1572,7 @@ var methods = {
             },
             function (xhr, status) {
                 if (xhr.status != 404) {
-                    app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
+                    // app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
                 }
             },
             function (xhr, status) {
@@ -1021,7 +1593,8 @@ var methods = {
             function (xhr, status) {
                 setTimeout(function(){ app.dialog.close(); }, 300);
                 if (xhr.status != 404) {
-                    app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
+                    // app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
+                     app.dialog.alert("Please try again.", "Payment Process Failed");
                 }
             },
             function (xhr, status) {
@@ -1054,7 +1627,29 @@ var methods = {
             function (xhr, status) {
                 setTimeout(function(){ app.dialog.close(); }, 300);
                 if (xhr.status != 404) {
-                    app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
+                    // var dialog1 = app.dialog.create({
+                    //     title: 'Server is busy at the moment...',
+                    //     text: '<div id="retry_btn"></div>',
+                    //     buttons: [
+                    //       {
+                    //         text: 'RETRY NOW',
+                    //         onClick: function () {
+                    //             // clearInterval(myTimer);
+                    //             f7c.$router.refreshPage('/');
+                                
+                    //         }
+                    //       },
+                    //       {
+                    //         text: 'Close',
+                    //         onClick: function () {
+                    //             clearInterval(myTimer);
+                    //             app.dialog.close()
+                    //         }
+                    //       }
+                    //     ]
+                    //   })
+
+                    //   dialog1.open()
                 }
             },
             function (xhr, status) {});
@@ -1077,7 +1672,30 @@ var methods = {
             },
             function (xhr, status) {
                 if (xhr.status != 404) {
-                    app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
+                    // app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
+                    // var dialog1 = app.dialog.create({
+                    //     title: 'Server is busy at the moment...',
+                    //     text: '<div id="retry_btn"></div>',
+                    //     buttons: [
+                    //       {
+                    //         text: 'RETRY NOW',
+                    //         onClick: function () {
+                    //             // clearInterval(myTimer);
+                    //             f7c.$router.refreshPage('/');
+                                
+                    //         }
+                    //       },
+                    //       {
+                    //         text: 'Close',
+                    //         onClick: function () {
+                    //             clearInterval(myTimer);
+                    //             app.dialog.close()
+                    //         }
+                    //       }
+                    //     ]
+                    //   })
+
+                    //   dialog1.open()
                 }
             },
             function (xhr, status) {});
@@ -1100,7 +1718,30 @@ var methods = {
             },
             function (xhr, status) {
                 if (xhr.status != 404) {
-                    app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
+                    // app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
+                    // var dialog1 = app.dialog.create({
+                    //     title: 'Server is busy at the moment...',
+                    //     text: '<div id="retry_btn"></div>',
+                    //     buttons: [
+                    //       {
+                    //         text: 'RETRY NOW',
+                    //         onClick: function () {
+                    //             // clearInterval(myTimer);
+                    //             f7c.$router.refreshPage('/');
+                                
+                    //         }
+                    //       },
+                    //       {
+                    //         text: 'Close',
+                    //         onClick: function () {
+                    //             clearInterval(myTimer);
+                    //             app.dialog.close()
+                    //         }
+                    //       }
+                    //     ]
+                    //   })
+
+                    //   dialog1.open()
                 }
             },
             function (xhr, status) {});
@@ -1124,7 +1765,29 @@ var methods = {
             function (xhr, status) {
                 setTimeout(function(){ app.dialog.close(); }, 300);
                 if (xhr.status != 404) {
-                    app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
+                    var dialog1 = app.dialog.create({
+                        title: 'Sorry to have you waiting.',
+                        text: '<div>We currently facing high traffic on billing-related action.<br><br>Please try again !<br>Thank you for your patience :) </div>',
+                        buttons: [
+                        // {
+                        //     text: 'RETRY NOW',
+                        //     onClick: function () {
+                        //         clearInterval(myTimer);
+                        //         router.refreshPage('/');
+                                
+                        //     }
+                        // },
+                        {
+                            text: 'Close',
+                            onClick: function () {
+    
+                                app.dialog.close()
+                            }
+                        }
+                        ]
+                    })
+    
+                    dialog1.open();
                 }
             },
             function (xhr, status) {});
@@ -1158,7 +1821,29 @@ var methods = {
                 function (xhr, status) {
                     setTimeout(function(){ app.dialog.close(); }, 300);
                     if (xhr.status != 404) {
-                        app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
+                        // var dialog1 = app.dialog.create({
+                        //     title: 'Server is busy at the moment...',
+                        //     text: '<div id="retry_btn"></div>',
+                        //     buttons: [
+                        //       {
+                        //         text: 'RETRY NOW',
+                        //         onClick: function () {
+                        //             // clearInterval(myTimer);
+                        //             f7c.$router.refreshPage('/');
+                                    
+                        //         }
+                        //       },
+                        //       {
+                        //         text: 'Close',
+                        //         onClick: function () {
+                        //             clearInterval(myTimer);
+                        //             app.dialog.close()
+                        //         }
+                        //       }
+                        //     ]
+                        //   })
+    
+                        //   dialog1.open()
                     }
                 },
                 function (xhr, status) {
@@ -1187,7 +1872,29 @@ var methods = {
                 function (xhr, status) {
                     setTimeout(function(){ app.dialog.close(); }, 300);
                     if (xhr.status != 404) {
-                        app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
+                        // var dialog1 = app.dialog.create({
+                        //     title: 'Server is busy at the moment...',
+                        //     text: '<div id="retry_btn"></div>',
+                        //     buttons: [
+                        //       {
+                        //         text: 'RETRY NOW',
+                        //         onClick: function () {
+                        //             // clearInterval(myTimer);
+                        //             f7c.$router.refreshPage('/');
+                                    
+                        //         }
+                        //       },
+                        //       {
+                        //         text: 'Close',
+                        //         onClick: function () {
+                        //             clearInterval(myTimer);
+                        //             app.dialog.close()
+                        //         }
+                        //       }
+                        //     ]
+                        //   })
+    
+                        //   dialog1.open()
                     }
                 },
                 function (xhr, status) {

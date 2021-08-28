@@ -111,7 +111,7 @@
                         form.append("subject", subject);
                         form.append("user", auth.user.id);
                         form.append("lot", userlot[0].id);
-                        form.append("message", "\nMessage : "+message +"\n\n\nEmail: "+email+"\nLot : "+lot); 
+                        form.append("message", "\nMessage : "+message +"\n\n\nEmail: "+email+"\nLot : "+lot+"\nVersion:"+app.version); 
                         app.methods.submitFeedback(form);
                         // router.navigate('/');
                         // router.clearPreviousHistory();

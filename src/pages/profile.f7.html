@@ -14,15 +14,23 @@
       </div>
     </div>
     <div class="page-content">
+      
       <div class="block block-strong inset shadow text-align-center no-margin">
+        
         <div id="user-infos">
           <div class="profile-user-pic">
             <i class="icon f7-icons">person_round</i>
+            
           </div>
           <h3 class="profile-user-name capitalize">{{name}}</h3>
           <a href="/change-pass/" class="button button-fill color-green" style="font-size: 3vw;">Change Password</a>
+          
         </div>
       </div>
+      <div style="float: right;" id="version_id">
+        
+      </div>
+      <br>
       <div class="list links-list">
         <ul>
           <li><a href="/faq/" id="">FAQ</a></li>
@@ -30,6 +38,7 @@
           <li><a href="#" id="logout">Logout</a></li>
         </ul>
       </div>
+      
     </div>
   </div>
 </template>
@@ -69,7 +78,8 @@
           router.navigate('/login/');
           router.clearPreviousHistory();
         }
-
+        $$('#version_id').html('<p style="color:grey;padding-right:10px;font-size:11px"> App Version '+app.version+'</p>');
+        console.log(app.version)
         $$("#logout").on("click", function () {
           app.panel.close("right");
           app.form.removeFormData("auth");

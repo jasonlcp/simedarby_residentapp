@@ -1,4 +1,4 @@
-import Framework7 from 'framework7/framework7.esm.bundle.js';
+import Framework7 from 'framework7/framework7.esm.bundle.js'; 
 import sound_audio from './sound_audio.js'
 // Import F7 Styles
 import 'framework7/css/framework7.bundle.css';
@@ -21,7 +21,8 @@ var app = new Framework7({
   root: '#app', // App root element
   id: 'io.framework7.simedarbyelminaresident', // App bundle ID
   name: 'Sime Darby Resident', // App name
-  theme: 'md', // Automatic theme detection
+  theme: 'md',
+  version:'v1.0.19', // Automatic theme detection
   // App routes
   routes: routes,
   touch: {
@@ -62,8 +63,13 @@ var app = new Framework7({
         // Init cordova APIs (see cordova-app.js)
         cordovaApp.init(f7);
         $$(document).on('deviceready', function () {
+
           var push = PushNotification.init({
-            android: {},
+            android: {
+              alert: "true",
+              badge: "true",
+              sound: "true",
+            },
             browser: {},
             ios: {
               alert: "true",
@@ -72,7 +78,7 @@ var app = new Framework7({
             },
             windows: {}
           });
-
+          
           push.on('registration', function (data) {
               // data.registrationId
               console.log('register: ' + JSON.stringify(data));
@@ -92,6 +98,7 @@ var app = new Framework7({
           push.on('notification', function (data) {
             console.log('notification: ' + data);
             //alert("Title:" + data.title + " Message:" + data.message);
+            mainView.router.navigate('/notification/')
           });
 
           push.on('error', function (e) {
@@ -163,7 +170,7 @@ var app = new Framework7({
   
         var notificationCallbackOnClose = app.notification.create({
           icon: '<i class="icon f7-icons">person_round</i>',
-          title: "your visitor has left!",
+          title: "Your visitor has left!",
           titleRightText: 'now',
           subtitle: data.title,
           text: 'Click here to close',

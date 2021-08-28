@@ -191,6 +191,14 @@
                                     </div>
                                 </a>
                             </li>
+                            <li>
+                                <a class="item-link item-content popover-close pdf-click" href="#">
+                                    <div class="item-media"><i class="icon f7-icons">doc</i></div>
+                                    <div class="item-inner">
+                                        <div class="item-title">Select Document</div>
+                                    </div>
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -298,6 +306,36 @@
                         mediaType: Camera.MediaType.PICTURE,
                         sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
                     });
+                });
+                $$('.pdf-click').on('click', function () {
+                    window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function (fs) {
+
+                    //var absPath = "file:///storage/emulated/0/";
+                    var absPath = cordova.file.externalRootDirectory;
+                    var fileDir = cordova.file.externalDataDirectory.replace(cordova.file.externalRootDirectory, '');
+                    var fileName = "somename.txt";
+                    var filePath = fileDir + fileName;
+
+                    fs.root.getFile(filePath, { create: true, exclusive: false }, function (fileEntry) {
+                        writeFile(fileEntry, BINARY_ARR).then(function(){
+                        //do something here
+                        });
+                    }, function(err) {});
+                    }, function(err) {});
+
+                    function writeFile(fileEntry, dataObj) {
+                    return $q(function (resolve, reject) {
+                        fileEntry.createWriter(function (fileWriter) {
+                            fileWriter.onwriteend = function () {
+                                resolve();
+                            };
+                            fileWriter.onerror = function (e) {
+                                reject(e);
+                            };
+                            fileWriter.write(dataObj);
+                        });
+                    });
+                    }
                 });
                 $$('#reg_btn').on('submit', function (e) {
                     e.preventDefault();
