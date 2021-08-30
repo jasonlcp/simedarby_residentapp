@@ -298,6 +298,7 @@ import Framework7 from 'framework7/framework7.esm.bundle.js';
                 var router = this.$router;
                 var userDetail;
                 var userlot;
+                this.bill = null
                 app.methods.getUserLot(function (data) {
                     userDetail = JSON.parse(data.response);
                     userlot = userDetail.lot
@@ -364,26 +365,47 @@ import Framework7 from 'framework7/framework7.esm.bundle.js';
                                                             function (xhr, status) {
                                                                 if (xhr.status != 404) {
                                                                     var dialog1 = app.dialog.create({
-                                                                            title: 'Server is busy at the moment...',
-                                                                            text: 'Please try again later or click on the RETRY button',
-                                                                            buttons: [
-                                                                            {
-                                                                                text: 'RETRY',
-                                                                                onClick: function () {
-                                                                                    router.refreshPage('/');
-                                                                                    
-                                                                                }
-                                                                            },
-                                                                            {
-                                                                                text: 'Close',
-                                                                                onClick: function () {
-                                                                                    app.dialog.close()
-                                                                                }
-                                                                            }
-                                                                            ]
-                                                                        })
-                                                    
-                                                                        dialog1.open()
+                                                                            title: 'Sorry to have you waiting.',
+                                                                                        text: '<div id="retry_btn"></div>',
+                                                                                        buttons: [
+                                                                                        // {
+                                                                                        //     text: 'RETRY NOW',
+                                                                                        //     onClick: function () {
+                                                                                        //         clearInterval(myTimer);
+                                                                                        //         router.refreshPage('/');
+                                                                                                
+                                                                                        //     }
+                                                                                        // },
+                                                                                        {
+                                                                                            text: 'Close',
+                                                                                            onClick: function () {
+                                                                                                clearInterval(myTimer);
+                                                                                                app.dialog.close()
+                                                                                            }
+                                                                                        }
+                                                                                        ]
+                                                                                    })
+
+                                                                                    dialog1.open();
+                                                                                        var timeleft = 59;
+                                                                                        var count= 0;
+
+                                                                                        var myTimer = setInterval(function(){
+
+                                                                                        count= timeleft - 1;
+                                                                                        timeleft -= 1;
+                                                                                        console.log(count)
+
+                                                                                        if(count == 0){
+                                                                                            app.dialog.close()
+                                                                                            clearInterval(myTimer);
+                                                                                            router.refreshPage('/');
+                                                                                            
+                                                                                        }else{
+                                                                                            $$('#retry_btn').html('We currently facing high traffic on billing-related action.<br><br>Please come back again later or you can continue to retry<br>Thank you for your patience :) <br><br>Retrying in '+count+' seconds...')
+                                                                                        }
+
+                                                                                    }, 1000);
                                                                 }else{
                                                                     if(xhr.responseText){
                                                                         if(JSON.parse(xhr.responseText).detail=="Not found."){

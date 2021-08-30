@@ -158,6 +158,8 @@
                 var self = this;
                 var $$ = this.$$;
                 var router = this.$router;
+                this.bill = null
+                app.dialog.preloader();
                 this.$app.methods.getProperties(function () {
                     var a = app.smartSelect.create({
                         el: '.smart-select',
@@ -174,7 +176,7 @@
 
                 // var app = this.$app;
                 // var $$ = this.$$;
-               
+                app.dialog.close()
                 var dialog1 = app.dialog.create({
                     title: 'Sorry to have you waiting.',
                     text: '<div id="retry_btn"></div>',
@@ -224,7 +226,7 @@
                 var $$ = this.$$;
                 var self = this;
                 var app = this.$app;
- 
+                app.dialog.close()
 
                 $$('.smart-select').on('smartselect:close', function () {
                     var d = $$('[name="house"]').val();

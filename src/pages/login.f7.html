@@ -78,9 +78,11 @@
                 $$('#login-screen').on('submit', function (e) {
                     e.preventDefault();
                     var formData = app.form.convertToData('#login-screen');
+                    app.dialog.preloader();
                     console.log(formData)
                     request.post('login', null, formData,
                         function (data) {
+                            setTimeout(function(){ app.dialog.close(); }, 300);
                             app.form.storeFormData('auth', data);
                             router.navigate('/');
                             router.clearPreviousHistory();
@@ -97,55 +99,57 @@
                         },
                         function (xhr, status) {
                             if (xhr.status == 404 || xhr.status == 400) {
+                                setTimeout(function(){ app.dialog.close(); }, 300);
                                 var r = JSON.parse(xhr.response);
                                 app.dialog.alert(r.non_field_errors);
                             } else {
+                                setTimeout(function(){ app.dialog.close(); }, 300);
                                 // app.dialog.alert(
                                 //     "This application requires internet connection. Check your connection and try again.",
                                 //     "No Internet Connection");
                                 
                                 var dialog1 = app.dialog.create({
-                                                                            title: 'Sorry to have you waiting.',
-                                                                                        text: '<div id="retry_btn"></div>',
-                                                                                        buttons: [
-                                                                                        // {
-                                                                                        //     text: 'RETRY NOW',
-                                                                                        //     onClick: function () {
-                                                                                        //         clearInterval(myTimer);
-                                                                                        //         router.refreshPage('/');
-                                                                                                
-                                                                                        //     }
-                                                                                        // },
-                                                                                        {
-                                                                                            text: 'Close',
-                                                                                            onClick: function () {
-                                                                                                clearInterval(myTimer);
-                                                                                                app.dialog.close()
-                                                                                            }
-                                                                                        }
-                                                                                        ]
-                                                                                    })
+                                    title: 'Sorry to have you waiting.',
+                                                text: '<div id="retry_btn"></div>',
+                                                buttons: [
+                                                // {
+                                                //     text: 'RETRY NOW',
+                                                //     onClick: function () {
+                                                //         clearInterval(myTimer);
+                                                //         router.refreshPage('/');
+                                                        
+                                                //     }
+                                                // },
+                                                {
+                                                    text: 'Close',
+                                                    onClick: function () {
+                                                        clearInterval(myTimer);
+                                                        app.dialog.close()
+                                                    }
+                                                }
+                                                ]
+                                            })
 
-                                                                                    dialog1.open();
-                                                                                        var timeleft = 59;
-                                                                                        var count= 0;
+                                            dialog1.open();
+                                                var timeleft = 59;
+                                                var count= 0;
 
-                                                                                        var myTimer = setInterval(function(){
+                                                var myTimer = setInterval(function(){
 
-                                                                                        count= timeleft - 1;
-                                                                                        timeleft -= 1;
-                                                                                        console.log(count)
+                                                count= timeleft - 1;
+                                                timeleft -= 1;
+                                                console.log(count)
 
-                                                                                        if(count == 0){
-                                                                                            app.dialog.close()
-                                                                                            clearInterval(myTimer);
-                                                                                            router.refreshPage('/');
-                                                                                            
-                                                                                        }else{
-                                                                                            $$('#retry_btn').html('We currently facing high traffic on billing-related action.<br><br>Please come back again later or you can continue to retry<br>Thank you for your patience :) <br><br>Retrying in '+count+' seconds...')
-                                                                                        }
+                                                if(count == 0){
+                                                    app.dialog.close()
+                                                    clearInterval(myTimer);
+                                                    router.refreshPage('/');
+                                                    
+                                                }else{
+                                                    $$('#retry_btn').html('We currently facing high traffic on billing-related action.<br><br>Please come back again later or you can continue to retry<br>Thank you for your patience :) <br><br>Retrying in '+count+' seconds...')
+                                                }
 
-                                                                                    }, 1000);
+                                            }, 1000);
                                                                                     
                             }
 

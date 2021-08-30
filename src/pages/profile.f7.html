@@ -78,7 +78,7 @@
           router.navigate('/login/');
           router.clearPreviousHistory();
         }
-        $$('#version_id').html('<p style="color:grey;padding-right:10px;font-size:11px"> App Version '+app.version+'</p>');
+        $$('#version_id').html('<p style="color:grey;padding-right:10px;font-size:11px">Version '+app.version+'</p>');
         console.log(app.version)
         $$("#logout").on("click", function () {
           app.panel.close("right");

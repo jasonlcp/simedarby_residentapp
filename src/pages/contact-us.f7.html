@@ -106,7 +106,7 @@
                         var message =  $$("#message_id").val();
                         
                         console.log(subject);
-                        console.log("\nMessage : "+message +"\n\n\nEmail : "+email+"\nLot : "+lot);
+                        console.log("\nMessage : "+message +"\n\n\nEmail : "+email+"\nLot : "+lot+"\nVersion:"+app.version);
                         var form = new FormData();
                         form.append("subject", subject);
                         form.append("user", auth.user.id);
