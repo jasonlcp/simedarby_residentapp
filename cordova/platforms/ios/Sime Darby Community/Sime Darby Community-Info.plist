@@ -19,11 +19,11 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0.16</string>
+	<string>1.0.22</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>1.0.16</string>
+	<string>1.0.22</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
@@ -31,18 +31,10 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
-	<key>NSCameraUsageDescription</key>
-	<string>need camera access to take pictures for submit certificate</string>
-	<key>NSContactsUsageDescription</key>
-	<string>This app requires contacts access to create your visitor contact list</string>
 	<key>NSMainNibFile</key>
-	<string></string>
+	<string/>
 	<key>NSMainNibFile~ipad</key>
-	<string></string>
-	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>Need photo library access to save pictures</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Need photo library access to get pictures when submit payment receipt</string>
+	<string/>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>remote-notification</string>
@@ -65,5 +57,13 @@
 		<string>UIInterfaceOrientationPortrait</string>
 		<string>UIInterfaceOrientationPortraitUpsideDown</string>
 	</array>
+	<key>NSContactsUsageDescription</key>
+	<string>This app requires contacts access to create your visitor contact list</string>
+	<key>NSCameraUsageDescription</key>
+	<string>need camera access to take pictures for submit certificate</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Need photo library access to get pictures when submit payment receipt</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Need photo library access to save pictures</string>
 </dict>
 </plist>

@@ -52,6 +52,7 @@
 		DA1814A94507445BA80DDEB9 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89F13536A28247D5BE054E6A /* ImageIO.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		E3E7D99A0E0B4DC5963F429B /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D3B3358EEE6431F9086EED7 /* SafariServices.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		F8EE9CE926BC4C858176F399 /* CDVFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 56A2C89872BA47FF9520AE19 /* CDVFile.m */; };
+		B1175A6987194FEE9B177A88 /* ExitApp.m in Sources */ = {isa = PBXBuildFile; fileRef = FC4248606D3E48A49553BCB9 /* ExitApp.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -165,6 +166,8 @@
 		F9A9853FF398405B929118B1 /* Screenshot.h */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.h; name = Screenshot.h; path = com.darktalker.cordova.screenshot/Screenshot.h; sourceTree = "<group>"; };
 		FAC4A10C0B244419B7D62384 /* Social.framework */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		FE5770A2260D45628A18EC2F /* Screenshot.m */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.objc; name = Screenshot.m; path = com.darktalker.cordova.screenshot/Screenshot.m; sourceTree = "<group>"; };
+		FC4248606D3E48A49553BCB9 /* ExitApp.m */ = {isa = PBXFileReference; name = "ExitApp.m"; path = "cordova-plugin-app-exit/ExitApp/ExitApp.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
+		03D6C2BA7F11490EA5E76BA9 /* ExitApp.h */ = {isa = PBXFileReference; name = "ExitApp.h"; path = "cordova-plugin-app-exit/ExitApp/ExitApp.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -346,6 +349,8 @@
 				71AFCFC5A4F34A72AB7DE219 /* PushPlugin.m */,
 				8EEBCC61B20E479FB2EE1205 /* AppDelegate+notification.h */,
 				63122BEBCECD42279DBCA600 /* PushPlugin.h */,
+				FC4248606D3E48A49553BCB9 /* ExitApp.m */,
+				03D6C2BA7F11490EA5E76BA9 /* ExitApp.h */,
 			);
 			name = Plugins;
 			path = "Sime Darby Community/Plugins";
@@ -535,6 +540,7 @@
 				D80B37659F5F4D429ECA95A9 /* SocialSharing.m in Sources */,
 				7E18CE550B504A9A9E0E8AAA /* AppDelegate+notification.m in Sources */,
 				ADE466DA68C540179FA16445 /* PushPlugin.m in Sources */,
+				B1175A6987194FEE9B177A88 /* ExitApp.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

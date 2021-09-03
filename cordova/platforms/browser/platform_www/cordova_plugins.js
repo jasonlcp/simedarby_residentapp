@@ -383,6 +383,20 @@ module.exports = [
         "id": "cordova-plugin-camera.CameraProxy",
         "pluginId": "cordova-plugin-camera",
         "runs": true
+    },
+    {
+        "file": "plugins/cordova-plugin-app-exit/www/ExitApp.js",
+        "id": "cordova-plugin-app-exit.exitApp",
+        "pluginId": "cordova-plugin-app-exit",
+        "merges": [
+            "navigator.app"
+        ]
+    },
+    {
+        "file": "plugins/cordova-plugin-app-exit/src/browser/ExitApp.js",
+        "id": "cordova-plugin-app-exit.ExitApp",
+        "pluginId": "cordova-plugin-app-exit",
+        "runs": true
     }
 ];
 module.exports.metadata = 
@@ -407,7 +421,8 @@ module.exports.metadata =
     "phonegap-plugin-push": "2.3.0",
     "cordova-custom-config": "5.1.0",
     "cordova-plugin-android-permissions": "1.1.2",
-    "cordova-plugin-camera": "4.1.0"
+    "cordova-plugin-camera": "4.1.0",
+    "cordova-plugin-app-exit": "0.0.1"
 }
 // BOTTOM OF METADATA
 });

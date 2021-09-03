@@ -51,6 +51,9 @@
         <param name="android-package" value="com.customtabplugin.ChromeCustomTabPlugin" />
         <param name="onload" value="true" />
     </feature>
+    <feature name="ExitApp">
+        <param name="android-package" value="org.apache.cordova.exitapp.ExitApp" />
+    </feature>
     <name>Sime Darby Community</name>
     <description>
         A sample Apache Cordova application that responds to the deviceready event.

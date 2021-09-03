@@ -63,6 +63,9 @@
     },
     "cordova-plugin-camera": {
       "PACKAGE_NAME": "com.framework7.simedarbycommunity"
+    },
+    "cordova-plugin-app-exit": {
+      "PACKAGE_NAME": "com.framework7.simedarbycommunity"
     }
   },
   "dependent_plugins": {

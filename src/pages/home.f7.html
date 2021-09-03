@@ -288,6 +288,9 @@
   }
 </style>
 <script>
+  import Framework7 from 'framework7/framework7.esm.bundle.js'; 
+
+
   export default {
     data: function () {
       var auth = this.$app.methods.getUser();
@@ -319,10 +322,111 @@
         var property_swiper;
         var router = this.$router;
         var self = this;
+        console.log(auth.user)
+        let link = "";
+           
+        if (Framework7.device.ios) {
+          console.log('It is iOS device');
+            app.methods.getUserLot(function (data) {
+              var d = JSON.parse(data.response);
+              console.log(d.user.version );
+              if(d.user.version != app.version){
+                var dialog1 = app.dialog.create({
+                    title: 'Sime Darby',
+                    text: 'Please update to the latest version ('+d.user.version+') to use <br> Your current version is ('+app.version+').',
+                    buttons: [
+                    {
+                        text: 'UPDATE NOW',
+                        onClick: function () {
+                          link = "itms-apps://itunes.apple.com/app/1488080665";
+                          window.open(link,"_system","location = yes")
+                          navigator.app.exitApp();
+                          
+                        }
+                    },
+                    {
+                        text: 'Close',
+                        onClick: function () {
+                            // clearInterval(myTimer);
+                            app.dialog.close()
+                        }
+                    }
+                    ]
+                })
 
-            
+                dialog1.open();
+              }
+             
+            });
+          
+        }else  if (Framework7.device.android) {
+          app.methods.getUserLot(function (data) {
+              var d = JSON.parse(data.response);
+              console.log(d.user.version );
+              if(d.user.version != app.version){
+                var dialog1 = app.dialog.create({
+                    title: 'Sime Darby',
+                    text: 'Please update to the latest version ('+d.user.version+') to use <br> Your current version is ('+app.version+').',
+                    buttons: [
+                    {
+                        text: 'UPDATE NOW',
+                        onClick: function () {
+                          link = "market://details?id=com.framework7.simedarbycommunity";
+                          window.open(link,"_system","location = yes")  
+                          navigator.app.exitApp();
+                         
+                        }
+                    },
+                    {
+                        text: 'Close',
+                        onClick: function () {
+                            // clearInterval(myTimer);
+                            app.dialog.close()
+                        }
+                    }
+                    ]
+                })
+
+                dialog1.open();
+              }
+             
+            });
         
-        
+
+        }else if (Framework7.device.window) {
+          app.methods.getUserLot(function (data) {
+              var d = JSON.parse(data.response);
+              console.log(d.user.version );
+              if(d.user.version != app.version){
+                var dialog1 = app.dialog.create({
+                    title: 'Sime Darby',
+                    text: 'Please update to the latest version ('+d.user.version+') to use <br> Your current version is ('+app.version+').',
+                    buttons: [
+                    {
+                        text: 'UPDATE NOW',
+                        onClick: function () {
+                          link = "market://details?id=com.framework7.simedarbycommunity";
+                          window.open(link,"_system","location = yes")  
+                          navigator.app.exitApp();
+                         
+                        }
+                    },
+                    {
+                        text: 'Close',
+                        onClick: function () {
+                            // clearInterval(myTimer);
+                            app.dialog.close()
+                        }
+                    }
+                    ]
+                })
+
+                dialog1.open();
+              }
+             
+            });         
+ 
+          }
         
         if (!auth) {
           router.navigate('/login/');

@@ -181,5 +181,13 @@
     },
     "is_top_level": true,
     "variables": {}
+  },
+  "cordova-plugin-app-exit": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-app-exit"
+    },
+    "is_top_level": true,
+    "variables": {}
   }
 }
