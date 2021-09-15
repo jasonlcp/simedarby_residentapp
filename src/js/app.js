@@ -22,7 +22,7 @@ var app = new Framework7({
   id: 'io.framework7.simedarbyelminaresident', // App bundle ID
   name: 'Sime Darby Resident', // App name
   theme: 'md',
-  version:'1.0.21', // Automatic theme detection
+  version:'1.0.25', // Automatic theme detection
   // App routes
   routes: routes,
   touch: {
@@ -63,9 +63,6 @@ var app = new Framework7({
         // Init cordova APIs (see cordova-app.js)
         cordovaApp.init(f7);
         $$(document).on('deviceready', function () {
-          if (Framework7.device.android) {
-            console.log('It is iOS device');
-          }  
           var push = PushNotification.init({
             android: {
               alert: "true",

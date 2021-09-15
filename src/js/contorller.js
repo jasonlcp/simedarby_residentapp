@@ -429,7 +429,27 @@ var methods = {
             function (xhr, status) {
                 setTimeout(function(){ app.dialog.close(); }, 300);
                 if (xhr.status != 404) {
-                    app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
+                  //  app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
+                }
+
+                if (status == 404) {
+                    var dialog1 = app.dialog.create({
+                        title: 'Not Found !',
+                        text: 'The Visitors has been deleted !',
+                        buttons: [
+                          {
+                            text: 'Close',
+                            onClick: function () {
+                                // clearInterval(myTimer);
+                                // 
+                                f7c.$router.navigate('/')
+                                f7c.$router.clearHistory();
+                            }
+                          }
+                        ]
+                      })
+    
+                      dialog1.open()
                 }
             },
             function (xhr, status) {
@@ -1089,6 +1109,26 @@ var methods = {
                     })
     
                     dialog1.open();
+                }
+
+                if (status == 404) {
+                    var dialog1 = app.dialog.create({
+                        title: 'Not Found !',
+                        text: 'The Bill has been deleted !',
+                        buttons: [
+                          {
+                            text: 'Close',
+                            onClick: function () {
+                                // clearInterval(myTimer);
+                                // 
+                                f7c.$router.navigate('/')
+                                f7c.$router.clearHistory();
+                            }
+                          }
+                        ]
+                      })
+    
+                      dialog1.open()
                 }
             },
             function (xhr, status) {
