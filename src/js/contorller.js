@@ -35,6 +35,7 @@ var methods = {
         var f7c = this.view.current.router.currentPageEl.f7Component;
         request.get('property/getarea', null, {'id':id},
             function (data) {
+                console.log(data)
                 f7c.$setState({
                     area: data,
                 });
@@ -57,6 +58,7 @@ var methods = {
         var f7c = this.view.current.router.currentPageEl.f7Component;
         request.get('property/getstreet', null, {'id':id},
             function (data) {
+                console.log(data)
                 f7c.$setState({
                     street: data,
                 });

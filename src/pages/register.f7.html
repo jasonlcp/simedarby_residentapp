@@ -121,8 +121,8 @@
                                 </div>
                             </div>
                         </li>
-                        <li class="item-content">
-                            <div class="item-inner">
+                        <li class="item-content ">
+                            <div class="item-inner cert_attachment">
                                 <div class="item-title-row">
                                     <div class="item-title">Certificate of Ownership</div>
                                     <div class="item-after">
@@ -191,14 +191,7 @@
                                     </div>
                                 </a>
                             </li>
-                            <li>
-                                <a class="item-link item-content popover-close pdf-click" href="#">
-                                    <div class="item-media"><i class="icon f7-icons">doc</i></div>
-                                    <div class="item-inner">
-                                        <div class="item-title">Select Document</div>
-                                    </div>
-                                </a>
-                            </li>
+                           
                         </ul>
                     </div>
                 </div>
@@ -238,6 +231,10 @@
         overflow: visible;
         z-index: 0;
     }
+
+    .hide_attachment{
+        display: none;
+    }
 </style>
 <script>
     export default {
@@ -260,6 +257,8 @@
                 var self = this;
                 var f = document.getElementById('regform');
                 var bdata;
+                var area_data=[];
+                var check_attach;
                 $$('#community').on('change',function(){
                     var val = $$(this).val();
                     console.log(val);
@@ -269,6 +268,7 @@
                         self.$setState({area: null,street:null,lot:null});
                     }else{
                         app.methods.getArea(val);
+                        
                     }
 
                 });
@@ -276,13 +276,30 @@
 
                 $$('#area').on('change',function(){
                     var val = $$(this).val();
+                    
                     console.log(val);
+                    
                     if(val == ' '){
                         //self.area = null;
                         //self.f7.$update();
                         self.$setState({street: null,lot:null});
                     }else{
                         app.methods.getStreet(val);
+                        console.log(self.area)
+                        for (var i = 0; i <self.area.length; i++){
+                           
+                           if(self.area[i].id == val){
+                               if(self.area[i].certificate_required == false){
+                                check_attach = self.area[i].certificate_required;
+                                console.log(self.area[i]['certificate_required'],val)
+                                $$(".cert_attachment").hide();
+                               
+                               }else{
+                                check_attach = self.area[i].certificate_required;
+                                $$(".cert_attachment").show();
+                               }
+                           }
+                        }
                     }
                 });
 
@@ -355,8 +372,14 @@
                         Fdata.append("slip", bdata, "upload.jpg");
                         app.methods.postRegister(Fdata);
                     }else {
-                                app.dialog.alert("Please attached the prove of Certificate of Ownership! ", "Certificate of Ownership");
-                            }
+                        console.log(check_attach)
+                        if(check_attach == true){
+                          app.dialog.alert("Please attached the prove of Certificate of Ownership! ", "Certificate of Ownership");
+                        }else{
+                            Fdata.append("slip", "");
+                            app.methods.postRegister(Fdata); 
+                        }
+                    }
                     
                     
 
