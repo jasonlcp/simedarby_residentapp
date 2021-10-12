@@ -2,6 +2,7 @@ import HomePage from '../pages/home.f7.html';
 import NotFoundPage from '../pages/404.f7.html';
 import LoginPage from '../pages/login.f7.html';
 import ProfilePage from '../pages/profile.f7.html';
+import EditProfilePage from '../pages/edit-profile.f7.html';
 import SchedulePage from '../pages/schedule.f7.html';
 import VisitorListPage from '../pages/visitor-list.f7.html';
 import ForgotPage from '../pages/forgot.f7.html';
@@ -164,6 +165,10 @@ var routes = [{
   {
     path:'/faq/',
     component:FaqPage,
+  },
+  {
+    path:'/edit-profile/',
+    component:EditProfilePage,
   },
   {
     path:'/change-pass/',

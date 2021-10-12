@@ -983,6 +983,58 @@ var methods = {
             }
         })
     },
+    updateProfile: function (id, data) {
+        var user = this.methods.getUser();
+        var f7c = this.view.current.router.currentPageEl.f7Component;
+        var app = this;
+        this.dialog.preloader();
+        request.post('edit_profile/', {
+            'Authorization': 'JWT ' + user.token
+        }, data, function () {
+            setTimeout(function(){ app.dialog.close(); }, 300);
+            var dialog1 = app.dialog.create({
+                title: 'Edit Profile',
+                text: 'Update Succcessfully !',
+                buttons: [
+              
+                
+                {
+                    text: 'Close',
+                    onClick: function () {
+                        app.dialog.close()
+                    }
+                }
+                ]
+            })
+
+            dialog1.open();
+
+          
+        }, function (xhr, status) {
+            setTimeout(function(){ app.dialog.close(); }, 300);
+            if (xhr.status == 400) {
+                var response = JSON.parse(xhr.response);
+                f7c.$$(".item-input-error-message").html('');
+                for (var res in response) {
+                    f7c.$$("div[for=" + res + "]").html(response[res]);
+                }
+
+            } else {
+                app.dialog.alert("Please try again.", "Edit Profile");
+            }
+
+        }, function (xhr, status) {
+            if (xhr.status == 201) {
+                var router = f7c.$router;
+                app.dialog.alert("successfully added new visitor.", "Success!",function(){
+                    router.back("/visitor-list/2", {
+                        force: true
+                    });
+                });
+           
+            }
+        })
+    },
     postDefaultLot: function (val) {
         var user = this.methods.getUser();
         var app = this;

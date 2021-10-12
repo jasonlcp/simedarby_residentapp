@@ -22,7 +22,7 @@ var app = new Framework7({
   id: 'io.framework7.simedarbyelminaresident', // App bundle ID
   name: 'Sime Darby Resident', // App name
   theme: 'md',
-  version:'1.0.26', // Automatic theme detection
+  version:'1.0.27', // Automatic theme detection
   // App routes
   routes: routes,
   touch: {
