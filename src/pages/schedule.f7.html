@@ -264,6 +264,15 @@
                         openIn: 'sheet',
                     });
                     var selectedLot = app.form.getFormData('selectedLot');
+                    console.log($$('#lt').val());
+                    console.log($$('#lt').find(':checked').attr('data-area'));
+                    var area_ev = $$('#lt').find(':checked').attr('data-area');
+
+                    if(area_ev == "true"){
+                        $$("#alert_arrival").removeClass('visible-alert');
+                    }else{
+                        $$("#alert_arrival").addClass('visible-alert');
+                    }
                     if(selectedLot){
 
                     var sm = app.smartSelect.get($$('.lotSelector.smart-select'));
