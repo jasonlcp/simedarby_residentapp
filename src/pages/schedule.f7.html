@@ -146,7 +146,8 @@
                     <p>Multiple entries allows unlimited entry & exit within the same day.</p>
                     <p>Re-registration is required after 12:00AM</p>
                     <h3>Scheduled Entry</h3>
-                    <p>Scheduled Entry allows repetative visits to be scheduled up front.</p>
+                    <p>Scheduled Entry allows multiple entries within the start and end date with the correct Day selected. .</p>
+                    <p><i>For example: <br>Visitor who entry on 1st November 2021 and exit on 2nd November 2021 or visitor who is schedule to come on specific day within a time frame.</i></p>
                     <a class="button button-raised button-fill popup-close" href="#">Close popup</a>
                 </div>
             </div>
@@ -314,8 +315,7 @@
                     app.form.storeFormData('entryVal', $$(this).children('select').val());
                     console.log(val);
                     if (val == 'S') {
-                        if (schedule == false) {
-                                                    
+                        if (schedule == false) {                  
                             // $$('#scheduleForm ul.mainform').html(
                                 document.getElementById("extend_date_selection").innerHTML=
                                 '<li class="item-content item-input added">' +
@@ -333,13 +333,14 @@
                                 '<a href="#" class="item-link selectdays smart-select">' +
                                 '<div class="item-after"></div>' +
                                 '<select name="days" id="selected_day" multiple required>' +
+                                // '<option value="All" selected data-display-as="All">All</option>' +
                                 '<option value="0" selected data-display-as="Mon">Monday</option>' +
-                                '<option value="1" data-display-as="Tue">Tuesday</option>' +
-                                '<option value="2" data-display-as="Wed">Wednesday</option>' +
-                                '<option value="3" data-display-as="Thu">Thursday</option>' +
-                                '<option value="4" data-display-as="Fri">Friday</option>' +
-                                '<option value="5" data-display-as="Sat">Saturday</option>' +
-                                '<option value="6" data-display-as="Sun">Sunday</option>' +
+                                '<option value="1" selected data-display-as="Tue">Tuesday</option>' +
+                                '<option value="2" selected data-display-as="Wed">Wednesday</option>' +
+                                '<option value="3" selected data-display-as="Thu">Thursday</option>' +
+                                '<option value="4" selected data-display-as="Fri">Friday</option>' +
+                                '<option value="5" selected data-display-as="Sat">Saturday</option>' +
+                                '<option value="6" selected data-display-as="Sun">Sunday</option>' +
                                 '</select>' +
                                 '</a>' +
                                 '</div>' +
@@ -372,8 +373,12 @@
                             if(day){
                                 
                                 d.setValue(day);
+                                console.log(day)
                             }
                             schedule = true;
+                            
+
+                            
                         }else{
                             document.getElementById("extend_date_selection").style.display = "block";
                            
@@ -391,8 +396,9 @@
                             $$("#exp_date").val("")
                             $$(".selectdays").children('select').val("monday");
                             $$(".selectdays").find(".item-after").text("Mon");
+                            
 
-
+ 
                             expCalendarModal.setValue("");
                             app.form.removeFormData('endDate');
                         }
