@@ -288,6 +288,9 @@
   }
 </style>
 <script>
+  import Framework7 from 'framework7/framework7.esm.bundle.js'; 
+
+
   export default {
     data: function () {
       var auth = this.$app.methods.getUser();
@@ -319,6 +322,82 @@
         var property_swiper;
         var router = this.$router;
         var self = this;
+        console.log(auth.user)
+        let link = "";
+           
+        if (Framework7.device.ios) {
+          console.log('It is iOS device');
+            app.methods.getUserLot(function (data) {
+              var d = JSON.parse(data.response);
+              console.log(d);
+              if(d.version.ios === true){
+              if(d.version.version_number != app.version){
+                var dialog1 = app.dialog.create({
+                    title: 'Sime Darby',
+                    text: 'Please update to the latest version ('+d.version.version_number+') to use <br> Your current version is ('+app.version+').',
+                    buttons: [
+                    {
+                        text: 'UPDATE NOW',
+                        onClick: function () {
+                          link = "itms-apps://itunes.apple.com/app/1488080665";
+                          window.open(link,"_system","location = yes")
+                          setTimeout(function(){  navigator.app.exitApp();}, 300);
+                        }
+                    },
+                    {
+                        text: 'Close',
+                        onClick: function () {
+                            // clearInterval(myTimer);
+                            app.dialog.close()
+                        }
+                    }
+                    ]
+                })
+
+                dialog1.open();
+              }
+            }
+            });
+          
+        }else  if (Framework7.device.android) {
+          app.methods.getUserLot(function (data) {
+              var d = JSON.parse(data.response);
+              console.log(d );
+              if(d.version.android === true){
+              if(d.version.version_number != app.version){
+                var dialog1 = app.dialog.create({
+                    title: 'Sime Darby',
+                    text: 'Please update to the latest version ('+d.version.version_number+') to use <br> Your current version is ('+app.version+').',
+                    buttons: [
+                    {
+                        text: 'UPDATE NOW',
+                        onClick: function () {
+                          link = "market://details?id=com.framework7.simedarbycommunity";
+                         
+
+                          window.open(link,"_system","location = yes")  
+                          setTimeout(function(){  navigator.app.exitApp();}, 300);
+                         
+                        }
+                    },
+                    {
+                        text: 'Close',
+                        onClick: function () {
+                            // clearInterval(myTimer);
+                            app.dialog.close()
+                        }
+                    }
+                    ]
+                })
+
+                dialog1.open();
+              }
+            }
+            });
+        
+
+        }
+        
         if (!auth) {
           router.navigate('/login/');
           router.clearPreviousHistory();
@@ -355,7 +434,48 @@
             });
             $$('.locked').attr('href', '');
             if (self.properties ==  null) {
-          
+
+                    var dialog1 = app.dialog.create({
+                    title: 'Sorry to have you waiting.',
+                    text: '<div id="retry_btn"></div>',
+                    buttons: [
+                    // {
+                    //     text: 'RETRY NOW',
+                    //     onClick: function () {
+                    //         clearInterval(myTimer);
+                    //         router.refreshPage('/');
+                            
+                    //     }
+                    // },
+                    {
+                        text: 'Close',
+                        onClick: function () {
+                            clearInterval(myTimer);
+                            app.dialog.close()
+                        }
+                    }
+                    ]
+                })
+
+                dialog1.open();
+                    var timeleft = 59;
+                    var count= 0;
+
+                    var myTimer = setInterval(function(){
+
+                    count= timeleft - 1;
+                    timeleft -= 1;
+                    console.log(count)
+
+                    if(count == 0){
+                        app.dialog.close()
+                        clearInterval(myTimer);
+                        router.refreshPage('/');
+                        
+                    }else{
+                        $$('#retry_btn').html('We currently facing high traffic on billing-related action.<br><br>Please come back again later or you can continue to retry<br>Thank you for your patience :) <br><br>Retrying in '+count+' seconds...')
+                    }
+              }, 1000);
               $$(".property-wrapper").html('<div class="swiper-slide">' +
                 '<div class="card">' +
                 '<div class="card-content card-content-padding">No properties at the moment.</div>' +
@@ -363,11 +483,13 @@
                 '</div>');
             }else{
               if(self.properties.length ==0){
-                       $$(".property-wrapper").html('<div class="swiper-slide">' +
+                $$(".property-wrapper").html('<div class="swiper-slide">' +
                 '<div class="card">' +
                 '<div class="card-content card-content-padding">No properties at the moment.</div>' +
                 '</div>' +
                 '</div>');
+
+                
               }
             }
           });

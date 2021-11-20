@@ -127,6 +127,7 @@
                     var dt = app.dataTable.create({
                         el: '.data-table'
                     });
+
                     $$('.ac-5').on('click', function () {
                         var imageLink;
                        
@@ -142,6 +143,8 @@
 
                         console.log('Calling from CapturePhoto');
                         $$('.page-content').scrollTop(0)
+                    
+                    
                         setTimeout(function(){ 
 
                             navigator.screenshot.save(function (error, res) {
@@ -152,7 +155,7 @@
                                     $$('.adv').css("display","none");
                                     $$('.page-content').removeClass( "padding-top-none" );
                                     $$('.card-content').removeClass( "full_height" );
-                           
+                                    
                                 } else {
 
                                 
@@ -188,6 +191,7 @@
                     
                      
                     });
+                
                 });
                 $$('.cnc-btn').on('click',function(){
                     var k = $$('.stats').data("val");
