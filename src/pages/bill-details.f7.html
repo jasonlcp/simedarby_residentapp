@@ -40,7 +40,7 @@
             <div id="toolbar" class="toolbar toolbar-bottom auto-height" >
                     <div class="block">
                      <!-- /pay-bills/{{id}}--> 
-                        <a href="#!" id="pay-bill"  class="button button-raised button-round button-fill pay-bill external  disabled_btn"  >Checking Payment History...</a>
+                        <a href="#!" id="pay-bill"  target="_system" class="button button-raised button-round button-fill pay-bill external  disabled_btn"  >Checking Payment History...</a>
                     </div>
             </div>
           
@@ -53,7 +53,17 @@
                     <li class="item-content">
                         <div class="item-inner">
                             <div class="item-title-row">
-                                <div class="item-title">Title</div>
+                                <div class="item-title text-bold">Invoice No </div>
+                                <div class="item-after">
+                                    {{index}}
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="item-content">
+                        <div class="item-inner">
+                            <div class="item-title-row">
+                                <div class="item-title text-bold">Bill Name</div>
                                 <div class="item-after">
                                     {{name}}
                                 </div>
@@ -63,7 +73,37 @@
                     <li class="item-content">
                         <div class="item-inner">
                             <div class="item-title-row">
-                                <div class="item-title">Bill Total</div>
+                                <div class="item-title text-bold">Bill Type</div>
+                                <div class="item-after">
+                                    {{bill_type.name}}
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="item-content">
+                        <div class="item-inner">
+                            <div class="item-title-row">
+                                <div class="item-title text-bold">Due Date</div>
+                                <div class="item-after">
+                                    {{bill_date}}
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="item-content">
+                        <div class="item-inner">
+                            <div class="item-title-row">
+                                <div class="item-title text-bold">Bill Date</div>
+                                <div class="item-after">
+                                    {{created_at}}
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="item-content">
+                        <div class="item-inner">
+                            <div class="item-title-row">
+                                <div class="item-title text-bold">Bill Total</div>
                                 <div class="item-after">
                                     {{amount}}
                                 </div>
@@ -73,7 +113,7 @@
                     <li class="item-content">
                         <div class="item-inner total-after">
                             <div class="item-title-row">
-                                <div class="item-title">Amount Paid</div>
+                                <div class="item-title text-bold">Amount Paid</div>
                                 <div class="item-after">
                                     {{paid_amount}}
                                 </div>
@@ -83,7 +123,7 @@
                     <li class="item-content">
                         <div class="item-inner total-after">
                             <div class="item-title-row">
-                                <div class="item-title">Amount Due</div>
+                                <div class="item-title text-bold">Amount Due</div>
                                 <div class="item-after">
                                     {{remainder}}
                                 </div>
@@ -93,7 +133,7 @@
                      <li class="item-content">
                         <div class="item-inner ">
                             <div class="item-title-row">
-                                <div class="item-title">Remark:</div>
+                                <div class="item-title text-bold">Remark:</div>
                             </div>
                             <div style="    word-break: break-word;">
                                 {{remark}}
@@ -101,6 +141,7 @@
                         </div>
                     </li>
                 </ul>
+                {{#each payment_set}}
                 <div class="block">
                     <div class="card">
                         <div class="card-header">
@@ -109,18 +150,22 @@
                         <div class="card-content">
                             <div class="list media-list">
                                 <ul>
-                                    {{#each payment_set}}
+                                    
                                     <li>
                                         <a href="#" class="item-content">
                                             <div class="item-media"><i class="icon fas fa-file-invoice-dollar"></i>
                                             </div>
                                             <div class="item-inner">
+                                                <div class="item-after">
+                                                    <span class="badge color-orange">{{paymentStatus status}}</span>
+                                                    
+                                                </div>
                                                 <div class="item-title-row">
-                                                    <div class="item-title">Inv-{{../id}}-{{js "this.@index + 1"}}</div>
-                                                    <div class="item-after">
-                                                        <span class="badge color-orange">{{paymentStatus status}}</span>
-                                                        {{payment_date}}
-                                                    </div>
+                                                    <div class="item-title">{{../index}}</div>
+                                                    
+                                                </div>
+                                                <div class="item-text">
+                                                    {{payment_date}}
                                                 </div>
                                                 <div class="item-text">
                                                     RM{{amount}}
@@ -128,18 +173,20 @@
                                             </div>
                                         </a>
                                     </li>
-                                    {{else}}
-                                    <li>
+                                    
+                                    <!-- <li>
                                         <a href="#" class="item-content">
                                             No Pending Bills.
                                         </a>
-                                    </li>
-                                    {{/each}}
+                                    </li> -->
+                                   
                                 </ul>
                             </div>
                         </div>
                     </div>
                 </div>
+                {{else}}
+                {{/each}}
                 {{/bill}}
             </div>
         </div>
@@ -215,6 +262,22 @@
         background-color:grey !important;
     }
 
+    .text-bold{
+        font-weight: bold;
+    }
+
+    .item-inner{
+        padding-top: 5px !important;
+        padding-bottom: 5px !important;
+        min-height: 0px !important;
+        /* height: 0px !important; */
+    }
+    .item-content{
+        min-height: 0px !important;
+        
+
+    }
+
 </style>
 <script>
 import request from '../js/request.js';
@@ -233,14 +296,22 @@ import Framework7 from 'framework7/framework7.esm.bundle.js';
                 var $$ = this.$$;
                 var app = this.$app;
                 var router = this.$router;
-               
+                var userDetail;
+                var userlot;
+                this.bill = null
+                app.methods.getUserLot(function (data) {
+                    userDetail = JSON.parse(data.response);
+                    userlot = userDetail.lot
+                            });
+                
                 app.methods.getBill(this.$route.params.id);
                 var _this=this;
-                console.log(this.bill)
+                console.log(_this.bill)
 
                window.myInterval = setInterval(function(){ 
+                   console.log(userlot)
                     var bill_data=_this.bill;
-                    
+                    console.log(bill_data)
                     if(bill_data){
                         console.log(bill_data)
                         window.clearInterval(window.myInterval);
@@ -248,10 +319,10 @@ import Framework7 from 'framework7/framework7.esm.bundle.js';
 
                         if(bill_data.status!= 'S'){
 
-                           var manual=bill_data.area.manual_payment;
-                           var online=bill_data.area.online_payment;
-                            
-
+                           var manual=bill_data.lot.street.area.manual_payment;
+                           var online=bill_data.lot.street.area.online_payment;
+                           var lothouse = bill_data.lot.name+", "+bill_data.lot.street.name+", "+bill_data.lot.street.area.name;
+                           console.log(lothouse);
                             if(manual && online){
 
                                     $$("#pay-bill").attr("href",'#!')
@@ -281,8 +352,8 @@ import Framework7 from 'framework7/framework7.esm.bundle.js';
                                                                 setTimeout(function(){ 
                                                                      app.dialog.close();
 
-                                                                    var dynamic_link= '<a href="'+data.url+'" id="pay_online"  class="external" target="_system"  ></a>';
-
+                                                                    var dynamic_link= '<a href="'+data.url+'" id="pay_online" class="link external" target="_blank" ></a>';
+                                                                    // router.navigate('/');
                                                                     $$(".page-content").append(dynamic_link);
                                                                     $$("#pay_online").click();
 
@@ -293,7 +364,48 @@ import Framework7 from 'framework7/framework7.esm.bundle.js';
                                                             },
                                                             function (xhr, status) {
                                                                 if (xhr.status != 404) {
-                                                                    app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
+                                                                    var dialog1 = app.dialog.create({
+                                                                            title: 'Sorry to have you waiting.',
+                                                                                        text: '<div id="retry_btn"></div>',
+                                                                                        buttons: [
+                                                                                        // {
+                                                                                        //     text: 'RETRY NOW',
+                                                                                        //     onClick: function () {
+                                                                                        //         clearInterval(myTimer);
+                                                                                        //         router.refreshPage('/');
+                                                                                                
+                                                                                        //     }
+                                                                                        // },
+                                                                                        {
+                                                                                            text: 'Close',
+                                                                                            onClick: function () {
+                                                                                                clearInterval(myTimer);
+                                                                                                app.dialog.close()
+                                                                                            }
+                                                                                        }
+                                                                                        ]
+                                                                                    })
+
+                                                                                    dialog1.open();
+                                                                                        var timeleft = 59;
+                                                                                        var count= 0;
+
+                                                                                        var myTimer = setInterval(function(){
+
+                                                                                        count= timeleft - 1;
+                                                                                        timeleft -= 1;
+                                                                                        console.log(count)
+
+                                                                                        if(count == 0){
+                                                                                            app.dialog.close()
+                                                                                            clearInterval(myTimer);
+                                                                                            router.refreshPage('/');
+                                                                                            
+                                                                                        }else{
+                                                                                            $$('#retry_btn').html('We currently facing high traffic on billing-related action.<br><br>Please come back again later or you can continue to retry<br>Thank you for your patience :) <br><br>Retrying in '+count+' seconds...')
+                                                                                        }
+
+                                                                                    }, 1000);
                                                                 }else{
                                                                     if(xhr.responseText){
                                                                         if(JSON.parse(xhr.responseText).detail=="Not found."){
@@ -302,6 +414,8 @@ import Framework7 from 'framework7/framework7.esm.bundle.js';
                                                                             var bill_amt=parseInt(bill_data.remainder*100);
                                                                             var email=user.user.email;
                                                                             var name =user.user.first_name +" "+user.user.last_name;
+                                                                            var lot = bill_data.lot.name+", "+bill_data.lot.street.name+", "+bill_data.lot.street.area.code;
+                                                                            console.log(lot)
                                                                             var callback_url=configsetting.uri+"billings_api/billplz_invoice_update/";
 
 
@@ -312,7 +426,7 @@ import Framework7 from 'framework7/framework7.esm.bundle.js';
 
                                                                             today = yyyy + '-' + mm + '-' + dd;
                                                                             console.log(today)
-
+                                                                            
                                                                             var form = new FormData();
                                                                             form.append("bill_id", bill_data.id);
                                                                             form.append("amount", bill_amt); //amount : RM 1 = 100
@@ -321,10 +435,11 @@ import Framework7 from 'framework7/framework7.esm.bundle.js';
                                                                             form.append("callback_url", callback_url); //callback url to upate billplz invoice data after payment done
                                                                             form.append("description", 
                                                                                         "DATE: "+today+
-                                                                                        "\nInvoice: INV-"+bill_data.id+
+                                                                                        "\nHouse Lot: "+lot+
+                                                                                        "\nInvoice No: "+bill_data.index+
+                                                                                        "\nBill Name: "+bill_data.name+
                                                                                         "\nBill Type: "+bill_data.bill_type.name+
-                                                                                        "\nBill: "+bill_data.name+
-                                                                                        "\nbill_date: "+bill_data.bill_date+
+                                                                                        "\nDue Date: "+bill_data.bill_date+
                                                                                         "\nAmount: "+bill_data.remainder);
                                                                 
 
@@ -339,19 +454,61 @@ import Framework7 from 'framework7/framework7.esm.bundle.js';
                                                                                   setTimeout(function(){ 
                                                                                             app.dialog.close();
 
-                                                                                        var dynamic_link= '<a href="'+response.url+'" id="pay_online"  class="external" target="_system"  ></a>';
-
+                                                                                        var dynamic_link= '<a href="'+response.url+'" id="pay_online"  class="link external" target="_blank" ></a>';
                                                                                         $$(".page-content").append(dynamic_link);
                                                                                         $$("#pay_online").click();
-
+                                                                                        // $$("#pay-bill").removeClass( "disabled_btn")
                                                                                         $$("#pay_online").remove();
 
                                                                                         
-                                                                                    }, 1500);
+                                                                                    }, 600);
                                                                                 },
                                                                                 function (xhr, status) {
                                                                                     if (xhr.status != 404) {
-                                                                                        app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
+                                                                                       
+                                                                       
+                                                                                    var dialog1 = app.dialog.create({
+                                                                                        title: 'Sorry to have you waiting.',
+                                                                                        text: '<div id="retry_btn"></div>',
+                                                                                        buttons: [
+                                                                                        // {
+                                                                                        //     text: 'RETRY NOW',
+                                                                                        //     onClick: function () {
+                                                                                        //         clearInterval(myTimer);
+                                                                                        //         router.refreshPage('/');
+                                                                                                
+                                                                                        //     }
+                                                                                        // },
+                                                                                        {
+                                                                                            text: 'Close',
+                                                                                            onClick: function () {
+                                                                                                clearInterval(myTimer);
+                                                                                                app.dialog.close()
+                                                                                            }
+                                                                                        }
+                                                                                        ]
+                                                                                    })
+
+                                                                                    dialog1.open();
+                                                                                        var timeleft = 59;
+                                                                                        var count= 0;
+
+                                                                                        var myTimer = setInterval(function(){
+
+                                                                                        count= timeleft - 1;
+                                                                                        timeleft -= 1;
+                                                                                        console.log(count)
+
+                                                                                        if(count == 0){
+                                                                                            app.dialog.close()
+                                                                                            clearInterval(myTimer);
+                                                                                            router.refreshPage('/');
+                                                                                            
+                                                                                        }else{
+                                                                                            $$('#retry_btn').html('We currently facing high traffic on billing-related action.<br><br>Please come back again later or you can continue to retry<br>Thank you for your patience :) <br><br>Retrying in '+count+' seconds...')
+                                                                                        }
+
+                                                                                    }, 1000);
                                                                                     }
                                                                                 },
                                                                                 function (xhr, status) {
@@ -394,31 +551,11 @@ import Framework7 from 'framework7/framework7.esm.bundle.js';
 
                             }else{
                                 if(online){
-                                    request.get('billplz_invoice/' + bill_data.id, {
-                                            'Authorization': 'JWT ' + user.token
-                                        }, null,
-                                        function (data) {
-                                            console.log(data);
-                                    
-                                            setTimeout(function(){ 
-                                                $$("#pay-bill").attr("href",data.url)
-                                                $$("#pay-bill").text("PAY BILL");
-                                                $$("#pay-bill").removeClass( "disabled_btn" )
-                                            }, 1500);
-                                        },
-                                        function (xhr, status) {
-                                            if (xhr.status != 404) {
-                                                app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
-                                            }else{
-                                                if(xhr.responseText){
-                                                    if(JSON.parse(xhr.responseText).detail=="Not found."){
-                                                    
-
-                                                        var bill_amt=parseInt(bill_data.remainder*100);
+                                    var bill_amt=parseInt(bill_data.remainder*100);
                                                         var email=user.user.email;
                                                         var name =user.user.first_name +" "+user.user.last_name;
                                                         var callback_url=configsetting.uri+"billings_api/billplz_invoice_update/";
-
+                                                        var lot = bill_data.lot.name+", "+bill_data.lot.street.name+", "+bill_data.lot.street.area.code;
 
                                                         var today = new Date();
                                                         var dd = String(today.getDate()).padStart(2, '0');
@@ -436,10 +573,11 @@ import Framework7 from 'framework7/framework7.esm.bundle.js';
                                                         form.append("callback_url", callback_url); //callback url to upate billplz invoice data after payment done
                                                         form.append("description", 
                                                                     "DATE: "+today+
-                                                                    "\nInvoice: INV-"+bill_data.id+
+                                                                    "\nHouse Lot: "+lot+
+                                                                    "\nInvoice No: "+bill_data.index+
+                                                                    "\nBill Name: "+bill_data.name+
                                                                     "\nBill Type: "+bill_data.bill_type.name+
-                                                                    "\nBill: "+bill_data.name+
-                                                                    "\nbill_date: "+bill_data.bill_date+
+                                                                    "\nDue Date: "+bill_data.bill_date+
                                                                     "\nAmount: "+bill_data.remainder);
                                             
 
@@ -458,26 +596,72 @@ import Framework7 from 'framework7/framework7.esm.bundle.js';
                                                                     $$("#pay-bill").removeClass( "disabled_btn" )
                                                                 
                                                                     
-                                                                }, 1500);
+                                                                }, 600);
+
+                                                                $$("#pay-bill").on('click',function(){
+                                                                        setTimeout(function(){ 
+                                                                            router.navigate('/');
+                                                                            router.clearPreviousHistory();
+                                                                        
+                                                                            
+                                                                        }, 600);
+                                                                    });
                                                             },
                                                             function (xhr, status) {
                                                                 if (xhr.status != 404) {
-                                                                    app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
-                                                                }
+                                                                   
+
+
+                                                                       
+                                                                        var dialog1 = app.dialog.create({
+                                                                            title: 'Sorry to have you waiting.',
+                                                                                        text: '<div id="retry_btn"></div>',
+                                                                                        buttons: [
+                                                                                        // {
+                                                                                        //     text: 'RETRY NOW',
+                                                                                        //     onClick: function () {
+                                                                                        //         clearInterval(myTimer);
+                                                                                        //         router.refreshPage('/');
+                                                                                                
+                                                                                        //     }
+                                                                                        // },
+                                                                                        {
+                                                                                            text: 'Close',
+                                                                                            onClick: function () {
+                                                                                                clearInterval(myTimer);
+                                                                                                app.dialog.close()
+                                                                                            }
+                                                                                        }
+                                                                                        ]
+                                                                                    })
+
+                                                                                    dialog1.open();
+                                                                                        var timeleft = 59;
+                                                                                        var count= 0;
+
+                                                                                        var myTimer = setInterval(function(){
+
+                                                                                        count= timeleft - 1;
+                                                                                        timeleft -= 1;
+                                                                                        console.log(count)
+
+                                                                                        if(count == 0){
+                                                                                            app.dialog.close()
+                                                                                            clearInterval(myTimer);
+                                                                                            router.refreshPage('/');
+                                                                                            
+                                                                                        }else{
+                                                                                            $$('#retry_btn').html('We currently facing high traffic on billing-related action.<br><br>Please come back again later or you can continue to retry<br>Thank you for your patience :) <br><br>Retrying in '+count+' seconds...')
+                                                                                        }
+
+                                                                                    }, 1000);
+                                                                                    }
                                                             },
                                                             function (xhr, status) {
                                                                 //complete(xhr, status);
                                                             });
 
-                                                    
-
-                                                
-                                                }
-                                                }
-                                            }
-                                        },
-                                        function (xhr, status) {});
-
+                                       
 
 
                                 }else if(manual){
@@ -504,7 +688,7 @@ import Framework7 from 'framework7/framework7.esm.bundle.js';
                       
                         }else{
                             console.log("payment complete")
-                           $$("#pay-bill").attr("href",'#!')
+                            $$("#pay-bill").attr("href",'#!')
                               $$("#pay-bill").text("PAYMENT COMPLETE");
                         }
                     
@@ -514,6 +698,7 @@ import Framework7 from 'framework7/framework7.esm.bundle.js';
 
                     
                  }, 1000);
+                 
             },
           
         }

@@ -30,7 +30,7 @@
                             <div class="item-inner">
                                 <div class="item-title item-label">Subject</div>
                                 <div class="item-input-wrap">
-                                    <input type="email" placeholder="Subject" name="subject" value="">
+                                    <input type="text" placeholder="Subject" id="subject_id" name="subject" value="">
                                     <span class="input-clear-button"></span>
                                 </div>
                             </div>
@@ -40,7 +40,7 @@
                             <div class="item-inner">
                                 <div class="item-title item-label">Message</div>
                                 <div class="item-input-wrap">
-                                    <textarea class="resizable" placeholder="Go ahead, we are listening..." rows="3"></textarea>
+                                    <textarea class="resizable" id="message_id" name="message" placeholder="Go ahead, we are listening..." rows="3"></textarea>
                                     <span class="input-clear-button"></span>
                                 </div>
                             </div>
@@ -82,6 +82,15 @@
                 var $$ = this.$$;
                 var app = this.$app;
                 var router = this.$router;
+                var auth = this.$app.methods.getUser();
+                var email = auth.user.email;
+                var userDetail;
+                var userlot;
+                app.methods.getUserLot(function (data) {
+                    userDetail = JSON.parse(data.response);
+                    userlot = userDetail.lot
+                            });
+                // var lot = auth.lot.name + ", "+auth.lot.street.name +", "+auth.lot.street.area.code;
                 $$('#supportForm').submit(function(e){
                     e.preventDefault();
                 });
@@ -90,9 +99,22 @@
                         app.dialog.alert("Please fill in the form.","Error!");
                         
                     }else{
-                        app.dialog.alert("we will get back to your shortly.","Thank you!");
-                        router.navigate('/');
-                        router.clearPreviousHistory();
+                        console.log(userlot)
+                        var lot = userlot[0].name + ", "+userlot[0].street.name +", "+userlot[0].street.area.code;
+                        // app.dialog.alert("we will get back to your shortly.","Thank you!");
+                        var subject = $$("#subject_id").val();
+                        var message =  $$("#message_id").val();
+                        
+                        console.log(subject);
+                        console.log("\nMessage : "+message +"\n\n\nEmail : "+email+"\nLot : "+lot+"\nVersion:"+app.version);
+                        var form = new FormData();
+                        form.append("subject", subject);
+                        form.append("user", auth.user.id);
+                        form.append("lot", userlot[0].id);
+                        form.append("message", "\nMessage : "+message +"\n\n\nEmail: "+email+"\nLot : "+lot+"\nVersion:"+app.version); 
+                        app.methods.submitFeedback(form);
+                        // router.navigate('/');
+                        // router.clearPreviousHistory();
                     }
 
                 })

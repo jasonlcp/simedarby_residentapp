@@ -22,9 +22,12 @@
                             <div class="item-input-wrap input-dropdown-wrap">
                                 <a class="item-link smart-select smart-select" data-open-in="sheet">
                                     <div class="item-after"></div>
+                                    
                                     <select name="house">
+                                        <!-- <option value="">Select a property</option> -->
                                         {{#each properties}}
-                                        <option value="{{id}}" {{#if is_default}}selected{{/if}}>{{name}}, {{street.area.name}}</option>
+                                        
+                                        <option value="{{id}}" {{#if is_default}}selected{{/if}} >{{name}}, {{street.area.name}}</option>
                                         {{else}}
                                         <option value="">Select a property</option>
                                         {{/each}}
@@ -48,22 +51,31 @@
                                             <div class="item-media"><i class="icon fas fa-file-invoice-dollar"></i>
                                             </div>
                                             <div class="item-inner">
-                                                <div class="item-title-row">
-                                                    <div class="item-title">Inv-{{id}}</div>
-                                                    <div class="item-after">
+                                                <div class="">
                                                     <span class="badge color-orange">{{billStatus status}}</span>
-                                                    {{bill_date}}
-                                                    </div>
-                                                </div>
-                                                <div class="item-subtitle">
-                                                    {{name}}
-                                                </div>
-                                                <div class="item-subtitle">
-                                                    {{bill_type.name}}
                                                     
+                                                   
                                                 </div>
+                                                <div class="item-title-row">
+                                                    
+                                                    <div class="item-title">{{index}}</div>
+                                                </div>
+                                                <div class="item-subtitle">
+                                                 <span style="font-weight: bold;"> Bill Name :</span> {{name}}
+                                                </div>
+                                                <div class="item-subtitle">
+                                                    <span style="font-weight: bold;">Bill Type :</span> {{bill_type.name}}
+                                                </div>
+                                                <div class="item-subtitle">
+                                                    <span style="font-weight: bold;">Due Date :</span> {{bill_date}}
+    
+                                                </div>
+                                                <div class="item-subtitle" style="color:grey">
+                                                    <span style="font-weight: bold;">Bill Date :</span> {{created_at}}
+   
+                                               </div>
                                                 <div class="item-text">
-                                                    RM{{amount}}
+                                                    <span style="font-weight: bold;">Total Amount :</span> RM{{amount}}
                                                 </div>
                                             </div>
                                         </a>
@@ -145,6 +157,9 @@
                 var app = this.$app;
                 var self = this;
                 var $$ = this.$$;
+                var router = this.$router;
+                this.bill = null
+                app.dialog.preloader();
                 this.$app.methods.getProperties(function () {
                     var a = app.smartSelect.create({
                         el: '.smart-select',
@@ -152,20 +167,76 @@
                         
                     });
                     console.log(a);
-                    app.methods.getBills($$(a.selectEl).val());
+                    console.log(a.$selectEl[0][0].label);
+                    if(a.$selectEl[0][0].label != 'Select a property') {
+                        app.methods.getBills($$(a.selectEl).val());
+                    
+                    }
+                                    if(self.properties == null){
+
+                // var app = this.$app;
+                // var $$ = this.$$;
+                app.dialog.close()
+                var dialog1 = app.dialog.create({
+                    title: 'Sorry to have you waiting.',
+                    text: '<div id="retry_btn"></div>',
+                    buttons: [
+                    // {
+                    //     text: 'RETRY NOW',
+                    //     onClick: function () {
+                    //         clearInterval(myTimer);
+                    //         router.refreshPage('/');
+                            
+                    //     }
+                    // },
+                    {
+                        text: 'Close',
+                        onClick: function () {
+                            clearInterval(myTimer);
+                            app.dialog.close()
+                        }
+                    }
+                    ]
+                })
+
+                dialog1.open();
+                    var timeleft = 59;
+                    var count= 0;
+
+                    var myTimer = setInterval(function(){
+
+                    count= timeleft - 1;
+                    timeleft -= 1;
+                    console.log(count)
+
+                    if(count == 0){
+                        app.dialog.close()
+                        clearInterval(myTimer);
+                        router.refreshPage('/');
+                        
+                    }else{
+                        $$('#retry_btn').html('We currently facing high traffic on billing-related action.<br><br>Please come back again later or you can continue to retry<br>Thank you for your patience :) <br><br>Retrying in '+count+' seconds...')
+                    }
+
+                }, 1000);
+                }
                 });
             },
             pageInit: function () {
                 var $$ = this.$$;
                 var self = this;
                 var app = this.$app;
- 
+                app.dialog.close()
 
                 $$('.smart-select').on('smartselect:close', function () {
                     var d = $$('[name="house"]').val();
                     console.log(d)
-                    app.methods.getBills(d);
+                    if(d != 'Select a property'){
+                       app.methods.getBills(d);
+                    }
                 });
+
+
             }
         }
 

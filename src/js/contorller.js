@@ -23,7 +23,7 @@ var methods = {
             },
             function (xhr, status) {
                 if (xhr.status != 404) {
-                    app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
+                    // app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
                 }
 
             },
@@ -35,13 +35,14 @@ var methods = {
         var f7c = this.view.current.router.currentPageEl.f7Component;
         request.get('property/getarea', null, {'id':id},
             function (data) {
+                console.log(data)
                 f7c.$setState({
                     area: data,
                 });
             },
             function (xhr, status) {
                 if (xhr.status != 404) {
-                    app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
+                    // app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
                 }else{
                     f7c.$setState({
                         area: null,
@@ -57,13 +58,14 @@ var methods = {
         var f7c = this.view.current.router.currentPageEl.f7Component;
         request.get('property/getstreet', null, {'id':id},
             function (data) {
+                console.log(data)
                 f7c.$setState({
                     street: data,
                 });
             },
             function (xhr, status) {
                 if (xhr.status != 404) {
-                    app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
+                    // app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
                 }else{
                     f7c.$setState({
                         street: null,
@@ -85,7 +87,7 @@ var methods = {
             },
             function (xhr, status) {
                 if (xhr.status != 404) {
-                    app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
+                    // app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
                 }else{
                     f7c.$setState({
                         lot: null,
@@ -129,7 +131,10 @@ var methods = {
                     //alert(response);
                     //alert(JSON.stringify(xhr));
                     //alert(status);
-                    app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection")
+                    // app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection")
+                    app.dialog.alert("Please try again.", "Register Process Failed");
+                   
+             
                 }
             },
             function (xhr, status) {
@@ -149,7 +154,8 @@ var methods = {
             function () {},
             function (xhr, status) {
                 if (xhr.status != 404) {
-                    app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
+                    // app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
+                    app.dialog.alert("Please try again.", "Delete Family Process Failed");
                 }
             },
             function (xhr, status) {
@@ -168,8 +174,9 @@ var methods = {
                 });
             },
             function (xhr, status) {
+                console.log(xhr)
                 if (xhr.status != 404) {
-                    app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
+                    // app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
                 }else{
                     f7c.$setState({
                         notificationCount: null,
@@ -191,6 +198,7 @@ var methods = {
             }, null,
             function (data) {
                 setTimeout(function(){ app.dialog.close(); }, 300);
+                console.log(data)
                 f7c.$setState({
                     notification: data,
                 });
@@ -198,7 +206,29 @@ var methods = {
             function (xhr, status) {
                 setTimeout(function(){ app.dialog.close(); }, 300);
                 if (xhr.status != 404) {
-                    app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
+                    var dialog1 = app.dialog.create({
+                        title: 'Sorry to have you waiting.',
+                        text: '<div>We currently facing high traffic on billing-related action.<br><br>Please try again !<br>Thank you for your patience :) </div>',
+                        buttons: [
+                        // {
+                        //     text: 'RETRY NOW',
+                        //     onClick: function () {
+                        //         clearInterval(myTimer);
+                        //         router.refreshPage('/');
+                                
+                        //     }
+                        // },
+                        {
+                            text: 'Close',
+                            onClick: function () {
+                                f7c.$router.refreshPage('/');
+                                app.dialog.close()
+                            }
+                        }
+                        ]
+                    })
+    
+                    dialog1.open();
                 }
             },
             function (xhr, status) {
@@ -216,7 +246,8 @@ var methods = {
             function () {},
             function (xhr, status) {
                 if (xhr.status != 404) {
-                    app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
+                    // app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
+                    app.dialog.alert("Please try again.", "Update Process Failed");
                 }
             },
             function (xhr, status) {
@@ -232,7 +263,7 @@ var methods = {
             function () {},
             function (xhr, status) {
                 if (xhr.status != 404) {
-                    app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
+                    app.dialog.alert("Please try again.", "Delete Notification Process Failed");
                 }
             },
             function (xhr, status) {
@@ -248,7 +279,8 @@ var methods = {
             function () {},
             function (xhr, status) {
                 if (xhr.status != 404) {
-                    app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
+                    app.dialog.alert("Please try again.", "Delete Notification Process Failed");
+                    
                 }
             },
             function (xhr, status) {
@@ -272,7 +304,7 @@ var methods = {
             function (xhr, status) {
                 setTimeout(function(){ app.dialog.close(); }, 300);
                 if (xhr.status != 404) {
-                    app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
+            
                 }
             },
             function (xhr, status) {
@@ -290,7 +322,7 @@ var methods = {
             function (data) {},
             function (xhr, status) {
                 if (xhr.status != 404) {
-                    app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
+                    app.dialog.alert("Please try again.", "Update Process Failed");
                 }
             },
             function (xhr, status) {
@@ -314,6 +346,29 @@ var methods = {
             function (xhr, status) {
                 if (xhr.status == 200) {
                     f7c.$router.back("/login/", {
+                        force: true
+                    });
+                }
+            });
+    },
+
+    submitFeedback: function (data, complete) {
+        var user = this.methods.getUser();
+        var f7c = this.view.current.router.currentPageEl.f7Component;
+        var app = this;
+        this.dialog.preloader();
+        request.post('feedback', null, data,
+            function (data) {
+                setTimeout(function(){ app.dialog.close(); }, 300);
+                app.dialog.alert(" Our support team will get back to you soon !\nOur office hour is Mon - Fri, 9am - 6pm (Excluding Public Holiday) !","Thanks for your Feedback !");
+            },
+            function (xhr, status) {
+                setTimeout(function(){ app.dialog.close(); }, 300);
+                app.dialog.alert("Please try again.", "Submit Process Failed");
+            },
+            function (xhr, status) {
+                if (xhr.status == 200) {
+                     f7c.$router.back("/", {
                         force: true
                     });
                 }
@@ -343,7 +398,8 @@ var methods = {
                     }
     
                 } else {
-                    app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection")
+                    // app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection")
+                    app.dialog.alert("Please try again.", "Reset Password Process Failed");
                 }
             },
             function (xhr, status) {
@@ -375,7 +431,27 @@ var methods = {
             function (xhr, status) {
                 setTimeout(function(){ app.dialog.close(); }, 300);
                 if (xhr.status != 404) {
-                    app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
+                  //  app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
+                }
+
+                if (status == 404) {
+                    var dialog1 = app.dialog.create({
+                        title: 'Not Found !',
+                        text: 'The Visitors has been deleted !',
+                        buttons: [
+                          {
+                            text: 'Close',
+                            onClick: function () {
+                                // clearInterval(myTimer);
+                                // 
+                                f7c.$router.navigate('/')
+                                f7c.$router.clearHistory();
+                            }
+                          }
+                        ]
+                      })
+    
+                      dialog1.open()
                 }
             },
             function (xhr, status) {
@@ -397,7 +473,7 @@ var methods = {
             function (xhr, status) {
                 setTimeout(function(){ app.dialog.close(); }, 300);
                 if (xhr.status != 404) {
-                    app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
+                    // app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
                 }
             },
             function (xhr, status) {
@@ -412,7 +488,7 @@ var methods = {
             limit = 0;
         }
         var app = this;
-        //this.dialog.preloader();
+        // this.dialog.preloader();
         request.get('announcements', {
                 'Authorization': 'JWT ' + user.token
             }, {
@@ -429,7 +505,7 @@ var methods = {
             function (xhr, status) {
                 //setTimeout(function(){ app.dialog.close(); }, 300);
                 if (xhr.status != 404) {
-                    app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
+
                 }
             },
             function (xhr, status) {
@@ -452,17 +528,72 @@ var methods = {
                 setTimeout(function(){ app.dialog.close(); }, 300);
                 var announcements = data;
                 console.log(data);
+                if(data.body == null){
+                var dialog1 = app.dialog.create({
+                    title: 'Deleted',
+                    text: 'The Announcement has been deleted !',
+                    buttons: [
+                      {
+                        text: 'Close',
+                        onClick: function () {
+                            // clearInterval(myTimer);
+                            app.dialog.close()
+                        }
+                      }
+                    ]
+                  })
+
+                  dialog1.open()
+                }
                 f7c.$setState({
                     announcements: announcements,
+                    
                 });
             },
             function (xhr, status) {
                 setTimeout(function(){ app.dialog.close(); }, 300);
-                if (xhr.status != 404) {
-                    app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
+                console.log(status)
+                if(xhr.status != 404){
+                    var dialog1 = app.dialog.create({
+                        title: 'Sorry to have you waiting.',
+                        text: '<div>We currently facing high traffic on billing-related action.<br><br>Please try again !<br>Thank you for your patience :) </div>',
+                        buttons: [
+                      
+                        
+                        {
+                            text: 'Close',
+                            onClick: function () {
+                                f7c.$router.refreshPage('/');
+                                app.dialog.close()
+                            }
+                        }
+                        ]
+                    })
+    
+                    dialog1.open();
+                }
+                if (status == 404) {
+                    var dialog1 = app.dialog.create({
+                        title: 'Not Found !',
+                        text: 'The Announcement has been deleted !',
+                        buttons: [
+                          {
+                            text: 'Close',
+                            onClick: function () {
+                                // clearInterval(myTimer);
+                                // 
+                                f7c.$router.navigate('/')
+                                f7c.$router.clearHistory();
+                            }
+                          }
+                        ]
+                      })
+    
+                      dialog1.open()
                 }
             });
     },
+    
     getProperties: function (complete) {
         var user = this.methods.getUser();
         var f7c = this.view.current.router.currentPageEl.f7Component;
@@ -483,8 +614,10 @@ var methods = {
             },
             function (xhr, status) {
                 //setTimeout(function(){ app.dialog.close(); }, 300);
+                console.log(xhr)
                 if (xhr.status != 404) {
-                    app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
+                 
+                
                 }
             },
             function (xhr, status) {
@@ -514,7 +647,7 @@ var methods = {
             function (xhr, status) {
                 setTimeout(function(){ app.dialog.close(); }, 300);
                 if (xhr.status != 404) {
-                    app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
+               
                 }
             },
             function (xhr, status) {
@@ -550,8 +683,8 @@ var methods = {
                 }
 
             } else {
-                app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
-                
+                // app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
+                app.dialog.alert("Please try again.", "Submit Family Request Process Failed");
             }
 
         }, function (xhr, status) {})
@@ -578,7 +711,8 @@ var methods = {
                 }
 
             } else {
-                app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
+                // app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
+                app.dialog.alert("Please try again.", "Submit Entry Process Failed");
             }
 
         }, function (xhr, status) {})
@@ -609,7 +743,7 @@ var methods = {
             function (xhr, status) {
                 setTimeout(function(){ app.dialog.close(); }, 300);
                 if (xhr.status != 404) {
-                    app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
+             
                 }
             },
             function (xhr, status) {
@@ -640,7 +774,7 @@ var methods = {
             },
             function (xhr, status) {
                 if (xhr.status != 404) {
-                    app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
+                 
                 }
             },
             function (xhr, status) {
@@ -671,7 +805,7 @@ var methods = {
             },
             function (xhr, status) {
                 if (xhr.status != 404) {
-                    app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
+
                 }
             },
             function (xhr, status) {
@@ -691,7 +825,8 @@ var methods = {
             },
             function (xhr, status) {
                 if (xhr.status != 404) {
-                    app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
+                    app.dialog.alert("Please try again.", "Delete Entry Process Failed");
+                   
                 }
             },
             function (xhr, status) {
@@ -723,7 +858,7 @@ var methods = {
             function (xhr, status) {
                 setTimeout(function(){ app.dialog.close(); }, 300);
                 if (xhr.status != 404) {
-                    app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
+         
                 }
             },
             function (xhr, status) {
@@ -747,7 +882,7 @@ var methods = {
             function (xhr, status) {
                 setTimeout(function(){ app.dialog.close(); }, 300);
                 if (xhr.status != 404) {
-                    app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
+                    app.dialog.alert("Please try again.", "Update Process Failed");
                 }
             },
             function (xhr, status) {
@@ -775,7 +910,7 @@ var methods = {
             function (xhr, status) {
                 setTimeout(function(){ app.dialog.close(); }, 300);
                 if (xhr.status != 404) {
-                    app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
+                  
                 }
             },
             function (xhr, status) {
@@ -804,7 +939,7 @@ var methods = {
                 }
 
             } else {
-                app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
+                app.dialog.alert("Please try again.", "Submit Visitors Process Failed");
             }
 
         }, function (xhr, status) {
@@ -836,7 +971,8 @@ var methods = {
                 }
                 
             } else {
-                app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
+            //     app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
+            app.dialog.alert("Please try again.", "Update Process Failed");
             }
 
         }, function (xhr, status) {
@@ -844,6 +980,58 @@ var methods = {
                 if (complete) {
                     complete(xhr, status);
                 }
+            }
+        })
+    },
+    updateProfile: function (id, data) {
+        var user = this.methods.getUser();
+        var f7c = this.view.current.router.currentPageEl.f7Component;
+        var app = this;
+        this.dialog.preloader();
+        request.post('edit_profile/', {
+            'Authorization': 'JWT ' + user.token
+        }, data, function () {
+            setTimeout(function(){ app.dialog.close(); }, 300);
+            var dialog1 = app.dialog.create({
+                title: 'Edit Profile',
+                text: 'Update Succcessfully !',
+                buttons: [
+              
+                
+                {
+                    text: 'Close',
+                    onClick: function () {
+                        app.dialog.close()
+                    }
+                }
+                ]
+            })
+
+            dialog1.open();
+
+          
+        }, function (xhr, status) {
+            setTimeout(function(){ app.dialog.close(); }, 300);
+            if (xhr.status == 400) {
+                var response = JSON.parse(xhr.response);
+                f7c.$$(".item-input-error-message").html('');
+                for (var res in response) {
+                    f7c.$$("div[for=" + res + "]").html(response[res]);
+                }
+
+            } else {
+                app.dialog.alert("Please try again.", "Edit Profile");
+            }
+
+        }, function (xhr, status) {
+            if (xhr.status == 201) {
+                var router = f7c.$router;
+                app.dialog.alert("successfully added new visitor.", "Success!",function(){
+                    router.back("/visitor-list/2", {
+                        force: true
+                    });
+                });
+           
             }
         })
     },
@@ -895,7 +1083,8 @@ var methods = {
             function (xhr, status) {
                 setTimeout(function(){ app.dialog.close(); }, 300);
                 if (xhr.status != 404) {
-                    app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
+                    // app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
+                    app.dialog.alert("Please try again.", "Delete Visitor Process Failed");
                 }
             },
             function (xhr, status) {
@@ -920,7 +1109,7 @@ var methods = {
             function (xhr, status) {
                 setTimeout(function(){ app.dialog.close(); }, 300);
                 if (xhr.status != 404) {
-                    app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
+                    
                 }
             },
             function (xhr, status) {
@@ -941,6 +1130,7 @@ var methods = {
                 "finish": 1,
             },
             function (data) {
+                setTimeout(function(){ app.dialog.close(); }, 300);
                 console.log(data)
                 f7c.$setState({
                     bill: data,
@@ -950,7 +1140,49 @@ var methods = {
             function (xhr, status) {
                 setTimeout(function(){ app.dialog.close(); }, 300);
                 if (xhr.status != 404) {
-                    app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
+                    var dialog1 = app.dialog.create({
+                        title: 'Sorry to have you waiting.',
+                        text: '<div>We currently facing high traffic on billing-related action.<br><br>Please try again !<br>Thank you for your patience :) </div>',
+                        buttons: [
+                        // {
+                        //     text: 'RETRY NOW',
+                        //     onClick: function () {
+                        //         clearInterval(myTimer);
+                        //         router.refreshPage('/');
+                                
+                        //     }
+                        // },
+                        {
+                            text: 'Close',
+                            onClick: function () {
+                                f7c.$router.refreshPage('/');
+                                app.dialog.close()
+                            }
+                        }
+                        ]
+                    })
+    
+                    dialog1.open();
+                }
+
+                if (status == 404) {
+                    var dialog1 = app.dialog.create({
+                        title: 'Not Found !',
+                        text: 'The Bill has been deleted !',
+                        buttons: [
+                          {
+                            text: 'Close',
+                            onClick: function () {
+                                // clearInterval(myTimer);
+                                // 
+                                f7c.$router.navigate('/')
+                                f7c.$router.clearHistory();
+                            }
+                          }
+                        ]
+                      })
+    
+                      dialog1.open()
                 }
             },
             function (xhr, status) {
@@ -976,7 +1208,7 @@ var methods = {
             },
             function (xhr, status) {
                 if (xhr.status != 404) {
-                    app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
+                    // app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
                 }
             },
             function (xhr, status) {
@@ -997,7 +1229,8 @@ var methods = {
             function (xhr, status) {
                 setTimeout(function(){ app.dialog.close(); }, 300);
                 if (xhr.status != 404) {
-                    app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
+                    // app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
+                     app.dialog.alert("Please try again.", "Payment Process Failed");
                 }
             },
             function (xhr, status) {
@@ -1030,7 +1263,7 @@ var methods = {
             function (xhr, status) {
                 setTimeout(function(){ app.dialog.close(); }, 300);
                 if (xhr.status != 404) {
-                    app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
+             
                 }
             },
             function (xhr, status) {});
@@ -1053,7 +1286,7 @@ var methods = {
             },
             function (xhr, status) {
                 if (xhr.status != 404) {
-                    app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
+
                 }
             },
             function (xhr, status) {});
@@ -1076,7 +1309,7 @@ var methods = {
             },
             function (xhr, status) {
                 if (xhr.status != 404) {
-                    app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
+
                 }
             },
             function (xhr, status) {});
@@ -1100,7 +1333,7 @@ var methods = {
             function (xhr, status) {
                 setTimeout(function(){ app.dialog.close(); }, 300);
                 if (xhr.status != 404) {
-                    app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
+  
                 }
             },
             function (xhr, status) {});
@@ -1134,7 +1367,7 @@ var methods = {
                 function (xhr, status) {
                     setTimeout(function(){ app.dialog.close(); }, 300);
                     if (xhr.status != 404) {
-                        app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
+                     
                     }
                 },
                 function (xhr, status) {
@@ -1163,7 +1396,11 @@ var methods = {
                 function (xhr, status) {
                     setTimeout(function(){ app.dialog.close(); }, 300);
                     if (xhr.status != 404) {
-                        app.dialog.alert("This application requires internet connection. Check your connection and try again.", "No Internet Connection");
+
+                    }
+
+                    if(status == 404){
+                        app.dialog.alert("You don't have any vistors.", "Not Found !");
                     }
                 },
                 function (xhr, status) {

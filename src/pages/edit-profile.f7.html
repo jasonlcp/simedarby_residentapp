@@ -1,0 +1,155 @@
+<template>
+    <div class="page">
+      <div class="navbar">
+        <div class="navbar-inner sliding">
+          <div class="left">
+            <a href="#"  class="back link">
+              <i class="icon icon-back"></i>
+              <span class="if-not-md">Back</span>
+            </a>
+          </div>
+          <div class="center">
+          Edit Profile
+          </div>
+        </div>
+      </div>
+      <div class="page-content">
+        <div class=" text-align-center no-margin" style="padding: 20px;">
+            <div id="user-infos">
+                <div class="profile-user-pic">
+                  <i class="icon f7-icons">person_round</i>
+                </div>
+            </div>
+        </div>
+        <form id="edit-screen">
+            <div class="list">
+                <ul>
+                    <li class="item-content item-input item-input-with-error-message">
+                        <div class="item-inner">
+                            <div class="item-title item-label">First Name</div>
+                            <div class="item-input-wrap">
+                                
+                                <input type="text" name="first_name" placeholder="User's first name"
+                                    data-vaildate-on-blur="true" id="editFName" value="" required>
+                                <div class="item-input-error-message" for="first_name"></div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="item-content item-input item-input-with-error-message">
+                        <div class="item-inner">
+                            <div class="item-title item-label">Last Name</div>
+                            <div class="item-input-wrap">
+                                <input type="text" name="last_name" placeholder="User's last name"
+                                    data-vaildate-on-blur="true" id="editLName" value="" required>
+                                <div class="item-input-error-message" for="last_name"></div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="item-content item-input item-input-with-error-message">
+                        <div class="item-inner">
+                            <div class="item-title item-label">Mobile Number</div>
+                            <div class="item-input-wrap">
+                                <input type="tel" placeholder="Mobile No." id="editPhone" name="phone_number"
+                                    value="" required>
+                                <!-- <span class="input-clear-button"></span> -->
+                                <div class="item-input-error-message" for="phone_number"></div>
+                                <input type="text" name="user_id"
+                                    data-vaildate-on-blur="true" id="user_id" value="" style="visibility :hidden">
+                            </div>
+                        </div>
+                    </li>
+                    
+                </ul>
+            </div>
+            <div class="row">
+                <div class="col-25"></div>
+                <div class="col-50">
+                    <a href="#" id="profile_submit" class="button button-raised button-fill reseted-button">Submit</a></li>
+                </div>
+                <div class="col-25"></div>
+            </div>
+        </form>
+    </div>
+</div>
+</template>
+<style>
+    .profile-user-pic i {
+      font-size: 70px;
+      color: var(--f7-theme-color-tint);
+    }
+    .shadow {
+      box-shadow: 0 .125rem .25rem rgba(0, 0, 0, .075);
+    }
+    #user-infos .button {
+      width: 40%;
+      margin: 0 auto;
+      font-size: 12px;
+  }
+
+  .auto-height {
+        --f7-toolbar-height: 100px;
+
+    }
+
+    .list textarea.resizable {
+        height: auto;
+    }
+
+    .auto-height~* {
+        --f7-page-toolbar-bottom-offset: 100px;
+    }
+
+    .item-content .item-link {
+        height: var(--f7-input-height);
+    }
+
+    .item-content .item-link .item-after {
+        padding-left: 0px;
+        margin-left: 0px;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+    .item-input-error-message{
+        display:block;
+    }
+    .md label.item-checkbox {
+        position: relative;
+        overflow: visible;
+        z-index: 0;
+    }
+  </style>
+  <script>
+    import request from '../js/request.js';
+    export default {
+        on: {
+            pageInit: function () {
+                var $$ = this.$$;
+                var app = this.$app;
+                var router = this.$router;
+                var auth = app.form.getFormData('auth');
+                if (auth) {
+                    console.log(auth.user.profile.phone_number)
+                    $$('#editFName').val(auth.user.first_name);
+                    $$('#editLName').val(auth.user.last_name);
+                    $$('#user_id').val(auth.user.id);
+                    $$('#editPhone').val(auth.user.profile.phone_number);
+                }
+                
+                // var lastName = $$('#editLName').val();
+                $$('#profile_submit').on('click', function () {
+                    var data = app.form.convertToData('#edit-screen');
+                    app.methods.updateProfile(auth.user.id,data);
+                    if($$('#editFName').val() != '' && $$('#editLName').val() != '' && $$('#editPhone').val() != ''){
+                    var authUser = auth
+                    authUser.user.first_name = $$('#editFName').val();
+                    authUser.user.last_name = $$('#editLName').val();
+                    authUser.user.profile.phone_number = $$('#editPhone').val();
+                    console.log(authUser);
+                    app.form.storeFormData('auth', authUser);
+                    // app.methods.updateProfile(auth.user.id,data);
+                    }
+                })
+            }
+        }
+    }
+</script>

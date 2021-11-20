@@ -37,26 +37,37 @@
                                 <div class="list media-list">
                                     <ul>
                                         {{#pending}}
-                                        <li data-date={{bill_date}} class="filter-items">
+                                        <li  class="filter-items">
                                             <a href="/bill-details/{{id}}" class="item-content">
                                                 <div class="item-media"><i class="icon fas fa-file-invoice-dollar"></i>
                                                 </div>
                                                 <div class="item-inner">
+                                                    <div class="item-after">
+                                                        <span
+                                                            class="badge color-orange">{{billStatus status}}</span>
+                                                    </div>
                                                     <div class="item-title-row">
-                                                        <div class="item-title">Inv-{{id}}</div>
-                                                        <div class="item-after">
-                                                            <span
-                                                                class="badge color-orange">{{billStatus status}}</span>
-                                                            {{bill_date}}
-                                                        </div>
+                                                       
+                                                        <div class="item-title">{{index}}</div>
+                                                        
                                                     </div>
                                                     <div class="item-subtitle">
-                                                        {{bill_type.name}}
-
-                                                    </div>
-                                                    <div class="item-text">
-                                                        RM{{amount}}
-                                                    </div>
+                                                        <span style="font-weight: bold;"> Bill Name :</span> {{name}}
+                                                       </div>
+                                                       <div class="item-subtitle">
+                                                           <span style="font-weight: bold;">Bill Type :</span> {{bill_type.name}}
+                                                       </div>
+                                                       <div class="item-subtitle">
+                                                           <span style="font-weight: bold;">Due Date :</span> {{bill_date}}
+           
+                                                       </div>
+                                                       <div class="item-subtitle" style="color:grey">
+                                                           <span style="font-weight: bold;">Bill Date :</span> {{created_at}}
+          
+                                                      </div>
+                                                       <div class="item-text">
+                                                           <span style="font-weight: bold;">Total Amount :</span> RM{{amount}}
+                                                       </div>
                                                 </div>
                                             </a>
                                         </li>
@@ -78,26 +89,37 @@
                                 <div class="list media-list">
                                     <ul>
                                         {{#partially}}
-                                        <li data-date={{bill_date}} class="filter-items">
+                                        <li  class="filter-items">
                                             <a href="/bill-details/{{id}}" class="item-content">
                                                 <div class="item-media"><i class="icon fas fa-file-invoice-dollar"></i>
                                                 </div>
                                                 <div class="item-inner">
+                                                    <div class="item-after">
+                                                        <span
+                                                            class="badge color-orange">{{billStatus status}}</span>
+                                                    </div>
                                                     <div class="item-title-row">
-                                                        <div class="item-title">Inv-{{id}}</div>
-                                                        <div class="item-after">
-                                                            <span
-                                                                class="badge color-orange">{{billStatus status}}</span>
-                                                            {{bill_date}}
-                                                        </div>
+                                                        
+                                                        <div class="item-title">{{index}}</div>
+                                                        
                                                     </div>
                                                     <div class="item-subtitle">
-                                                        {{bill_type.name}}
-
-                                                    </div>
-                                                    <div class="item-text">
-                                                        RM{{amount}}
-                                                    </div>
+                                                        <span style="font-weight: bold;"> Bill Name :</span> {{name}}
+                                                       </div>
+                                                       <div class="item-subtitle">
+                                                           <span style="font-weight: bold;">Bill Type :</span> {{bill_type.name}}
+                                                       </div>
+                                                       <div class="item-subtitle">
+                                                           <span style="font-weight: bold;">Due Date :</span> {{bill_date}}
+           
+                                                       </div>
+                                                       <div class="item-subtitle" style="color:grey">
+                                                           <span style="font-weight: bold;">Bill Date :</span> {{created_at}}
+          
+                                                      </div>
+                                                       <div class="item-text">
+                                                           <span style="font-weight: bold;">Total Amount :</span> RM{{amount}}
+                                                       </div>
                                                 </div>
                                             </a>
                                         </li>
@@ -119,26 +141,37 @@
                                 <div class="list media-list">
                                     <ul>
                                         {{#paid}}
-                                        <li data-date={{bill_date}} class="filter-items">
+                                        <li  class="filter-items">
                                             <a href="/bill-details/{{id}}" class="item-content">
                                                 <div class="item-media"><i class="icon fas fa-file-invoice-dollar"></i>
                                                 </div>
                                                 <div class="item-inner">
+                                                    <div class="item-after">
+                                                        <span
+                                                            class="badge color-orange">{{billStatus status}}</span>
+                                                    </div>
                                                     <div class="item-title-row">
-                                                        <div class="item-title">Inv-{{id}}</div>
-                                                        <div class="item-after">
-                                                            <span
-                                                                class="badge color-green">{{billStatus status}}</span>
-                                                            {{bill_date}}
-                                                        </div>
+                                                        
+                                                        <div class="item-title">{{index}}</div>
+                                                        
                                                     </div>
                                                     <div class="item-subtitle">
-                                                        {{bill_type.name}}
-
-                                                    </div>
-                                                    <div class="item-text">
-                                                        RM{{amount}}
-                                                    </div>
+                                                        <span style="font-weight: bold;"> Bill Name :</span> {{name}}
+                                                       </div>
+                                                       <div class="item-subtitle">
+                                                           <span style="font-weight: bold;">Bill Type :</span> {{bill_type.name}}
+                                                       </div>
+                                                       <div class="item-subtitle">
+                                                           <span style="font-weight: bold;">Due Date :</span> {{bill_date}}
+           
+                                                       </div>
+                                                       <div class="item-subtitle" style="color:grey">
+                                                           <span style="font-weight: bold;">Bill Date :</span> {{created_at}}
+          
+                                                      </div>
+                                                       <div class="item-text">
+                                                           <span style="font-weight: bold;">Total Amount :</span> RM{{amount}}
+                                                       </div>
                                                 </div>
                                             </a>
                                         </li>

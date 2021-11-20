@@ -167,7 +167,57 @@
                 var property_swiper;
                 var router = this.$router;
                 var self = this;
-                this.$app.methods.getProperties(function () {});
+                this.$app.methods.getProperties(function () {
+                    if(self.properties== null){
+
+                        // var app = this.$app;
+                        // var $$ = this.$$;
+                        // var router = this.$router;
+
+                        var dialog1 = app.dialog.create({
+                        title: 'Sorry to have you waiting.',
+                        text: '<div id="retry_btn"></div>',
+                        buttons: [
+                        // {
+                        //     text: 'RETRY NOW',
+                        //     onClick: function () {
+                        //         clearInterval(myTimer);
+                        //         router.refreshPage('/');
+                                
+                        //     }
+                        // },
+                        {
+                            text: 'Close',
+                            onClick: function () {
+                                clearInterval(myTimer);
+                                app.dialog.close()
+                            }
+                        }
+                        ]
+                        })
+
+                        dialog1.open();
+                        var timeleft = 59;
+                        var count= 0;
+
+                        var myTimer = setInterval(function(){
+
+                        count= timeleft - 1;
+                        timeleft -= 1;
+                        console.log(count)
+
+                        if(count == 0){
+                            app.dialog.close()
+                            clearInterval(myTimer);
+                            router.refreshPage('/');
+                            
+                        }else{
+                            $$('#retry_btn').html('We currently facing high traffic on billing-related action.<br><br>Please come back again later or you can continue to retry<br>Thank you for your patience :) <br><br>Retrying in '+count+' seconds...')
+                        }
+
+                        }, 1000);
+                        }
+                });
                 $$('.page-content').on('click', '.checkFamily', function (e) {
                     if ($$(this).data('stop') == 'true') {
                         app.dialog.alert("You have reached the max number of family members.",
