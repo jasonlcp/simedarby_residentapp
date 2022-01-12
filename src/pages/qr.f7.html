@@ -11,6 +11,11 @@
                 <div class="center">
                     <div class="title">Entry</div>
                 </div>
+                <div class="right">
+                    <a href="#" id="cancel_btn" class="cnc-btn link open-confirm-delete">
+                        <i class="icon f7-icons">trash</i>
+                    </a>
+                </div>
             </div>
         </div>
         <div class="toolbar toolbar-bottom auto-height screencap">
@@ -20,9 +25,9 @@
                 <div class="row ">
                    
 
-                    <div class="col">
+                    <!-- <div class="col">
                         <a href="#" id="cancel_btn" class="cnc-btn color-gray button button-raised button-round button-fill ">Cancel</a>
-                    </div>
+                    </div> -->
                     <div class="col">
                         <a href="#" id="schedule_submit" class="ac-5 button button-raised button-round button-fill ">Share</a>
                     </div>
@@ -199,7 +204,7 @@
                     if( k == 'Cancelled' || k == 'Expired' ){
                         app.dialog.alert("This entry is already cancelled or expired! ","Error!");
                     }else{
-                        app.dialog.confirm('You won\'t be able to undo this.','Are you sure?',function(){
+                        app.dialog.confirm("You won\'t be able to undo this.","Are you sure want to inactive the QRcode ?",function(){
                             app.methods.updateStatusV(id,0 ,function () {
                                 app.dialog.alert("Successfully cancel this entry.","Success",function(){
                                     $$(".only-click-this").click();
