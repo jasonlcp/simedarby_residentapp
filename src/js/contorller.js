@@ -918,31 +918,31 @@ var methods = {
                     console.log(string_day2)
                     switch (string_day2) {
                         case '"0"':
-                            day = "Sun";
-                            break;
-
-                        case '"1"':
                             day = "Mon";
                             break;
 
-                        case '"2"':
+                        case '"1"':
                             day = "Tue";
                             break;
-                            
-                        case '"3"':
+
+                        case '"2"':
                             day = "Wed";
                             break;
                             
-                        case '"4"':
+                        case '"3"':
                             day = "Thu";
                             break;
                             
-                        case '"5"':
+                        case '"4"':
                             day = "Fri";
                             break;
                             
-                        case '"6"':
+                        case '"5"':
                             day = "Sat";
+                            break;
+                            
+                        case '"6"':
+                            day = "Sun";
                             
                     }
                     console.log(day);
