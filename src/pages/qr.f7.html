@@ -43,8 +43,6 @@
                     </div>
 
                 </div>
-           
-
                 <div class="card-content" >
                     <center>
                     <table>
@@ -54,28 +52,32 @@
                                 <th class="label-cell"  style="min-height:40px">House No.</th>
                                 <th class="label-cell" style="min-height:40px">Visitor's Name</th>
                                 <th classs="label-cell" style="min-height:40px">Visitor's Registration No.</th>
-                                <th class="label-cell" style="min-height:40px">Visit Date</th>
                                 <th class="label-cell" style="min-height:40px">Entry Type</th>
+                                <th class="label-cell" style="min-height:40px">Visit Date</th>
+                                <th class="label-cell" style="min-height:40px">Visit End Date</th>
+                                <th class="label-cell" style= "min-height:40px">Days</th>
                                 <th class="label-cell" style= "min-height:40px">Status</th>
                             </tr>
                         </thead>
                         <tbody>
                             {{#entry}}
-                            <tr >
+                            <tr>
                                 <td class="label-cell" style="min-height:40px;padding:0 12.5%;"><span style="width:100%;text-align: right;">{{area_name}}</span></td>
                                 <td class="label-cell" style="min-height:40px;padding:0 12.5%;"><span style="width:100%;text-align: right;">{{lot_name}}, {{street_name}}</span></td>
                                 <td class="label-cell" style="min-height:40px;padding:0 12.5%;"><span style="width:100%;text-align: right;">{{visitor_name}}</span></td>
                                 <td class="label-cell" style="min-height:40px;padding:0 12.5%;"><span style="width:100%;text-align: right;">{{visitor_car_plate}}</span></td>
+                                <td class="label-cell" style="min-height:40px;padding:0 12.5%;"><input id="entry_type_qr" class="no-outline" style="width:100%;text-align: right;" value="{{entryType entry_type}}" readonly></td>
                                 <td class="label-cell" style="min-height:40px;padding:0 12.5%;"><span style="width:100%;text-align: right;">{{start_date}}</span></td>
-                                <td class="label-cell" style="min-height:40px;padding:0 12.5%;"><span style="width:100%;text-align: right;">{{entryType entry_type}}</span></td>
+                                <td id="sch_end_date" class="label-cell" style="min-height:40px;padding:0 12.5%;"><span style="width:100%;text-align: right;">{{end_date}}</span></td>
+                                <td  id="sch_day" class="label-cell" style="min-height:40px;padding:0 12.5%;"><span style="width:100%;text-align: right;">{{days}}</span></td>
                                 <td class="label-cell stats" style="min-height:40px;padding:0 12.5%;" data-val="{{status}}">
-                                    <span style="width:100%;text-align: right;"> {{status}}
+                                <span style="width:100%;text-align: right;"> {{status}}
                                 </td>
                             </tr>
                             {{/entry}}
                         </tbody>
                     </table>
-
+         
                   </center>
                 </div>
                 <div class="card-footer adv" style="text-align: center;display:none;">
@@ -90,6 +92,9 @@
     </div>
 </template>
 <style scoped>
+     .visible{
+       display: none !important;
+    }
     .qr {
         width: 100%;
     }
@@ -98,6 +103,18 @@
         width: 90% !important;
         height: auto !important;
     }
+
+    input {
+  border-top-style: hidden;
+  border-right-style: hidden;
+  border-left-style: hidden;
+  border-bottom-style: hidden;
+  /* background-color: #eee; */
+}
+
+.no-outline:focus {
+  outline: none;
+}
 </style>
 <script>
     import qrcode from "qrcode-generator/qrcode.js"
@@ -122,6 +139,9 @@
                 var app = this.$app;
                 var id = this.$route.params.id;
                 var router = this.$router;
+
+               
+                
                 this.$app.methods.getEntry(this.$route.params.id, function () {
                     var qr = qrcode(13, "M");
                     console.log(self);
@@ -141,10 +161,6 @@
                         $$('.page-content').addClass( "padding-top-none" );
                         $$('.card-content').addClass( "full_height" );
                                 
-     
-
-
-                        
 
                         console.log('Calling from CapturePhoto');
                         $$('.page-content').scrollTop(0)
@@ -213,6 +229,16 @@
                         });
                     }
                 });
+
+                setTimeout(function(){ var entry_type_qr = $$('#entry_type_qr').val();
+                console.log(entry_type_qr)
+                if(entry_type_qr == 'Single Entry' || entry_type_qr == 'Multiple Entry'){
+                    $$("#sch_end_date").addClass('visible');
+                    $$("#sch_day").addClass('visible');
+
+                }
+            
+                },1000);   
             }
         }
     }

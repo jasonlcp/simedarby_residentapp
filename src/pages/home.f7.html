@@ -23,7 +23,8 @@
       <div class="toolbar-inner">
         <a  {{#if is_lock_down}}class="tab-link locked" @click="this.$app.methods.locked()" {{else}}class="tab-link " href="/schedule/2"{{/if}}>
           <i class="icon f7-icons">calendar_today</i>
-          <span class="tabbar-label">Schedule Visit</span>
+          <span class="tabbar-label">QR code</span>
+          <!-- <span class="tabbar-label">Schedule Visit</span> -->
         </a>
         <a href="/visitor-list/2" class="tab-link tab-link">
           <i class="icon f7-icons">person_round</i>
@@ -324,7 +325,7 @@
         var self = this;
         console.log(auth.user)
         let link = "";
-           
+
         if (Framework7.device.ios) {
           console.log('It is iOS device');
             app.methods.getUserLot(function (data) {

@@ -91,6 +91,7 @@ var cordovaApp = {
 
     // Handle Keyboard
     cordovaApp.handleKeyboard();
+
   },
 };
 export default cordovaApp;

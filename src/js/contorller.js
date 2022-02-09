@@ -902,11 +902,65 @@ var methods = {
             function (data) {
                 setTimeout(function(){ app.dialog.close(); }, 300);
                 console.log(data);
+                console.log(data.days);
+                var day = '';
+                var get_day = '';
+ 
+                var days_visit = data.days;
+                
+                if (data.days != null){
+                const myArray = days_visit.split(",");
+                for(var i = 0; i<myArray.length; i++){
+                    day = "";
+                    console.log(myArray[i]);
+                    var string_day = myArray[i].replace("[", "");
+                    var string_day2 = string_day.replace("]", "");
+                    console.log(string_day2)
+                    switch (string_day2) {
+                        case '"0"':
+                            day = "Sun";
+                            break;
+
+                        case '"1"':
+                            day = "Mon";
+                            break;
+
+                        case '"2"':
+                            day = "Tue";
+                            break;
+                            
+                        case '"3"':
+                            day = "Wed";
+                            break;
+                            
+                        case '"4"':
+                            day = "Thu";
+                            break;
+                            
+                        case '"5"':
+                            day = "Fri";
+                            break;
+                            
+                        case '"6"':
+                            day = "Sat";
+                            
+                    }
+                    console.log(day);
+                    get_day = get_day +", "+day;
+                    var days = get_day.substring(1);
+                    data.days = days
+                    
+                }
+            }else{
+                
+
+            }
+               
                 f7c.$setState({
                     entry: data,
                 });
 
-            },
+         },
             function (xhr, status) {
                 setTimeout(function(){ app.dialog.close(); }, 300);
                 if (xhr.status != 404) {

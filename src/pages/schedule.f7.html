@@ -35,7 +35,7 @@
                                         <select id='lt' name="lot">
                                             {{#each properties}}
                                             {{#unless is_lock}}
-                                            <option data-area="{{street.area.visitor_approval}}" value="{{id}}" {{#if is_default}}selected{{/if}}>{{name}},
+                                            <option data-area="{{street.area.visitor_approval}}"  data-single="{{street.area.single_entry}}" data-multiple="{{street.area.multiple_entry}}" data-schedule="{{street.area.schedule_entry}}"value="{{id}}" {{#if is_default}}selected{{/if}}>{{name}},
                                                 {{street.area.name}}</option>
                                             {{/unless}}
                                             {{else}}
@@ -85,14 +85,15 @@
                         <li class="item-content item-input item-input-with-error-message">
                             <div class="item-inner">
                                 <div class="item-title item-label">Entry Type</div>
-                                <div class="item-input-wrap input-dropdown-wrap">
-                                    <a id="entryid" class="item-link smart-select smart-select-init"
+                                <div class="item-input-wrap input-dropdown">
+                                    <a id="entryid" class="item-link"   
                                         data-open-in="sheet">
                                         <div class="item-after"></div>
                                         <select name="entry_type">
-                                            <option value="E" selected>Single Entry</option>
-                                            <option value="M">Multiple Entries</option>
-                                            <option value="S">Scheduled Entry</option>
+                                            <option value="" selected disabled>Please Select Entry Type</option>
+                                            <option value="E" class='t1'>Single Entry</option>
+                                            <option value="M" class='t2' >Multiple Entries</option>
+                                            <option value="S" class='t3'>Scheduled Entry</option>
                                         </select>
                                     </a>
                                 </div>
@@ -186,6 +187,10 @@
     .visible-alert{
        visibility: hidden;
     }
+
+    .visible-option{
+       display: none;
+    }
 </style>
 <script>
     import request from '../js/request.js';
@@ -268,12 +273,42 @@
                     console.log($$('#lt').val());
                     console.log($$('#lt').find(':checked').attr('data-area'));
                     var area_ev = $$('#lt').find(':checked').attr('data-area');
+                    var single_ev = $$('#lt').find(':checked').attr('data-single');
+                    var multiple_ev = $$('#lt').find(':checked').attr('data-multiple');
+                    var schedule_ev = $$('#lt').find(':checked').attr('data-schedule');
 
                     if(area_ev == "true"){
                         $$("#alert_arrival").removeClass('visible-alert');
                     }else{
                         $$("#alert_arrival").addClass('visible-alert');
+                        
                     }
+
+                    if(single_ev == "true"){
+                        $$(".t1").removeClass('visible-option');
+                    }else{
+
+                        $$(".t1").addClass('visible-option');
+                        
+                    }
+
+                    if(multiple_ev == "true"){
+                        $$(".t2").removeClass('visible-option');
+                    }else{
+
+                        $$(".t2").addClass('visible-option');
+                        
+                    }
+
+                    if(schedule_ev == "true"){
+                        $$(".t3").removeClass('visible-option');
+                    }else{
+
+                        $$(".t3").addClass('visible-option');
+                        
+                    }
+                    
+                    
                     if(selectedLot){
 
                     var sm = app.smartSelect.get($$('.lotSelector.smart-select'));
@@ -298,19 +333,46 @@
                     console.log($$(this).val());
                     console.log($$(this).find(':checked').attr('data-area'));
                     var area_ev = $$(this).find(':checked').attr('data-area');
-
+                    var single_ev = $$('#lt').find(':checked').attr('data-single');
+                    var multiple_ev = $$('#lt').find(':checked').attr('data-multiple');
+                    var schedule_ev = $$('#lt').find(':checked').attr('data-schedule');
+                    
                     if(area_ev == "true"){
                         $$("#alert_arrival").removeClass('visible-alert');
                     }else{
                         $$("#alert_arrival").addClass('visible-alert');
+                       
+                    }
+
+                    if(single_ev == "true"){
+                        $$(".t1").removeClass('visible-option');
+                    }else{
+
+                        $$(".t1").addClass('visible-option');
+                        
+                    }
+
+                    if(multiple_ev == "true"){
+                        $$(".t2").removeClass('visible-option');
+                    }else{
+
+                        $$(".t2").addClass('visible-option');
+                        
+                    }
+
+                    if(schedule_ev == "true"){
+                        $$(".t3").removeClass('visible-option');
+                    }else{
+
+                        $$(".t3").addClass('visible-option');
+                        
                     }
                     app.form.storeFormData('selectedLot', $$(this).val());
                 });
 
 
-
-                $$("#entryid").on("smartselect:close", function () {
-
+                $$("#entryid").on('change', function () {
+                // $$("#entryid").on("smartselect:close", function () {
                     var val = $$(this).children('select').val();
                     app.form.storeFormData('entryVal', $$(this).children('select').val());
                     console.log(val);

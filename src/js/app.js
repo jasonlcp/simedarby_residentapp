@@ -90,14 +90,15 @@ var app = new Framework7({
                 f7.form.storeFormData('device_id', device.uuid);
               }
               //alert(data.registrationId);
-            
+              mainView.router.navigate('/notification/')
             console.log(data.registrationId);
           });
-
+          
           push.on('notification', function (data) {
             console.log('notification: ' + data);
             //alert("Title:" + data.title + " Message:" + data.message);
             mainView.router.navigate('/notification/')
+            
           });
 
           push.on('error', function (e) {
