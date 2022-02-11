@@ -35,7 +35,7 @@
                                         <select id='lt' name="lot">
                                             {{#each properties}}
                                             {{#unless is_lock}}
-                                            <option data-area="{{street.area.visitor_approval}}"  data-single="{{street.area.single_entry}}" data-multiple="{{street.area.multiple_entry}}" data-schedule="{{street.area.schedule_entry}}"value="{{id}}" {{#if is_default}}selected{{/if}}>{{name}},
+                                            <option data-area="{{street.area.visitor_approval}}"  data-single="{{street.area.single_entry}}" data-multiple="{{street.area.multiple_entry}}" data-schedule="{{street.area.schedule_entry}}" value="{{id}}" {{#if is_default}}selected{{/if}}>{{name}},
                                                 {{street.area.name}}</option>
                                             {{/unless}}
                                             {{else}}
@@ -89,12 +89,14 @@
                                     <a id="entryid" class="item-link"   
                                         data-open-in="sheet">
                                         <div class="item-after"></div>
-                                        <select name="entry_type">
-                                            <option value="" selected disabled>Please Select Entry Type</option>
-                                            <option value="E" class='t1'>Single Entry</option>
-                                            <option value="M" class='t2' >Multiple Entries</option>
-                                            <option value="S" class='t3'>Scheduled Entry</option>
-                                        </select>
+                                        <div class="item-option">
+                                            <!-- <select name="entry_type">
+                                                <option value="" selected disabled>Please Select Entry Type</option>
+                                                <option value="E" id='t1'>Single Entry</option>
+                                                <option value="M" id='t2' >Multiple Entries</option>
+                                                <option value="S" id='t3'>Scheduled Entry</option>
+                                            </select> -->
+                                        </div>
                                     </a>
                                 </div>
                             </div>
@@ -276,7 +278,20 @@
                     var single_ev = $$('#lt').find(':checked').attr('data-single');
                     var multiple_ev = $$('#lt').find(':checked').attr('data-multiple');
                     var schedule_ev = $$('#lt').find(':checked').attr('data-schedule');
-
+                    var option1 = '<select name="entry_type">';
+                    var option2 = '<option value="" selected disabled>Please Select Entry Type</option>';
+                    var option3 = '';
+                    var option4 = '';
+                    var option5 = '';
+                    var option6 = '';
+                                            //     <option value="" selected disabled>Please Select Entry Type</option>
+                                            //     <option value="E" id='t1'>Single Entry</option>
+                                            //     <option value="M" id='t2' >Multiple Entries</option>
+                                            //     <option value="S" id='t3'>Scheduled Entry</option>
+                                            // </select>';
+                    console.log(single_ev);
+                    console.log(multiple_ev);
+                    console.log(schedule_ev);
                     if(area_ev == "true"){
                         $$("#alert_arrival").removeClass('visible-alert');
                     }else{
@@ -285,30 +300,33 @@
                     }
 
                     if(single_ev == "true"){
-                        $$(".t1").removeClass('visible-option');
+                        // $$(".t1").removeClass('visible-option');
+                        option3 = '<option value="E">Single Entry</option>';
                     }else{
-
-                        $$(".t1").addClass('visible-option');
+                        option3='';
+                        // $$(".t1").addClass('visible-option');
                         
                     }
 
                     if(multiple_ev == "true"){
-                        $$(".t2").removeClass('visible-option');
+                        option4 = '<option value="M" >Multiple Entries</option>';
                     }else{
-
-                        $$(".t2").addClass('visible-option');
+                        option4='';
+                        
                         
                     }
 
                     if(schedule_ev == "true"){
-                        $$(".t3").removeClass('visible-option');
+                        option5='<option value="S">Scheduled Entry</option>';
                     }else{
-
-                        $$(".t3").addClass('visible-option');
+                        option5='';
+                    
                         
                     }
+
+                    option6='</select>';
                     
-                    
+                    $$('.item-option').html(option1+option2+option3+option4+option5+option6);
                     if(selectedLot){
 
                     var sm = app.smartSelect.get($$('.lotSelector.smart-select'));
@@ -336,37 +354,58 @@
                     var single_ev = $$('#lt').find(':checked').attr('data-single');
                     var multiple_ev = $$('#lt').find(':checked').attr('data-multiple');
                     var schedule_ev = $$('#lt').find(':checked').attr('data-schedule');
-                    
+                    console.log(single_ev);
+                    console.log(multiple_ev);
+                    console.log(schedule_ev);
+                    var option1 = '<select name="entry_type">';
+                    var option2 = '<option value="" selected disabled>Please Select Entry Type</option>';
+                    var option3 = '';
+                    var option4 = '';
+                    var option5 = '';
+                    var option6 = '';
+                                            //     <option value="" selected disabled>Please Select Entry Type</option>
+                                            //     <option value="E" id='t1'>Single Entry</option>
+                                            //     <option value="M" id='t2' >Multiple Entries</option>
+                                            //     <option value="S" id='t3'>Scheduled Entry</option>
+                                            // </select>';
+                    console.log(single_ev);
+                    console.log(multiple_ev);
+                    console.log(schedule_ev);
                     if(area_ev == "true"){
                         $$("#alert_arrival").removeClass('visible-alert');
                     }else{
                         $$("#alert_arrival").addClass('visible-alert');
-                       
+                        
                     }
 
                     if(single_ev == "true"){
-                        $$(".t1").removeClass('visible-option');
+                        // $$(".t1").removeClass('visible-option');
+                        option3 = '<option value="E">Single Entry</option>';
                     }else{
-
-                        $$(".t1").addClass('visible-option');
+                        option3='';
+                        // $$(".t1").addClass('visible-option');
                         
                     }
 
                     if(multiple_ev == "true"){
-                        $$(".t2").removeClass('visible-option');
+                        option4 = '<option value="M" >Multiple Entries</option>';
                     }else{
-
-                        $$(".t2").addClass('visible-option');
+                        option4='';
+                        
                         
                     }
 
                     if(schedule_ev == "true"){
-                        $$(".t3").removeClass('visible-option');
+                        option5='<option value="S">Scheduled Entry</option>';
                     }else{
-
-                        $$(".t3").addClass('visible-option');
+                        option5='';
+                    
                         
                     }
+
+                    option6='</select>';
+                    
+                    $$('.item-option').html(option1+option2+option3+option4+option5+option6);
                     app.form.storeFormData('selectedLot', $$(this).val());
                 });
 

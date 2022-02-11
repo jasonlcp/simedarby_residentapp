@@ -347,6 +347,14 @@ cordova.define('cordova/plugin_list', function(require, exports, module) {
       "clobbers": [
         "PushNotification"
       ]
+    },
+    {
+      "id": "cordova-plugin-app-exit.exitApp",
+      "file": "plugins/cordova-plugin-app-exit/www/ExitApp.js",
+      "pluginId": "cordova-plugin-app-exit",
+      "merges": [
+        "navigator.app"
+      ]
     }
   ];
   module.exports.metadata = {
@@ -371,6 +379,7 @@ cordova.define('cordova/plugin_list', function(require, exports, module) {
     "cordova-plugin-x-socialsharing": "5.6.0",
     "cordova-support-google-services": "1.3.2",
     "phonegap-plugin-multidex": "1.0.0",
-    "phonegap-plugin-push": "2.3.0"
+    "phonegap-plugin-push": "2.3.0",
+    "cordova-plugin-app-exit": "0.0.1"
   };
 });
