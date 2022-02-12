@@ -86,17 +86,17 @@
                             <div class="item-inner">
                                 <div class="item-title item-label">Entry Type</div>
                                 <div class="item-input-wrap input-dropdown">
-                                    <a id="entryid" class="item-link"   
+                                    <a id="entryid" class="item-link item-option"   
                                         data-open-in="sheet">
                                         <div class="item-after"></div>
-                                        <div class="item-option">
+                                       
                                             <!-- <select name="entry_type">
                                                 <option value="" selected disabled>Please Select Entry Type</option>
                                                 <option value="E" id='t1'>Single Entry</option>
                                                 <option value="M" id='t2' >Multiple Entries</option>
                                                 <option value="S" id='t3'>Scheduled Entry</option>
                                             </select> -->
-                                        </div>
+                                        
                                     </a>
                                 </div>
                             </div>
@@ -278,7 +278,7 @@
                     var single_ev = $$('#lt').find(':checked').attr('data-single');
                     var multiple_ev = $$('#lt').find(':checked').attr('data-multiple');
                     var schedule_ev = $$('#lt').find(':checked').attr('data-schedule');
-                    var option1 = '<select name="entry_type">';
+                    var option1 = '<div class="item-after"></div><select name="entry_type">';
                     var option2 = '<option value="" selected disabled>Please Select Entry Type</option>';
                     var option3 = '';
                     var option4 = '';
@@ -357,7 +357,7 @@
                     console.log(single_ev);
                     console.log(multiple_ev);
                     console.log(schedule_ev);
-                    var option1 = '<select name="entry_type">';
+                    var option1 = '<div class="item-after"></div><select name="entry_type">';
                     var option2 = '<option value="" selected disabled>Please Select Entry Type</option>';
                     var option3 = '';
                     var option4 = '';
