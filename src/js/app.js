@@ -90,7 +90,7 @@ var app = new Framework7({
                 f7.form.storeFormData('device_id', device.uuid);
               }
               //alert(data.registrationId);
-              mainView.router.navigate('/notification/')
+              mainView.router.navigate('/login/')
             console.log(data.registrationId);
           });
           

@@ -1,4 +1,4 @@
-// var uri = 'https://simedarbypropertycommunity.com/';
+var uri = 'https://simedarbypropertycommunity.com/';
 var sockets = 'https://vmsnodejsweb.azurewebsites.net';
 
 
@@ -6,11 +6,11 @@ var sockets = 'https://vmsnodejsweb.azurewebsites.net';
 // var sockets = 'http://127.0.0.1:8000';
 
 
-var uri = 'https://vmsdjangoapp01-clone1.azurewebsites.net/';
+// var uri = 'https://vmsdjangoapp01-clone1.azurewebsites.net/';
 
 
 
-//var uri = 'http://139.162.60.53/';
+// var uri = 'http://139.162.60.53/';
 //var sockets = 'http://139.162.60.53:3000'
 
 
