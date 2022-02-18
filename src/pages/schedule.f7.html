@@ -35,7 +35,7 @@
                                         <select id='lt' name="lot">
                                             {{#each properties}}
                                             {{#unless is_lock}}
-                                            <option data-area="{{street.area.visitor_approval}}"  data-single="{{street.area.single_entry}}" data-multiple="{{street.area.multiple_entry}}" data-schedule="{{street.area.schedule_entry}}"value="{{id}}" {{#if is_default}}selected{{/if}}>{{name}},
+                                            <option data-area="{{street.area.visitor_approval}}"  data-single="{{street.area.single_entry}}" data-multiple="{{street.area.multiple_entry}}" data-schedule="{{street.area.schedule_entry}}" value="{{id}}" {{#if is_default}}selected{{/if}}>{{name}},
                                                 {{street.area.name}}</option>
                                             {{/unless}}
                                             {{else}}
@@ -86,15 +86,17 @@
                             <div class="item-inner">
                                 <div class="item-title item-label">Entry Type</div>
                                 <div class="item-input-wrap input-dropdown">
-                                    <a id="entryid" class="item-link"   
+                                    <a id="entryid" class="item-link item-option"   
                                         data-open-in="sheet">
                                         <div class="item-after"></div>
-                                        <select name="entry_type">
-                                            <option value="" selected disabled>Please Select Entry Type</option>
-                                            <option value="E" class='t1'>Single Entry</option>
-                                            <option value="M" class='t2' >Multiple Entries</option>
-                                            <option value="S" class='t3'>Scheduled Entry</option>
-                                        </select>
+                                       
+                                            <!-- <select name="entry_type">
+                                                <option value="" selected disabled>Please Select Entry Type</option>
+                                                <option value="E" id='t1'>Single Entry</option>
+                                                <option value="M" id='t2' >Multiple Entries</option>
+                                                <option value="S" id='t3'>Scheduled Entry</option>
+                                            </select> -->
+                                        
                                     </a>
                                 </div>
                             </div>
@@ -252,18 +254,41 @@
                 var expCalendarModal;
                 var entryCalendarModal;
                 var today = new Date();
+              
+                
+               
                 $$("#schedule_submit").on("click", function () {
-                    var data = app.form.convertToData('#scheduleForm');
-                    data['days'] = JSON.stringify(data['days'] )
-                    console.log('schedule: ' + JSON.stringify(data));
-                    app.methods.postEntry(data);
-                    app.form.removeFormData('selectedLot');
-                    app.form.removeFormData('entryVal');
-                    app.form.removeFormData('notify');
-                    app.form.removeFormData('startDate');
-                    app.form.removeFormData('endDate');
-                    app.form.removeFormData('days');
-                });
+                    var end_date = $$('#exp_date').val();
+                    var start_date = $$('#entry_date').val();
+                    console.log(end_date);
+                    console.log(start_date);
+                    if(end_date != ''){
+                        var data = app.form.convertToData('#scheduleForm');
+                        data['days'] = JSON.stringify(data['days'] )
+                        console.log('schedule: ' + JSON.stringify(data));
+                        app.methods.postEntry(data);
+                        app.form.removeFormData('selectedLot');
+                        app.form.removeFormData('entryVal');
+                        app.form.removeFormData('notify');
+                        app.form.removeFormData('startDate');
+                        app.form.removeFormData('endDate');
+                        app.form.removeFormData('days');
+                    }else{
+                         $$('#exp_date').val(start_date);
+                        var data = app.form.convertToData('#scheduleForm');
+                        data['days'] = JSON.stringify(data['days'] )
+                        console.log('schedule: ' + JSON.stringify(data));
+                        app.methods.postEntry(data);
+                        app.form.removeFormData('selectedLot');
+                        app.form.removeFormData('entryVal');
+                        app.form.removeFormData('notify');
+                        app.form.removeFormData('startDate');
+                        app.form.removeFormData('endDate');
+                        app.form.removeFormData('days');
+                    }
+
+                }
+                );
                 this.$app.methods.getProperties(function () {
                     app.smartSelect.create({
                         el: '.smart-select',
@@ -276,7 +301,21 @@
                     var single_ev = $$('#lt').find(':checked').attr('data-single');
                     var multiple_ev = $$('#lt').find(':checked').attr('data-multiple');
                     var schedule_ev = $$('#lt').find(':checked').attr('data-schedule');
-
+                    document.getElementById("extend_date_selection").innerHTML= '';
+                    var option1 = '<div class="item-after"></div><select name="entry_type">';
+                    // var option2 = '<option value="" selected disabled>Please Select Entry Type</option>';
+                    var option3 = '';
+                    var option4 = '';
+                    var option5 = '';
+                    var option6 = '';
+                                            //     <option value="" selected disabled>Please Select Entry Type</option>
+                                            //     <option value="E" id='t1'>Single Entry</option>
+                                            //     <option value="M" id='t2' >Multiple Entries</option>
+                                            //     <option value="S" id='t3'>Scheduled Entry</option>
+                                            // </select>';
+                    console.log(single_ev);
+                    console.log(multiple_ev);
+                    console.log(schedule_ev);
                     if(area_ev == "true"){
                         $$("#alert_arrival").removeClass('visible-alert');
                     }else{
@@ -285,30 +324,97 @@
                     }
 
                     if(single_ev == "true"){
-                        $$(".t1").removeClass('visible-option');
+                        // $$(".t1").removeClass('visible-option');
+                        option3 = '<option value="E" selected>Single Entry</option>';
                     }else{
-
-                        $$(".t1").addClass('visible-option');
+                        option3='';
+                        // $$(".t1").addClass('visible-option');
                         
                     }
 
                     if(multiple_ev == "true"){
-                        $$(".t2").removeClass('visible-option');
+                        option4 = '<option value="M" >Multiple Entries</option>';
                     }else{
+                        option4='';
+                        
+                        
+                    }
+                     
+                    if(multiple_ev == "false" && single_ev == "false"){
+                        option5='<option value="S" selected >Scheduled Entry</option>';
+                        document.getElementById("extend_date_selection").innerHTML=
+                                '<li class="item-content item-input item-input-with-error-message">' +
+                                '<div class="item-inner">' +
+                                '<div class="item-title item-label">Valid Until</div>' +
+                                '<div class="item-input-wrap">' +
+                                '<input name="end_date" type="text" placeholder="Select date" readonly="readonly" id="exp_date" required />' +
+                                '<div class="item-input-error-message" for="start_date"></div>' +
+                                '</div>' +
+                                '</div>' +
+                                '</li>' +
+                                '<li class="item-content item-input added">' +
+                                '<div class="item-inner">' +
+                                '<div class="item-title item-label">Day</div>' +
+                                '<div class="item-input-wrap input-dropdown-wrap">' +
+                                '<a href="#" class="item-link selectdays smart-select">' +
+                                '<div class="item-after"></div>' +
+                                '<select name="days" id="selected_day" multiple required>' +
+                                // '<option value="All" selected data-display-as="All">All</option>' +
+                                '<option value="0" selected data-display-as="Mon">Monday</option>' +
+                                '<option value="1" selected data-display-as="Tue">Tuesday</option>' +
+                                '<option value="2" selected data-display-as="Wed">Wednesday</option>' +
+                                '<option value="3" selected data-display-as="Thu">Thursday</option>' +
+                                '<option value="4" selected data-display-as="Fri">Friday</option>' +
+                                '<option value="5" selected data-display-as="Sat">Saturday</option>' +
+                                '<option value="6" selected data-display-as="Sun">Sunday</option>' +
+                                '</select>' +
+                                '</a>' +
+                                '</div>' +
+                                '</div>' +
+                                '</li>';
 
-                        $$(".t2").addClass('visible-option');
+                            
+
+                                expCalendarModal = app.calendar.create({
+                                inputEl: '#exp_date',
+                                openIn: 'customModal',
+                                header: true,
+                                footer: true,
+                                dateFormat: 'yyyy-mm-dd',
+                                minDate: entryCalendarModal.getValue(),
+                            });
+                            expCalendarModal.on('close', function () {
+                                app.form.storeFormData('endDate',this.getValue());
+                            });
+                            var ed = app.form.getFormData('endDate');
+                            if(ed){
+                                expCalendarModal.setValue(sd);
+                            }
+                            var day = app.form.getFormData('days');
+                            var d = app.smartSelect.create({
+                                el: '.selectdays',
+                                openIn: 'page',
+                            });
+                            $$(".selectdays").on("smartselect:close", function () {
+                                app.form.storeFormData('days',$$(this).children('select').val());
+                            });
+                            if(day){
+                                
+                                d.setValue(day);
+                                console.log(day)
+                            }
+                    }else{
+                        if(schedule_ev == "true"){
+                        option5='<option value="S">Scheduled Entry</option>';
+                    }else{
+                        option5='';
+                    }
                         
                     }
 
-                    if(schedule_ev == "true"){
-                        $$(".t3").removeClass('visible-option');
-                    }else{
-
-                        $$(".t3").addClass('visible-option');
-                        
-                    }
+                    option6='</select>';
                     
-                    
+                    $$('.item-option').html(option1+option3+option4+option5+option6);
                     if(selectedLot){
 
                     var sm = app.smartSelect.get($$('.lotSelector.smart-select'));
@@ -317,6 +423,7 @@
                         
                     
                     }
+
                 });
                 var yesterday = new Date().setDate(today.getDate() - 1);
                 var ayear = new Date(new Date().setFullYear(new Date().getFullYear() + 1));
@@ -336,37 +443,121 @@
                     var single_ev = $$('#lt').find(':checked').attr('data-single');
                     var multiple_ev = $$('#lt').find(':checked').attr('data-multiple');
                     var schedule_ev = $$('#lt').find(':checked').attr('data-schedule');
-                    
+                    console.log(single_ev);
+                    console.log(multiple_ev);
+                    console.log(schedule_ev);
+                    document.getElementById("extend_date_selection").innerHTML= ''
+                    var option1 = '<div class="item-after"></div><select name="entry_type">';
+                    // var option2 = '<option value="" selected disabled>Please Select Entry Type</option>';
+                    var option3 = '';
+                    var option4 = '';
+                    var option5 = '';
+                    var option6 = '';
+                                            //     <option value="" selected disabled>Please Select Entry Type</option>
+                                            //     <option value="E" id='t1'>Single Entry</option>
+                                            //     <option value="M" id='t2' >Multiple Entries</option>
+                                            //     <option value="S" id='t3'>Scheduled Entry</option>
+                                            // </select>';
+                    console.log(single_ev);
+                    console.log(multiple_ev);
+                    console.log(schedule_ev);
                     if(area_ev == "true"){
                         $$("#alert_arrival").removeClass('visible-alert');
                     }else{
                         $$("#alert_arrival").addClass('visible-alert');
-                       
+                        
                     }
 
                     if(single_ev == "true"){
-                        $$(".t1").removeClass('visible-option');
+                        // $$(".t1").removeClass('visible-option');
+                        option3 = '<option value="E">Single Entry</option>';
                     }else{
-
-                        $$(".t1").addClass('visible-option');
+                        option3='';
+                        // $$(".t1").addClass('visible-option');
                         
                     }
 
                     if(multiple_ev == "true"){
-                        $$(".t2").removeClass('visible-option');
+                        option4 = '<option value="M" >Multiple Entries</option>';
                     }else{
-
-                        $$(".t2").addClass('visible-option');
+                        option4='';
+                        
                         
                     }
 
-                    if(schedule_ev == "true"){
-                        $$(".t3").removeClass('visible-option');
-                    }else{
+                    if(multiple_ev == "false" && single_ev == "false"){
+                        option5='<option value="S" selected >Scheduled Entry</option>';
+                        document.getElementById("extend_date_selection").innerHTML=
+                                '<li class="item-content item-input item-input-with-error-message">' +
+                                '<div class="item-inner">' +
+                                '<div class="item-title item-label">Valid Until</div>' +
+                                '<div class="item-input-wrap">' +
+                                '<input name="end_date" type="text" placeholder="Select date" readonly="readonly" id="exp_date" required />' +
+                                '<div class="item-input-error-message" for="start_date"></div>' +
+                                '</div>' +
+                                '</div>' +
+                                '</li>' +
+                                '<li class="item-content item-input added">' +
+                                '<div class="item-inner">' +
+                                '<div class="item-title item-label">Day</div>' +
+                                '<div class="item-input-wrap input-dropdown-wrap">' +
+                                '<a href="#" class="item-link selectdays smart-select">' +
+                                '<div class="item-after"></div>' +
+                                '<select name="days" id="selected_day" multiple required>' +
+                                // '<option value="All" selected data-display-as="All">All</option>' +
+                                '<option value="0" selected data-display-as="Mon">Monday</option>' +
+                                '<option value="1" selected data-display-as="Tue">Tuesday</option>' +
+                                '<option value="2" selected data-display-as="Wed">Wednesday</option>' +
+                                '<option value="3" selected data-display-as="Thu">Thursday</option>' +
+                                '<option value="4" selected data-display-as="Fri">Friday</option>' +
+                                '<option value="5" selected data-display-as="Sat">Saturday</option>' +
+                                '<option value="6" selected data-display-as="Sun">Sunday</option>' +
+                                '</select>' +
+                                '</a>' +
+                                '</div>' +
+                                '</div>' +
+                                '</li>';
 
-                        $$(".t3").addClass('visible-option');
+                                expCalendarModal = app.calendar.create({
+                                inputEl: '#exp_date',
+                                openIn: 'customModal',
+                                header: true,
+                                footer: true,
+                                dateFormat: 'yyyy-mm-dd',
+                                minDate: entryCalendarModal.getValue(),
+                            });
+                            expCalendarModal.on('close', function () {
+                                app.form.storeFormData('endDate',this.getValue());
+                            });
+                            var ed = app.form.getFormData('endDate');
+                            if(ed){
+                                expCalendarModal.setValue(sd);
+                            }
+                            var day = app.form.getFormData('days');
+                            var d = app.smartSelect.create({
+                                el: '.selectdays',
+                                openIn: 'page',
+                            });
+                            $$(".selectdays").on("smartselect:close", function () {
+                                app.form.storeFormData('days',$$(this).children('select').val());
+                            });
+                            if(day){
+                                
+                                d.setValue(day);
+                                console.log(day)
+                            }
+                    }else{
+                        if(schedule_ev == "true"){
+                        option5='<option value="S">Scheduled Entry</option>';
+                    }else{
+                        option5='';
+                    }
                         
                     }
+
+                    option6='</select>';
+                    
+                    $$('.item-option').html(option1+option3+option4+option5+option6);
                     app.form.storeFormData('selectedLot', $$(this).val());
                 });
 
@@ -380,11 +571,12 @@
                         if (schedule == false) {                  
                             // $$('#scheduleForm ul.mainform').html(
                                 document.getElementById("extend_date_selection").innerHTML=
-                                '<li class="item-content item-input added">' +
+                                '<li class="item-content item-input item-input-with-error-message">' +
                                 '<div class="item-inner">' +
                                 '<div class="item-title item-label">Valid Until</div>' +
                                 '<div class="item-input-wrap">' +
-                                '<input name="end_date" type="text" placeholder="Select date" readonly="readonly" id="exp_date" required/>' +
+                                '<input name="end_date" type="text" placeholder="Select date" readonly="readonly" id="exp_date" required />' +
+                                '<div class="item-input-error-message" for="start_date"></div>' +
                                 '</div>' +
                                 '</div>' +
                                 '</li>' +
@@ -409,6 +601,9 @@
                                 '</div>' +
                                 '</li>';
                             // );
+
+                            
+
                             expCalendarModal = app.calendar.create({
                                 inputEl: '#exp_date',
                                 openIn: 'customModal',

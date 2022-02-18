@@ -42,7 +42,7 @@
           "CFBundleAllowMixedLocalizations": [
             {
               "xml": "<true />",
-              "count": 12
+              "count": 25
             }
           ],
           "UIBackgroundModes": [
