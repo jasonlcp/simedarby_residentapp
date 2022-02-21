@@ -3,7 +3,7 @@
         <div class="navbar">
             <div class="navbar-inner sliding">
                 <div class="left">
-                    <a href="{{link}}" data-force="true" data-ignore-cache="true"  class="back link">
+                    <a href="#" data-force="true" data-ignore-cache="true"  class="back link" id="back_home">
                         <i class="icon icon-back"></i>
                         <span class="if-not-md">Back</span>
                     </a>
@@ -254,14 +254,28 @@
                 var expCalendarModal;
                 var entryCalendarModal;
                 var today = new Date();
-              
-                
+                var router = this.$router;
+                $$("#back_home").on("click", function () {
+                    router.navigate('/');
+                    router.clearPreviousHistory();
+                });
+               
+                                                                        
                
                 $$("#schedule_submit").on("click", function () {
                     var end_date = $$('#exp_date').val();
                     var start_date = $$('#entry_date').val();
                     console.log(end_date);
                     console.log(start_date);
+
+                    if ($$('input[name="notify"]').prop('checked')) {
+                        app.form.storeFormData('notify', 'true');
+                        $$('input[name="is_notify"]').val("true");
+                    } else {
+                        app.form.storeFormData('notify', 'false');
+                        $$('input[name="is_notify"]').val("false");
+                    }
+                    
                     if(end_date != ''){
                         var data = app.form.convertToData('#scheduleForm');
                         data['days'] = JSON.stringify(data['days'] )
@@ -286,6 +300,7 @@
                         app.form.removeFormData('endDate');
                         app.form.removeFormData('days');
                     }
+                    
 
                 }
                 );
