@@ -262,6 +262,15 @@
                     var start_date = $$('#entry_date').val();
                     console.log(end_date);
                     console.log(start_date);
+
+                    if ($$('input[name="notify"]').prop('checked')) {
+                        app.form.storeFormData('notify', 'true');
+                        $$('input[name="is_notify"]').val("true");
+                    } else {
+                        app.form.storeFormData('notify', 'false');
+                        $$('input[name="is_notify"]').val("false");
+                    }
+                    
                     if(end_date != ''){
                         var data = app.form.convertToData('#scheduleForm');
                         data['days'] = JSON.stringify(data['days'] )
@@ -286,6 +295,7 @@
                         app.form.removeFormData('endDate');
                         app.form.removeFormData('days');
                     }
+                    
 
                 }
                 );
