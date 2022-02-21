@@ -259,6 +259,7 @@ document.addEventListener('backbutton', function (e) {
   } else {
     app.views.main.router.back();
   }
+  
 
 
 })
