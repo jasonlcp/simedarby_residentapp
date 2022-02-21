@@ -45,7 +45,7 @@
         "parents": {
           "/manifest/application": [
             {
-              "xml": "<application android:usesCleartextTraffic=\"true\" />",
+              "xml": "<application android:requestLegacyExternalStorage=\"true\" />",
               "count": 2,
               "mode": "merge",
               "id": "config.xml",
@@ -59,7 +59,7 @@
               }
             },
             {
-              "xml": "<application android:requestLegacyExternalStorage=\"true\" />",
+              "xml": "<application android:usesCleartextTraffic=\"true\" />",
               "count": 1,
               "mode": "merge",
               "id": "config.xml",
@@ -311,9 +311,6 @@
       "PACKAGE_NAME": "com.framework7.simedarbycommunity"
     },
     "cordova-plugin-app-exit": {
-      "PACKAGE_NAME": "com.framework7.simedarbycommunity"
-    },
-    "cordova-plugin-androidx-adapter": {
       "PACKAGE_NAME": "com.framework7.simedarbycommunity"
     }
   },
@@ -675,7 +672,6 @@
     "cordova-support-google-services": "1.3.2",
     "phonegap-plugin-multidex": "1.0.0",
     "phonegap-plugin-push": "2.3.0",
-    "cordova-plugin-app-exit": "0.0.1",
-    "cordova-plugin-androidx-adapter": "1.1.3"
+    "cordova-plugin-app-exit": "0.0.1"
   }
 }

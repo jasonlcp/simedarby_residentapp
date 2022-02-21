@@ -3,7 +3,7 @@
         <div class="navbar">
             <div class="navbar-inner sliding">
                 <div class="left">
-                    <a href="{{link}}" data-force="true" data-ignore-cache="true"  class="back link">
+                    <a href="#" data-force="true" data-ignore-cache="true"  class="back link" id="back_home">
                         <i class="icon icon-back"></i>
                         <span class="if-not-md">Back</span>
                     </a>
@@ -254,8 +254,13 @@
                 var expCalendarModal;
                 var entryCalendarModal;
                 var today = new Date();
-              
-                
+                var router = this.$router;
+                $$("#back_home").on("click", function () {
+                    router.navigate('/');
+                    router.clearPreviousHistory();
+                });
+               
+                                                                        
                
                 $$("#schedule_submit").on("click", function () {
                     var end_date = $$('#exp_date').val();
