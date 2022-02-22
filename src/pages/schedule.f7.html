@@ -268,7 +268,10 @@
                 $$('input[name=start_date]').change(function() {
                     var end_date = $$('#exp_date').val();
                     var start_date = $$('#entry_date').val();
+                    
+                    if(end_date == '' || end_date == start_date){
                     $$('#exp_date').val(start_date);
+                    }
                 });
                
                                                                         
