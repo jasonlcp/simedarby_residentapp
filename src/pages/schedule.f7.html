@@ -264,6 +264,12 @@
                     }, 600);
                    
                 });
+
+                $$('input[name=start_date]').change(function() {
+                    var end_date = $$('#exp_date').val();
+                    var start_date = $$('#entry_date').val();
+                    $$('#exp_date').val(start_date);
+                });
                
                                                                         
                
@@ -281,7 +287,6 @@
                         $$('input[name="is_notify"]').val("false");
                     }
                     
-                    if(end_date != ''){
                         var data = app.form.convertToData('#scheduleForm');
                         data['days'] = JSON.stringify(data['days'] )
                         console.log('schedule: ' + JSON.stringify(data));
@@ -292,20 +297,6 @@
                         app.form.removeFormData('startDate');
                         app.form.removeFormData('endDate');
                         app.form.removeFormData('days');
-                    }else{
-                         $$('#exp_date').val(start_date);
-                        var data = app.form.convertToData('#scheduleForm');
-                        data['days'] = JSON.stringify(data['days'] )
-                        console.log('schedule: ' + JSON.stringify(data));
-                        app.methods.postEntry(data);
-                        app.form.removeFormData('selectedLot');
-                        app.form.removeFormData('entryVal');
-                        app.form.removeFormData('notify');
-                        app.form.removeFormData('startDate');
-                        app.form.removeFormData('endDate');
-                        app.form.removeFormData('days');
-                    }
-                    
 
                 }
                 );
@@ -367,8 +358,8 @@
                                 '<div class="item-inner">' +
                                 '<div class="item-title item-label">Valid Until</div>' +
                                 '<div class="item-input-wrap">' +
-                                '<input name="end_date" type="text" placeholder="Select date" readonly="readonly" id="exp_date" required />' +
-                                '<div class="item-input-error-message" for="start_date"></div>' +
+                                '<input name="end_date" type="text" placeholder="Select date" readonly="readonly" id="exp_date" />' +
+                                '<div class="item-input-error-message"></div>' +
                                 '</div>' +
                                 '</div>' +
                                 '</li>' +
@@ -512,8 +503,8 @@
                                 '<div class="item-inner">' +
                                 '<div class="item-title item-label">Valid Until</div>' +
                                 '<div class="item-input-wrap">' +
-                                '<input name="end_date" type="text" placeholder="Select date" readonly="readonly" id="exp_date" required />' +
-                                '<div class="item-input-error-message" for="start_date"></div>' +
+                                '<input name="end_date" type="text" placeholder="Select date" readonly="readonly" id="exp_date" />' +
+                                '<div class="item-input-error-message"></div>' +
                                 '</div>' +
                                 '</div>' +
                                 '</li>' +
@@ -597,8 +588,8 @@
                                 '<div class="item-inner">' +
                                 '<div class="item-title item-label">Valid Until</div>' +
                                 '<div class="item-input-wrap">' +
-                                '<input name="end_date" type="text" placeholder="Select date" readonly="readonly" id="exp_date" required />' +
-                                '<div class="item-input-error-message" for="start_date"></div>' +
+                                '<input name="end_date" type="text" placeholder="Select date" readonly="readonly" id="exp_date" />' +
+                                '<div class="item-input-error-message"></div>' +
                                 '</div>' +
                                 '</div>' +
                                 '</li>' +
