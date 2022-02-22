@@ -256,8 +256,13 @@
                 var today = new Date();
                 var router = this.$router;
                 $$("#back_home").on("click", function () {
-                    router.navigate('/');
-                    router.clearPreviousHistory();
+                    setTimeout(function(){ 
+                        router.navigate('/');
+                        router.clearPreviousHistory();
+                    
+                        
+                    }, 600);
+                   
                 });
                
                                                                         
