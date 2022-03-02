@@ -13,7 +13,7 @@
     </div>
     {{#visitor}}
     {{#js_if "this.status == 'PEN'"}}
-    <div class="toolbar toolbar-bottom auto-height">
+    <div class="toolbar toolbar-bottom auto-height expired_entry">
       <div class="block">
         <div class="row">
           <div class="col-50">
@@ -31,7 +31,7 @@
     {{/visitor}}
     {{#visitor}}
     {{#js_if "this.status == 'OEN'"}}
-    <div class="toolbar toolbar-bottom auto-height">
+    <div class="toolbar toolbar-bottom auto-height expired_entry">
       <div class="block">
         <div class="row">
           <div class="col-50">
@@ -83,7 +83,7 @@
               <tr>
                 <td class="label-cell">{{lot.street.area.name}}</td>
                 <td class="label-cell">{{lot.name}}, {{lot.street.name}}</td>
-                <td class="numeric-cell">{{created_at}}</td>
+                <td class="numeric-cell">{{created_at}} <input id="entry_date" type="text" value="{{created_at}}" style="display: none"/></td>
                 <td class="label-cell">{{entryType entry_type}}</td>
               </tr>
             </tbody>
@@ -107,11 +107,16 @@
     width: 100%;
   }
 
+  .disabled_btn{
+        background-color:grey !important;
+    }
+
   .page-content {
     padding-bottom: 100px;
   }
 </style>
 <script>
+  import moment from '/node_modules/moment/moment.js';
   export default {
     data: function () {
       return {
@@ -126,6 +131,7 @@
         var router = this.$router;
         var r = this.$route;
         var d;
+
         this.$app.methods.getTrack(this.$route.params.id, function (data) {
           app.dialog.close();
    
@@ -136,6 +142,25 @@
             el: '.dt'
           });
           var swiper = app.swiper.create('.swiper-container');
+          
+          var now = new Date();
+var dateString = moment(now).format('DD-MM-YYYY');
+
+          var date = $$('#entry_date').val();
+          const myArray = date.split(" ");
+          var d = myArray[0]
+        console.log(d);
+        console.log(dateString);
+        if(d != dateString){
+          $$('.expired_entry').html('<div class="block">'+
+        '<div class="row">'+
+          '<div class="col-100">'+
+            '<a href="#" class="button button-raised button-round button-fill disabled_btn">The entry has been expired</a>'+
+          '</div>'+
+        '</div>'+
+      '</div>');
+        }
+
         });
         $$('.page').on('click', '.schedule_submit', function () {
           console.log(d);
@@ -145,6 +170,7 @@
           })
         });
 
+       
       }
     }
   }
