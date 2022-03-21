@@ -145,15 +145,19 @@
           
           var now = new Date();
           var dateString = moment(now).format('YYYY-MM-DD');
+          var dateString1 = moment(now).format('DD-MM-YYYY');
 
           var date = $$('#entry_date').val();
           const myArray = date.split(" ");
           var d1 = myArray[0];
-          d1 = moment(d1).format('YYYY-MM-DD');
+          // d1 = moment(d1).format('YYYY-MM-DD');
+          // d2 = moment(d1).format('YYYY-MM-DD');
 
         console.log(d1);
         console.log(dateString);
-        if(d1 != dateString){
+        console.log(dateString1);
+
+        if(d1 != dateString && d1 !=dateString1){
           $$('.expired_entry').html('<div class="block">'+
         '<div class="row">'+
           '<div class="col-100">'+

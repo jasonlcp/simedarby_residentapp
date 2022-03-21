@@ -47,9 +47,6 @@ var app = new Framework7({
   on: {
     init: function () {
       var f7 = this;
-
-     
-
       mainView = f7.views.create('.view-main');
       this.form.removeFormData('selectedLot');
       this.form.removeFormData('entryVal');
@@ -92,14 +89,24 @@ var app = new Framework7({
               //alert(data.registrationId);
               // mainView.router.navigate('/notification/')
             console.log(data.registrationId);
+            console.log(device.uuid);
           });
-          
+
           push.on('notification', function (data) {
+            var auth = app.form.getFormData('auth');
+            console.log(auth);
+            if (!auth){
+
+            }else{
             console.log('notification: ' + data);
             //alert("Title:" + data.title + " Message:" + data.message);
-            mainView.router.navigate('/notification/')
-            
+            setTimeout(function() {
+            mainView.router.navigate('/notification/');
+            },1000);
+            }
           });
+          
+            
 
           push.on('error', function (e) {
             console.log('error: ' +e.message)
@@ -190,9 +197,10 @@ var app = new Framework7({
       sck.on('visitor_arrive', function (data) {
         app.methods.getNotificationCount();
         navigator.vibrate(500);
+        console.log(data);
+        
 
         var notification_sound =sound_audio.sound_in;
-
         var loop_sound = null;
         notification_sound.play();
         var count =0 ;
@@ -209,12 +217,13 @@ var app = new Framework7({
                     
                       }, 4500);
         
+        
         var notificationCallbackOnClose = app.notification.create({
           icon: '<i class="icon f7-icons">person_round</i>',
           title: "A visitor has arrived!",
           titleRightText: 'now',
           subtitle: data.title,
-          text: 'Click here to view',
+          text: 'Click here to view or approve.',
           closeOnClick: true,
           on: {
             close: function () {
@@ -225,6 +234,7 @@ var app = new Framework7({
             },
           },
         });
+      
         notificationCallbackOnClose.open();
       })
 

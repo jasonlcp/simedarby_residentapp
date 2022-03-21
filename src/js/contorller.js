@@ -145,6 +145,31 @@ var methods = {
                 }
             });
     },
+    getLogout:function(data){
+        var f7c = this.view.current.router.currentPageEl.f7Component;
+        var app = this;
+        var user = this.methods.getUser();
+        var registrationId = app.form.getFormData('reg_id');
+        
+
+        
+        request.get('notification/delete_token/', {
+            'Authorization': 'JWT ' + user.token}, {"registration_id":""+registrationId+""},
+        function () {
+            // this.dialog.preloader();
+            app.form.removeFormData("auth");
+            // app.form.removeFormData("reg_id");
+            f7c.$router.navigate('/login/');
+            f7c.$router.clearPreviousHistory();
+        },
+        function (xhr, status) {
+            
+        },
+        function (xhr, status) {
+            //complete(xhr, status);
+        });
+       
+    },
     deletefamily:function(resident,lot){
         var user = this.methods.getUser();
         var f7c = this.view.current.router.currentPageEl.f7Component;

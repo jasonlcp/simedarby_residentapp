@@ -50,7 +50,7 @@
                             <div class="item-inner">
                                 <div class="item-title item-label">Name</div>
                                 <div class="item-input-wrap">
-                                    <input type="text" placeholder="Visitor's name" name="visitor_name"
+                                    <input type="text" placeholder="Visitor's name" name="visitor_name" id="visitor_name"
                                         value="{{js 'this.$route.params.phone ? decodeURIComponent(this.$route.params.name) :"" '}}">
                                     <span class="input-clear-button"></span>
                                     <div class="item-input-error-message" for="visitor_name"></div>
@@ -64,7 +64,7 @@
                             <div class="item-inner">
                                 <div class="item-title item-label">Vehicle Registration No.</div>
                                 <div class="item-input-wrap">
-                                    <input type="text" placeholder="Plate Number" name="visitor_car_plate"
+                                    <input type="text" placeholder="Plate Number" name="visitor_car_plate" id="plate_number"
                                         value="{{js 'this.$route.params.phone ? decodeURIComponent(this.$route.params.plate) : "" '}}">
                                     <span class="input-clear-button"></span>
                                     <div class="item-input-error-message" for="visitor_car_plate"></div>
@@ -75,7 +75,7 @@
                             <div class="item-inner">
                                 <div class="item-title item-label">Mobile No.</div>
                                 <div class="item-input-wrap">
-                                    <input type="tel" placeholder="Mobile No." name="visitor_phone_number"
+                                    <input type="tel" placeholder="Mobile No." name="visitor_phone_number" id="mobile_no"
                                         value="{{js 'this.$route.params.phone ? decodeURIComponent(this.$route.params.phone) : "" '}}">
                                     <span class="input-clear-button"></span>
                                     <div class="item-input-error-message" for="visitor_phone_number"></div>
@@ -127,7 +127,7 @@
                                     <div class="item-title">Alert me upon arrival</div>
                                     <div class="item-after">
                                         <label class="toggle toggle-init">
-                                            <input type="checkbox" value="true" class="ck" name="notify"><i
+                                            <input type="checkbox" value="true" class="ck" name="notify" id="toggle"><i
                                                 class="toggle-icon"></i>
                                         </label>
                                     </div>
@@ -202,6 +202,7 @@
             var link;
             if(id == 1){
                 link = '/visitor-list/2';
+                
             }else{
                 link = '/';
             }
@@ -239,10 +240,13 @@
                         openIn: 'sheet',
                     });
                     var selectedLot = app.form.getFormData('selectedLot');
+                    console.log(selectedLot)
                     if(selectedLot){
                         var sm = app.smartSelect.get('.lotSelector.smart-select');
+
                         console.log(sm);
                         sm.setValue(selectedLot);
+                        
                     }
                 });
 
@@ -255,6 +259,7 @@
                 var entryCalendarModal;
                 var today = new Date();
                 var router = this.$router;
+                app.form.removeFormData('selectedLot');
                 $$("#back_home").on("click", function () {
                     setTimeout(function(){ 
                         router.navigate('/');
@@ -271,7 +276,7 @@
                     var end_date = $$('#exp_date').val();
                     var start_date = $$('#entry_date').val();
                     
-                    if(end_date == '' || end_date == start_date){
+                    if(end_date == '' || end_date < start_date){
                     $$('#exp_date').val(start_date);
                     }
                 });
@@ -283,7 +288,14 @@
                     var start_date = $$('#entry_date').val();
                     console.log(end_date);
                     console.log(start_date);
-
+                    var val1 = app.form.getFormData('entryVal');
+                    
+                    console.log(val1);
+                    if (val1 == 'E' || val1 == 'M'){
+                        $$("#exp_date").val("");
+                    }
+                        
+                    
                     if ($$('input[name="notify"]').prop('checked')) {
                         app.form.storeFormData('notify', 'true');
                         $$('input[name="is_notify"]').val("true");
@@ -400,8 +412,16 @@
                                 dateFormat: 'yyyy-mm-dd',
                                 minDate: entryCalendarModal.getValue(),
                             });
+                            
+                            var end_date = $$('#exp_date').val();
+                            var start_date = $$('#entry_date').val();
+                            console.log(start_date);
+                            if(end_date == '' || end_date < start_date){
+                                $$('#exp_date').val(start_date);
+                            }
+
                             expCalendarModal.on('close', function () {
-                                app.form.storeFormData('endDate',this.getValue());
+                                // app.form.storeFormData('endDate',this.getValue());
                             });
                             var ed = app.form.getFormData('endDate');
                             if(ed){
@@ -454,6 +474,21 @@
                     }
                 });
                 $$('#lt').on('change',function(){
+                    
+                    // app.form.removeFormData('selectedLot');
+                    // app.form.removeFormData('entryVal');
+                    // app.form.removeFormData('notify');
+                    // app.form.removeFormData('startDate');
+                    // app.form.removeFormData('endDate');
+                    // app.form.removeFormData('days');
+
+                    
+                    // document.getElementById('visitor_name').value = ('');
+                    // document.getElementById('plate_number').value = ('');
+                    // document.getElementById('mobile_no').value = ('');
+                    // document.getElementById('toggle').checked=false;
+                    
+
                     console.log($$(this).val());
                     console.log($$(this).find(':checked').attr('data-area'));
                     var area_ev = $$(this).find(':checked').attr('data-area');
@@ -536,7 +571,7 @@
                                 '</li>';
 
                             
-
+                             
                                 expCalendarModal = app.calendar.create({
                                 inputEl: '#exp_date',
                                 openIn: 'customModal',
@@ -544,9 +579,16 @@
                                 footer: true,
                                 dateFormat: 'yyyy-mm-dd',
                                 minDate: entryCalendarModal.getValue(),
+                                
                             });
+                            var end_date = $$('#exp_date').val();
+                            var start_date = $$('#entry_date').val();
+                            console.log(start_date);
+                            if(end_date == '' || end_date < start_date){
+                                $$('#exp_date').val(start_date);
+                            }
                             expCalendarModal.on('close', function () {
-                                app.form.storeFormData('endDate',this.getValue());
+                                // app.form.storeFormData('endDate',this.getValue());
                             });
                             var ed = app.form.getFormData('endDate');
                             if(ed){
@@ -565,14 +607,14 @@
                                 d.setValue(day);
                                 console.log(day)
                             }
-                    }else{
+                    }else
                         if(schedule_ev == "true"){
                         option5='<option value="S">Scheduled Entry</option>';
                     }else{
                         option5='';
                     }
                         
-                    }
+                    
 
                     option6='</select>';
                     
@@ -604,7 +646,7 @@
                                 '<div class="item-title item-label">Day</div>' +
                                 '<div class="item-input-wrap input-dropdown-wrap">' +
                                 '<a href="#" class="item-link selectdays smart-select">' +
-                                '<div class="item-after"></div>' +
+                                '<div class="item-after">Mon, Tue, Wed, Thu, Fri, Sat, Sun</div>' +
                                 '<select name="days" id="selected_day" multiple required>' +
                                 // '<option value="All" selected data-display-as="All">All</option>' +
                                 '<option value="0" selected data-display-as="Mon">Monday</option>' +
@@ -631,8 +673,14 @@
                                 dateFormat: 'yyyy-mm-dd',
                                 minDate: entryCalendarModal.getValue(),
                             });
+                            var start_date = $$('#entry_date').val();
+                            var end_date = $$('#exp_date').val();
+                            console.log(start_date);
+                            if(end_date == '' || end_date < start_date){
+                                $$('#exp_date').val(start_date);
+                            }
                             expCalendarModal.on('close', function () {
-                                app.form.storeFormData('endDate',this.getValue());
+                                // app.form.storeFormData('endDate',this.getValue());
                             });
                             var ed = app.form.getFormData('endDate');
                             if(ed){
@@ -643,16 +691,19 @@
                                 el: '.selectdays',
                                 openIn: 'page',
                             });
+                            
                             $$(".selectdays").on("smartselect:close", function () {
                                 app.form.storeFormData('days',$$(this).children('select').val());
                                 
                             });
+                            
                             if(day){
                                 
                                 d.setValue(day);
                                 console.log(day)
                             }
                             schedule = true;
+                            
                             
 
                             
@@ -661,7 +712,7 @@
                            
                         }
                         
-                    } else {
+                    } else 
                         if (schedule == true) {
                             // expCalendarModal.off('destroy');
                             // expCalendarModal.destroy();
@@ -670,16 +721,21 @@
                             console.log(schedule);
                             document.getElementById("extend_date_selection").style.display = "none";
                             app.form.removeFormData('days');
-                            $$("#exp_date").val("")
+                            // $$("#exp_date").val()
                             // $$(".selectdays").children('select').val("monday");
                             // $$(".selectdays").find(".item-after").text("Mon");
                             
 
  
-                            expCalendarModal.setValue("");
-                            app.form.removeFormData('endDate');
+                            // expCalendarModal.setValue("");
+                            // app.form.removeFormData('endDate');
                         }
-                    }
+                        else{
+                            document.getElementById("extend_date_selection").style.display = "none";
+                            
+                        }
+
+                    
                 });
 
                 entryCalendarModal = app.calendar.create({
@@ -699,7 +755,7 @@
                 entryCalendarModal.on('close', function () {
                     console.log(this.getValue());
                     app.form.storeFormData('startDate', this.getValue());
-                    app.form.storeFormData('endDate', this.getValue());
+                    // app.form.storeFormData('endDate', this.getValue());
                     var v = this.getValue();
                     if (this.getValue() && expCalendarModal && !expCalendarModal.destroyed) {
                         console.log(expCalendarModal.value)

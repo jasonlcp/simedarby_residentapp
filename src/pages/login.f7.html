@@ -28,8 +28,8 @@
                                     </div>
                                 </div>
                             </li>
-                            <input type="hidden" name="reg_id" value="{{reg_id}}">
-                            <input type="hidden" name="device_id" value="{{device_id}}">
+                            <input type="hidden" name="reg_id" value="{{reg_id}}" id="input_reg">
+                            <input type="hidden" name="device_id" value="{{device_id}}" id="input_device">
                         </ul>
                     </div>
                     <div class="row">
@@ -64,8 +64,8 @@
             var app = this.$app;
             return {
                 base_uri: config.BASE_URI,
-                reg_id:app.form.getFormData('reg_id'),
-                device_id:app.form.getFormData('device_id')
+                reg_id : app.form.getFormData('reg_id'),
+                device_id : app.form.getFormData('device_id')
             }
         },
         on: {
@@ -73,11 +73,20 @@
                 var app = this.$app;
                 var $$ = this.$$;
                 var router = this.$router;
-               
+                setTimeout(function(){
+                var registrationID = app.form.getFormData('reg_id');
+                var deviceID = app.form.getFormData('device_id');
+                console.log(registrationID);
+                console.log(deviceID);
+                $$('#input_reg').val(registrationID);
+                $$('#input_device').val(deviceID);
+                },2000);
                 
+
                 $$('#login-screen').on('submit', function (e) {
                     e.preventDefault();
                     var formData = app.form.convertToData('#login-screen');
+                    
                     app.dialog.preloader();
                     console.log(formData)
                     request.post('login', null, formData,
