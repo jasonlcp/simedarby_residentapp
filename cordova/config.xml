@@ -119,6 +119,9 @@
     <plugin name="cordova-plugin-media" spec="~5.0.2">
         <variable name="KEEP_AVAUDIOSESSION_ALWAYS_ACTIVE" value="NO" />
     </plugin>
+    <plugin name="cordova-plugin-firebasex" spec="latest">
+    <variable name="ANDROID_FIREBASE_ANALYTICS_VERSION" value="17.0.0" />
+</plugin>
     <plugin name="cordova-plugin-safariviewcontroller" spec="~1.6.0" />
     <plugin name="cordova-plugin-whitelist" spec="1" />
     <plugin name="cordova-plugin-vibration" spec="~3.1.1" />

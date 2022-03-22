@@ -132,6 +132,12 @@
     },
     "cordova-plugin-app-exit": {
       "PACKAGE_NAME": "com.framework7.simedarbycommunity"
+    },
+    "cordova-plugin-firebasex": {
+      "FIREBASE_ANALYTICS_COLLECTION_ENABLED": "true",
+      "FIREBASE_PERFORMANCE_COLLECTION_ENABLED": "true",
+      "FIREBASE_CRASHLYTICS_COLLECTION_ENABLED": "true",
+      "PACKAGE_NAME": "com.framework7.simedarbycommunity"
     }
   },
   "dependent_plugins": {},
@@ -556,6 +562,7 @@
     "cordova-custom-config": "5.1.0",
     "cordova-plugin-android-permissions": "1.1.2",
     "cordova-plugin-camera": "4.1.0",
-    "cordova-plugin-app-exit": "0.0.1"
+    "cordova-plugin-app-exit": "0.0.1",
+    "cordova-plugin-firebasex": "14.0.0"
   }
 }

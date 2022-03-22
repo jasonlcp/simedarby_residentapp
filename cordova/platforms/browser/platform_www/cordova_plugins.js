@@ -422,7 +422,8 @@ module.exports.metadata =
     "cordova-custom-config": "5.1.0",
     "cordova-plugin-android-permissions": "1.1.2",
     "cordova-plugin-camera": "4.1.0",
-    "cordova-plugin-app-exit": "0.0.1"
+    "cordova-plugin-app-exit": "0.0.1",
+    "cordova-plugin-firebasex": "14.0.0"
 }
 // BOTTOM OF METADATA
 });

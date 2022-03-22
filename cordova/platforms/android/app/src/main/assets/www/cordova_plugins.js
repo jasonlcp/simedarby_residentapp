@@ -331,6 +331,14 @@ cordova.define('cordova/plugin_list', function(require, exports, module) {
       "merges": [
         "navigator.app"
       ]
+    },
+    {
+      "id": "cordova-plugin-firebasex.FirebasePlugin",
+      "file": "plugins/cordova-plugin-firebasex/www/firebase.js",
+      "pluginId": "cordova-plugin-firebasex",
+      "clobbers": [
+        "FirebasePlugin"
+      ]
     }
   ];
   module.exports.metadata = {
@@ -356,6 +364,7 @@ cordova.define('cordova/plugin_list', function(require, exports, module) {
     "cordova-support-google-services": "1.3.2",
     "phonegap-plugin-multidex": "1.0.0",
     "phonegap-plugin-push": "2.3.0",
-    "cordova-plugin-app-exit": "0.0.1"
+    "cordova-plugin-app-exit": "0.0.1",
+    "cordova-plugin-firebasex": "14.0.0"
   };
 });

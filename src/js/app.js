@@ -16,6 +16,7 @@ import config from './config.js';
 import socket from 'socket.io-client/dist/socket.io.js';
 //declare var
 import $$ from 'dom7';
+
 var mainView;
 var app = new Framework7({
   root: '#app', // App root element
@@ -92,28 +93,24 @@ var app = new Framework7({
             console.log(device.uuid);
           });
 
-          push.on('notification', function (data) {
-            var auth = app.form.getFormData('auth');
-            console.log(auth);
-            if (!auth){
+          // push.on('notification', function (data) {
+          //   var auth = app.form.getFormData('auth');
+          //   console.log(auth);
+          //   if (!auth){
 
-            }else{
-            console.log('notification: ' + data);
-            //alert("Title:" + data.title + " Message:" + data.message);
-            setTimeout(function() {
-            mainView.router.navigate('/notification/');
-            },1000);
-            }
-          });
+          //   }else{
+          //   console.log('notification: ' + data);
+          //   //alert("Title:" + data.title + " Message:" + data.message);
+          //   setTimeout(function() {
+          //   mainView.router.navigate('/notification/');
+          //   },1000);
+          //   }
+          // });
           
-            
-
           push.on('error', function (e) {
             console.log('error: ' +e.message)
           });
         });
-
-       
        
         document.addEventListener("resume", onResume, false);
         function onResume() {
@@ -234,7 +231,9 @@ var app = new Framework7({
             },
           },
         });
-      
+        setTimeout(function() {
+        mainView.router.navigate('/notification/');
+        },1000);
         notificationCallbackOnClose.open();
       })
 

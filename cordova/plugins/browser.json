@@ -66,6 +66,12 @@
     },
     "cordova-plugin-app-exit": {
       "PACKAGE_NAME": "com.framework7.simedarbycommunity"
+    },
+    "cordova-plugin-firebasex": {
+      "FIREBASE_ANALYTICS_COLLECTION_ENABLED": "true",
+      "FIREBASE_PERFORMANCE_COLLECTION_ENABLED": "true",
+      "FIREBASE_CRASHLYTICS_COLLECTION_ENABLED": "true",
+      "PACKAGE_NAME": "com.framework7.simedarbycommunity"
     }
   },
   "dependent_plugins": {

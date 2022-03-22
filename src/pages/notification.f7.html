@@ -3,7 +3,7 @@
         <div class="navbar">
             <div class="navbar-inner sliding">
                 <div class="left">
-                    <a href="/" class="back link">
+                    <a href="/" class="back link" data-force="true" data-ignore-cache="true"  class="back link" id="back_home">
                         <i class="icon icon-back"></i>
                         <span class="if-not-md">Back</span>
                     </a>
@@ -75,6 +75,15 @@
                 this.$app.methods.getNotification();
                 var app = this.$app;
                 var $$ = this.$$;
+                var router = this.$router;
+
+                $$("#back_home").on("click", function () {
+                    setTimeout(function(){ 
+                        router.navigate('/');
+                        router.clearPreviousHistory();
+                    }, 600);
+                });
+
                 this.$$(".open-confirm-delete").on('click', function () {
                     app.dialog.confirm('Are you sure you want to delete all notification?',
                         function () {

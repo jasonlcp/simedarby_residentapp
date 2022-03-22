@@ -291,7 +291,6 @@
 <script>
   import Framework7 from 'framework7/framework7.esm.bundle.js'; 
 
-
   export default {
     data: function () {
       var auth = this.$app.methods.getUser();
@@ -309,12 +308,35 @@
     on: {
       pageAfterIn:function(){
         var app = this.$app;
+        var router = this.$router;
         app.form.removeFormData('selectedLot');
         app.form.removeFormData('entryVal');
         app.form.removeFormData('notify');
         app.form.removeFormData('startDate');
         app.form.removeFormData('endDate');
         app.form.removeFormData('days');
+
+        FirebasePlugin.onMessageReceived(function(message) {
+        console.log("Message type: " + message.messageType);
+        if(message.messageType === "notification"){
+            console.log("Notification message received");
+            if(message.tap){
+                console.log("Tapped in " + message.tap);
+                router.navigate('/notification/');
+            }
+        }else{
+            // console.log('notification: ' + data);
+        //alert("Title:" + data.title + " Message:" + data.message);
+        setTimeout(function() {
+        router.navigate('/notification/');
+        },1000);
+        }
+            console.dir(message);
+        }, 
+        function(error) {
+            console.error(error);
+        });
+
       },
       pageInit: function () {
         var $$ = this.$$;
